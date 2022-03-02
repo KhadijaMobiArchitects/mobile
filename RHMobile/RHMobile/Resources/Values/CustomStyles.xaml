@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:RHMobile.Resources"
+    x:Class="RHMobile.Resources.CustomStyles">
+
+    <ResourceDictionary.MergedDictionaries>
+        <resources:Colors/>
+        <resources:BaseStyles/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--TransparentEntryStyle-->
+
+    <Style
+        x:Key="TransparentEntryStyle"
+        BasedOn="{StaticResource BaseEntryStyle}"
+        TargetType="Entry"
+        >
+        <Setter
+            Property="BackgroundColor"
+            Value="Transparent"/>
+        <Setter
+            Property="Visual"
+            Value="Material"
+            />
+
+    </Style>
+
+</ResourceDictionary>

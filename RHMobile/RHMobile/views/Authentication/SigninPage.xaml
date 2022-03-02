@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+    xmlns:Base="clr-namespace:RHMobile.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Local="clr-namespace:RHMobile"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms" xmlns:controls="clr-namespace:XForms.Controls" xmlns:cc="clr-namespace:RHMobile.Controls"
+    x:Class="RHMobile.views.Authentication.SigninPage">
+    <Base:BasePage.Content>
+
+        <Grid>
+            <!--Background-->
+            <Image
+                VerticalOptions="FillAndExpand"
+                Source="{Local:ImageResource Rectangle.png}"
+                Aspect="AspectFit"
+                />
+            <Grid
+                RowDefinitions="Auto,*,Auto"
+                BackgroundColor="Orange"
+                Padding="{OnPlatform iOS='30,90,30,30',Android='30,0,50,30'}"
+                VerticalOptions="FillAndExpand"
+                >
+
+                <!--Header-->
+                <Grid           
+                    BackgroundColor="Violet"
+                    RowDefinitions="Auto"
+                    VerticalOptions="Start"
+                    ColumnDefinitions="*,4*"
+                    >
+                    <controls:CornerView
+                        HeightRequest="90"
+                        StyleCorner="Square"
+                        BackgroundColor="Red"
+                        >
+                        <svg:SvgCachedImage
+                        Source="{Local:ImageResource Logo.svg}"
+                        BackgroundColor="Black"
+                        />
+                    </controls:CornerView>
+
+                    <StackLayout
+                        Grid.Column="1"
+                        HeightRequest="20"
+                        BackgroundColor="White"
+                        >
+                        <Label
+                        Text="HR Management"
+                        TextColor="#0B3461"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        />
+                        <Label
+                        Text="By mobiarchitects"
+                        FontSize="14"
+                        TextColor="#126BCD"
+                            />
+                    </StackLayout>
+
+                </Grid>
+
+                <!--content-->
+                <Grid
+                    Grid.Row="1"
+                    BackgroundColor="Blue"
+                    RowDefinitions="Auto,*,Auto"
+                    >
+                    <StackLayout
+                        Grid.Row="0"
+                        >
+                        <Label
+                            Text="Saisissez votre adresse e-mail"
+                            />
+                        <Label
+                            Text="&amp; Mot de passe"
+                            />
+                    </StackLayout>
+
+                    <StackLayout
+                        Grid.Row="1"
+                        Spacing="0"
+                        >
+                        <cc:MaterialEntry
+                            Placeholder="Email"
+                            cornerRadius="6,6,0,0"
+                            />
+                        <cc:MaterialEntry
+                            Placeholder="Mot de passe"
+                            cornerRadius="0,0,6,6"
+
+                            />
+                        
+                    </StackLayout>
+
+                    <Button/>
+
+                </Grid>
+
+                <!--Footer-->
+
+                <Grid
+                    Grid.Row="2"
+                    >
+                    <Button
+                        Text="Se connecter avec face ID"
+                        BackgroundColor="#24B3D6"
+                        TextColor="White"
+                        CornerRadius="8"
+                        FontAttributes="Bold"
+                        Padding="16"
+
+
+                        />
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+
+    </Base:BasePage.Content>
+</Base:BasePage>
