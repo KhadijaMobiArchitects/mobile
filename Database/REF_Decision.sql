@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[REF_Decision]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Libelle] NVARCHAR(MAX) NOT NULL
+)

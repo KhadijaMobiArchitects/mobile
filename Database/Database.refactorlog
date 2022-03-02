@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="e148d20b-98da-46ef-b9ef-6c29a6fd85dd" ChangeDateTime="02/23/2022 10:01:25">
+    <Property Name="ElementName" Value="[dbo].[FK_Traçabilite_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Traçabilite]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Traçabilite_ToDecision]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="41cca941-7e32-4798-956c-03e1274ed4ce" ChangeDateTime="02/23/2022 10:14:00">
+    <Property Name="ElementName" Value="[dbo].[MAP_Traçabilite_Projet].[CongeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MAP_Traçabilite_Projet]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProjetId" />
+  </Operation>
+</Operations>

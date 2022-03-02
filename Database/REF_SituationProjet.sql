@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[REF_SituationProjet]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Libelle] NVARCHAR(MAX) NULL
+)
