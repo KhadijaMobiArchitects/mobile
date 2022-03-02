@@ -83,11 +83,11 @@
                         >
                         <cc:MaterialEntry
                             Placeholder="Email"
-                            cornerRadius="6,6,0,0"
+                            CornerRadiuss="8,8,0,0"
                             />
                         <cc:MaterialEntry
                             Placeholder="Mot de passe"
-                            cornerRadius="0,0,6,6"
+                            CornerRadiuss="0,0,8,8"
 
                             />
                         
