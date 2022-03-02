@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace RHMobile.iOS
+namespace XForms.iOS
 {
     public class Application
     {

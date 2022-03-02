@@ -1,9 +1,9 @@
 ﻿using System;
-using RHMobile.views.Authentication;
+using XForms.views.Authentication;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace RHMobile
+namespace XForms
 {
     public partial class App : Application
     {

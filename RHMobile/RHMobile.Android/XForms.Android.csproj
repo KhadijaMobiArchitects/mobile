@@ -95,9 +95,9 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RHMobile\RHMobile.csproj">
+    <ProjectReference Include="..\RHMobile\XForms.csproj">
       <Project>{82653E57-C221-4928-9456-66DB43375D8C}</Project>
-      <Name>RHMobile</Name>
+      <Name>XForms</Name>
     </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

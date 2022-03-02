@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace RHMobile.views.Base
+namespace XForms.views.Base
 {
     public class BasePage : ContentPage
     {

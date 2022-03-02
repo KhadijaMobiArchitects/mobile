@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 
-namespace RHMobile.Controls
+namespace XForms.Controls
 {
     public partial class MaterialEntry : StackLayout
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace RHMobile.Controls
+namespace XForms.Controls
 {
     public class CustomButton : Button
     {

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
-namespace RHMobile
+namespace XForms
 {
     [Preserve(AllMembers = true)]
     [ContentProperty(nameof(Source))]
@@ -20,9 +20,9 @@ namespace RHMobile
 
             if (Source.EndsWith(".svg"))
 
-                return SvgImageSource.FromResource("RHMobile.Resources.Images." + Source, typeof(ImageResourceExtension).GetTypeInfo().Assembly);
+                return SvgImageSource.FromResource("XForms.Resources.Images." + Source, typeof(ImageResourceExtension).GetTypeInfo().Assembly);
 
-            return ImageSource.FromResource("RHMobile.Resources.Images." + Source, typeof(ImageResourceExtension).GetTypeInfo().Assembly);
+            return ImageSource.FromResource("XForms.Resources.Images." + Source, typeof(ImageResourceExtension).GetTypeInfo().Assembly);
         }
     }
 }

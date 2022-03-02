@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace RHMobile.Resources
+namespace XForms.Resources
 {
     public partial class BaseStyles 
     {

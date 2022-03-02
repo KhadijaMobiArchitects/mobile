@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Base:BasePage
-    xmlns:Base="clr-namespace:RHMobile.views.Base"
+    xmlns:Base="clr-namespace:XForms.views.Base"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:Local="clr-namespace:RHMobile"
-    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms" xmlns:controls="clr-namespace:XForms.Controls" xmlns:cc="clr-namespace:RHMobile.Controls"
-    x:Class="RHMobile.views.Authentication.SigninPage">
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms" xmlns:controls="clr-namespace:XForms.Controls" xmlns:cc="clr-namespace:XForms.Controls"
+    x:Class="XForms.views.Authentication.SigninPage">
     <Base:BasePage.Content>
 
         <Grid>
