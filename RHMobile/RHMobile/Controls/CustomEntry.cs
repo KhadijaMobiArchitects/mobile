@@ -5,8 +5,6 @@ namespace XForms.Controls
 {
     public class CustomEntry : Entry
     {
-        public CustomEntry()
-        {
-        }
+
     }
 }

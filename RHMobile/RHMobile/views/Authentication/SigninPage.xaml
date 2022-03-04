@@ -15,18 +15,17 @@
             <Image
                 VerticalOptions="FillAndExpand"
                 Source="{Local:ImageResource Rectangle.png}"
-                Aspect="AspectFit"
+                Aspect="AspectFill"
                 />
             <ScrollView
                 Grid.RowSpan="2"
                 >
                 <Grid
                 RowDefinitions="Auto,*,Auto"
-                Padding="{OnPlatform iOS='30,90,30,30',Android='30,0,50,30'}"
+                Padding="{OnPlatform iOS='30,90,30,40',Android='30,50,30,40'}"
                 VerticalOptions="FillAndExpand"
-                RowSpacing="30"
-                
-                >
+                RowSpacing="50"
+                    >
 
                     <!--Header-->
                     <Grid           
@@ -39,7 +38,7 @@
                         StyleCorner="Square"
                         VerticalOptions="CenterAndExpand"
                         >
-                        <svg:SvgCachedImage
+                            <svg:SvgCachedImage
                         Source="{Local:ImageResource Logo.svg}"
                          Aspect="AspectFit"
                             HorizontalOptions="FillAndExpand"
@@ -107,10 +106,6 @@
                             >
                             <cc:CustomButton
                                 Text="Se connecter"
-                                CornerRadius="8"
-                                Padding="18"
-                                FontSize="20"
-                                BackgroundColor="{StaticResource Primary}"
                                 />
                         </StackLayout>
                     </Grid>
@@ -123,10 +118,6 @@
                         <cc:CustomButton
                         Text="Se connecter avec face ID"
                         BackgroundColor="#24B3D6"
-                        CornerRadius="8"
-                        Padding="18"
-                        Margin="0,0,0,6"
-                        FontSize="20"
                         />
                     </Grid>
 

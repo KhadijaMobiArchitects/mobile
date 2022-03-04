@@ -35,7 +35,7 @@
         >
         <Setter
             Property="HeightRequest"
-            Value="5"
+            Value="10"
             />
         <Setter
             Property="BackgroundColor"
@@ -47,7 +47,7 @@
             />
         <Setter
             Property="TranslationY"
-            Value="-2"
+            Value="0"
             />
 
     </Style>

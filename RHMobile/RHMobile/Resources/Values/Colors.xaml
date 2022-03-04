@@ -9,4 +9,5 @@
     <Color x:Key="Black" >#000000</Color>
     <Color x:Key="PlaceholderColor">#737A83</Color>
     <Color x:Key="InputBorder">#DDE4F3</Color>
+    <Color x:Key="White">#ffffff</Color>
 </ResourceDictionary>
