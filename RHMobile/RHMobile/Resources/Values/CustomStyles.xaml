@@ -27,4 +27,29 @@
 
     </Style>
 
+    <!--overEntryStyle-->
+
+        <Style
+        x:Key="OverEntryStyle"
+        TargetType="BoxView"
+        >
+        <Setter
+            Property="HeightRequest"
+            Value="10"
+            />
+        <Setter
+            Property="BackgroundColor"
+            Value="White"
+            />
+        <Setter
+            Property="HorizontalOptions"
+            Value="FillAndExpand"
+            />
+        <Setter
+            Property="TranslationY"
+            Value="0"
+            />
+
+    </Style>
+
 </ResourceDictionary>

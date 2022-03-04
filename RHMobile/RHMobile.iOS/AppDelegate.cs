@@ -22,10 +22,14 @@ namespace XForms.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+
+
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             var ignore = typeof(FFImageLoading.Svg.Forms.SvgCachedImage);
+
+            global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.Forms.FormsMaterial.Init();
 
 
             LoadApplication(new App());

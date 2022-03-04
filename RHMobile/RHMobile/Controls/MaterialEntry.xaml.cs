@@ -32,15 +32,15 @@ namespace XForms.Controls
             }
         }
 
-        public static readonly BindableProperty CornerRadiusProperty =
-                BindableProperty.Create(nameof(cornerRadius), typeof(string), typeof(View), string.Empty, BindingMode.TwoWay);
+        public static readonly BindableProperty CornerRadiussProperty =
+                BindableProperty.Create(nameof(CornerRadiuss), typeof(CornerRadius), typeof(View),default , BindingMode.TwoWay);
 
-        public string cornerRadius
+        public CornerRadius CornerRadiuss
         {
-            get { return (string)GetValue(CornerRadiusProperty); }
+            get { return (CornerRadius)GetValue(CornerRadiussProperty); }
             set
             {
-                SetValue(CornerRadiusProperty, value);
+                SetValue(CornerRadiussProperty, value);
             }
         }
 
