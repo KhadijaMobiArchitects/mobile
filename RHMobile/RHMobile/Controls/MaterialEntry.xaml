@@ -7,18 +7,26 @@
     x:Name="this"
     >
     <pcview:PancakeView
-        Padding="20,16"
+        Padding="20,5,0,0"
         BackgroundColor="White"
         CornerRadius="{Binding CornerRadiuss,Source={x:Reference this}}"
         >
         <pcview:PancakeView.Border>
             <pcview:Border Color="{StaticResource InputBorder}" Thickness="1"/>
         </pcview:PancakeView.Border>
+        <StackLayout
+            Spacing="0"
+            >
         <Entry
             Text="{Binding Text,Source={x:Reference this}}"
             Placeholder="{Binding Placeholder,Source={x:Reference this}}"
             Style="{StaticResource TransparentEntryStyle}"
             Visual="Material"
             />
+            <BoxView
+                Style="{StaticResource OverEntryStyle}"
+                />
+            </StackLayout>
+        
     </pcview:PancakeView>
 </StackLayout>

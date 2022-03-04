@@ -16,7 +16,7 @@ namespace XForms.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
+            global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             var ignore = typeof(FFImageLoading.Svg.Forms.SvgCachedImage);

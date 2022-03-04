@@ -8,6 +8,8 @@ namespace XForms.Controls
      
         public CustomButton()
         {
+            this.TextColor = Color.White;
+            this.FontAttributes = FontAttributes.Bold;
         }
     }
 }

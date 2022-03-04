@@ -8,113 +8,130 @@
     x:Class="XForms.views.Authentication.SigninPage">
     <Base:BasePage.Content>
 
-        <Grid>
+        <Grid
+            RowDefinitions="4*,*"
+            >
             <!--Background-->
             <Image
                 VerticalOptions="FillAndExpand"
                 Source="{Local:ImageResource Rectangle.png}"
                 Aspect="AspectFit"
                 />
-            <Grid
+            <ScrollView
+                Grid.RowSpan="2"
+                >
+                <Grid
                 RowDefinitions="Auto,*,Auto"
-                BackgroundColor="Orange"
                 Padding="{OnPlatform iOS='30,90,30,30',Android='30,0,50,30'}"
                 VerticalOptions="FillAndExpand"
+                RowSpacing="30"
+                
                 >
 
-                <!--Header-->
-                <Grid           
-                    BackgroundColor="Violet"
+                    <!--Header-->
+                    <Grid           
                     RowDefinitions="Auto"
                     VerticalOptions="Start"
                     ColumnDefinitions="*,4*"
                     >
-                    <controls:CornerView
+                        <controls:CornerView
                         HeightRequest="90"
                         StyleCorner="Square"
-                        BackgroundColor="Red"
+                        VerticalOptions="CenterAndExpand"
                         >
                         <svg:SvgCachedImage
                         Source="{Local:ImageResource Logo.svg}"
-                        BackgroundColor="Black"
+                         Aspect="AspectFit"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
                         />
-                    </controls:CornerView>
+                        </controls:CornerView>
 
-                    <StackLayout
+                        <StackLayout
                         Grid.Column="1"
-                        HeightRequest="20"
-                        BackgroundColor="White"
+                
+                            VerticalOptions="CenterAndExpand"
                         >
-                        <Label
+                            <Label
                         Text="HR Management"
                         TextColor="#0B3461"
                         FontSize="20"
-                        FontAttributes="Bold"
+                        FontFamily="RubikBold"
                         />
-                        <Label
+                            <Label
                         Text="By mobiarchitects"
                         FontSize="14"
                         TextColor="#126BCD"
-                            />
-                    </StackLayout>
+                        FontFamily="RubikLight"
+                                />
+                        </StackLayout>
 
-                </Grid>
+                    </Grid>
 
-                <!--content-->
-                <Grid
+                    <!--content-->
+                    <Grid
                     Grid.Row="1"
-                    BackgroundColor="Blue"
-                    RowDefinitions="Auto,*,Auto"
+                    RowDefinitions="Auto,Auto,Auto"
+                    RowSpacing="30"
                     >
-                    <StackLayout
+                        <StackLayout
                         Grid.Row="0"
                         >
-                        <Label
-                            Text="Saisissez votre adresse e-mail"
-                            />
-                        <Label
-                            Text="&amp; Mot de passe"
-                            />
-                    </StackLayout>
+                            <Label
+                            Text="Saisissez votre adresse e-mail &#x0a;&amp; Mot de passe"
+                            TextColor="#0B3461"
+                            FontSize="16"
+                            LineHeight="1.3"
+                            FontFamily="RubikRegualr"
+                                />
 
-                    <StackLayout
+                        </StackLayout>
+
+                        <StackLayout
                         Grid.Row="1"
                         Spacing="0"
                         >
-                        <cc:MaterialEntry
+                            <cc:MaterialEntry
                             Placeholder="Email"
                             CornerRadiuss="8,8,0,0"
                             />
-                        <cc:MaterialEntry
+                            <cc:MaterialEntry
                             Placeholder="Mot de passe"
                             CornerRadiuss="0,0,8,8"
 
                             />
-                        
-                    </StackLayout>
 
-                    <Button/>
+                        </StackLayout>
+                        <StackLayout
+                            Grid.Row="2"
+                            >
+                            <cc:CustomButton
+                                Text="Se connecter"
+                                CornerRadius="8"
+                                Padding="18"
+                                FontSize="20"
+                                BackgroundColor="{StaticResource Primary}"
+                                />
+                        </StackLayout>
+                    </Grid>
 
-                </Grid>
+                    <!--Footer-->
 
-                <!--Footer-->
-
-                <Grid
+                    <Grid
                     Grid.Row="2"
                     >
-                    <Button
+                        <cc:CustomButton
                         Text="Se connecter avec face ID"
                         BackgroundColor="#24B3D6"
-                        TextColor="White"
                         CornerRadius="8"
-                        FontAttributes="Bold"
-                        Padding="16"
-
-
+                        Padding="18"
+                        Margin="0,0,0,6"
+                        FontSize="20"
                         />
-                </Grid>
+                    </Grid>
 
-            </Grid>
+                </Grid>
+            </ScrollView>
 
         </Grid>
 
