@@ -2,6 +2,7 @@
 using XForms.views.Authentication;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XForms.views.Conge;
 
 namespace XForms
 {
@@ -11,7 +12,7 @@ namespace XForms
         {
             InitializeComponent();
 
-            MainPage = new SigninPage();
+            MainPage = new DemandeConge();
         }
 
         protected override void OnStart()

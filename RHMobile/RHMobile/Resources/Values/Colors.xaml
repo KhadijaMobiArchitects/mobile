@@ -10,4 +10,7 @@
     <Color x:Key="PlaceholderColor">#737A83</Color>
     <Color x:Key="InputBorder">#DDE4F3</Color>
     <Color x:Key="White">#ffffff</Color>
+    <Color x:Key="StartGradient">#0C4599</Color>
+    <Color x:Key="EndGradient">#0D69B6</Color>
+
 </ResourceDictionary>

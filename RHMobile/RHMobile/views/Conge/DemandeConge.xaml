@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="XForms.views.Conge.DemandeConge"
+    x:Name="this">
+    <Base:BasePage.Content>
+        <Grid
+            BackgroundColor="White"
+            RowDefinitions="*,2*">
+            <cc:CornerBox
+                ScaleX="2">
+                <cc:CornerBox.Background>
+                    <LinearGradientBrush
+                        StartPoint="0,0"
+                        EndPoint="0,1">
+                        <GradientStop
+                            Color="{StaticResource StartGradient}"
+                            Offset="0.1" />
+                        <GradientStop
+                            Color="{StaticResource EndGradient}"
+                            Offset="1.0" />
+
+                    </LinearGradientBrush>
+                </cc:CornerBox.Background>
+
+            </cc:CornerBox>
+
+
+            <Grid
+                RowDefinitions="auto,*,auto"
+                Padding="{OnPlatform iOS='0,90,0,40',Android='0,50,0,40'}"
+                VerticalOptions="FillAndExpand"
+                Grid.RowSpan="2"
+                RowSpacing="20">
+
+                <!--Header-->
+
+                <Grid
+                    ColumnDefinitions="5*,*"
+                    Padding="20,0">
+                    <StackLayout
+                        Spacing="2"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Text="Demande congé"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="16" />
+                        <Label
+                            Text="1 demandes en cours"
+                            FontFamily="RubilRegular"
+                            TextColor="White"
+                            FontSize="13"
+                            Opacity="0.5" />
+                    </StackLayout>
+
+                    <Image
+                        Grid.Column="2"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
+                                Glyph="{x:Static res:FontAwesomeFonts.Bell}"
+                                Color="White"
+                                Size="24" />
+                        </Image.Source>
+                    </Image>
+
+                </Grid>
+
+                <!--Body-->
+
+                <Grid
+                    Grid.Row="1"
+                    RowDefinitions="auto,auto,auto,*"
+                    RowSpacing="20">
+                    <pcview:PancakeView
+                        Margin="20,0"
+                        BackgroundColor="White"
+                        WidthRequest="335"
+                        HeightRequest="200"
+                        CornerRadius="8"
+                        Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=10}">
+                    </pcview:PancakeView>
+
+                    <!--Switch-->
+
+                    <ScrollView
+                        Grid.Row="1"
+                        Padding="20,0"
+                        Orientation="Horizontal"
+                        HorizontalScrollBarVisibility="Never">
+                        <StackLayout
+                            Spacing="15"
+                            Orientation="Horizontal"
+                            BindableLayout.ItemsSource="{Binding HeadrActionList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+
+                                        <!--Clicked="SelectItem_Clicked"-->
+
+                                        <cc:CustomButton
+                                            Text="{Binding Name}"
+                                            StyleCorner="RoundCorner"
+                                            BackgroundColor="{Binding BackgroundColor}"
+                                            TextColor="{StaticResource White}"
+                                            HorizontalOptions="Start"
+                                            Padding="15,5"
+                                            FontSize="12"
+                                            Visual="Default"
+                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionCommand}"
+                                            CommandParameter="{Binding .}"
+                                            />
+                                    </StackLayout>
+
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+
+                    </ScrollView>
+                    <StackLayout
+                        Grid.Row="2"
+                        Padding="20,0"
+
+                        >
+                        <Label
+                            Text="Mes demandes en cours"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            TextColor="#33373D"
+
+                            />
+                        
+
+                    </StackLayout>
+
+                    <ScrollView
+                        Padding="20,0"
+                        Grid.Row="3"
+                        >
+
+                    </ScrollView>
+
+                </Grid>
+
+                <!--Footer-->
+
+                <Grid
+                    Grid.Row="2"
+                    Padding="20,0"
+                    >
+                    <cc:CustomButton
+                        Text="Nouvelle demande"
+                        FontSize="20"
+                        />
+
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+
+
+    </Base:BasePage.Content>
+</Base:BasePage>
