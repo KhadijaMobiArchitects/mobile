@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:res="clr-namespace:XForms.Resources"
+    x:Class="XForms.views.Conge.NouvelleDemande">
+    <Base:BasePage.Content>
+        <Grid
+            BackgroundColor="White"
+            RowDefinitions="*,4*">
+            <cc:CornerBox
+                ScaleX="3">
+                <cc:CornerBox.Background>
+                    <LinearGradientBrush
+                        StartPoint="0,0"
+                        EndPoint="0,1">
+                        <GradientStop
+                            Color="{StaticResource StartGradient}"
+                            Offset="0.1" />
+                        <GradientStop
+                            Color="{StaticResource EndGradient}"
+                            Offset="1.0" />
+
+                    </LinearGradientBrush>
+                </cc:CornerBox.Background>
+
+            </cc:CornerBox>
+
+
+
+            <Grid
+                RowDefinitions="auto,*,auto"
+                Padding="{OnPlatform iOS='30,90,30,40',Android='30,50,30,40'}"
+                VerticalOptions="FillAndExpand"
+                Grid.RowSpan="2"
+                RowSpacing="20">
+                <!--Header-->
+
+                <Grid
+                    ColumnDefinitions="5*,*"
+                    >
+                    <StackLayout
+                        Spacing="2"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Text="Demande congé"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="16" />
+                    </StackLayout>
+
+                    <Image
+                        Grid.Column="2"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
+                                Glyph="{x:Static res:FontAwesomeFonts.Bell}"
+                                Color="White"
+                                Size="24" />
+                        </Image.Source>
+                    </Image>
+
+                </Grid>
+                <!--Footer-->
+
+                <Grid
+                    Grid.Row="2"
+                    >
+                    <cc:CustomButton
+                        Text="Envoyer ma demande"
+                        FontSize="20"
+                        BackgroundColor="#B0B6BE"
+                        />
+
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Base:BasePage.Content>
+
+</Base:BasePage>

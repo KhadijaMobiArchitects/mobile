@@ -12,7 +12,7 @@ namespace XForms
         {
             InitializeComponent();
 
-            MainPage = new DemandeConge();
+            MainPage = new NouvelleDemande();
         }
 
         protected override void OnStart()

@@ -81,4 +81,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="views\Conge\NouvelleDemande.xaml.cs">
+      <DependentUpon>NouvelleDemande.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
