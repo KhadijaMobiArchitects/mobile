@@ -6,25 +6,46 @@
     x:Class="XForms.views.Conge.DemandeCongeCellView">
     <ContentView.Content>
         <Grid
+            RowDefinitions="*,auto"
+            >
+
+              <Grid
             ColumnDefinitions="auto,*,auto"
+            Padding="0,10"
            >
 
             <BoxView
-                BackgroundColor="Orange"
+                BackgroundColor="#FEE07D"
                 />
             <StackLayout
                 Grid.Column="1"
                 >
                 <Label
-                    Text="Congé annuel"
+                    Text="{Binding Type}"
                     FontAttributes="Bold"
+                    FontSize="14"
+                    TextColor="#33373D"
                     />
 
                 <Label
-                    Text="20/10/2020 - 24/10/2020"
+                    Text="{Binding DateDebut}"
                     FontFamily="RubikRegular"
                     FontSize="12"
-                    />
+                    >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                Text="{Binding DateDebut,StringFormat='{0:dd/MM/yyyy}'}"
+                                />
+                            <Span
+                                Text=" - "
+                                />
+                            <Span
+                                Text="{Binding DateFin,StringFormat='{0:dd/MM/yyyy}'}"
+                                />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
                 <!--<Label
 
@@ -33,12 +54,25 @@
             </StackLayout>
 
             <cc:CustomButton
-                Text="En vérification"
-                BackgroundColor="#E6992A"
-
+                Grid.Column="2"
+                Text="{Binding Status}"
+                BackgroundColor="#FEE07D"
+                TextColor="#E6992A"
+                FontSize="12"
+                FontFamily="RubikRegular"
+                Padding="10,0"
                 />
-
         </Grid>
-        
+
+            <BoxView
+                Grid.Row="1"
+                HeightRequest="1"
+                BackgroundColor="#EBF1FE"
+                HorizontalOptions="FillAndExpand"
+                />
+        </Grid>
+
+      
+
     </ContentView.Content>
 </ContentView>

@@ -10,6 +10,10 @@ namespace XForms.ViewModels
     {
         public List<REFItem> HeadrActionList { get; set; }
 
+        public List<Conge> CongeList { get; set; }
+
+        //public ObservableRangeCollection<ObservableGroupCollection<string, Conge>> CongeList { get; set; }
+
         public DemandeCongeViewModel()
         {
 
@@ -32,6 +36,25 @@ namespace XForms.ViewModels
                     Name = "Demande reporté",
                 }
             };
+
+            CongeList = new List<Conge>()
+            {
+                new Conge()
+                {
+                    Type="Conge annuel",
+                    Status="En cours",
+                    DateDebut = new DateTime(2022,4,20),
+                    DateFin = new DateTime(2022,9,2)
+                },
+                new Conge(){
+                    Type="Conge Mensuel",
+                    Status="Confirmé",
+                    DateDebut = new DateTime(2021,7,20),
+                    DateFin = new DateTime(2021,8,12)
+                }
+            };
+
+
 
 
         }
@@ -63,6 +86,7 @@ namespace XForms.ViewModels
             {
                 CanSelectHeaderAction = true;
             }
-        }, (_) => CanSelectHeaderAction);
+        },
+        (_) => CanSelectHeaderAction);
     }
 }

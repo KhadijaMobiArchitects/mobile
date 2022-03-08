@@ -1,5 +1,5 @@
 ﻿using System;
-namespace XForms.Conge.Models
+namespace XForms.Models
 {
     public class Conge
     {
