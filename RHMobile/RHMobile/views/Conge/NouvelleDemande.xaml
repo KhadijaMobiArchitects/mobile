@@ -40,12 +40,12 @@
 
                 <Grid
                     ColumnDefinitions="5*,*"
-                    >
+                                        >
                     <StackLayout
                         Spacing="2"
                         VerticalOptions="FillAndExpand">
                         <Label
-                            Text="Demande congé"
+                            Text="Nouvelle demande"
                             TextColor="White"
                             FontAttributes="Bold"
                             FontSize="16" />
@@ -63,6 +63,44 @@
                                 Size="24" />
                         </Image.Source>
                     </Image>
+
+                </Grid>
+
+                <!--Body-->
+
+                <Grid
+                    Margin="0,30,0,0"
+                    Grid.Row="1"
+                    BackgroundColor="White"
+                    RowDefinitions="auto,auto,auto"
+                    >
+                    <StackLayout
+                        Grid.Row="1"
+                        Spacing="10"
+                        >
+                        <Label
+                            Text="Informations congé"
+                            TextColor="{StaticResource LabelColor}"
+                            FontAttributes="Bold"
+
+                            Padding="0,10"
+
+                            />
+                    <cc:MaterialPicker
+                        Date="Date début"
+                        LeftGlyph="{x:Static res:FontAwesomeFonts.Calendar}"
+                        />
+
+                    <cc:MaterialPicker
+                        Date="Date Fin"
+                        LeftGlyph="{x:Static res:FontAwesomeFonts.Calendar}"
+                        />
+                    <cc:MaterialPicker
+                        Date="Type de congé"
+                        LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                        />
+
+                    </StackLayout>
 
                 </Grid>
                 <!--Footer-->

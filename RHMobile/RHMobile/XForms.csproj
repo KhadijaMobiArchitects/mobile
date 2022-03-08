@@ -85,5 +85,8 @@
     <Compile Update="views\Conge\NouvelleDemande.xaml.cs">
       <DependentUpon>NouvelleDemande.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\CustomDatePicker.xaml.cs">
+      <DependentUpon>CustomDatePicker.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
