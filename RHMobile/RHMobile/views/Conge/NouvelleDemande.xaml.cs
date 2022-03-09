@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using XForms.ViewModels;
 using XForms.views.Base;
 
 namespace XForms.views.Conge
@@ -11,6 +12,8 @@ namespace XForms.views.Conge
         public NouvelleDemande()
         {
             InitializeComponent();
+
+            BindingContext = new NouvelleDemandeViewModel();
         }
     }
 }

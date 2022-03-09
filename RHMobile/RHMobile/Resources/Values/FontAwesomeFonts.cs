@@ -12,7 +12,7 @@ namespace XForms.Resources
     {
         public const string Bell = "\uf0f3";
         public const string Calendar = "\uf073";
-        public const string AngleDown = "\uf107";
+        public const string Angledown = "\uf078";
 
 
 

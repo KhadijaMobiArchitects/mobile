@@ -74,31 +74,88 @@
                     BackgroundColor="White"
                     RowDefinitions="auto,auto,auto"
                     >
-                    <StackLayout
+                    <StackLayout>
+
+                        <StackLayout
                         Grid.Row="1"
                         Spacing="10"
                         >
-                        <Label
-                            Text="Informations congé"
+                            <Label
+                                Text="Informations congé"
+                                TextColor="{StaticResource LabelColor}"
+                                FontAttributes="Bold"
+                                FontSize="15"
+                                Padding="0,10"
+
+                            />
+                            <cc:MaterialDatePicker
+
+                                />
+                            <cc:MaterialPicker
+                                LeftGlyph="{x:Static res:FontAwesomeFonts.Calendar}"
+                                Title="Date début"
+                               
+                        />
+
+                            <cc:MaterialPicker
+                                Title="Date Fin"
+                                LeftGlyph="{x:Static res:FontAwesomeFonts.Calendar}"
+                        />
+                            <cc:MaterialPicker
+                                LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                                ItemsSource="{Binding ListConge}"
+                                Title="Type de congé"    
+                        />
+
+                        </StackLayout>
+                        <StackLayout
+                        Grid.Row="1"
+                        Spacing="10"
+                        >
+                            <Label
+                            Text="Informations Interne"
                             TextColor="{StaticResource LabelColor}"
                             FontAttributes="Bold"
+                            FontSize="15"
+                            Padding="0,10"
+
+                            />
+
+                            <cc:MaterialPicker
+                        Title="Projet"
+                        LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                        />
+
+                            <cc:MaterialPicker
+                        Title="Votre situation sur le projet"
+                        LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                        />
+
+                        </StackLayout>
+                        <StackLayout
+                            Padding="0,20"
+                            Orientation="Horizontal"
+                            >
+
+                            <cc:CustomButton
+                                StyleCorner="Circle"
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource InputBackground}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                BorderWidth="2"
+                                HeightRequest="30"
+                                />
+                            <Label
+                            Text="Confirmation congé par squad"
+                            TextColor="{StaticResource LabelColor}"
+                            FontAttributes="Bold"
+                            FontSize="15"
 
                             Padding="0,10"
 
                             />
-                    <cc:MaterialPicker
-                        Date="Date début"
-                        LeftGlyph="{x:Static res:FontAwesomeFonts.Calendar}"
-                        />
-
-                    <cc:MaterialPicker
-                        Date="Date Fin"
-                        LeftGlyph="{x:Static res:FontAwesomeFonts.Calendar}"
-                        />
-                    <cc:MaterialPicker
-                        Date="Type de congé"
-                        LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
-                        />
+                        </StackLayout>
 
                     </StackLayout>
 

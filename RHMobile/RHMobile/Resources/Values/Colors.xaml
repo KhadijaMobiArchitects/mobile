@@ -12,8 +12,7 @@
     <Color x:Key="White">#ffffff</Color>
     <Color x:Key="StartGradient">#0C4599</Color>
     <Color x:Key="EndGradient">#0D69B6</Color>    
-    <Color x:Key="InputBackgroundColor">#F2F6FE</Color>
-    <Color x:Key="InputTextColor">#737A83</Color>
+    <Color x:Key="InputBackground">#F2F6FE</Color>
     <Color x:Key="LabelColor">#33373D</Color>
 
 </ResourceDictionary>
