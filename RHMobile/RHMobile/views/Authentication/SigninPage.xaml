@@ -106,6 +106,7 @@
                             >
                             <cc:CustomButton
                                 Text="Se connecter"
+                                FontSize="20"
                                 />
                         </StackLayout>
                     </Grid>
@@ -118,6 +119,7 @@
                         <cc:CustomButton
                         Text="Se connecter avec face ID"
                         BackgroundColor="#24B3D6"
+                            FontSize="20"
                         />
                     </Grid>
 

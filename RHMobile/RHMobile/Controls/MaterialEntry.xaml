@@ -6,8 +6,9 @@
     x:Class="XForms.Controls.MaterialEntry"
     x:Name="this"
     >
+            <!--Padding="{OnPlatform iOS='0,5,0,5',Android='20,5,0,5'}"-->
+
     <pcview:PancakeView
-        Padding="{OnPlatform iOS='20,5,0,5',Android='20,5,0,5'}"
         BackgroundColor="White"
         CornerRadius="{Binding CornerRadiuss,Source={x:Reference this}}"
         >
@@ -21,6 +22,7 @@
             Text="{Binding Text,Source={x:Reference this}}"
             Placeholder="{Binding Placeholder,Source={x:Reference this}}"
             Style="{StaticResource TransparentEntryStyle}"
+            BackgroundColor="{StaticResource White}"
             Visual="Material"
             />
             <BoxView
