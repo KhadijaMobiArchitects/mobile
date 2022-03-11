@@ -4,55 +4,49 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cc="clr-namespace:XForms.Controls"
-    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:res="clr-namespace:XForms.Resources" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     x:Class="XForms.views.Conge.NouvelleDemande">
     <Base:BasePage.Content>
         <Grid
             BackgroundColor="White"
-            RowDefinitions="*,4*">
+            RowDefinitions="*,5*">
             <cc:CornerBox
-                ScaleX="3">
-                <cc:CornerBox.Background>
-                    <LinearGradientBrush
-                        StartPoint="0,0"
-                        EndPoint="0,1">
-                        <GradientStop
-                            Color="{StaticResource StartGradient}"
-                            Offset="0.1" />
-                        <GradientStop
-                            Color="{StaticResource EndGradient}"
-                            Offset="1.0" />
+                ScaleX="{OnPlatform iOS='3',Android='1.5'}">
 
-                    </LinearGradientBrush>
-                </cc:CornerBox.Background>
+                <cc:CornerBox.BackgroundGradientStops>
+            <pancake:GradientStopCollection>
+                <pancake:GradientStop Color="{StaticResource StartGradient}" Offset="0.1"/>
+                <pancake:GradientStop Color="{StaticResource EndGradient}" Offset="1"/>
+            </pancake:GradientStopCollection>
+                </cc:CornerBox.BackgroundGradientStops>
 
             </cc:CornerBox>
 
-
-
             <Grid
-                RowDefinitions="auto,*,auto"
-                Padding="{OnPlatform iOS='30,90,30,40',Android='30,50,30,40'}"
+                RowDefinitions="*,4*,*"
+                Padding="{OnPlatform iOS='30,0,30,0',Android='30,0,30,0'}"
                 VerticalOptions="FillAndExpand"
                 Grid.RowSpan="2"
-                RowSpacing="20">
+                RowSpacing="0">
                 <!--Header-->
 
                 <Grid
+                    Padding="{OnPlatform iOS='0,30,0,0',Android='0'}"
                     ColumnDefinitions="5*,*"
                                         >
                     <StackLayout
-                        Spacing="2"
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="Center"
+                        >
                         <Label
                             Text="Nouvelle demande"
                             TextColor="White"
                             FontAttributes="Bold"
+                            VerticalTextAlignment="Center"
                             FontSize="16" />
                     </StackLayout>
 
                     <Image
-                        Grid.Column="2"
+                        Grid.Column="1"
                         VerticalOptions="Center"
                         HorizontalOptions="Center">
                         <Image.Source>
@@ -69,16 +63,12 @@
                 <!--Body-->
 
                 <Grid
-                    Margin="0,30,0,0"
                     Grid.Row="1"
-                    BackgroundColor="White"
                     RowDefinitions="auto,auto,auto"
                     >
-                    <StackLayout>
-
+    
                         <StackLayout
-                        Grid.Row="1"
-                        Spacing="10"
+                        Grid.Row="0"
                         >
                             <Label
                                 Text="Informations congé"
@@ -88,18 +78,13 @@
                                 Padding="0,10"
 
                             />
+
                             <cc:MaterialDatePicker
-
+                                Placeholder="Date début"
                                 />
-                            <cc:MaterialPicker
-                                LeftGlyph="{x:Static res:FontAwesomeFonts.Calendar}"
-                                Title="Date début"
-                               
-                        />
 
-                            <cc:MaterialPicker
-                                Title="Date Fin"
-                                LeftGlyph="{x:Static res:FontAwesomeFonts.Calendar}"
+                            <cc:MaterialDatePicker
+                                Placeholder="Date Fin"
                         />
                             <cc:MaterialPicker
                                 LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
@@ -110,7 +95,6 @@
                         </StackLayout>
                         <StackLayout
                         Grid.Row="1"
-                        Spacing="10"
                         >
                             <Label
                             Text="Informations Interne"
@@ -122,19 +106,23 @@
                             />
 
                             <cc:MaterialPicker
-                        Title="Projet"
-                        LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                            Title="Projet"
+                            LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                            ItemsSource="{Binding ListProjet}"
+
                         />
 
                             <cc:MaterialPicker
                         Title="Votre situation sur le projet"
                         LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                        ItemsSource="{Binding ListSituation}"
                         />
 
                         </StackLayout>
                         <StackLayout
                             Padding="0,20"
                             Orientation="Horizontal"
+                            Grid.Row="2"
                             >
 
                             <cc:CustomButton
@@ -157,8 +145,6 @@
                             />
                         </StackLayout>
 
-                    </StackLayout>
-
                 </Grid>
                 <!--Footer-->
 
@@ -169,6 +155,7 @@
                         Text="Envoyer ma demande"
                         FontSize="20"
                         BackgroundColor="#B0B6BE"
+                        VerticalOptions="Center"
                         />
 
                 </Grid>

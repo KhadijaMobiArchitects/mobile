@@ -7,9 +7,9 @@
     xmlns:res="clr-namespace:XForms.Resources" xmlns:cc="clr-namespace:XForms.Controls"
     x:Name="this"
     >
+            <!--Padding="{OnPlatform iOS='20,0,15,0',Android='20,0,0,0'}"-->
 
     <pcview:PancakeView
-        Padding="{OnPlatform iOS='20,0,15,0',Android='20,0,0,0'}"
         BackgroundColor="{StaticResource InputBackground}"
         CornerRadius="6"
         >
@@ -18,7 +18,8 @@
         </pcview:PancakeView.Border>
         <Grid
             ColumnSpacing="0"
-            ColumnDefinitions="5*,*"
+            ColumnDefinitions="*,auto"
+            RowDefinitions="auto"
             >
             <!--<Label
                 Text="{Binding Date,Source={x:Reference this}}"
@@ -27,14 +28,15 @@
                 VerticalTextAlignment="Center"
                 />-->
             <cc:CustomNativePicker
-                Grid.Column="0"
+                x:Name="NativePicker"
+                Grid.ColumnSpan="2"
                 TextColor="Black"
                 ItemsSource="{Binding ItemsSource,Source={x:Reference this}}"
-                ItemDisplayBinding="{Binding Type}"
+                ItemDisplayBinding="{Binding Name}"
                 Style="{StaticResource TransparentPickerStyle}"
                 Title="{Binding Title, Source={x:Reference this}}"
-
                 />
+
             <cc:CustomButton
                 Grid.Column="1"
                 HorizontalOptions="Center"
@@ -42,13 +44,14 @@
                 StyleCorner="Circle"
                 Opacity="0.6"
                 Style="{StaticResource InputActionStyle}"
-
+                FocsudView="{x:Reference NativePicker}"
                 >
                 <cc:CustomButton.ImageSource>
                     <FontImageSource
                         FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
                         Glyph="{Binding LeftGlyph, Source={x:Reference this}}"
                         Size="20"
+                        Color="{StaticResource PlaceholderColor}"
                         />
                 </cc:CustomButton.ImageSource>
 

@@ -10,7 +10,7 @@
     >
 
     <pcview:PancakeView
-        Padding="{OnPlatform iOS='20,0,15,0',Android='20,0,0,0'}"
+        Padding="{OnPlatform iOS='0,0,0,0',Android='0,0,0,0'}"
         BackgroundColor="{StaticResource InputBackground}"
         CornerRadius="6"
         >
@@ -19,34 +19,46 @@
         </pcview:PancakeView.Border>
         <Grid
             ColumnSpacing="0"
-            ColumnDefinitions="5*,*"
+            ColumnDefinitions="*,auto"
+            RowDefinitions="auto"
             >
-            <!--<Label
-                Text="{Binding Date,Source={x:Reference this}}"
-                TextColor="{StaticResource InputTextColor}"
-                FontSize="14"
+            <Grid
+                Grid.ColumnSpan="2"
+                >
+            <Entry
+                Text="{Binding DateString ,Source={x:Reference this}}"
+                Placeholder="{Binding Placeholder,Source={x:Reference this}}"                
                 VerticalTextAlignment="Center"
-                />-->
+                Style="{StaticResource TransparentEntryStyle}"
+                />
+                <Grid
+                    Opacity="0"
+                    >
             <DatePicker
-                Grid.Column="0"
+                x:Name="DatePicker"
                 TextColor="Black"
                 Style="{StaticResource TransparentPickerStyle}"
-
+                Visual="Material"
+                DateSelected="DatePicker_DateSelected"
                 />
+                </Grid>
+            </Grid>
+
             <cc:CustomButton
                 Grid.Column="1"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 StyleCorner="Circle"
                 Opacity="0.6"
+                FocsudView="{x:Reference DatePicker}"
                 Style="{StaticResource InputActionStyle}"
-
                 >
                 <cc:CustomButton.ImageSource>
                     <FontImageSource
                         FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
                         Glyph="{x:Static res:FontAwesomeFonts.Calendar}"
                         Size="20"
+                        Color="{StaticResource PlaceholderColor}"
                         />
                 </cc:CustomButton.ImageSource>
 

@@ -7,6 +7,7 @@ namespace XForms.Models
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
         public string Type { get; set; }
+        public string Name => Type;
         public string Status { get; set; }
 
         public Conge()

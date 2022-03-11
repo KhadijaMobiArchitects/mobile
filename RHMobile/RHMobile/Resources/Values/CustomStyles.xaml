@@ -20,7 +20,7 @@
         >
         <Setter
             Property="BackgroundColor"
-            Value="Transparent"/>
+            Value="{StaticResource InputBackground}"/>
         <Setter
             Property="Visual"
             Value="Material"
@@ -33,7 +33,7 @@
         <Style
         x:Key="OverEntryStyle"
         TargetType="BoxView"
-        >
+        >            
         <Setter
             Property="HeightRequest"
             Value="10"
@@ -90,7 +90,7 @@
             Value="{OnPlatform Android='20', iOS=10 }" />
         <Setter
             Property="TranslationX"
-            Value="10" />
+            Value="-10" />
         <Setter
             Property="Visual"
             Value="Default" />

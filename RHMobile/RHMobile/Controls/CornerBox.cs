@@ -1,10 +1,11 @@
 ﻿using System;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 using XForms.Enums;
 
 namespace XForms.Controls
 {
-    public class CornerBox : BoxView
+    public class CornerBox : PancakeView
     {
         private ControlStyleCorner styleCorner = ControlStyleCorner.SemiRounded;
         public ControlStyleCorner StyleCorner

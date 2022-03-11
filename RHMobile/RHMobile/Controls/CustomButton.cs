@@ -8,12 +8,21 @@ namespace XForms.Controls
     {
         public ControlStyleCorner StyleCorner { get; set; } = ControlStyleCorner.Default;
 
+        public static readonly BindableProperty FocsudViewProperty = BindableProperty.Create(nameof(FocsudView), typeof(View), typeof(Entry));
+        public View FocsudView
+        {
+            get => (View)GetValue(FocsudViewProperty);
+            set => SetValue(FocsudViewProperty, value);
+        }
 
         public CustomButton()
         {
-            this.TextColor = Color.White;
-            this.FontAttributes = FontAttributes.Bold;
-            this.FontSize = 14;
+
+            this.Clicked += (object sender, EventArgs e) =>
+            {
+                FocsudView?.Focus();
+            };
+
 
             this.SizeChanged += (object sender, EventArgs e) =>
             {

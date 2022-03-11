@@ -49,6 +49,7 @@
     <None Remove="Fody" />
     <None Remove="Models\Conge\" />
     <None Remove="Models\Base\" />
+    <None Remove="Models\Projet\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -66,6 +67,7 @@
     <Folder Include="Models\" />
     <Folder Include="Models\Conge\" />
     <Folder Include="Models\Base\" />
+    <Folder Include="Models\Projet\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
