@@ -144,7 +144,7 @@
                         Grid.Row="3"
                         >
                         <CollectionView
-                            ItemsSource="{Binding CongeList}"
+                            ItemsSource="{Binding ListConge}"
                             >
                             <CollectionView.GroupHeaderTemplate>
                                 <DataTemplate>

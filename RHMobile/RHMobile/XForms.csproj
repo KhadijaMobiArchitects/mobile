@@ -17,6 +17,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2337" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -50,6 +51,10 @@
     <None Remove="Models\Conge\" />
     <None Remove="Models\Base\" />
     <None Remove="Models\Projet\" />
+    <None Remove="Data\" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Constants\" />
+    <None Remove="HttpREST\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -68,6 +73,9 @@
     <Folder Include="Models\Conge\" />
     <Folder Include="Models\Base\" />
     <Folder Include="Models\Projet\" />
+    <Folder Include="Data\" />
+    <Folder Include="Constants\" />
+    <Folder Include="HttpREST\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

@@ -13,7 +13,14 @@ namespace XForms.views.Conge
         {
             InitializeComponent();
 
+
             BindingContext = new NouvelleDemandeViewModel();
+        }
+
+        void CustomButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Console.WriteLine("Hello worlds ");
+
         }
     }
 }

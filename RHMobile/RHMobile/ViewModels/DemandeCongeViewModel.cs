@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Windows.Input;
+using Newtonsoft.Json;
 using Xamarin.Forms;
+using XForms.Constants;
 using XForms.Models;
 
 namespace XForms.ViewModels
@@ -10,7 +13,8 @@ namespace XForms.ViewModels
     {
         public List<REFItem> HeadrActionList { get; set; }
 
-        public List<Conge> CongeList { get; set; }
+        public List<Conge> ListConge { get; set; }
+
 
         //public ObservableRangeCollection<ObservableGroupCollection<string, Conge>> CongeList { get; set; }
 
@@ -37,24 +41,35 @@ namespace XForms.ViewModels
                 }
             };
 
-            CongeList = new List<Conge>()
+            //CongeList = new List<Conge>()
+            //{
+            //    new Conge()
+            //    {
+            //        Type="Conge annuel",
+            //        Status="En cours",
+            //        DateDebut = new DateTime(2022,4,20),
+            //        DateFin = new DateTime(2022,9,2)
+            //    },
+            //    new Conge(){
+            //        Type="Conge Mensuel",
+            //        Status="Confirmé",
+            //        DateDebut = new DateTime(2021,7,20),
+            //        DateFin = new DateTime(2021,8,12)
+            //    }
+            //};
+
+            //Uri uri = new Uri(Uri);
+
+            var client = new HttpClient();
+            var resp = client.GetAsync(AppUrls.GesRequestsListConge);
+
+            if (resp.Result.IsSuccessStatusCode)
             {
-                new Conge()
-                {
-                    Type="Conge annuel",
-                    Status="En cours",
-                    DateDebut = new DateTime(2022,4,20),
-                    DateFin = new DateTime(2022,9,2)
-                },
-                new Conge(){
-                    Type="Conge Mensuel",
-                    Status="Confirmé",
-                    DateDebut = new DateTime(2021,7,20),
-                    DateFin = new DateTime(2021,8,12)
-                }
-            };
+                var content = resp.Result.Content.ReadAsStringAsync();
+                ListConge  = JsonConvert.DeserializeObject<List<Conge>>(content.Result.ToString());
 
 
+            }
 
 
         }

@@ -97,7 +97,7 @@
                         Grid.Row="1"
                         >
                             <Label
-                            Text="Informations Interne"
+                            Text="Activités Actuelles"
                             TextColor="{StaticResource LabelColor}"
                             FontAttributes="Bold"
                             FontSize="15"
@@ -156,6 +156,7 @@
                         FontSize="20"
                         BackgroundColor="#B0B6BE"
                         VerticalOptions="Center"
+                        Clicked="CustomButton_Clicked"
                         />
 
                 </Grid>
