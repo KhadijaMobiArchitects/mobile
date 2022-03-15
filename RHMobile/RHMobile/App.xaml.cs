@@ -3,6 +3,7 @@ using XForms.views.Authentication;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XForms.views.Conge;
+using XForms.views.DashBoard;
 
 namespace XForms
 {

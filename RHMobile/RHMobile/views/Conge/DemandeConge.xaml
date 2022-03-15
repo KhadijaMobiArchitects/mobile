@@ -53,7 +53,7 @@
                             FontAttributes="Bold"
                             FontSize="16" />
                         <Label
-                            Text="1 demandes en cours"
+                            Text="{Binding nbreDemandes,StringFormat='{0} demandes en cours'}"
                             FontFamily="RubilRegular"
                             TextColor="White"
                             FontSize="13"
@@ -94,6 +94,7 @@
 
                     <ScrollView
                         Grid.Row="1"
+                        x:Name="scroll"
                         Padding="20,0"
                         Orientation="Horizontal"
                         HorizontalScrollBarVisibility="Never">
@@ -144,7 +145,7 @@
                         Grid.Row="3"
                         >
                         <CollectionView
-                            ItemsSource="{Binding ListConge}"
+                            ItemsSource="{Binding ListCongeitems}"
                             >
                             <CollectionView.GroupHeaderTemplate>
                                 <DataTemplate>
@@ -152,7 +153,10 @@
                             </CollectionView.GroupHeaderTemplate>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Cell:DemandeCongeCellView/>
+                                    <Cell:DemandeCongeCellView
+                                        BackgroundColorButton="{Binding BackgroundColor}"
+                                        TextColor="{Binding TextColor}"
+                                        />
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
@@ -181,3 +185,6 @@
 
     </Base:BasePage.Content>
 </Base:BasePage>
+
+<!--BackgroundColorButton="{Binding Source={x:Reference this}, Path=BindingContext.BackgroundColor}"
+TextColor="{Binding Source={x:Reference this},Path=BindingContext.TextColor}"-->

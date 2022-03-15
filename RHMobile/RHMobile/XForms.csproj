@@ -8,8 +8,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
@@ -55,6 +59,9 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Constants\" />
     <None Remove="HttpREST\" />
+    <None Remove="views\DashBoard\" />
+    <None Remove="Resources\Images\ImageProfil.svg" />
+    <None Remove="Resources\Images\profil.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -76,6 +83,7 @@
     <Folder Include="Data\" />
     <Folder Include="Constants\" />
     <Folder Include="HttpREST\" />
+    <Folder Include="views\DashBoard\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
@@ -87,6 +95,8 @@
     <EmbeddedResource Include="Resources\Assets\FontAwesome5Regular.otf" />
     <EmbeddedResource Include="Resources\Assets\FontAwesome5Regular.ttf" />
     <EmbeddedResource Include="Resources\Assets\FontAwesome5Solid.ttf" />
+    <EmbeddedResource Include="Resources\Images\ImageProfil.svg" />
+    <EmbeddedResource Include="Resources\Images\profil.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />

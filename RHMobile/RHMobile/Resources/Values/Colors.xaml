@@ -14,5 +14,6 @@
     <Color x:Key="EndGradient">#0D69B6</Color>    
     <Color x:Key="InputBackground">#F2F6FE</Color>
     <Color x:Key="LabelColor">#33373D</Color>
+    <Color x:Key="Secondenry">#1275D0</Color>
 
 </ResourceDictionary>

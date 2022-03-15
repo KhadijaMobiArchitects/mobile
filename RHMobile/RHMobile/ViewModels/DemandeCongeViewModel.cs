@@ -15,11 +15,26 @@ namespace XForms.ViewModels
 
         public List<Conge> ListConge { get; set; }
 
+        public List<Conge> ListCongeitems { get; set; }
+
+
+        public List<Conge> ListCongeEncours { get; set; }
+        public List<Conge> ListCongeConfirme { get; set; }
+        public List<Conge> ListCongeReporte { get; set; }
+
+        public Color BackgroundColor { get; set; }
+        public Color TextColor { get; set; }
+        public int nbreDemandes {get;set;}
+
 
         //public ObservableRangeCollection<ObservableGroupCollection<string, Conge>> CongeList { get; set; }
 
         public DemandeCongeViewModel()
         {
+            ListCongeConfirme = new List<Conge>();
+            ListCongeEncours = new List<Conge>();
+            ListCongeReporte = new List<Conge>();
+
 
             HeadrActionList = new List<REFItem>()
             {
@@ -41,7 +56,7 @@ namespace XForms.ViewModels
                 }
             };
 
-            //CongeList = new List<Conge>()
+            //ListConge = new List<Conge>()
             //{
             //    new Conge()
             //    {
@@ -66,12 +81,35 @@ namespace XForms.ViewModels
             if (resp.Result.IsSuccessStatusCode)
             {
                 var content = resp.Result.Content.ReadAsStringAsync();
-                ListConge  = JsonConvert.DeserializeObject<List<Conge>>(content.Result.ToString());
+                ListConge = JsonConvert.DeserializeObject<List<Conge>>(content.Result.ToString());
 
 
             }
 
+            Classerconge(ListConge);
 
+            ListCongeitems = ListCongeEncours;
+            nbreDemandes = ListCongeitems.Count;
+
+        }
+
+        private void Classerconge(List<Conge> listConge)
+        {
+            foreach (var item in listConge)
+            {
+                if (item.Status == "En cours")
+                {
+                    ListCongeEncours.Add(item);
+                }
+                else if (item.Status == "Confirmé")
+                {
+                    ListCongeConfirme.Add(item);
+                }
+                else if (item.Status == "Reporté")
+                {
+                    ListCongeReporte.Add(item);
+                }
+            }
         }
 
         private bool CanSelectHeaderAction = true;
@@ -91,6 +129,26 @@ namespace XForms.ViewModels
                     //item.BackgroundColor = ;
 
                 }
+
+                if (HeadrActionList[0].IsSelected)
+                {
+                    ListCongeitems = ListCongeEncours;
+
+                }
+                else if (HeadrActionList[1].IsSelected)
+                {
+                    ListCongeitems = ListCongeConfirme;
+
+                }
+                else if (HeadrActionList[2].IsSelected)
+                {
+                    ListCongeitems = ListCongeReporte;
+
+                }
+
+                nbreDemandes = ListCongeitems.Count;
+                OnPropertyChanged(nameof(ListCongeitems));
+                OnPropertyChanged(nameof(nbreDemandes));
 
             }
             catch (Exception ex)

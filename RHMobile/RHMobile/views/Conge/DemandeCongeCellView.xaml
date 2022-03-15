@@ -3,7 +3,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cc="clr-namespace:XForms.Controls"
-    x:Class="XForms.views.Conge.DemandeCongeCellView">
+    x:Class="XForms.views.Conge.DemandeCongeCellView"
+    x:Name="this"
+    >
     <ContentView.Content>
         <Grid
             RowDefinitions="*,auto"
@@ -31,6 +33,7 @@
                     Text="{Binding DateDebut}"
                     FontFamily="RubikRegular"
                     FontSize="12"
+                    TextColor="#A3AEC5"
                     >
                     <Label.FormattedText>
                         <FormattedString>
@@ -56,8 +59,8 @@
             <cc:CustomButton
                 Grid.Column="2"
                 Text="{Binding Status}"
-                BackgroundColor="#FEE07D"
-                TextColor="#E6992A"
+                BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
+                TextColor="{Binding TextColor,Source = {x:Reference this}}"
                 FontSize="12"
                 FontFamily="RubikRegular"
                 Padding="10,0"

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+ xmlns:Base="clr-namespace:XForms.views.Base"    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:Local="clr-namespace:XForms"
+    x:Class="XForms.views.DashBoard.HomePage">
+    <Base:BasePage.Content>
+        <Grid
+            BackgroundColor="White"
+            RowDefinitions="*,5*">
+            <cc:CornerBox
+                ScaleX="{OnPlatform iOS='3',Android='1.5'}"
+                >
+
+                <cc:CornerBox.BackgroundGradientStops>
+                    <pancake:GradientStopCollection>
+                        <pancake:GradientStop Color="{StaticResource StartGradient}" Offset="0.1"/>
+                        <pancake:GradientStop Color="{StaticResource EndGradient}" Offset="1"/>
+                    </pancake:GradientStopCollection>
+                </cc:CornerBox.BackgroundGradientStops>
+
+            </cc:CornerBox>
+            <Grid
+                RowDefinitions="*,3*,*"
+                Padding="{OnPlatform iOS='30,0,30,0',Android='30,0,30,0'}"
+                VerticalOptions="FillAndExpand"
+                Grid.RowSpan="2"
+                RowSpacing="0">
+                <!--Header-->
+
+                <Grid
+                    Padding="{OnPlatform iOS='0,30,0,0',Android='0,30,0,0'}"
+                    ColumnDefinitions="5*,*"
+                    RowDefinitions="auto,*,*"
+                    RowSpacing="0"
+                    >
+                    <Grid
+                        ColumnDefinitions="auto,*"
+                        Padding="0,10,0,10"
+                        >
+                        <StackLayout
+                            >
+                            <cc:CornerView
+                            HeightRequest="45"
+                            StyleCorner="Circle"
+                            >
+                                <cc:CornerView.Border>
+                                    <pancake:Border Color="{StaticResource Secondenry}" Thickness="2"/>
+                                </cc:CornerView.Border>
+
+                                <svg:SvgCachedImage
+                                Source="{Local:ImageResource profil.png}"
+                                Aspect="AspectFill"
+                                />
+                            </cc:CornerView>
+                        </StackLayout>
+                        <StackLayout
+                            Grid.Column="1"
+                            VerticalOptions="Center"
+                            >
+                            <Label
+                            Text="Mehdi Mountij"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            VerticalTextAlignment="Center"
+                            FontSize="16" />
+
+                            <Label
+                            Text="Art director and ui/ux designer "
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            VerticalTextAlignment="Center"
+                            FontSize="13"
+                                Opacity="0.5"
+                                FontFamily="RubikRegular"
+                                />
+                        </StackLayout>
+                    </Grid>
+
+                    <Image
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
+                                Glyph="{x:Static res:FontAwesomeFonts.Bell}"
+                                Color="White"
+                                Size="24" />
+                        </Image.Source>
+                    </Image>
+                    <!--<StackLayout
+                        Grid.Row="1"
+                        BackgroundColor="Green"
+                        >
+
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Row="2"
+                        BackgroundColor="Gray"
+                        >
+
+                    </StackLayout>-->
+                    <pancake:PancakeView
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="White"
+                        CornerRadius="8"
+                        Shadow="{pancake:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}">
+
+                    </pancake:PancakeView>
+
+                </Grid>
+                <!--<Grid
+                    Grid.Row="1"
+                    HeightRequest="70"
+                    TranslationY="-35"
+                    >
+                    <pancake:PancakeView
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="Red"
+                        >
+
+                    </pancake:PancakeView>
+                </Grid>-->
+
+                <!--body-->
+
+
+
+                <!--Footer-->
+
+            </Grid>
+
+        </Grid>
+    </Base:BasePage.Content>
+
+</Base:BasePage>
