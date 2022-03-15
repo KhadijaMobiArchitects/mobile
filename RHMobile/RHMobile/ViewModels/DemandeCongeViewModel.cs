@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Windows.Input;
+using Microcharts;
 using Newtonsoft.Json;
+using SkiaSharp;
 using Xamarin.Forms;
 using XForms.Constants;
 using XForms.Models;
-
 namespace XForms.ViewModels
 {
     public class DemandeCongeViewModel : BindableObject
@@ -16,6 +17,7 @@ namespace XForms.ViewModels
         public List<Conge> ListConge { get; set; }
 
         public List<Conge> ListCongeitems { get; set; }
+        public List<ChartEntry> entries { get; set; }
 
 
         public List<Conge> ListCongeEncours { get; set; }
@@ -24,7 +26,8 @@ namespace XForms.ViewModels
 
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
-        public int nbreDemandes {get;set;}
+        public int nbreDemandes { get; set; }
+        public DonutChart donutChart { get; set; }
 
 
         //public ObservableRangeCollection<ObservableGroupCollection<string, Conge>> CongeList { get; set; }
@@ -35,6 +38,31 @@ namespace XForms.ViewModels
             ListCongeEncours = new List<Conge>();
             ListCongeReporte = new List<Conge>();
 
+            entries = new List<ChartEntry>
+            {
+                new ChartEntry(30)
+                {
+                    Color = SKColor.Parse("#cccccc")
+                },
+                new ChartEntry(50)
+                {
+                    Color = SKColor.Parse("#bbbbbb")
+                },
+                new ChartEntry(20)
+                {
+                    Color = SKColor.Parse("#aaaaaa")
+                },
+            };
+
+            donutChart = new DonutChart()
+            {
+                Entries = entries,
+                MinValue = 0,
+                MaxValue = 100,
+                HoleRadius = 0.6f,
+
+
+            };
 
             HeadrActionList = new List<REFItem>()
             {

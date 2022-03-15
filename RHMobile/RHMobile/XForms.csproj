@@ -22,6 +22,7 @@
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2337" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -62,6 +63,7 @@
     <None Remove="views\DashBoard\" />
     <None Remove="Resources\Images\ImageProfil.svg" />
     <None Remove="Resources\Images\profil.png" />
+    <None Remove="Microcharts.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />

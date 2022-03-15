@@ -6,7 +6,7 @@
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:cc="clr-namespace:XForms.Controls"
     xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:Cell="clr-namespace:XForms.views.Conge"
+    xmlns:Cell="clr-namespace:XForms.views.Conge" xmlns:chart="clr-namespace:Microcharts;assembly=Microcharts" xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     x:Class="XForms.views.Conge.DemandeConge"
     x:Name="this">
     <Base:BasePage.Content>
@@ -87,7 +87,73 @@
                         WidthRequest="335"
                         HeightRequest="200"
                         CornerRadius="8"
-                        Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=10}">
+                        Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
+                        >
+                        <Grid
+                            ColumnDefinitions="3*,2*"
+                            Padding="10"
+
+                            >
+                            <Grid
+                                BackgroundColor="Blue"
+                                >
+                                <microcharts:ChartView
+                                    x:Name="chartV"
+                                    Chart="{Binding donutChart}"
+                                   
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    />
+                                <StackLayout
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    >
+                                    <Label
+                                        Text="26"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                        FontSize="24"
+                                        FontAttributes="Bold"
+                                        />
+                                    <Label
+                                        Text="Total du jours"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                        FontSize="13"
+                                        FontFamily="RubikRegular"
+                                        TextColor="#B5BED0"
+                                        />
+
+                                </StackLayout>
+                            </Grid>
+                            <StackLayout
+                                Grid.Column="1"
+                                BackgroundColor="White"
+                                Padding="0,20"
+                                >
+                                <cc:MaterialDay
+                                    NumberOfDays="12"
+                                    StatusColor="{StaticResource ConfirmedColor}"
+                                    StatusDays="consomé"
+                                    VerticalOptions="StartAndExpand"
+                                    
+                                    />
+                                <cc:MaterialDay
+                                    NumberOfDays="7"
+                                    StatusColor="{StaticResource InProgressColor}"
+                                    StatusDays="en vérification"
+                                    VerticalOptions="CenterAndExpand"
+                                    />
+                                <cc:MaterialDay
+                                    NumberOfDays="8"
+                                    StatusColor="{StaticResource postponedColor}"
+                                    StatusDays="reporté"
+                                    VerticalOptions="EndAndExpand"
+                                    />
+                            </StackLayout>
+
+                        </Grid>
+
                     </pcview:PancakeView>
 
                     <!--Switch-->
