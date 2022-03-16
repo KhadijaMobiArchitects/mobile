@@ -29,6 +29,11 @@ namespace XForms.ViewModels
         public int nbreDemandes { get; set; }
         public DonutChart donutChart { get; set; }
 
+        public int ConfirmedDays { get; set; }
+        public int InprogessDays { get; set; }
+        public int PostponedDays { get; set; }
+        public int TotalDays => 26;
+
 
         //public ObservableRangeCollection<ObservableGroupCollection<string, Conge>> CongeList { get; set; }
 
@@ -38,31 +43,6 @@ namespace XForms.ViewModels
             ListCongeEncours = new List<Conge>();
             ListCongeReporte = new List<Conge>();
 
-            entries = new List<ChartEntry>
-            {
-                new ChartEntry(30)
-                {
-                    Color = SKColor.Parse("#cccccc")
-                },
-                new ChartEntry(50)
-                {
-                    Color = SKColor.Parse("#bbbbbb")
-                },
-                new ChartEntry(20)
-                {
-                    Color = SKColor.Parse("#aaaaaa")
-                },
-            };
-
-            donutChart = new DonutChart()
-            {
-                Entries = entries,
-                MinValue = 0,
-                MaxValue = 100,
-                HoleRadius = 0.6f,
-
-
-            };
 
             HeadrActionList = new List<REFItem>()
             {
@@ -116,8 +96,66 @@ namespace XForms.ViewModels
 
             Classerconge(ListConge);
 
+            DifferenceOfDays(ListCongeEncours, ListCongeConfirme, ListCongeReporte);
+
             ListCongeitems = ListCongeEncours;
             nbreDemandes = ListCongeitems.Count;
+
+            entries = new List<ChartEntry>
+            {
+                new ChartEntry(ConfirmedDays)
+                {
+                    Color = SKColor.Parse("#95D5A4")
+                },
+                new ChartEntry(InprogessDays)
+                {
+                    Color = SKColor.Parse("#FEE07D")
+                },
+                new ChartEntry(PostponedDays)
+                {
+                    Color = SKColor.Parse("#D59595")
+                },
+                new ChartEntry(TotalDays)
+                {
+                    Color = SKColor.Parse("#E4FAE8")
+                },
+            };
+
+            donutChart = new DonutChart()
+            {
+                Entries = entries,
+                MinValue = 0,
+                MaxValue = 26,
+                HoleRadius = 0.7f,
+
+
+            };
+
+        }
+
+        private void DifferenceOfDays(List<Conge> listCongeEncours, List<Conge> listCongeConfirme, List<Conge> listCongeReporte)
+        {
+            ConfirmedDays = 0;
+            InprogessDays = 0;
+            PostponedDays = 0;
+
+            foreach(var item in listCongeConfirme)
+            {
+                ConfirmedDays +=item.DifferenceOfDays;
+            }
+            foreach (var item in listCongeEncours)
+            {
+                InprogessDays += item.DifferenceOfDays;
+            }
+            foreach (var item in listCongeReporte)
+            {
+                PostponedDays += item.DifferenceOfDays;
+            }
+
+            OnPropertyChanged(nameof(ConfirmedDays));
+            OnPropertyChanged(nameof(InprogessDays));
+            OnPropertyChanged(nameof(PostponedDays));
+
 
         }
 

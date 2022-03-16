@@ -34,7 +34,7 @@
 
             <Grid
                 RowDefinitions="auto,*,auto"
-                Padding="{OnPlatform iOS='0,90,0,40',Android='0,50,0,40'}"
+                Padding="{OnPlatform iOS='0,70,0,40',Android='0,50,0,40'}"
                 VerticalOptions="FillAndExpand"
                 Grid.RowSpan="2"
                 RowSpacing="20">
@@ -132,20 +132,20 @@
                                 Padding="0,20"
                                 >
                                 <cc:MaterialDay
-                                    NumberOfDays="12"
+                                    NumberOfDays="{Binding ConfirmedDays}"
                                     StatusColor="{StaticResource ConfirmedColor}"
                                     StatusDays="consomé"
                                     VerticalOptions="StartAndExpand"
                                     
                                     />
                                 <cc:MaterialDay
-                                    NumberOfDays="7"
+                                    NumberOfDays="{Binding InprogessDays}"
                                     StatusColor="{StaticResource InProgressColor}"
                                     StatusDays="en vérification"
                                     VerticalOptions="CenterAndExpand"
                                     />
                                 <cc:MaterialDay
-                                    NumberOfDays="8"
+                                    NumberOfDays="{Binding PostponedDays}"
                                     StatusColor="{StaticResource postponedColor}"
                                     StatusDays="reporté"
                                     VerticalOptions="EndAndExpand"

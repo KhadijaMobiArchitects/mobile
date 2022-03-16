@@ -33,6 +33,8 @@ namespace XForms.Models
             "Reporté" => Color.FromHex("#925858")
         };
 
+        public int DifferenceOfDays => (int)(DateFin - DateDebut).TotalDays;
+
         public Conge()
         {
         }
