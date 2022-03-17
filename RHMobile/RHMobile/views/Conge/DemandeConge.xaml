@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
     xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:Cell="clr-namespace:XForms.views.Conge" xmlns:chart="clr-namespace:Microcharts;assembly=Microcharts" xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     x:Class="XForms.views.Conge.DemandeConge"
@@ -239,6 +240,7 @@
                     <cc:CustomButton
                         Text="Nouvelle demande"
                         FontSize="20"
+                        Command="{Binding NavigationtonewRequest}"
                         />
 
                 </Grid>

@@ -47,7 +47,16 @@ namespace XForms.views.Conge
 
 
         //}
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await (BindingContext as DemandeCongeViewModel).getListConge();
+        }
     }
+    
+
 }
 //if ((sender as View)?.BindingContext is REFItem item)
 //{

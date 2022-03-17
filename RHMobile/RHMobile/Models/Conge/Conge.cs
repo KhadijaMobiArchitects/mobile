@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Xamarin.Forms;
+using XForms.Enum;
 
 namespace XForms.Models
 {
@@ -13,8 +14,16 @@ namespace XForms.Models
         public string Type { get; set; }
         [JsonIgnore]
         public string Name => Type;
-        public string Status { get; set; }
+        public int StatusID { get; set; }
 
+        [JsonIgnore]
+        public string Status => (StatusConge)StatusID switch
+        {
+            StatusConge.Inprogress => "En cours",
+            StatusConge.Confirmed => "Confirmé",
+            StatusConge.Postponed => "Reporté"
+
+        };
         //public long IdStatus => Status switch
         //{
         //    "En cours" => 1,
@@ -22,20 +31,21 @@ namespace XForms.Models
         //    "Reporté" => 3
         //};
         [JsonIgnore]
-        public Color BackgroundColor => Status switch
+        public Color BackgroundColor => (StatusConge)StatusID switch
         {
-            "En cours" => Color.FromHex("#FEE07D"),
-            "Confirmé" => Color.FromHex("#95D5A4"),
-            "Reporté" => Color.FromHex("#D59595"),
+            StatusConge.Inprogress => Color.FromHex("#FEE07D"),
+            StatusConge.Confirmed => Color.FromHex("#95D5A4"),
+            StatusConge.Postponed => Color.FromHex("#D59595"),
             _ => Color.Gray
 
         };
+
         [JsonIgnore]
-        public Color TextColor => Status switch
+        public Color TextColor => (StatusConge)StatusID switch
         {
-            "En cours" => Color.FromHex("#E6992A"),
-            "Confirmé" => Color.FromHex("#589266"),
-            "Reporté" => Color.FromHex("#925858"),
+            StatusConge.Inprogress => Color.FromHex("#E6992A"),
+            StatusConge.Confirmed => Color.FromHex("#589266"),
+            StatusConge.Postponed => Color.FromHex("#925858"),
             _=> Color.Gray
         };
 

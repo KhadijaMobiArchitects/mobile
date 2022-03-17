@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Microcharts;
 using Newtonsoft.Json;
 using SkiaSharp;
 using Xamarin.Forms;
 using XForms.Constants;
+using XForms.Enum;
 using XForms.Models;
+using XForms.views.Conge;
+
 namespace XForms.ViewModels
 {
     public class DemandeCongeViewModel : BindableObject
@@ -33,6 +37,8 @@ namespace XForms.ViewModels
         public int InprogessDays { get; set; }
         public int PostponedDays { get; set; }
         public int TotalDays => 26;
+
+        //public INavigation Navigation;
 
 
         //public ObservableRangeCollection<ObservableGroupCollection<string, Conge>> CongeList { get; set; }
@@ -83,25 +89,37 @@ namespace XForms.ViewModels
 
             //Uri uri = new Uri(Uri);
 
-            var client = new HttpClient();
-            var resp = client.GetAsync(AppUrls.GesRequestsListConge);
+            //ListConge = new List<Conge>();
 
-            if (resp.Result.IsSuccessStatusCode)
+            //getListConge(ListConge);
+
+            donutChart = new DonutChart()
+            {        
+                MinValue = 0,
+                MaxValue = 26,
+                HoleRadius = 0.7f,
+
+
+            };
+        }
+
+
+        public async Task getListConge()
+        {
+                        var client = new HttpClient();
+        var resp = await client.GetAsync(AppUrls.GesRequestsListConge);
+
+            if (resp.IsSuccessStatusCode)
             {
-                var content = resp.Result.Content.ReadAsStringAsync();
-                ListConge = JsonConvert.DeserializeObject<List<Conge>>(content.Result.ToString());
+                var content = resp.Content.ReadAsStringAsync();
+        ListConge = JsonConvert.DeserializeObject<List<Conge>>(content.Result.ToString());
 
+                Classerconge(ListConge);
+                DifferenceOfDays(ListCongeEncours, ListCongeConfirme, ListCongeReporte);
+                ListCongeitems = ListCongeEncours;
+                nbreDemandes = ListCongeitems.Count;
 
-            }
-
-            Classerconge(ListConge);
-
-            DifferenceOfDays(ListCongeEncours, ListCongeConfirme, ListCongeReporte);
-
-            ListCongeitems = ListCongeEncours;
-            nbreDemandes = ListCongeitems.Count;
-
-            entries = new List<ChartEntry>
+                entries = new List<ChartEntry>
             {
                 new ChartEntry(ConfirmedDays)
                 {
@@ -121,16 +139,10 @@ namespace XForms.ViewModels
                 },
             };
 
-            donutChart = new DonutChart()
-            {
-                Entries = entries,
-                MinValue = 0,
-                MaxValue = 26,
-                HoleRadius = 0.7f,
+                donutChart.Entries = entries;
 
 
-            };
-
+            }
         }
 
         private void DifferenceOfDays(List<Conge> listCongeEncours, List<Conge> listCongeConfirme, List<Conge> listCongeReporte)
@@ -159,24 +171,29 @@ namespace XForms.ViewModels
 
         }
 
-        private void Classerconge(List<Conge> listConge)
+        private  void Classerconge(List<Conge> listConge)
         {
+            ListCongeConfirme.Clear();
+            ListCongeEncours.Clear();
+            ListCongeReporte.Clear();
+
             foreach (var item in listConge)
             {
-                if (item.Status == "En cours")
+                if (item.StatusID == (int)StatusConge.Inprogress)
                 {
-                    ListCongeEncours.Add(item);
+                     ListCongeEncours.Add(item);
                 }
-                else if (item.Status == "Confirmé")
+                else if (item.StatusID ==(int)StatusConge.Confirmed)
                 {
                     ListCongeConfirme.Add(item);
                 }
-                else if (item.Status == "Reporté")
+                else if (item.StatusID == (int)StatusConge.Postponed)
                 {
                     ListCongeReporte.Add(item);
                 }
             }
         }
+
 
         private bool CanSelectHeaderAction = true;
         public ICommand SelectHeaderActionCommand => new Command<REFItem>(async (model) =>
@@ -227,5 +244,17 @@ namespace XForms.ViewModels
             }
         },
         (_) => CanSelectHeaderAction);
+
+
+        public ICommand NavigationtonewRequest => new Command(() =>
+        {
+            App.Current.MainPage.Navigation.PushAsync(new NouvelleDemande());
+            
+        },
+    () => true
+
+
+    );
+
     }
 }

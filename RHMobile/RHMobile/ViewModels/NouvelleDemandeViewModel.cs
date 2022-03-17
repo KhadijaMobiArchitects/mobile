@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using XForms.Constants;
 using XForms.Models;
 using XForms.Models.Projet;
+using XForms.views.Conge;
 
 namespace XForms.ViewModels
 {
@@ -98,7 +99,6 @@ namespace XForms.ViewModels
 
                     Conge item = new Conge()
                     {
-                        Status = "En cours",
                         Type =SelectedConge.Name,
                         DateDebut = DateDebut,
                         DateFin = DateFin
@@ -109,6 +109,7 @@ namespace XForms.ViewModels
                     string json = JsonConvert.SerializeObject(item);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                     var responseMessage = client.PostAsync(AppUrls.GesRequestsListConge, content);
+                    App.Current.MainPage.Navigation.PushAsync(new DemandeConge());
 
                 }
                 catch(Exception ex)
@@ -123,6 +124,18 @@ namespace XForms.ViewModels
             ()=> CandSendRequest
 
             );
+        public ICommand NavigationBack => new Command(() =>
+        {
+            //App.Current.MainPage.Navigation.PushAsync(new DemandeConge());
+            App.Current.MainPage.Navigation.PopAsync();
+
+
+        },
+    () => true
+
+
+    );
+
 
     }
 }
