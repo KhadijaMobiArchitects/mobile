@@ -35,6 +35,8 @@
                 ItemDisplayBinding="{Binding Name}"
                 Style="{StaticResource TransparentPickerStyle}"
                 Title="{Binding Title, Source={x:Reference this}}"
+                SelectedItem="{Binding SelectedItem,Source={x:Reference this}}"
+                SelectedIndex="{Binding SelectedIndex, Source={x:Reference this}}"
                 />
 
             <cc:CustomButton

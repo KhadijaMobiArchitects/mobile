@@ -151,7 +151,6 @@
                                     VerticalOptions="EndAndExpand"
                                     />
                             </StackLayout>
-
                         </Grid>
 
                     </pcview:PancakeView>

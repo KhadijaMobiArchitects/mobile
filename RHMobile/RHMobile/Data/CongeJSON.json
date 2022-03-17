@@ -1,4 +1,4 @@
-﻿{
+{
   "Conges": [
     {
       "id": 1,
@@ -48,8 +48,106 @@
       "DateFin": "2021-12-05",
       "Type": "Annuel",
       "Status": "En cours"
+    },
+    {
+      "id": 11,
+      "DateDebut": "2021-02-09",
+      "DateFin": "2021-03-23",
+      "Type": "Annuel",
+      "Status": "Confirmé"
+    },
+    {
+      "id": 13,
+      "DateDebut": "2021-06-19",
+      "DateFin": "2021-03-22",
+      "Type": "Annuel",
+      "Status": "En cours"
+    },
+    {
+      "DateDebut": "2021-11-03T00:00:00",
+      "DateFin": "2021-11-04T00:00:00",
+      "Type": "Conge annuel",
+      "Name": "Conge annuel",
+      "Status": "Reporté",
+      "id": 16
+    },
+    {
+      "DateDebut": "2021-11-03T00:00:00",
+      "DateFin": "2021-11-04T00:00:00",
+      "Type": "Conge annuel",
+      "Name": "Conge annuel",
+      "Status": "Reporté",
+      "id": 17
+    },
+    {
+      "DateDebut": "2021-11-03T00:00:00",
+      "DateFin": "2021-11-04T00:00:00",
+      "Type": "Conge annuel",
+      "Status": "Reporté",
+      "id": 18
+    },
+    {
+      "DateDebut": "1927-01-01T00:00:00",
+      "DateFin": "1925-01-01T00:00:00",
+      "Type": "Conge annuel",
+      "Status": "Reporté",
+      "id": 21
+    },
+    {
+      "DateDebut": "2020-01-01T00:00:00",
+      "DateFin": "2000-01-01T00:00:00",
+      "Type": "Conge annuel",
+      "Status": "Reporté",
+      "id": 22
+    },
+    {
+      "DateDebut": "2022-03-16T11:55:23.746444+00:00",
+      "DateFin": "0001-01-01T00:00:00",
+      "Type": "Conge annuel",
+      "Status": "Reporté",
+      "id": 23
+    },
+    {
+      "DateDebut": "2022-03-16T11:55:59.757778+00:00",
+      "DateFin": "2022-03-16T11:55:59.757832+00:00",
+      "Type": "Conge annuel",
+      "Status": "Reporté",
+      "id": 24
+    },
+    {
+      "DateDebut": "2022-03-16T00:00:00+00:00",
+      "DateFin": "2022-03-18T00:00:00",
+      "Type": "Conge annuel",
+      "Status": "Reporté",
+      "id": 25
+    },
+    {
+      "DateDebut": "2022-03-17T08:22:49.252024+00:00",
+      "DateFin": "2022-03-17T08:22:49.252084+00:00",
+      "Type": "Conge annuel",
+      "Status": "Reporté",
+      "id": 26
+    },
+    {
+      "DateDebut": "2022-03-17T00:00:00+00:00",
+      "DateFin": "2022-03-17T00:00:00+00:00",
+      "Type": "Conge annuel",
+      "Status": "Mensuel",
+      "id": 27
+    },
+    {
+      "DateDebut": "2022-03-17T00:00:00+00:00",
+      "DateFin": "2022-07-24T00:00:00",
+      "Type": "Conge annuel",
+      "Status": "Mensuel",
+      "id": 28
+    },
+    {
+      "DateDebut": "2022-03-17T00:00:00+00:00",
+      "DateFin": "2022-03-17T00:00:00+00:00",
+      "Type": "Mensuel",
+      "Status": "En cours",
+      "id": 29
     }
-
   ]
-
 }

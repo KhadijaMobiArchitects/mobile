@@ -41,6 +41,30 @@ namespace XForms.Controls
             }
         }
 
+        public static readonly BindableProperty SelectedIndexProperty =
+   BindableProperty.Create(nameof(SelectedIndex), typeof(int), typeof(View), default, BindingMode.TwoWay);
+
+        public int SelectedIndex
+        {
+            get { return (int)GetValue(SelectedIndexProperty); }
+            set
+            {
+                SetValue(SelectedIndexProperty, value);
+            }
+        }
+
+        public static readonly BindableProperty SelectedItemProperty =
+   BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(View), default, BindingMode.TwoWay);
+
+        public object SelectedItem
+        {
+            get { return (object)GetValue(SelectedItemProperty); }
+            set
+            {
+                SetValue(SelectedItemProperty, value);
+            }
+        }
+
         public static readonly BindableProperty TitleProperty =
     BindableProperty.Create(nameof(Title), typeof(string), typeof(View), string.Empty, BindingMode.TwoWay);
 
@@ -52,6 +76,7 @@ namespace XForms.Controls
                 SetValue(TitleProperty, value);
             }
         }
+
 
 
         public MaterialPicker()

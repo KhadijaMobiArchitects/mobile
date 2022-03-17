@@ -82,15 +82,25 @@
 
                             <cc:MaterialDatePicker
                                 Placeholder="Date début"
+                                Date="{Binding DateDebut}"
                                 />
 
                             <cc:MaterialDatePicker
                                 Placeholder="Date Fin"
+                                Date="{Binding DateFin}"
+
                         />
+                            <!--<Picker
+                                ItemsSource="{Binding ListConge}"
+                                SelectedItem="{Binding SelectedType}"
+                                ItemDisplayBinding="{Binding Name}"
+                                
+                                />-->
                             <cc:MaterialPicker
                                 LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
                                 ItemsSource="{Binding ListConge}"
-                                Title="Type de congé"    
+                                Title="Type de congé"
+                                SelectedItem="{Binding SelectedConge}"
                         />
 
                         </StackLayout>
@@ -108,15 +118,17 @@
 
                             <cc:MaterialPicker
                             Title="Projet"
-                            LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
-                            ItemsSource="{Binding ListProjet}"
+                                LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                                ItemsSource="{Binding ListProjet}"
+                                SelectedItem="{Binding SelectedProjet}"
 
                         />
 
                             <cc:MaterialPicker
-                        Title="Votre situation sur le projet"
-                        LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
-                        ItemsSource="{Binding ListSituation}"
+                                Title="Votre situation sur le projet"
+                                LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                                ItemsSource="{Binding ListSituation}"
+                                SelectedItem="{Binding SelectedSituationProjet}"
                         />
 
                         </StackLayout>
@@ -157,7 +169,7 @@
                         FontSize="20"
                         BackgroundColor="#B0B6BE"
                         VerticalOptions="Center"
-                        Clicked="CustomButton_Clicked"
+                        Command="{Binding SendRequest}"
                         />
 
                 </Grid>
