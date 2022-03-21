@@ -101,6 +101,7 @@ namespace XForms.ViewModels
 
 
             };
+
         }
 
 
@@ -118,6 +119,9 @@ namespace XForms.ViewModels
                 DifferenceOfDays(ListCongeEncours, ListCongeConfirme, ListCongeReporte);
                 ListCongeitems = ListCongeEncours;
                 nbreDemandes = ListCongeitems.Count;
+
+                OnPropertyChanged(nameof(ListCongeitems));
+                OnPropertyChanged(nameof(nbreDemandes));
 
                 entries = new List<ChartEntry>
             {
@@ -249,7 +253,12 @@ namespace XForms.ViewModels
         public ICommand NavigationtonewRequest => new Command(() =>
         {
             App.Current.MainPage.Navigation.PushAsync(new NouvelleDemande());
-            
+
+
+            HeadrActionList[0].IsSelected = true;
+            HeadrActionList[1].IsSelected = false;
+            HeadrActionList[2].IsSelected = false;
+
         },
     () => true
 

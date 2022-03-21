@@ -65,6 +65,7 @@
     <None Remove="Resources\Images\profil.png" />
     <None Remove="Microcharts.Forms" />
     <None Remove="ViewModels\Base\" />
+    <None Remove="views\SharedView\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -88,6 +89,7 @@
     <Folder Include="HttpREST\" />
     <Folder Include="views\DashBoard\" />
     <Folder Include="ViewModels\Base\" />
+    <Folder Include="views\SharedViews\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

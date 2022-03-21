@@ -2,10 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.XForms">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30" />
 	<application android:label="XForms.Android" android:theme="@style/MainTheme" android:usesCleartextTraffic="true">
-
 		<uses-library android:name="org.apache.http.legacy" android:required="true" />
-
-    </application>
+	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	
 </manifest>

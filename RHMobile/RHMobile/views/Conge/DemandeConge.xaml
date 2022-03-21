@@ -7,7 +7,9 @@
     xmlns:cc="clr-namespace:XForms.Controls"
     NavigationPage.HasNavigationBar="False"
     xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:Cell="clr-namespace:XForms.views.Conge" xmlns:chart="clr-namespace:Microcharts;assembly=Microcharts" xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    xmlns:Cell="clr-namespace:XForms.views.Conge"
+    xmlns:chart="clr-namespace:Microcharts;assembly=Microcharts"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" xmlns:Shared="clr-namespace:XForms.views.SharedViews"
     x:Class="XForms.views.Conge.DemandeConge"
     x:Name="this">
     <Base:BasePage.Content>
@@ -41,40 +43,13 @@
                 RowSpacing="20">
 
                 <!--Header-->
-
-                <Grid
-                    ColumnDefinitions="5*,*"
-                    Padding="20,0">
-                    <StackLayout
-                        Spacing="2"
-                        VerticalOptions="FillAndExpand">
-                        <Label
-                            Text="Demande congé"
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            FontSize="16" />
-                        <Label
-                            Text="{Binding nbreDemandes,StringFormat='{0} demandes en cours'}"
-                            FontFamily="RubilRegular"
-                            TextColor="White"
-                            FontSize="13"
-                            Opacity="0.5" />
-                    </StackLayout>
-
-                    <Image
-                        Grid.Column="2"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center">
-                        <Image.Source>
-                            <FontImageSource
-                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
-                                Glyph="{x:Static res:FontAwesomeFonts.Bell}"
-                                Color="White"
-                                Size="24" />
-                        </Image.Source>
-                    </Image>
-
-                </Grid>
+                <Shared:SuggestionsNavBarView
+                    HasTitle="True"
+                    HasDescription="True"
+                    Title="Demande conge"
+                    Description="{Binding nbreDemandes,StringFormat='{0} demandes en cours'}"
+                    HasNotification="True"
+                    />
 
                 <!--Body-->
 
@@ -162,6 +137,7 @@
                         Grid.Row="1"
                         x:Name="scroll"
                         Padding="20,0"
+                        VerticalScrollBarVisibility="Never"
                         Orientation="Horizontal"
                         HorizontalScrollBarVisibility="Never">
                         <StackLayout
@@ -209,6 +185,8 @@
                     <ScrollView
                         Padding="20,0"
                         Grid.Row="3"
+                        HorizontalScrollBarVisibility="Never"
+                        VerticalScrollBarVisibility="Never"
                         >
                         <CollectionView
                             ItemsSource="{Binding ListCongeitems}"

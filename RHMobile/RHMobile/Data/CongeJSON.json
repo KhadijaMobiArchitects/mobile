@@ -1,95 +1,32 @@
 {
   "Conges": [
     {
-      "DateDebut": "2022-03-17T00:00:00+00:00",
-      "DateFin": "2022-03-17T00:00:00+00:00",
+      "DateDebut": "2022-03-21T00:00:00+00:00",
+      "DateFin": "2022-03-23T00:00:00",
       "Type": "Mensuel",
       "StatusID": 0,
       "id": 1
     },
     {
-      "DateDebut": "2022-03-17T00:00:00+00:00",
-      "DateFin": "2022-03-19T00:00:00",
-      "Type": "Annuel",
-      "StatusID": 1,
-      "id": 2
-    },
-    {
-      "DateDebut": "2022-03-19T00:00:00",
-      "DateFin": "2022-03-23T00:00:00",
-      "Type": "Annuel",
-      "StatusID": 0,
-      "id": 3
-    },
-    {
-      "DateDebut": "2022-03-19T00:00:00",
-      "DateFin": "2022-03-28T00:00:00",
-      "Type": "Annuel",
-      "StatusID": 2,
-      "id": 4
-    },
-    {
-      "DateDebut": "2022-03-20T00:00:00",
-      "DateFin": "2022-03-30T00:00:00",
-      "Type": "Annuel",
-      "StatusID": 1,
-      "id": 5
-    },
-    {
-      "DateDebut": "2022-08-20T00:00:00",
-      "DateFin": "2022-08-28T00:00:00",
-      "Type": "Annuel",
-      "StatusID": 0,
-      "id": 6
-    },
-    {
-      "DateDebut": "2022-03-17T00:00:00+00:00",
-      "DateFin": "2022-03-19T00:00:00",
-      "Type": "Mensuel",
-      "StatusID": 0,
-      "id": 7
-    },
-    {
-      "DateDebut": "2022-03-20T00:00:00",
+      "DateDebut": "2022-03-22T00:00:00",
       "DateFin": "2022-03-25T00:00:00",
       "Type": "Mensuel",
       "StatusID": 0,
-      "id": 8
+      "id": 2
     },
     {
-      "DateDebut": "2022-11-12T00:00:00",
-      "DateFin": "2022-11-14T00:00:00",
+      "DateDebut": "2022-04-21T00:00:00",
+      "DateFin": "2022-04-24T00:00:00",
       "Type": "Mensuel",
-      "StatusID": 0,
-      "id": 9
+      "StatusID": 1,
+      "id": 3
     },
     {
-      "DateDebut": "2020-03-17T00:00:00",
-      "DateFin": "2020-03-17T00:00:00",
-      "Type": "Annuel",
-      "StatusID": 0,
-      "id": 10
-    },
-    {
-      "DateDebut": "2018-03-17T00:00:00",
-      "DateFin": "2018-03-19T00:00:00",
+      "DateDebut": "2022-03-23T00:00:00",
+      "DateFin": "2022-03-27T00:00:00+00:00",
       "Type": "Mensuel",
-      "StatusID": 0,
-      "id": 11
-    },
-    {
-      "DateDebut": "2021-03-17T00:00:00",
-      "DateFin": "2021-03-20T00:00:00",
-      "Type": "Mensuel",
-      "StatusID": 0,
-      "id": 12
-    },
-    {
-      "DateDebut": "2022-03-17T00:00:00+00:00",
-      "DateFin": "2022-03-17T00:00:00+00:00",
-      "Type": "Annuel",
-      "StatusID": 0,
-      "id": 13
+      "StatusID": 2,
+      "id": 4
     }
   ]
 }

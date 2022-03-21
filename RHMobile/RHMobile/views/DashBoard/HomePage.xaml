@@ -7,6 +7,8 @@
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:Local="clr-namespace:XForms"
+    NavigationPage.HasNavigationBar="False"
+
     x:Class="XForms.views.DashBoard.HomePage">
     <Base:BasePage.Content>
         <Grid

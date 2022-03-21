@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BaseContent
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="XForms.views.SharedViews.SuggestionsNavBarView"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    x:Name="this"
+    >
+    <Base:BaseContent.Content>
+                   <Grid
+                    ColumnDefinitions="5*,*"
+                    Padding="20,0">
+                    <StackLayout
+                        Spacing="2"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Text="{Binding Title ,Source={x:Reference this}}"
+                            IsVisible="{Binding HasTitle,Source={x:Reference this}}"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="16" />
+
+                    <!--
+                        Text="{Binding nbreDemandes,StringFormat='{0} demandes en cours'}"
+                        -->
+
+                        <Label
+                            Text="{Binding Description,Source={x:Reference this}}"
+                            IsVisible="{Binding HasDescription,Source={x:Reference this}}"
+                            FontFamily="RubilRegular"
+                            TextColor="White"
+                            FontSize="13"
+                            Opacity="0.5" />
+                    </StackLayout>
+
+                    <cc:CustomButton
+                        Padding="0"
+                        StyleCorner="Circle"
+                        BackgroundColor="Transparent"
+                        IsVisible="{Binding HasNotification,Source={x:Reference this}}"
+                        Grid.Column="2"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                        <cc:CustomButton.ImageSource>
+                            <FontImageSource
+                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
+                                Glyph="{x:Static res:FontAwesomeFonts.Bell}"
+                                Color="White"
+                                Size="24" />
+                        </cc:CustomButton.ImageSource>
+
+                        </cc:CustomButton>
+                  
+
+                </Grid>
+
+    </Base:BaseContent.Content>
+
+</Base:BaseContent>
