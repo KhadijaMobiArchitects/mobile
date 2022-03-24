@@ -2,8 +2,9 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:cc="clr-namespace:XForms.Controls" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     x:Class="XForms.views.Conge.DemandeCongeCellView"
+    xmlns:Local="clr-namespace:XForms"
     x:Name="this"
     >
     <ContentView.Content>
@@ -14,19 +15,32 @@
               <Grid
             ColumnDefinitions="auto,*,auto"
             Padding="0,10"
+                  ColumnSpacing="15"
            >
 
-            <BoxView
+            <!--<BoxView
                 BackgroundColor="#FEE07D"
-                />
+                />-->
+
+                <svg:SvgCachedImage
+                    HeightRequest="45"
+                Source="{Local:ImageResource calendar2.svg}"
+                Aspect="AspectFit"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+            />
+
+
             <StackLayout
                 Grid.Column="1"
+                VerticalOptions="Center"
                 >
                 <Label
                     Text="{Binding Type}"
                     FontAttributes="Bold"
                     FontSize="14"
                     TextColor="#33373D"
+                    VerticalTextAlignment="Center"
                     />
 
                 <Label
@@ -34,6 +48,8 @@
                     FontFamily="RubikRegular"
                     FontSize="12"
                     TextColor="#A3AEC5"
+                    VerticalTextAlignment="Center"
+
                     >
                     <Label.FormattedText>
                         <FormattedString>
@@ -57,6 +73,7 @@
             </StackLayout>
 
             <cc:CustomButton
+                VerticalOptions="CenterAndExpand"
                 Grid.Column="2"
                 Text="{Binding Status}"
                 BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"

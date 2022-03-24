@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,6 +21,8 @@ namespace XForms.ViewModels
         public List<REFItem> HeadrActionList { get; set; }
 
         public List<Conge> ListConge { get; set; }
+        //public ObservableCollection<Conge> ListConge { get; set; }
+
 
         public List<Conge> ListCongeitems { get; set; }
         public List<ChartEntry> entries { get; set; }
@@ -107,13 +111,22 @@ namespace XForms.ViewModels
 
         public async Task getListConge()
         {
-                        var client = new HttpClient();
-        var resp = await client.GetAsync(AppUrls.GesRequestsListConge);
-
-            if (resp.IsSuccessStatusCode)
+            try
             {
-                var content = resp.Content.ReadAsStringAsync();
-        ListConge = JsonConvert.DeserializeObject<List<Conge>>(content.Result.ToString());
+                //                var client = new HttpClient();
+                //var resp = await client.GetAsync(AppUrls.GesRequestsListConge);
+
+                //    if (resp.IsSuccessStatusCode)
+                //    {
+                //        var content = resp.Content.ReadAsStringAsync();
+                //ListConge = JsonConvert.DeserializeObject<List<Conge>>(content.Result.ToString());
+
+                var result = await App.AppServices.GetConges();
+
+                ListConge = result.data.ToList();
+                //ListConge = new ObservableCollection<Conge>(CongesList);
+
+
 
                 Classerconge(ListConge);
                 DifferenceOfDays(ListCongeEncours, ListCongeConfirme, ListCongeReporte);
@@ -144,9 +157,14 @@ namespace XForms.ViewModels
             };
 
                 donutChart.Entries = entries;
-
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
 
             }
+
+
         }
 
         private void DifferenceOfDays(List<Conge> listCongeEncours, List<Conge> listCongeConfirme, List<Conge> listCongeReporte)

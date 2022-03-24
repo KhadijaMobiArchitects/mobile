@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BaseContent
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    x:Class="XForms.views.SharedViews.LargeRectangleBackground">
+    <Base:BaseContent.Content>
+
+            <cc:CornerBox
+                ScaleX="2">
+                <cc:CornerBox.Background>
+                    <LinearGradientBrush
+                        StartPoint="0,0"
+                        EndPoint="0,1">
+                        <GradientStop
+                            Color="{StaticResource StartGradient}"
+                            Offset="0.1" />
+                        <GradientStop
+                            Color="{StaticResource EndGradient}"
+                            Offset="1.0" />
+
+                    </LinearGradientBrush>
+                </cc:CornerBox.Background>
+
+            </cc:CornerBox>
+    </Base:BaseContent.Content>
+</Base:BaseContent>

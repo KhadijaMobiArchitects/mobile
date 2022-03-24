@@ -9,52 +9,77 @@
     x:Name="this"
     >
     <Base:BaseContent.Content>
-                   <Grid
-                    ColumnDefinitions="5*,*"
-                    Padding="20,0">
-                    <StackLayout
-                        Spacing="2"
-                        VerticalOptions="FillAndExpand">
-                        <Label
-                            Text="{Binding Title ,Source={x:Reference this}}"
-                            IsVisible="{Binding HasTitle,Source={x:Reference this}}"
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            FontSize="16" />
-
-                    <!--
-                        Text="{Binding nbreDemandes,StringFormat='{0} demandes en cours'}"
-                        -->
-
-                        <Label
-                            Text="{Binding Description,Source={x:Reference this}}"
-                            IsVisible="{Binding HasDescription,Source={x:Reference this}}"
-                            FontFamily="RubilRegular"
-                            TextColor="White"
-                            FontSize="13"
-                            Opacity="0.5" />
-                    </StackLayout>
-
-                    <cc:CustomButton
-                        Padding="0"
+        <Grid
+                    ColumnDefinitions="auto,5*,*"
+            >
+            <cc:CustomButton
+                        BackgroundColor="{StaticResource Secondenry}"
+                        BorderWidth="4"
+                        BorderColor="{StaticResource Primary}"
                         StyleCorner="Circle"
-                        BackgroundColor="Transparent"
-                        IsVisible="{Binding HasNotification,Source={x:Reference this}}"
-                        Grid.Column="2"
+                        HeightRequest="40"
+                        HorizontalOptions="Start"
                         VerticalOptions="Center"
-                        HorizontalOptions="Center">
-                        <cc:CustomButton.ImageSource>
-                            <FontImageSource
-                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
-                                Glyph="{x:Static res:FontAwesomeFonts.Bell}"
-                                Color="White"
-                                Size="24" />
-                        </cc:CustomButton.ImageSource>
+                        IsVisible="{Binding HasBackButton,Source={x:Reference this}}"
 
-                        </cc:CustomButton>
-                  
+                        Padding="5"
+                        Command="{Binding NavigationBack}"
+                        >
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource                        
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{x:Static res:FontAwesomeFonts.Angleleft}"
+                        Size="20"
+                        Color="{StaticResource White}"
+                        />
+                </cc:CustomButton.ImageSource>
+            </cc:CustomButton>
+            <StackLayout
+                    Grid.Column="1"
+                    Spacing="2"
+                    VerticalOptions="CenterAndExpand">
+                <Label
+                    Text="{Binding Title ,Source={x:Reference this}}"
+                    IsVisible="{Binding HasTitle,Source={x:Reference this}}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    VerticalTextAlignment="Center"
+                    />
 
-                </Grid>
+                <Label
+                    Text="{Binding Description,Source={x:Reference this}}"
+                    IsVisible="{Binding HasDescription,Source={x:Reference this}}"
+                    FontFamily="RubilRegular"
+                    TextColor="White"
+                    FontSize="13"
+                    Opacity="0.5"
+                    VerticalTextAlignment="Center"
+
+                    />
+            </StackLayout>
+
+            <cc:CustomButton
+                    Padding="0"
+                    StyleCorner="Circle"
+                    BackgroundColor="Transparent"
+                    IsVisible="{Binding HasNotification,Source={x:Reference this}}"
+                    Grid.Column="2"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource
+
+                    FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
+                    Glyph="{x:Static res:FontAwesomeFonts.Bell}"
+                    Color="White"
+                    Size="24" />
+                </cc:CustomButton.ImageSource>
+
+            </cc:CustomButton>
+
+
+        </Grid>
 
     </Base:BaseContent.Content>
 

@@ -47,12 +47,12 @@ namespace XForms.views.SharedViews
             }
         }
 
-        public static readonly BindableProperty HasBackButtonProperty = BindableProperty.Create(nameof(HasBackButton), typeof(Button), typeof(SuggestionsNavBarView));
-        public Button HasBackButton
+        public static readonly BindableProperty HasBackButtonProperty = BindableProperty.Create(nameof(HasBackButton), typeof(bool), typeof(SuggestionsNavBarView),false);
+        public bool HasBackButton
         {
             get
             {
-                return (Button)GetValue(HasNotificationProperty);
+                return (bool)GetValue(HasNotificationProperty);
             }
             set
             {

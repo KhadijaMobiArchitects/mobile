@@ -1,0 +1,18 @@
+﻿{
+  "Leaves": [
+    {
+      "succeeded": true,
+      "message": "Success",
+      "errors": null,
+      "data": 
+        {
+          "DateDebut": "2022-03-21T00:00:00+00:00",
+          "DateFin": "2022-03-23T00:00:00",
+          "Type": "Mensuel",
+          "StatusID": 0,
+          "id": 1
+        }
+    }
+
+  ]
+}

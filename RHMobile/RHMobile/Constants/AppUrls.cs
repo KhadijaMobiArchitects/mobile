@@ -5,6 +5,6 @@ namespace XForms.Constants
     {
         public const string BaseUrl = "http://localhost:3000/";
 
-        public const string GesRequestsListConge = BaseUrl + "Conges/";
+        public const string GesRequestsListConge = BaseUrl + "Leaves/";
     }
 }

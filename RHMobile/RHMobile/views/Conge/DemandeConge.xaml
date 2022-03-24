@@ -9,31 +9,16 @@
     xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:Cell="clr-namespace:XForms.views.Conge"
     xmlns:chart="clr-namespace:Microcharts;assembly=Microcharts"
-    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
     x:Class="XForms.views.Conge.DemandeConge"
     x:Name="this">
     <Base:BasePage.Content>
         <Grid
             BackgroundColor="White"
             RowDefinitions="*,2*">
-            <cc:CornerBox
-                ScaleX="2">
-                <cc:CornerBox.Background>
-                    <LinearGradientBrush
-                        StartPoint="0,0"
-                        EndPoint="0,1">
-                        <GradientStop
-                            Color="{StaticResource StartGradient}"
-                            Offset="0.1" />
-                        <GradientStop
-                            Color="{StaticResource EndGradient}"
-                            Offset="1.0" />
 
-                    </LinearGradientBrush>
-                </cc:CornerBox.Background>
-
-            </cc:CornerBox>
-
+            <Shared:LargeRectangleBackground/>
 
             <Grid
                 RowDefinitions="auto,*,auto"
@@ -44,11 +29,13 @@
 
                 <!--Header-->
                 <Shared:SuggestionsNavBarView
+                    Padding="20,0"
                     HasTitle="True"
                     HasDescription="True"
                     Title="Demande conge"
                     Description="{Binding nbreDemandes,StringFormat='{0} demandes en cours'}"
                     HasNotification="True"
+                    HasBackButton="False"
                     />
 
                 <!--Body-->

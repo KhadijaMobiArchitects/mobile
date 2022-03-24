@@ -7,6 +7,7 @@
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:Local="clr-namespace:XForms"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
     NavigationPage.HasNavigationBar="False"
 
     x:Class="XForms.views.DashBoard.HomePage">
@@ -14,18 +15,9 @@
         <Grid
             BackgroundColor="White"
             RowDefinitions="*,5*">
-            <cc:CornerBox
-                ScaleX="{OnPlatform iOS='3',Android='1.5'}"
-                >
 
-                <cc:CornerBox.BackgroundGradientStops>
-                    <pancake:GradientStopCollection>
-                        <pancake:GradientStop Color="{StaticResource StartGradient}" Offset="0.1"/>
-                        <pancake:GradientStop Color="{StaticResource EndGradient}" Offset="1"/>
-                    </pancake:GradientStopCollection>
-                </cc:CornerBox.BackgroundGradientStops>
+            <Shared:SmallReclangleBackground/>
 
-            </cc:CornerBox>
             <Grid
                 RowDefinitions="*,3*,*"
                 Padding="{OnPlatform iOS='30,0,30,0',Android='30,0,30,0'}"
@@ -36,7 +28,7 @@
 
                 <Grid
                     Padding="{OnPlatform iOS='0,30,0,0',Android='0,30,0,0'}"
-                    ColumnDefinitions="5*,*"
+                    ColumnDefinitions="auto"
                     RowDefinitions="auto,*,*"
                     RowSpacing="0"
                     >
@@ -60,53 +52,19 @@
                                 />
                             </cc:CornerView>
                         </StackLayout>
-                        <StackLayout
-                            Grid.Column="1"
-                            VerticalOptions="Center"
-                            >
-                            <Label
-                            Text="Mehdi Mountij"
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            VerticalTextAlignment="Center"
-                            FontSize="16" />
 
-                            <Label
-                            Text="Art director and ui/ux designer "
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            VerticalTextAlignment="Center"
-                            FontSize="13"
-                                Opacity="0.5"
-                                FontFamily="RubikRegular"
-                                />
-                        </StackLayout>
+
+                        <Shared:SuggestionsNavBarView
+                            Grid.Column="1"
+                           HasTitle="True"
+                            HasDescription="True"
+                            Title="Mehdi Mountij"
+                            Description="Art director and ui/ux designer"
+                            HasNotification="True"
+
+                            />
                     </Grid>
 
-                    <Image
-                        Grid.Column="1"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center">
-                        <Image.Source>
-                            <FontImageSource
-                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
-                                Glyph="{x:Static res:FontAwesomeFonts.Bell}"
-                                Color="White"
-                                Size="24" />
-                        </Image.Source>
-                    </Image>
-                    <!--<StackLayout
-                        Grid.Row="1"
-                        BackgroundColor="Green"
-                        >
-
-                    </StackLayout>
-                    <StackLayout
-                        Grid.Row="2"
-                        BackgroundColor="Gray"
-                        >
-
-                    </StackLayout>-->
                     <pancake:PancakeView
                         Grid.Row="1"
                         Grid.RowSpan="2"
