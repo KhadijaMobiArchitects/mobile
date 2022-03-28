@@ -35,16 +35,16 @@ namespace XForms.HttpREST
                         case HttpVerbs.GET:
                             response = await client.GetAsync(uri);
                             break;
-                        //case HttpVerbs.POST:
-                        //    //var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, contentType);
+                        case HttpVerbs.POST:
+                            //var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, contentType);
 
-                        //    var json = JsonConvert.SerializeObject(postObject, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }).ToString();
-                        //    //var json = JsonConvert.SerializeObject(postObject).ToString();
-                        //    var content = new StringContent(json, Encoding.UTF8, "application/json");
-                        //    response = await client.PostAsync(uri, content);
-                        //    break;
-                        //default:
-                        //    break;
+                            var json = JsonConvert.SerializeObject(postObject, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }).ToString();
+                            //var json = JsonConvert.SerializeObject(postObject).ToString();
+                            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                            response = await client.PostAsync(uri, content);
+                            break;
+                        default:
+                            break;
                     }
 
                     var stringResponseJson = await response.Content.ReadAsStringAsync();

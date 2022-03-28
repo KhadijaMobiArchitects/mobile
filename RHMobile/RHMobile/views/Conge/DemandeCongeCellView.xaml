@@ -2,15 +2,20 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:cc="clr-namespace:XForms.Controls" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     x:Class="XForms.views.Conge.DemandeCongeCellView"
     xmlns:Local="clr-namespace:XForms"
     x:Name="this"
     >
-    <ContentView.Content>
+    <ContentView.Content
+        >
         <Grid
-            RowDefinitions="*,auto"
+            RowDefinitions="*,auto"            
             >
+            <cc:PressableView
+                Clicked="SelectItem_Clicked"
+                />
 
               <Grid
             ColumnDefinitions="auto,*,auto"
@@ -29,7 +34,6 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
             />
-
 
             <StackLayout
                 Grid.Column="1"

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microcharts;
 using Newtonsoft.Json;
+using Rg.Plugins.Popup.Services;
 using SkiaSharp;
 using Xamarin.Forms;
 using XForms.Constants;
@@ -70,7 +71,7 @@ namespace XForms.ViewModels
                 new REFItem()
                 {
                     Id = 3,
-                    Name = "Demande reporté",
+                    Name = "Demande reportée",
                 }
             };
 
@@ -98,7 +99,7 @@ namespace XForms.ViewModels
             //getListConge(ListConge);
 
             donutChart = new DonutChart()
-            {        
+            {
                 MinValue = 0,
                 MaxValue = 26,
                 HoleRadius = 0.7f,
@@ -173,9 +174,9 @@ namespace XForms.ViewModels
             InprogessDays = 0;
             PostponedDays = 0;
 
-            foreach(var item in listCongeConfirme)
+            foreach (var item in listCongeConfirme)
             {
-                ConfirmedDays +=item.DifferenceOfDays;
+                ConfirmedDays += item.DifferenceOfDays;
             }
             foreach (var item in listCongeEncours)
             {
@@ -193,7 +194,7 @@ namespace XForms.ViewModels
 
         }
 
-        private  void Classerconge(List<Conge> listConge)
+        private void Classerconge(List<Conge> listConge)
         {
             ListCongeConfirme.Clear();
             ListCongeEncours.Clear();
@@ -203,9 +204,9 @@ namespace XForms.ViewModels
             {
                 if (item.StatusID == (int)StatusConge.Inprogress)
                 {
-                     ListCongeEncours.Add(item);
+                    ListCongeEncours.Add(item);
                 }
-                else if (item.StatusID ==(int)StatusConge.Confirmed)
+                else if (item.StatusID == (int)StatusConge.Confirmed)
                 {
                     ListCongeConfirme.Add(item);
                 }
@@ -268,6 +269,7 @@ namespace XForms.ViewModels
         (_) => CanSelectHeaderAction);
 
 
+
         public ICommand NavigationtonewRequest => new Command(() =>
         {
             App.Current.MainPage.Navigation.PushAsync(new NouvelleDemande());
@@ -282,6 +284,31 @@ namespace XForms.ViewModels
 
 
     );
+
+        private LeaveDatailsPopup leaveDatailsPopup;
+        public ICommand OpenLeaveDtailsPopupView => new Command(async () =>
+        {
+            try
+            {
+                if (leaveDatailsPopup == null)
+                {
+                    leaveDatailsPopup = new LeaveDatailsPopup();
+                }
+
+                await PopupNavigation.Instance.PushAsync(leaveDatailsPopup);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+
+            }
+        },
+        () => true );
+
 
     }
 }

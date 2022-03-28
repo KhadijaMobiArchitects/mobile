@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="XForms.views.Conge.LeaveDatailsPopup">
+
+    <Grid
+        RowDefinitions="auto,auto"
+        ColumnDefinitions="auto,auto"
+        >
+        <Label
+            Text="Date début"
+            />
+        <Label
+            Grid.Column="1"
+            Text="Date Fin"
+            />
+        <Label
+            Grid.Row="1"
+            Text="Type de congé"
+            />
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="Projet"
+            />
+    </Grid>
+
+</Base:BasePopupView>

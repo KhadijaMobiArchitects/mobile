@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using XForms.ViewModels;
+using XForms.Models;
 
 namespace XForms.views.Conge
 {
@@ -34,6 +36,15 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), Color.Ye
         public DemandeCongeCellView()
         {
             InitializeComponent();
+        }
+
+        void SelectItem_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if ((sender as View).BindingContext is Models.Conge item)
+            {
+                (this.Parent.BindingContext as DemandeCongeViewModel).OpenLeaveDtailsPopupView.Execute(item);
+            }
+
         }
     }
 }

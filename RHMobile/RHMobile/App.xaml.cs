@@ -43,7 +43,7 @@ namespace XForms
 
             Device.SetFlags(new string[] { "CollectionView_Experimental", "SwipeView_Experimental", "Shapes_Experimental", "FastRenderers_Experimental", "Brush_Experimental", "RadioButton_Experimental" });
 
-            MainPage = new NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new DemandeConge());
         }
 
         protected override void OnStart()

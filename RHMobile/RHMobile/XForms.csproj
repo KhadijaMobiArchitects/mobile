@@ -23,6 +23,8 @@
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2337" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.1" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -71,6 +73,9 @@
     <None Remove="Resources\Images\calendar2.svg" />
     <None Remove="Services\" />
     <None Remove="Services\Base\" />
+    <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Rg.Plugins.Popup" />
+    <None Remove="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -98,6 +103,7 @@
     <Folder Include="views\SharedViews\ReclangleBackground\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Base\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

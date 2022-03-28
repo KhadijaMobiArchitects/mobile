@@ -187,6 +187,7 @@
                                     <Cell:DemandeCongeCellView
                                         BackgroundColorButton="{Binding BackgroundColor}"
                                         TextColor="{Binding TextColor}"
+                                        
                                         />
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>

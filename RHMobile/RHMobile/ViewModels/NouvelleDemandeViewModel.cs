@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 using XForms.Constants;
+using XForms.HttpREST;
 using XForms.Models;
 using XForms.Models.Projet;
 using XForms.views.Conge;
@@ -91,7 +92,7 @@ namespace XForms.ViewModels
         }
         private bool CandSendRequest = true;
 
-        public ICommand SendRequest => new Command(() =>
+        public ICommand SendRequest => new Command(async () =>
             {
                 try
                 {
@@ -104,11 +105,17 @@ namespace XForms.ViewModels
                         DateFin = DateFin
                     };
 
-                    var client = new HttpClient();
+                    //RESTServiceResponse<Conge> response = new RESTServiceResponse<Conge>();
+                    //response.data = item;
 
-                    string json = JsonConvert.SerializeObject(item);
-                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    var responseMessage = client.PostAsync(AppUrls.GesRequestsListConge, content);
+                    //var client = new HttpClient();
+
+                    //string json = JsonConvert.SerializeObject(item);
+                    //StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                    //var responseMessage = client.PostAsync(AppUrls.GesRequestsListConge, content);
+
+                    var result = await App.AppServices.PostConge(item);
+
                     App.Current.MainPage.Navigation.PushAsync(new DemandeConge());
 
                 }

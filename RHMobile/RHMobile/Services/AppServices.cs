@@ -15,5 +15,12 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<IEnumerable<Conge>>(url: $"{AppUrls.GesRequestsListConge}", method: HttpVerbs.GET);
         }
+
+        public async Task<RESTServiceResponse<object>> PostConge(Conge postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.GesRequestsListConge}",postObject: postParams, method: HttpVerbs.POST);
+        }
     }
+
+
 }
