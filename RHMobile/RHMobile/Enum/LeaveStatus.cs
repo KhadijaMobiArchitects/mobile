@@ -1,7 +1,7 @@
 ﻿using System;
 namespace XForms.Enum
 {
-    public enum StatusConge
+    public enum LeaveStatus
     {
         Inprogress ,
         Confirmed,

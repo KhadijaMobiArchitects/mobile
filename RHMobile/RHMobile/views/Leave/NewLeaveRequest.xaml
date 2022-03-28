@@ -7,7 +7,7 @@
     NavigationPage.HasNavigationBar="False"
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:Shared="clr-namespace:XForms.views.SharedViews"
-    x:Class="XForms.views.Conge.NouvelleDemande">
+    x:Class="XForms.views.Leave.NewLeaveRequest">
     <Base:BasePage.Content>
         <Grid
             BackgroundColor="White"
@@ -112,25 +112,25 @@
 
                         <cc:MaterialDatePicker
                                 Placeholder="Date début"
-                                Date="{Binding DateDebut}"
+                                Date="{Binding StartDate}"
                                 />
 
                         <cc:MaterialDatePicker
                                 Placeholder="Date Fin"
-                                Date="{Binding DateFin}"
+                                Date="{Binding EndDate}"
 
                         />
                         <!--<Picker
-                                ItemsSource="{Binding ListConge}"
+                                ItemsSource="{Binding ListLeave}"
                                 SelectedItem="{Binding SelectedType}"
                                 ItemDisplayBinding="{Binding Name}"
                                 
                                 />-->
                         <cc:MaterialPicker
                                 LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
-                                ItemsSource="{Binding ListConge}"
+                                ItemsSource="{Binding ListLeave}"
                                 Title="Type de congé"
-                                SelectedItem="{Binding SelectedConge}"
+                                SelectedItem="{Binding SelectedLeave}"
                         />
 
                     </StackLayout>

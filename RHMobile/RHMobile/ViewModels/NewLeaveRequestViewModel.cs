@@ -9,33 +9,33 @@ using XForms.Constants;
 using XForms.HttpREST;
 using XForms.Models;
 using XForms.Models.Projet;
-using XForms.views.Conge;
+using XForms.views.Leave;
 
 namespace XForms.ViewModels
 {
-    public class NouvelleDemandeViewModel : BindableObject
+    public class NewLeaveRequestViewModel : BindableObject
     {
         
-        public List<Conge> ListConge { get; set; }
+        public List<Leave> ListLeave { get; set; }
         public List<Projet> ListProjet { get; set; }
         public List<SituationProjet> ListSituation { get; set; }
-        public DateTime DateDebut { get; set; }
-        public DateTime DateFin { get; set; }
-        public Conge SelectedConge { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public Leave SelectedLeave { get; set; }
         public Projet SelectedProjet { get; set; }
         public SituationProjet SelectedSituationProjet { get; set; }
 
-        public NouvelleDemandeViewModel()
+        public NewLeaveRequestViewModel()
         {
-            DateDebut = DateTime.Now;
-            DateFin = DateTime.Now;
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
 
-            ListConge = new List<Conge> {
-                new Conge(){
+            ListLeave = new List<Leave> {
+                new Leave(){
                     Type="Annuel"
                 }
                 ,
-                new Conge(){
+                new Leave(){
                     Type="Mensuel"
                 }
             };
@@ -75,19 +75,19 @@ namespace XForms.ViewModels
 
             //API Post
 
-            //Conge item = new Conge()
+            //Leave item = new Leave()
             //{
-            //    Type = "Conge annuel",
+            //    Type = "Leave annuel",
             //    Status = "Reporté",
-            //    DateDebut = DateDebut,
-            //    DateFin = DateFin
+            //    StartDate = StartDate,
+            //    EndDate = EndDate
             //};
 
             //var client = new HttpClient();
 
             //string json = JsonConvert.SerializeObject(item);
             //StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            //var responseMessage = client.PostAsync(AppUrls.GesRequestsListConge, content);
+            //var responseMessage = client.PostAsync(AppUrls.GesRequestsListLeave, content);
             
         }
         private bool CandSendRequest = true;
@@ -98,25 +98,25 @@ namespace XForms.ViewModels
                 {
                     CandSendRequest = false;
 
-                    Conge item = new Conge()
+                    Leave item = new Leave()
                     {
-                        Type =SelectedConge.Name,
-                        DateDebut = DateDebut,
-                        DateFin = DateFin
+                        Type =SelectedLeave.Name,
+                        StartDate = StartDate,
+                        EndDate = EndDate
                     };
 
-                    //RESTServiceResponse<Conge> response = new RESTServiceResponse<Conge>();
+                    //RESTServiceResponse<Leave> response = new RESTServiceResponse<Leave>();
                     //response.data = item;
 
                     //var client = new HttpClient();
 
                     //string json = JsonConvert.SerializeObject(item);
                     //StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    //var responseMessage = client.PostAsync(AppUrls.GesRequestsListConge, content);
+                    //var responseMessage = client.PostAsync(AppUrls.GesRequestsListLeave, content);
 
-                    var result = await App.AppServices.PostConge(item);
+                    var result = await App.AppServices.PostLeave(item);
 
-                    App.Current.MainPage.Navigation.PushAsync(new DemandeConge());
+                    App.Current.MainPage.Navigation.PushAsync(new LeaveRequest());
 
                 }
                 catch(Exception ex)
@@ -133,7 +133,7 @@ namespace XForms.ViewModels
             );
         public ICommand NavigationBack => new Command(() =>
         {
-            //App.Current.MainPage.Navigation.PushAsync(new DemandeConge());
+            //App.Current.MainPage.Navigation.PushAsync(new LeaveRequest());
             App.Current.MainPage.Navigation.PopAsync();
 
 

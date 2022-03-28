@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -48,14 +48,14 @@
     <None Remove="Resources\Assets\RubikRegular.ttf" />
     <None Remove="Resources\Assets\RubikLight.ttf" />
     <None Remove="Resources\Assets\RubikBold.ttf" />
-    <None Remove="views\Conge\" />
+    <None Remove="views\Leave\" />
     <None Remove="Resources\Assets\FontAwesome5Brands.ttf" />
     <None Remove="Resources\Assets\FontAwesome5Regular.otf" />
     <None Remove="Resources\Assets\FontAwesome5Regular.ttf" />
     <None Remove="Resources\Assets\FontAwesome5Solid.ttf" />
     <None Remove="Models\" />
     <None Remove="Fody" />
-    <None Remove="Models\Conge\" />
+    <None Remove="Models\Leave\" />
     <None Remove="Models\Base\" />
     <None Remove="Models\Projet\" />
     <None Remove="Data\" />
@@ -89,9 +89,9 @@
     <Folder Include="Enum\" />
     <Folder Include="Resources\Values\" />
     <Folder Include="Resources\Assets\" />
-    <Folder Include="views\Conge\" />
+    <Folder Include="views\Leave\" />
     <Folder Include="Models\" />
-    <Folder Include="Models\Conge\" />
+    <Folder Include="Models\Leave\" />
     <Folder Include="Models\Base\" />
     <Folder Include="Models\Projet\" />
     <Folder Include="Data\" />
@@ -124,7 +124,7 @@
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="views\Conge\NouvelleDemande.xaml.cs">
+    <Compile Update="views\Leave\NouvelleDemande.xaml.cs">
       <DependentUpon>NouvelleDemande.xaml</DependentUpon>
     </Compile>
     <Compile Update="Controls\CustomDatePicker.xaml.cs">

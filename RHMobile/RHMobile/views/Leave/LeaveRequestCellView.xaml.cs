@@ -4,9 +4,9 @@ using Xamarin.Forms;
 using XForms.ViewModels;
 using XForms.Models;
 
-namespace XForms.views.Conge
+namespace XForms.views.Leave
 {
-    public partial class DemandeCongeCellView : ContentView
+    public partial class LeaveRequestCellView : ContentView
     {
 
         public static readonly BindableProperty BackgroundColorButtonProperty =
@@ -33,16 +33,16 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), Color.Ye
             }
         }
 
-        public DemandeCongeCellView()
+        public LeaveRequestCellView()
         {
             InitializeComponent();
         }
 
         void SelectItem_Clicked(System.Object sender, System.EventArgs e)
         {
-            if ((sender as View).BindingContext is Models.Conge item)
+            if ((sender as View).BindingContext is Models.Leave item)
             {
-                (this.Parent.BindingContext as DemandeCongeViewModel).OpenLeaveDtailsPopupView.Execute(item);
+                (this.Parent.BindingContext as LeaveRequestViewModel).OpenLeaveDetailsPopupView.Execute(item);
             }
 
         }

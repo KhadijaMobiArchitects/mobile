@@ -7,11 +7,11 @@
     xmlns:cc="clr-namespace:XForms.Controls"
     NavigationPage.HasNavigationBar="False"
     xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:Cell="clr-namespace:XForms.views.Conge"
+    xmlns:Cell="clr-namespace:XForms.views.Leave"
     xmlns:chart="clr-namespace:Microcharts;assembly=Microcharts"
     xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     xmlns:Shared="clr-namespace:XForms.views.SharedViews"
-    x:Class="XForms.views.Conge.DemandeConge"
+    x:Class="XForms.views.Leave.LeaveRequest"
     x:Name="this">
     <Base:BasePage.Content>
         <Grid
@@ -32,8 +32,8 @@
                     Padding="20,0"
                     HasTitle="True"
                     HasDescription="True"
-                    Title="Demande conge"
-                    Description="{Binding nbreDemandes,StringFormat='{0} demandes en cours'}"
+                    Title="Demande Congé"
+                    Description="{Binding numberOfRequests,StringFormat='{0} demandes en cours'}"
                     HasNotification="True"
                     HasBackButton="False"
                     />
@@ -176,7 +176,7 @@
                         VerticalScrollBarVisibility="Never"
                         >
                         <CollectionView
-                            ItemsSource="{Binding ListCongeitems}"
+                            ItemsSource="{Binding LeaveItemsList}"
                             >
                             <CollectionView.GroupHeaderTemplate>
                                 <DataTemplate>
@@ -184,7 +184,7 @@
                             </CollectionView.GroupHeaderTemplate>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Cell:DemandeCongeCellView
+                                    <Cell:LeaveRequestCellView
                                         BackgroundColorButton="{Binding BackgroundColor}"
                                         TextColor="{Binding TextColor}"
                                         

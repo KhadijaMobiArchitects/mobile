@@ -11,14 +11,14 @@ namespace XForms.Services
 {
     public class AppServices : BaseService
     {
-        public async Task<RESTServiceResponse<IEnumerable<Conge>>> GetConges()
+        public async Task<RESTServiceResponse<IEnumerable<Leave>>> GetLeaves()
         {
-            return await RESTHelper.GetRequest<IEnumerable<Conge>>(url: $"{AppUrls.GesRequestsListConge}", method: HttpVerbs.GET);
+            return await RESTHelper.GetRequest<IEnumerable<Leave>>(url: $"{AppUrls.GesRequestsListLeave}", method: HttpVerbs.GET);
         }
 
-        public async Task<RESTServiceResponse<object>> PostConge(Conge postParams)
+        public async Task<RESTServiceResponse<object>> PostLeave(Leave postParams)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.GesRequestsListConge}",postObject: postParams, method: HttpVerbs.POST);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.GesRequestsListLeave}",postObject: postParams, method: HttpVerbs.POST);
         }
     }
 

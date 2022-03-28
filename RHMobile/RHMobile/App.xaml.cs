@@ -2,7 +2,7 @@
 using XForms.views.Authentication;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XForms.views.Conge;
+using XForms.views.Leave;
 using XForms.views.DashBoard;
 using XForms.Services;
 
@@ -43,7 +43,7 @@ namespace XForms
 
             Device.SetFlags(new string[] { "CollectionView_Experimental", "SwipeView_Experimental", "Shapes_Experimental", "FastRenderers_Experimental", "Brush_Experimental", "RadioButton_Experimental" });
 
-            MainPage = new NavigationPage(new DemandeConge());
+            MainPage = new NavigationPage(new LeaveRequest());
         }
 
         protected override void OnStart()

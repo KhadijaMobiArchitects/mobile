@@ -13,29 +13,29 @@ using Xamarin.Forms;
 using XForms.Constants;
 using XForms.Enum;
 using XForms.Models;
-using XForms.views.Conge;
+using XForms.views.Leave;
 
 namespace XForms.ViewModels
 {
-    public class DemandeCongeViewModel : BindableObject
+    public class LeaveRequestViewModel : BindableObject
     {
         public List<REFItem> HeadrActionList { get; set; }
 
-        public List<Conge> ListConge { get; set; }
-        //public ObservableCollection<Conge> ListConge { get; set; }
+        public List<Leave> LeavesList { get; set; }
+        //public ObservableCollection<Leave> LeavesList { get; set; }
 
 
-        public List<Conge> ListCongeitems { get; set; }
+        public List<Leave> LeaveItemsList { get; set; }
         public List<ChartEntry> entries { get; set; }
 
 
-        public List<Conge> ListCongeEncours { get; set; }
-        public List<Conge> ListCongeConfirme { get; set; }
-        public List<Conge> ListCongeReporte { get; set; }
+        public List<Leave> InprogessLeavesList { get; set; }
+        public List<Leave> ConfirmedLeavesList { get; set; }
+        public List<Leave> PostponedLeavesList { get; set; }
 
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
-        public int nbreDemandes { get; set; }
+        public int numberOfRequests { get; set; }
         public DonutChart donutChart { get; set; }
 
         public int ConfirmedDays { get; set; }
@@ -46,13 +46,13 @@ namespace XForms.ViewModels
         //public INavigation Navigation;
 
 
-        //public ObservableRangeCollection<ObservableGroupCollection<string, Conge>> CongeList { get; set; }
+        //public ObservableRangeCollection<ObservableGroupCollection<string, Leave>> LeaveList { get; set; }
 
-        public DemandeCongeViewModel()
+        public LeaveRequestViewModel()
         {
-            ListCongeConfirme = new List<Conge>();
-            ListCongeEncours = new List<Conge>();
-            ListCongeReporte = new List<Conge>();
+            ConfirmedLeavesList = new List<Leave>();
+            InprogessLeavesList = new List<Leave>();
+            PostponedLeavesList = new List<Leave>();
 
 
             HeadrActionList = new List<REFItem>()
@@ -75,28 +75,28 @@ namespace XForms.ViewModels
                 }
             };
 
-            //ListConge = new List<Conge>()
+            //LeavesList = new List<Leave>()
             //{
-            //    new Conge()
+            //    new Leave()
             //    {
-            //        Type="Conge annuel",
+            //        Type="Leave annuel",
             //        Status="En cours",
-            //        DateDebut = new DateTime(2022,4,20),
-            //        DateFin = new DateTime(2022,9,2)
+            //        StartDate = new DateTime(2022,4,20),
+            //        EndDate = new DateTime(2022,9,2)
             //    },
-            //    new Conge(){
-            //        Type="Conge Mensuel",
+            //    new Leave(){
+            //        Type="Leave Mensuel",
             //        Status="Confirmé",
-            //        DateDebut = new DateTime(2021,7,20),
-            //        DateFin = new DateTime(2021,8,12)
+            //        StartDate = new DateTime(2021,7,20),
+            //        EndDate = new DateTime(2021,8,12)
             //    }
             //};
 
             //Uri uri = new Uri(Uri);
 
-            //ListConge = new List<Conge>();
+            //LeavesList = new List<Leave>();
 
-            //getListConge(ListConge);
+            //getLeavesList(LeavesList);
 
             donutChart = new DonutChart()
             {
@@ -106,36 +106,34 @@ namespace XForms.ViewModels
 
 
             };
-
         }
 
-
-        public async Task getListConge()
+        public async Task getLeavesList()
         {
             try
             {
                 //                var client = new HttpClient();
-                //var resp = await client.GetAsync(AppUrls.GesRequestsListConge);
+                //var resp = await client.GetAsync(AppUrls.GesRequestsLeavesList);
 
                 //    if (resp.IsSuccessStatusCode)
                 //    {
                 //        var content = resp.Content.ReadAsStringAsync();
-                //ListConge = JsonConvert.DeserializeObject<List<Conge>>(content.Result.ToString());
+                //LeavesList = JsonConvert.DeserializeObject<List<Leave>>(content.Result.ToString());
 
-                var result = await App.AppServices.GetConges();
+                var result = await App.AppServices.GetLeaves();
 
-                ListConge = result.data.ToList();
-                //ListConge = new ObservableCollection<Conge>(CongesList);
+                LeavesList = result.data.ToList();
+                //LeavesList = new ObservableCollection<Leave>(LeavesList);
 
 
 
-                Classerconge(ListConge);
-                DifferenceOfDays(ListCongeEncours, ListCongeConfirme, ListCongeReporte);
-                ListCongeitems = ListCongeEncours;
-                nbreDemandes = ListCongeitems.Count;
+                ClasserLeave(LeavesList);
+                DifferenceOfDays(InprogessLeavesList, ConfirmedLeavesList, PostponedLeavesList);
+                LeaveItemsList = InprogessLeavesList;
+                numberOfRequests = LeaveItemsList.Count;
 
-                OnPropertyChanged(nameof(ListCongeitems));
-                OnPropertyChanged(nameof(nbreDemandes));
+                OnPropertyChanged(nameof(LeaveItemsList));
+                OnPropertyChanged(nameof(numberOfRequests));
 
                 entries = new List<ChartEntry>
             {
@@ -165,24 +163,23 @@ namespace XForms.ViewModels
 
             }
 
-
         }
 
-        private void DifferenceOfDays(List<Conge> listCongeEncours, List<Conge> listCongeConfirme, List<Conge> listCongeReporte)
+        private void DifferenceOfDays(List<Leave> InprogessLeavesList, List<Leave> ConfirmedLeavesList, List<Leave> PostponedLeavesList)
         {
             ConfirmedDays = 0;
             InprogessDays = 0;
             PostponedDays = 0;
 
-            foreach (var item in listCongeConfirme)
+            foreach (var item in ConfirmedLeavesList)
             {
                 ConfirmedDays += item.DifferenceOfDays;
             }
-            foreach (var item in listCongeEncours)
+            foreach (var item in InprogessLeavesList)
             {
                 InprogessDays += item.DifferenceOfDays;
             }
-            foreach (var item in listCongeReporte)
+            foreach (var item in PostponedLeavesList)
             {
                 PostponedDays += item.DifferenceOfDays;
             }
@@ -191,28 +188,27 @@ namespace XForms.ViewModels
             OnPropertyChanged(nameof(InprogessDays));
             OnPropertyChanged(nameof(PostponedDays));
 
-
         }
 
-        private void Classerconge(List<Conge> listConge)
+        private void ClasserLeave(List<Leave> LeavesList)
         {
-            ListCongeConfirme.Clear();
-            ListCongeEncours.Clear();
-            ListCongeReporte.Clear();
+            ConfirmedLeavesList.Clear();
+            InprogessLeavesList.Clear();
+            PostponedLeavesList.Clear();
 
-            foreach (var item in listConge)
+            foreach (var item in LeavesList)
             {
-                if (item.StatusID == (int)StatusConge.Inprogress)
+                if (item.StatusID == (int)LeaveStatus.Inprogress)
                 {
-                    ListCongeEncours.Add(item);
+                    InprogessLeavesList.Add(item);
                 }
-                else if (item.StatusID == (int)StatusConge.Confirmed)
+                else if (item.StatusID == (int)LeaveStatus.Confirmed)
                 {
-                    ListCongeConfirme.Add(item);
+                    ConfirmedLeavesList.Add(item);
                 }
-                else if (item.StatusID == (int)StatusConge.Postponed)
+                else if (item.StatusID == (int)LeaveStatus.Postponed)
                 {
-                    ListCongeReporte.Add(item);
+                    PostponedLeavesList.Add(item);
                 }
             }
         }
@@ -238,23 +234,23 @@ namespace XForms.ViewModels
 
                 if (HeadrActionList[0].IsSelected)
                 {
-                    ListCongeitems = ListCongeEncours;
+                    LeaveItemsList = InprogessLeavesList;
 
                 }
                 else if (HeadrActionList[1].IsSelected)
                 {
-                    ListCongeitems = ListCongeConfirme;
+                    LeaveItemsList = ConfirmedLeavesList;
 
                 }
                 else if (HeadrActionList[2].IsSelected)
                 {
-                    ListCongeitems = ListCongeReporte;
+                    LeaveItemsList = PostponedLeavesList;
 
                 }
 
-                nbreDemandes = ListCongeitems.Count;
-                OnPropertyChanged(nameof(ListCongeitems));
-                OnPropertyChanged(nameof(nbreDemandes));
+                numberOfRequests = LeaveItemsList.Count;
+                OnPropertyChanged(nameof(LeaveItemsList));
+                OnPropertyChanged(nameof(numberOfRequests));
 
             }
             catch (Exception ex)
@@ -268,12 +264,9 @@ namespace XForms.ViewModels
         },
         (_) => CanSelectHeaderAction);
 
-
-
         public ICommand NavigationtonewRequest => new Command(() =>
         {
-            App.Current.MainPage.Navigation.PushAsync(new NouvelleDemande());
-
+            App.Current.MainPage.Navigation.PushAsync(new NewLeaveRequest());
 
             HeadrActionList[0].IsSelected = true;
             HeadrActionList[1].IsSelected = false;
@@ -281,21 +274,19 @@ namespace XForms.ViewModels
 
         },
     () => true
-
-
     );
 
-        private LeaveDatailsPopup leaveDatailsPopup;
-        public ICommand OpenLeaveDtailsPopupView => new Command(async () =>
+        private LeaveDetailsPopup leaveDetailsPopup;
+        public ICommand OpenLeaveDetailsPopupView => new Command(async () =>
         {
             try
             {
-                if (leaveDatailsPopup == null)
+                if (leaveDetailsPopup == null)
                 {
-                    leaveDatailsPopup = new LeaveDatailsPopup();
+                    leaveDetailsPopup = new LeaveDetailsPopup();
                 }
 
-                await PopupNavigation.Instance.PushAsync(leaveDatailsPopup);
+                await PopupNavigation.Instance.PushAsync(leaveDetailsPopup);
 
             }
             catch (Exception ex)

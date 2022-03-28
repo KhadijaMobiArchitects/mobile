@@ -7,15 +7,15 @@ using XForms.Models;
 using XForms.ViewModels;
 using XForms.views.Base;
 
-namespace XForms.views.Conge
+namespace XForms.views.Leave
 {
-    public partial class DemandeConge : BasePage
+    public partial class LeaveRequest : BasePage
     {
-        public DemandeConge()
+        public LeaveRequest()
         {
             InitializeComponent();
 
-            BindingContext = new DemandeCongeViewModel();
+            BindingContext = new LeaveRequestViewModel();
         }
 
         //private void SelectItem_Clicked(System.Object sender, System.EventArgs e)
@@ -28,7 +28,7 @@ namespace XForms.views.Conge
 
         //        if (item != null) {
 
-        //            var vm = this.BindingContext as DemandeCongeViewModel;
+        //            var vm = this.BindingContext as LeaveRequestViewModel;
         //            if (vm != null) {
 
         //                //var demande = new REFItem
@@ -52,7 +52,7 @@ namespace XForms.views.Conge
         {
             base.OnAppearing();
 
-            await (BindingContext as DemandeCongeViewModel).getListConge();
+            await (BindingContext as LeaveRequestViewModel).getLeavesList();
         }
     }
     
@@ -60,5 +60,5 @@ namespace XForms.views.Conge
 }
 //if ((sender as View)?.BindingContext is REFItem item)
 //{
-//    (this.BindingContext as DemandeCongeViewModel)?.SelectHeaderActionCommand.Execute(item);
+//    (this.BindingContext as LeaveRequestViewModel)?.SelectHeaderActionCommand.Execute(item);
 //}

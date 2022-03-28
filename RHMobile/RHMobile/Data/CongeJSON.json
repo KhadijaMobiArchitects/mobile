@@ -1,29 +1,29 @@
 {
-  "Conges": [
+  "Leaves": [
     {
-      "DateDebut": "2022-03-21T00:00:00+00:00",
-      "DateFin": "2022-03-23T00:00:00",
+      "StartDate": "2022-03-21T00:00:00+00:00",
+      "EndDate": "2022-03-23T00:00:00",
       "Type": "Mensuel",
       "StatusID": 0,
       "id": 1
     },
     {
-      "DateDebut": "2022-03-22T00:00:00",
-      "DateFin": "2022-03-25T00:00:00",
+      "StartDate": "2022-03-22T00:00:00",
+      "EndDate": "2022-03-25T00:00:00",
       "Type": "Mensuel",
       "StatusID": 0,
       "id": 2
     },
     {
-      "DateDebut": "2022-04-21T00:00:00",
-      "DateFin": "2022-04-24T00:00:00",
+      "StartDate": "2022-04-21T00:00:00",
+      "EndDate": "2022-04-24T00:00:00",
       "Type": "Mensuel",
       "StatusID": 1,
       "id": 3
     },
     {
-      "DateDebut": "2022-03-23T00:00:00",
-      "DateFin": "2022-03-27T00:00:00+00:00",
+      "StartDate": "2022-03-23T00:00:00",
+      "EndDate": "2022-03-27T00:00:00+00:00",
       "Type": "Mensuel",
       "StatusID": 2,
       "id": 4
@@ -35,22 +35,22 @@
     "errors": null,
     "data": [
       {
-        "DateDebut": "2022-03-21T00:00:00+00:00",
-        "DateFin": "2022-03-23T00:00:00",
+        "StartDate": "2022-03-21T00:00:00+00:00",
+        "EndDate": "2022-03-23T00:00:00",
         "Type": "Mensuel",
         "StatusID": 0,
         "id": 1
       },
       {
-        "DateDebut": "2022-03-21T00:00:00+00:00",
-        "DateFin": "2022-03-23T00:00:00",
+        "StartDate": "2022-03-21T00:00:00+00:00",
+        "EndDate": "2022-03-23T00:00:00",
         "Type": "Mensuel",
         "StatusID": 0,
         "id": 2
       },
       {
-        "DateDebut": "2022-03-21T00:00:00+00:00",
-        "DateFin": "2022-03-23T00:00:00",
+        "StartDate": "2022-03-21T00:00:00+00:00",
+        "EndDate": "2022-03-23T00:00:00",
         "Type": "Mensuel",
         "StatusID": 0,
         "id": 3

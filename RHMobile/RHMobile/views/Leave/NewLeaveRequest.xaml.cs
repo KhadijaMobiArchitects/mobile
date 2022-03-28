@@ -5,16 +5,16 @@ using Xamarin.Forms;
 using XForms.ViewModels;
 using XForms.views.Base;
 
-namespace XForms.views.Conge
+namespace XForms.views.Leave
 {
-    public partial class NouvelleDemande : BasePage
+    public partial class NewLeaveRequest : BasePage
     {
-        public NouvelleDemande()
+        public NewLeaveRequest()
         {
             InitializeComponent();
 
 
-            BindingContext = new NouvelleDemandeViewModel();
+            BindingContext = new NewLeaveRequestViewModel();
         }
 
         void CustomButton_Clicked(System.Object sender, System.EventArgs e)
