@@ -10,7 +10,7 @@
     xmlns:Shared="clr-namespace:XForms.views.SharedViews"
     NavigationPage.HasNavigationBar="False"
 
-    x:Class="XForms.views.DashBoard.HomePage">
+    x:Class="XForms.views.Administration.HomePage">
     <Base:BasePage.Content>
         <Grid
             BackgroundColor="White"
@@ -31,6 +31,7 @@
                     ColumnDefinitions="auto"
                     RowDefinitions="auto,*,*"
                     RowSpacing="0"
+                    BackgroundColor="Blue"
                     >
                     <Grid
                         ColumnDefinitions="auto,*"
@@ -91,10 +92,22 @@
                 </Grid>-->
 
                 <!--body-->
+                <Grid
+                    Grid.Row="1"
+                    BackgroundColor="Orange"
+                    >
+
+                </Grid>
 
 
 
                 <!--Footer-->
+                <Grid
+                    Grid.Row="2"
+                    BackgroundColor="Brown"
+                    >
+
+                </Grid>
 
             </Grid>
 

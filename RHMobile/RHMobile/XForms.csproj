@@ -76,6 +76,7 @@
     <None Remove="Xamarin.CommunityToolkit" />
     <None Remove="Rg.Plugins.Popup" />
     <None Remove="Helpers\" />
+    <None Remove="ViewModels\Leave\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -97,13 +98,14 @@
     <Folder Include="Data\" />
     <Folder Include="Constants\" />
     <Folder Include="HttpREST\" />
-    <Folder Include="views\DashBoard\" />
+    <Folder Include="views\Administration\" />
     <Folder Include="ViewModels\Base\" />
     <Folder Include="views\SharedViews\" />
     <Folder Include="views\SharedViews\ReclangleBackground\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Base\" />
     <Folder Include="Helpers\" />
+    <Folder Include="ViewModels\Leave\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

@@ -2,29 +2,37 @@
 <Base:BasePopupView
     xmlns:Base="clr-namespace:XForms.views.Base"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="XForms.views.Leave.LeaveDetailsPopup">
-
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cc="clr-namespace:XForms.Controls"
+    x:Class="XForms.views.Leave.LeaveDetailsPopup"
+    CloseWhenBackgroundIsClicked="True"
+    HasKeyboardOffset="False"
+    BackgroundColor="#90000000"
+    >
     <Grid
-        RowDefinitions="auto,auto"
-        ColumnDefinitions="auto,auto"
+        VerticalOptions="EndAndExpand"
         >
-        <Label
-            Text="Date début"
+        <BoxView
+          
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="30,30,0,0"
+            VerticalOptions="FillAndExpand" />
+        <Grid
+           
+            RowDefinitions="auto,auto"
+            Padding="30,30"
+            >
+        <cc:MaterialItemValue
+            Item="Date début"
+            Value="16/09/2021"
             />
-        <Label
-            Grid.Column="1"
-            Text="Date Fin"
-            />
-        <Label
+        <cc:MaterialItemValue
             Grid.Row="1"
-            Text="Type de congé"
+            Item="Date début"
+            Value="16/09/2021"
             />
-        <Label
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="Projet"
-            />
+
+        </Grid>
+
     </Grid>
 
 </Base:BasePopupView>

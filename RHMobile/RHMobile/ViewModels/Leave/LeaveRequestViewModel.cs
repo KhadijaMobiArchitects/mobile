@@ -127,7 +127,7 @@ namespace XForms.ViewModels
 
 
 
-                ClasserLeave(LeavesList);
+                FilterLeaves(LeavesList);
                 DifferenceOfDays(InprogessLeavesList, ConfirmedLeavesList, PostponedLeavesList);
                 LeaveItemsList = InprogessLeavesList;
                 numberOfRequests = LeaveItemsList.Count;
@@ -187,10 +187,9 @@ namespace XForms.ViewModels
             OnPropertyChanged(nameof(ConfirmedDays));
             OnPropertyChanged(nameof(InprogessDays));
             OnPropertyChanged(nameof(PostponedDays));
-
         }
 
-        private void ClasserLeave(List<Leave> LeavesList)
+        private void FilterLeaves(List<Leave> LeavesList)
         {
             ConfirmedLeavesList.Clear();
             InprogessLeavesList.Clear();
@@ -198,21 +197,20 @@ namespace XForms.ViewModels
 
             foreach (var item in LeavesList)
             {
-                if (item.StatusID == (int)LeaveStatus.Inprogress)
+                if (item.RefStatusLeaveId == (int)LeaveStatus.Inprogress)
                 {
                     InprogessLeavesList.Add(item);
                 }
-                else if (item.StatusID == (int)LeaveStatus.Confirmed)
+                else if (item.RefStatusLeaveId == (int)LeaveStatus.Confirmed)
                 {
                     ConfirmedLeavesList.Add(item);
                 }
-                else if (item.StatusID == (int)LeaveStatus.Postponed)
+                else if (item.RefStatusLeaveId == (int)LeaveStatus.Postponed)
                 {
                     PostponedLeavesList.Add(item);
                 }
             }
         }
-
 
         private bool CanSelectHeaderAction = true;
         public ICommand SelectHeaderActionCommand => new Command<REFItem>(async (model) =>
@@ -228,7 +226,6 @@ namespace XForms.ViewModels
                     item.IsSelected = (item.Id == model.Id);
                     OnPropertyChanged(nameof(item.IsSelected));
 
-                    //item.BackgroundColor = ;
 
                 }
 
@@ -277,16 +274,20 @@ namespace XForms.ViewModels
     );
 
         private LeaveDetailsPopup leaveDetailsPopup;
+
+        private bool canOpenLeaveDetailsPopup = true;
         public ICommand OpenLeaveDetailsPopupView => new Command(async () =>
         {
             try
             {
+                canOpenLeaveDetailsPopup = false;
+
                 if (leaveDetailsPopup == null)
                 {
                     leaveDetailsPopup = new LeaveDetailsPopup();
                 }
 
-                await PopupNavigation.Instance.PushAsync(leaveDetailsPopup);
+                await PopupNavigation.Instance.PushSingleAsync(leaveDetailsPopup);
 
             }
             catch (Exception ex)
@@ -295,10 +296,12 @@ namespace XForms.ViewModels
             }
             finally
             {
+                canOpenLeaveDetailsPopup = true;
+
 
             }
         },
-        () => true );
+        () => canOpenLeaveDetailsPopup );
 
 
     }

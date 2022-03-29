@@ -18,6 +18,8 @@ namespace XForms.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
 
+            Rg.Plugins.Popup.Popup.Init(this);
+
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             var ignore = typeof(FFImageLoading.Svg.Forms.SvgCachedImage);
 

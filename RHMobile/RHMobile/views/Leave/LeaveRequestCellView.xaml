@@ -13,11 +13,18 @@
         <Grid
             RowDefinitions="*,auto"            
             >
-            <cc:PressableView
-                Clicked="SelectItem_Clicked"
-                />
+            <Grid.GestureRecognizers
+                >
 
-              <Grid
+        <TapGestureRecognizer           
+            Grid.ColumnSpan="2"
+            Tapped="SelectItem_Clicked"            
+            />
+
+            </Grid.GestureRecognizers>
+
+
+            <Grid
             ColumnDefinitions="auto,*,auto"
             Padding="0,10"
                   ColumnSpacing="15"
@@ -40,7 +47,7 @@
                 VerticalOptions="Center"
                 >
                 <Label
-                    Text="{Binding Type}"
+                    Text="{Binding LabelType}"
                     FontAttributes="Bold"
                     FontSize="14"
                     TextColor="#33373D"
@@ -79,7 +86,7 @@
             <cc:CustomButton
                 VerticalOptions="CenterAndExpand"
                 Grid.Column="2"
-                Text="{Binding Status}"
+                Text="{Binding labelStatus}"
                 BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
                 TextColor="{Binding TextColor,Source = {x:Reference this}}"
                 FontSize="12"
@@ -94,6 +101,7 @@
                 BackgroundColor="#EBF1FE"
                 HorizontalOptions="FillAndExpand"
                 />
+
         </Grid>
 
       

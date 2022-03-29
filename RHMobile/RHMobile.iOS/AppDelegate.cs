@@ -28,6 +28,8 @@ namespace XForms.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             var ignore = typeof(FFImageLoading.Svg.Forms.SvgCachedImage);
 
+            Rg.Plugins.Popup.Popup.Init();
+
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
 

@@ -18,18 +18,18 @@ namespace XForms.Models
         public bool ConfirmedBySquad { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; } = null!;
-        public int RefLeaveStatusId { get; set; }
+        public int RefStatusLeaveId { get; set; }
         public int RefTypeLeaveId { get; set; }
+        public string LabelType { get; set; }
+        public string labelStatus { get; set; }
+        //[JsonIgnore]
+        //public string Status => (LeaveStatus)RefLeaveStatusId switch
+        //{
+        //    LeaveStatus.Inprogress => "En cours",
+        //    LeaveStatus.Confirmed => "Confirmé",
+        //    LeaveStatus.Postponed => "Reporté"
 
-
-        [JsonIgnore]
-        public string Status => (LeaveStatus)RefLeaveStatusId switch
-        {
-            LeaveStatus.Inprogress => "En cours",
-            LeaveStatus.Confirmed => "Confirmé",
-            LeaveStatus.Postponed => "Reporté"
-
-        };
+        //};
         //public long IdStatus => Status switch
         //{
         //    "En cours" => 1,
@@ -37,7 +37,7 @@ namespace XForms.Models
         //    "Reporté" => 3
         //};
         [JsonIgnore]
-        public Color BackgroundColor => (LeaveStatus)RefLeaveStatusId switch
+        public Color BackgroundColor => (LeaveStatus)RefStatusLeaveId switch
         {
             LeaveStatus.Inprogress => Color.FromHex("#FEE07D"),
             LeaveStatus.Confirmed => Color.FromHex("#95D5A4"),
@@ -47,7 +47,7 @@ namespace XForms.Models
         };
 
         [JsonIgnore]
-        public Color TextColor => (LeaveStatus)RefLeaveStatusId switch
+        public Color TextColor => (LeaveStatus)RefStatusLeaveId switch
         {
             LeaveStatus.Inprogress => Color.FromHex("#E6992A"),
             LeaveStatus.Confirmed => Color.FromHex("#589266"),

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="XForms.Controls.MaterialItemValue"
+    x:Name="this"
+    >
+
+    <Label
+        Text="{Binding Item, Source={x:Reference this}}"
+        FontAttributes="Bold"
+        FontSize="14"
+        TextColor="#33373D"
+        VerticalTextAlignment="Center"
+        />
+
+    <Label
+        Text="{Binding Value, Source={x:Reference this}}"
+        FontFamily="RubikRegular"
+        FontSize="12"
+        TextColor="#A3AEC5"
+        VerticalTextAlignment="Center"
+                    />
+
+
+</StackLayout>

@@ -3,10 +3,8 @@ namespace XForms.Enum
 {
     public enum LeaveStatus
     {
-        Inprogress ,
-        Confirmed,
+        Inprogress = 1,
+        Confirmed ,
         Postponed
-
-
     }
 }
