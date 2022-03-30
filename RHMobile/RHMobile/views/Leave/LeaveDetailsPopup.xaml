@@ -8,14 +8,26 @@
     CloseWhenBackgroundIsClicked="True"
     HasKeyboardOffset="False"
     BackgroundColor="#90000000"
-    xmlns:Local="clr-namespace:XForms" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:animations="http://rotorgames.com"
     >
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+    </Base:BasePopupView.Animation>
+
     <Grid
         VerticalOptions="EndAndExpand"
         BackgroundColor="Transparent"
         >
-        <Grid
+        <Grid  
            
             RowDefinitions="40,40,auto,auto"
             >
@@ -30,15 +42,16 @@
                 Grid.Row="2"
                 >
 
-                <cc:MaterialItemValue
+                <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
-            Item="Congé annuel"
-            Value="16/09/2021"
+                    Item="{Binding SelectedLeave.LabelType,StringFormat='Congé {0}'}"
+                    Value="16/09/2021"
+                    HorizontalTextAlignment="Center"
             />
 
             <cc:CornerView
-                BackgroundColor="Orange"
-                Padding="0"
+                BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                Padding="5"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 StyleCorner="Default"
@@ -47,9 +60,9 @@
                 >
                 <Label
                     HorizontalOptions="Center"
-                    Text="En vérification"
-                    TextColor="#E6992A"
-                    BackgroundColor="{StaticResource InProgressColor}"
+                    Text="{Binding SelectedLeave.labelStatus}"
+                    TextColor="{Binding SelectedLeave.TextColor}"
+                    BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
                     FontSize="12"
                     Padding="5"                    
                     />
@@ -69,30 +82,33 @@
                 >
                 <cc:MaterialItemValue
             Item="Date début"
-            Value="16/09/2021"
-            />
-                <cc:MaterialItemValue
-            Grid.Row="1"
-            Item="Type de congé"
-            Value="16/09/2021"
+            Value="{Binding SelectedLeave.StartDate,StringFormat='{0:dd/MM/yyyy}'}"
             />
                 <cc:MaterialItemValue
             Grid.Column="1"
             Item="Date Fin"
-            Value="16/09/2021"
+            Value="{Binding SelectedLeave.EndDate,StringFormat='{0:dd/MM/yyyy}'}"
+
             />
+                <cc:MaterialItemValue
+            Grid.Row="1"
+            Item="Type de congé"
+            Value="{Binding SelectedLeave.LabelType}"
+
+            />
+
                 <cc:MaterialItemValue
             Grid.Row="1"
                     Grid.Column="1"
             Item="Projet"
-            Value="16/09/2021"
+            Value="Ta7alil"
             />
                 <cc:MaterialItemValue
             Grid.Row="2"
                     Grid.ColumnSpan="2"
                     VerticalOptions="Start"
             Item="Situation sur le projet"
-            Value="16/09/2021"
+            Value="Livré partiellement"
             />
             </Grid>
 
@@ -105,8 +121,7 @@
                 HorizontalOptions="CenterAndExpand">
                 <cc:CornerView
                     Padding="5"
-                    BackgroundColor="{Binding HeaderGlyphBackground}">
-
+                    >
                     <svg:SvgCachedImage                    
                         Visual="Default"
                         Margin="10"

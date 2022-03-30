@@ -41,7 +41,9 @@ namespace XForms.ViewModels
         public int ConfirmedDays { get; set; }
         public int InprogessDays { get; set; }
         public int PostponedDays { get; set; }
-        public int TotalDays => 26;
+        public int TotalDays => ConfirmedDays + InprogessDays + PostponedDays;
+
+        public Leave SelectedLeave { get; set; }
 
         //public INavigation Navigation;
 
@@ -187,6 +189,7 @@ namespace XForms.ViewModels
             OnPropertyChanged(nameof(ConfirmedDays));
             OnPropertyChanged(nameof(InprogessDays));
             OnPropertyChanged(nameof(PostponedDays));
+            OnPropertyChanged(nameof(TotalDays));
         }
 
         private void FilterLeaves(List<Leave> LeavesList)
@@ -276,16 +279,22 @@ namespace XForms.ViewModels
         private LeaveDetailsPopup leaveDetailsPopup;
 
         private bool canOpenLeaveDetailsPopup = true;
-        public ICommand OpenLeaveDetailsPopupView => new Command(async () =>
+        public ICommand OpenLeaveDetailsPopupView => new Command<Leave>(async (model) =>
         {
             try
             {
                 canOpenLeaveDetailsPopup = false;
 
+                if (model == null)
+                    return;
+
+                SelectedLeave = model;
+
                 if (leaveDetailsPopup == null)
                 {
-                    leaveDetailsPopup = new LeaveDetailsPopup();
+                    leaveDetailsPopup = new LeaveDetailsPopup() { BindingContext = this};
                 }
+                OnPropertyChanged(nameof(SelectedLeave));
 
                 await PopupNavigation.Instance.PushSingleAsync(leaveDetailsPopup);
 
@@ -301,7 +310,9 @@ namespace XForms.ViewModels
 
             }
         },
-        () => canOpenLeaveDetailsPopup );
+        (_) => canOpenLeaveDetailsPopup );
+
+       
 
 
     }

@@ -45,20 +45,29 @@ BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(View), strin
             }
         }
 
+        public DateTime? defaultDate=null;
+
         public MaterialDatePicker()
         {
 
 
             InitializeComponent();
-
-           Date = null;
+            myDatePicker.Date = default;
+            defaultDate = myDatePicker.Date;
+            //Date = null;
         }
 
         void DatePicker_DateSelected(System.Object sender, Xamarin.Forms.DateChangedEventArgs e)
         {
+            //var s = new DatePicker() { Date = default};
+            
+            if ((e.NewDate.Date != defaultDate) && (defaultDate != null))
+            {
             Date = e.NewDate;
-            IsSelecetedDate = true;
-            OnPropertyChanged(nameof(DateString));
+                IsSelecetedDate = true;
+                OnPropertyChanged(nameof(DateString));
+            }
+          
         }
 
         //void CustomButton_Clicked(System.Object sender, System.EventArgs e)

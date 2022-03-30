@@ -83,16 +83,22 @@
 
             </StackLayout>
 
-            <cc:CustomButton
+            <cc:CornerView
                 VerticalOptions="CenterAndExpand"
                 Grid.Column="2"
+                StyleCorner="Default"
+                CornerRadius="4"
+                >
+                <Label
                 Text="{Binding labelStatus}"
                 BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
                 TextColor="{Binding TextColor,Source = {x:Reference this}}"
                 FontSize="12"
                 FontFamily="RubikRegular"
-                Padding="10,0"
-                />
+                Padding="10"
+                    />
+            </cc:CornerView>
+                
         </Grid>
 
             <BoxView

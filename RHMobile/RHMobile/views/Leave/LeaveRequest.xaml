@@ -72,7 +72,7 @@
                                     HorizontalOptions="Center"
                                     >
                                     <Label
-                                        Text="26"
+                                        Text="{Binding TotalDays}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                         FontSize="24"

@@ -113,6 +113,8 @@
                         <cc:MaterialDatePicker
                                 Placeholder="Date début"
                                 Date="{Binding StartDate}"
+
+                             
                                 />
 
                         <cc:MaterialDatePicker

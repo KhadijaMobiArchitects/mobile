@@ -20,15 +20,13 @@ namespace XForms.ViewModels
         public List<Projet> ListProjet { get; set; }
         public List<SituationProjet> ListSituation { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; } 
         public Leave SelectedLeave { get; set; }
         public Projet SelectedProjet { get; set; }
         public SituationProjet SelectedSituationProjet { get; set; }
 
         public NewLeaveRequestViewModel()
         {
-            StartDate = DateTime.Now;
-            EndDate = DateTime.Now;
 
             ListLeave = new List<Leave> {
                 new Leave(){

@@ -12,6 +12,7 @@
         FontSize="14"
         TextColor="#33373D"
         VerticalTextAlignment="Center"
+        HorizontalTextAlignment="{Binding HorizontalTextAlignment, Source={x:Reference this}}"
         />
 
     <Label
@@ -20,6 +21,7 @@
         FontSize="12"
         TextColor="#A3AEC5"
         VerticalTextAlignment="Center"
+        HorizontalTextAlignment="{Binding HorizontalTextAlignment, Source={x:Reference this}}"
                     />
 
 

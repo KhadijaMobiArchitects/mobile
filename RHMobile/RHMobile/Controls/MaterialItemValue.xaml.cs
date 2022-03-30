@@ -31,6 +31,18 @@ namespace XForms.Controls
             }
         }
 
+        public static readonly BindableProperty HorizontalTextAlignmentProperty =
+ BindableProperty.Create(nameof(HorizontalTextAlignment), typeof(TextAlignment), typeof(View),TextAlignment.Start, BindingMode.TwoWay);
+
+        public TextAlignment HorizontalTextAlignment
+        {
+            get { return (TextAlignment)GetValue(HorizontalTextAlignmentProperty); }
+            set
+            {
+                SetValue(HorizontalTextAlignmentProperty, value);
+            }
+        }
+
 
         public MaterialItemValue()
         {

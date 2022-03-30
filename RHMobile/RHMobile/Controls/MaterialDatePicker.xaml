@@ -35,13 +35,14 @@
                     Opacity="0"
                     >
             <DatePicker
-                x:Name="DatePicker"
+                x:Name="myDatePicker"
 
                 TextColor="Black"
                 Style="{StaticResource TransparentPickerStyle}"
                 Visual="Material"
                 DateSelected="DatePicker_DateSelected"
                 Date="{Binding Date, Source={x:Reference this}}"
+
                 />
                 </Grid>
             </Grid>
@@ -52,7 +53,7 @@
                 VerticalOptions="Center"
                 StyleCorner="Circle"
                 Opacity="0.6"
-                FocsudView="{x:Reference DatePicker}"
+                FocsudView="{x:Reference myDatePicker}"
                 Style="{StaticResource InputActionStyle}"
                 >
                 <cc:CustomButton.ImageSource>
