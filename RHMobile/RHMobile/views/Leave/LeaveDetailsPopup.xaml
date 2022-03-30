@@ -4,35 +4,119 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cc="clr-namespace:XForms.Controls"
     x:Class="XForms.views.Leave.LeaveDetailsPopup"
+    xmlns:res="clr-namespace:XForms.Resources"
     CloseWhenBackgroundIsClicked="True"
     HasKeyboardOffset="False"
     BackgroundColor="#90000000"
+    xmlns:Local="clr-namespace:XForms" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+
     >
     <Grid
         VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"
         >
-        <BoxView
-          
+        <Grid
+           
+            RowDefinitions="40,40,auto,auto"
+            >
+            <BoxView
+            Grid.Row="1"
+            Grid.RowSpan="3"
             BackgroundColor="{StaticResource White}"
             CornerRadius="30,30,0,0"
             VerticalOptions="FillAndExpand" />
-        <Grid
-           
-            RowDefinitions="auto,auto"
-            Padding="30,30"
-            >
-        <cc:MaterialItemValue
+
+            <StackLayout
+                Grid.Row="2"
+                >
+
+                <cc:MaterialItemValue
+                    HorizontalOptions="CenterAndExpand"
+            Item="Congé annuel"
+            Value="16/09/2021"
+            />
+
+            <cc:CornerView
+                BackgroundColor="Orange"
+                Padding="0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                StyleCorner="Default"
+                CornerRadius="4"
+
+                >
+                <Label
+                    HorizontalOptions="Center"
+                    Text="En vérification"
+                    TextColor="#E6992A"
+                    BackgroundColor="{StaticResource InProgressColor}"
+                    FontSize="12"
+                    Padding="5"                    
+                    />
+
+            </cc:CornerView>
+
+            </StackLayout>
+
+
+            <Grid
+            Padding="30,0"
+                Grid.Row="3"
+                RowDefinitions="*,*,*"
+                ColumnDefinitions="*,*"
+                RowSpacing="20"
+                Margin="0,30"
+                >
+                <cc:MaterialItemValue
             Item="Date début"
             Value="16/09/2021"
             />
-        <cc:MaterialItemValue
+                <cc:MaterialItemValue
             Grid.Row="1"
-            Item="Date début"
+            Item="Type de congé"
             Value="16/09/2021"
             />
+                <cc:MaterialItemValue
+            Grid.Column="1"
+            Item="Date Fin"
+            Value="16/09/2021"
+            />
+                <cc:MaterialItemValue
+            Grid.Row="1"
+                    Grid.Column="1"
+            Item="Projet"
+            Value="16/09/2021"
+            />
+                <cc:MaterialItemValue
+            Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    VerticalOptions="Start"
+            Item="Situation sur le projet"
+            Value="16/09/2021"
+            />
+            </Grid>
 
+            <cc:CornerView
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                Padding="5"
+                BackgroundColor="{StaticResource BackgroundICon}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <cc:CornerView
+                    Padding="5"
+                    BackgroundColor="{Binding HeaderGlyphBackground}">
+
+                    <svg:SvgCachedImage                    
+                        Visual="Default"
+                        Margin="10"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Local:ImageResource calendar2.svg}"
+                        />
+                </cc:CornerView>
+            </cc:CornerView>
         </Grid>
-
     </Grid>
 
 </Base:BasePopupView>

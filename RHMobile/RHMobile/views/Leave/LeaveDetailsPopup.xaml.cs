@@ -7,9 +7,23 @@ namespace XForms.views.Leave
 {
     public partial class LeaveDetailsPopup : BasePopupView
     {
-        public LeaveDetailsPopup()
+        public string HeaderGlyph { get; set; }
+        public Color HeaderGlyphBackground { get; set; }
+
+
+        public LeaveDetailsPopup(
+            string headerGlyph = "",
+            Color headerGlyphBackground = default
+            )
         {
             InitializeComponent();
+
+            BindingContext = this;
+
+            HeaderGlyph = headerGlyph;
+            HeaderGlyphBackground = headerGlyphBackground;
+
+
         }
     }
 }
