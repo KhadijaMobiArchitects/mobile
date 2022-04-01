@@ -138,7 +138,7 @@
                                         <!--Clicked="SelectItem_Clicked"-->
 
                                         <cc:CustomButton
-                                            Text="{Binding Name}"
+                                            Text="{Binding Name,StringFormat='Demande {0}'}"
                                             StyleCorner="RoundCorner"
                                             BackgroundColor="{Binding BackgroundColor}"
                                             TextColor="{StaticResource White}"
@@ -162,7 +162,7 @@
 
                         >
                         <Label
-                            Text="Mes demandes en cours"
+                            Text="{Binding StatusName,StringFormat='Mes demandes {0}'}"
                             FontAttributes="Bold"
                             FontSize="16"
                             TextColor="#33373D"

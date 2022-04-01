@@ -9,20 +9,22 @@ using Microcharts;
 using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using SkiaSharp;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using XForms.Constants;
 using XForms.Enum;
 using XForms.Models;
+using XForms.ViewModels;
 using XForms.views.Leave;
 
 namespace XForms.ViewModels
 {
-    public class LeaveRequestViewModel : BindableObject
+    public class LeaveRequestViewModel : BaseViewModel
     {
         public List<REFItem> HeadrActionList { get; set; }
 
-        public List<Leave> LeavesList { get; set; }
-        //public ObservableCollection<Leave> LeavesList { get; set; }
+        public List<Leave> LeaveDate { get; set; }
+        public ObservableRangeCollection<Leave> LeavesList { get; set; }
 
 
         public List<Leave> LeaveItemsList { get; set; }
@@ -45,6 +47,8 @@ namespace XForms.ViewModels
 
         public Leave SelectedLeave { get; set; }
 
+        public string StatusName { get; set; }
+
         //public INavigation Navigation;
 
 
@@ -56,49 +60,27 @@ namespace XForms.ViewModels
             InprogessLeavesList = new List<Leave>();
             PostponedLeavesList = new List<Leave>();
 
+            //StatusName = "en cours";
 
             HeadrActionList = new List<REFItem>()
             {
                 new REFItem()
                 {
                     Id = 1,
-                    Name = "Demande en cours",
+                    Name = "en cours",
                     IsSelected = true
                 },
                 new REFItem()
                 {
                     Id = 2,
-                    Name = "Demande validée",
+                    Name = "validée",
                 },
                 new REFItem()
                 {
                     Id = 3,
-                    Name = "Demande reportée",
+                    Name = "reportée",
                 }
             };
-
-            //LeavesList = new List<Leave>()
-            //{
-            //    new Leave()
-            //    {
-            //        Type="Leave annuel",
-            //        Status="En cours",
-            //        StartDate = new DateTime(2022,4,20),
-            //        EndDate = new DateTime(2022,9,2)
-            //    },
-            //    new Leave(){
-            //        Type="Leave Mensuel",
-            //        Status="Confirmé",
-            //        StartDate = new DateTime(2021,7,20),
-            //        EndDate = new DateTime(2021,8,12)
-            //    }
-            //};
-
-            //Uri uri = new Uri(Uri);
-
-            //LeavesList = new List<Leave>();
-
-            //getLeavesList(LeavesList);
 
             donutChart = new DonutChart()
             {
@@ -108,24 +90,36 @@ namespace XForms.ViewModels
 
 
             };
+
+        }
+
+        public async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            //if (InterventionsList?.Any() != true || App.CanRefreshHome)
+            //{
+            //    await GetIntervenetionsData();
+
+            //    App.CanRefreshHome = false;
+            //}
+            StatusName = "en cours";
+            OnPropertyChanged(nameof(StatusName));
+            await getLeavesList();
+
+
+            //StatusName = HeadrActionList[0].IsSelected ? HeadrActionList[0].Name : (HeadrActionList[1].IsSelected ? HeadrActionList[1].Name : HeadrActionList[2].Name);
+
         }
 
         public async Task getLeavesList()
         {
             try
             {
-                //                var client = new HttpClient();
-                //var resp = await client.GetAsync(AppUrls.GesRequestsLeavesList);
-
-                //    if (resp.IsSuccessStatusCode)
-                //    {
-                //        var content = resp.Content.ReadAsStringAsync();
-                //LeavesList = JsonConvert.DeserializeObject<List<Leave>>(content.Result.ToString());
-
                 var result = await App.AppServices.GetLeaves();
 
-                LeavesList = result.data.ToList();
-                //LeavesList = new ObservableCollection<Leave>(LeavesList);
+                LeaveDate = result.data.ToList();
+                LeavesList = new ObservableRangeCollection<Leave>(LeaveDate);
 
 
 
@@ -192,7 +186,7 @@ namespace XForms.ViewModels
             OnPropertyChanged(nameof(TotalDays));
         }
 
-        private void FilterLeaves(List<Leave> LeavesList)
+        private void FilterLeaves(ObservableRangeCollection<Leave> LeavesList)
         {
             ConfirmedLeavesList.Clear();
             InprogessLeavesList.Clear();
@@ -251,6 +245,9 @@ namespace XForms.ViewModels
                 numberOfRequests = LeaveItemsList.Count;
                 OnPropertyChanged(nameof(LeaveItemsList));
                 OnPropertyChanged(nameof(numberOfRequests));
+
+                StatusName = HeadrActionList[0].IsSelected ? HeadrActionList[0].Name : (HeadrActionList[1].IsSelected ? HeadrActionList[1].Name + "s" : HeadrActionList[2].Name + "s");
+                OnPropertyChanged(nameof(StatusName));
 
             }
             catch (Exception ex)

@@ -19,7 +19,7 @@ namespace XForms.views.Leave
 
         void CustomButton_Clicked(System.Object sender, System.EventArgs e)
         {
-            Console.WriteLine("Hello worlds ");
+            //Console.WriteLine("Hello worlds ");
 
         }
     }

@@ -54,6 +54,10 @@ BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(View), strin
             InitializeComponent();
             myDatePicker.Date = default;
             defaultDate = myDatePicker.Date;
+
+            myDatePicker.MinimumDate = DateTime.Now;
+            myDatePicker.MaximumDate = DateTime.Now.AddYears(1);
+
             //Date = null;
         }
 
@@ -61,7 +65,7 @@ BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(View), strin
         {
             //var s = new DatePicker() { Date = default};
             
-            if ((e.NewDate.Date != defaultDate) && (defaultDate != null))
+            if ((e.NewDate.Date != defaultDate) && (defaultDate != null) && (e.NewDate.Date.ToShortDateString() != DateTime.Now.ToShortDateString()))
             {
             Date = e.NewDate;
                 IsSelecetedDate = true;

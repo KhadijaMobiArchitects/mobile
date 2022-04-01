@@ -15,7 +15,7 @@ namespace XForms.views.Leave
         {
             InitializeComponent();
 
-            BindingContext = new LeaveRequestViewModel();
+            //BindingContext = new LeaveRequestViewModel();
         }
 
         //private void SelectItem_Clicked(System.Object sender, System.EventArgs e)
@@ -50,9 +50,22 @@ namespace XForms.views.Leave
 
         protected async override void OnAppearing()
         {
-            base.OnAppearing();
+            try
+            {
+                if (BindingContext == null)
+                {
+                    BindingContext = new LeaveRequestViewModel();
+                }
 
-            await (BindingContext as LeaveRequestViewModel).getLeavesList();
+                base.OnAppearing();
+            }
+            catch (Exception ex)
+            {
+                //AppHelpers.Alert(ex.Message, exception: ex);
+            }
+            //base.OnAppearing();
+
+            //await (BindingContext as LeaveRequestViewModel).getLeavesList();
         }
     }
     

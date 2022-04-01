@@ -7,7 +7,7 @@
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:Local="clr-namespace:XForms"
-    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:adminCell="clr-namespace:XForms.views.Administration"
     NavigationPage.HasNavigationBar="False"
 
     x:Class="XForms.views.Administration.HomePage">
@@ -20,18 +20,16 @@
 
             <Grid
                 RowDefinitions="*,3*,*"
-                Padding="{OnPlatform iOS='30,0,30,0',Android='30,0,30,0'}"
                 VerticalOptions="FillAndExpand"
                 Grid.RowSpan="2"
                 RowSpacing="0">
                 <!--Header-->
 
                 <Grid
-                    Padding="{OnPlatform iOS='0,30,0,0',Android='0,30,0,0'}"
+                    Padding="{OnPlatform iOS='30,30,30,10',Android='30,30,30,10'}"
                     ColumnDefinitions="auto"
                     RowDefinitions="auto,*,*"
-                    RowSpacing="0"
-                    BackgroundColor="Blue"
+                    RowSpacing="0"                   
                     >
                     <Grid
                         ColumnDefinitions="auto,*"
@@ -77,25 +75,39 @@
                     </pancake:PancakeView>
 
                 </Grid>
-                <!--<Grid
-                    Grid.Row="1"
-                    HeightRequest="70"
-                    TranslationY="-35"
-                    >
-                    <pancake:PancakeView
-                        VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand"
-                        BackgroundColor="Red"
-                        >
 
-                    </pancake:PancakeView>
-                </Grid>-->
+                <!--Body-->
 
-                <!--body-->
                 <Grid
                     Grid.Row="1"
-                    BackgroundColor="Orange"
+                    RowDefinitions="auto,auto"
+                    Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
+
+
                     >
+                    <Label
+                        Text="Administration"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource LabelColor}"
+                        Padding="6,0"
+                        />
+                    <CollectionView
+                        Grid.Row="1"
+                        ItemsLayout="VerticalGrid,3"
+                        ItemsSource="{Binding AdminstrationList}"                        
+                        >
+                        <CollectionView.ItemTemplate                            
+                            >
+                            <DataTemplate>
+                                <adminCell:AdministrationCellView
+                                    Title="{Binding Title}"
+                                    ICone="{Binding ICone}"
+                                    />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>                 
 
                 </Grid>
 

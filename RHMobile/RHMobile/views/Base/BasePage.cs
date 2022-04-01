@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using XForms.ViewModels;
 
 namespace XForms.views.Base
 {
@@ -7,6 +8,15 @@ namespace XForms.views.Base
     {
         public BasePage()
         {
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+
+            if (BindingContext is BaseViewModel bindingContext)
+                bindingContext.OnAppearing();
         }
     }
 }

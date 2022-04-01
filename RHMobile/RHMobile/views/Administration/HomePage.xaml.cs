@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using XForms.ViewModels;
 using XForms.views.Base;
 
 namespace XForms.views.Administration
@@ -11,6 +12,8 @@ namespace XForms.views.Administration
         public HomePage()
         {
             InitializeComponent();
+
+            BindingContext = new HomeViewModel();
         }
     }
 }

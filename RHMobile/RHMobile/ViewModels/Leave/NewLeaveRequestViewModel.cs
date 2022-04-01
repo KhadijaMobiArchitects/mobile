@@ -28,6 +28,9 @@ namespace XForms.ViewModels
         public NewLeaveRequestViewModel()
         {
 
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
+
             ListLeave = new List<Leave> {
                 new Leave(){
                     Type="Annuel"
