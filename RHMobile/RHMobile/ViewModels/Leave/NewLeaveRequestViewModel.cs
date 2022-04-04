@@ -117,7 +117,7 @@ namespace XForms.ViewModels
 
                     var result = await App.AppServices.PostLeave(item);
 
-                    App.Current.MainPage.Navigation.PushAsync(new LeaveRequest());
+                    App.Current.MainPage.Navigation.PushAsync(new LeaveRequestPage());
 
                 }
                 catch(Exception ex)

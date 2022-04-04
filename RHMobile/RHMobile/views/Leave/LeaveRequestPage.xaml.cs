@@ -9,9 +9,9 @@ using XForms.views.Base;
 
 namespace XForms.views.Leave
 {
-    public partial class LeaveRequest : BasePage
+    public partial class LeaveRequestPage : BasePage
     {
-        public LeaveRequest()
+        public LeaveRequestPage()
         {
             InitializeComponent();
 

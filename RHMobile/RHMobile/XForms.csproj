@@ -80,6 +80,20 @@
     <None Remove="coverlet.msbuild" />
     <None Remove="ViewModels\Home\" />
     <None Remove="Models\Administration\" />
+    <None Remove="Resources\Images\certificate.svg" />
+    <None Remove="Resources\Images\complaint.svg" />
+    <None Remove="Resources\Images\delegation.svg" />
+    <None Remove="Resources\Images\intership.svg" />
+    <None Remove="Resources\Images\move.svg" />
+    <None Remove="Resources\Images\payslips.svg" />
+    <None Remove="Resources\Images\personalData.svg" />
+    <None Remove="Resources\Images\project.svg" />
+    <None Remove="Resources\Images\rcar.svg" />
+    <None Remove="Resources\Images\recore.svg" />
+    <None Remove="Resources\Images\recoreprime.svg" />
+    <None Remove="Resources\Images\certaficate.svg" />
+    <None Remove="ViewModels\Displacement\" />
+    <None Remove="views\Displacement\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -111,6 +125,8 @@
     <Folder Include="ViewModels\Leave\" />
     <Folder Include="ViewModels\Home\" />
     <Folder Include="Models\Administration\" />
+    <Folder Include="ViewModels\Displacement\" />
+    <Folder Include="views\Displacement\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
@@ -126,6 +142,17 @@
     <EmbeddedResource Include="Resources\Images\profil.png" />
     <EmbeddedResource Include="Resources\Images\calendar.svg" />
     <EmbeddedResource Include="Resources\Images\calendar2.svg" />
+    <EmbeddedResource Include="Resources\Images\complaint.svg" />
+    <EmbeddedResource Include="Resources\Images\delegation.svg" />
+    <EmbeddedResource Include="Resources\Images\intership.svg" />
+    <EmbeddedResource Include="Resources\Images\move.svg" />
+    <EmbeddedResource Include="Resources\Images\payslips.svg" />
+    <EmbeddedResource Include="Resources\Images\personalData.svg" />
+    <EmbeddedResource Include="Resources\Images\project.svg" />
+    <EmbeddedResource Include="Resources\Images\rcar.svg" />
+    <EmbeddedResource Include="Resources\Images\recore.svg" />
+    <EmbeddedResource Include="Resources\Images\recoreprime.svg" />
+    <EmbeddedResource Include="Resources\Images\certaficate.svg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />

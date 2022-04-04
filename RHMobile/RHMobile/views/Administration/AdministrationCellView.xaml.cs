@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
+using XForms.Models;
+using XForms.ViewModels;
 
 namespace XForms.views.Administration
 {
@@ -35,6 +37,15 @@ BindableProperty.Create(nameof(ICone), typeof(SvgImageSource), typeof(View), nul
         public AdministrationCellView()
         {
             InitializeComponent();
+        }
+
+        void SelectItem_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if ((sender as View).BindingContext is REFItemAdministration item)
+            {
+                (this.Parent.BindingContext as HomeViewModel).AdministraionNavigation.Execute(item);
+            }
+
         }
     }
 }

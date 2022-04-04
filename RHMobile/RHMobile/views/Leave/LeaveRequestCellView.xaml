@@ -13,8 +13,7 @@
         <Grid
             RowDefinitions="*,auto"            
             >
-            <Grid.GestureRecognizers
-                >
+            <Grid.GestureRecognizers>
 
         <TapGestureRecognizer           
             Grid.ColumnSpan="2"

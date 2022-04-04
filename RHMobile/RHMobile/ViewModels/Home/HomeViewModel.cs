@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Windows.Input;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
+using XForms.Enum;
 using XForms.Models;
+using XForms.views.Displacement;
+using XForms.views.Leave;
 
 namespace XForms.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
         public List<REFItemAdministration> AdminstrationList { get; set; }
-
         public HomeViewModel()
         {
 
@@ -18,97 +21,127 @@ namespace XForms.ViewModels
             {
                 new REFItemAdministration()
                 {
-                    Title = "Demande\nCongé",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(0,0,5,5)
+                    Id = AdministrationService.Leave,
+                    Title = ResourceHelpers.GetServiceTitle(AdministrationService.Leave),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Leave)
                 },
                 new REFItemAdministration()
                 {
-                    Title = "Demande\nAttestation",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(5,0,5,5)
+                    Id = AdministrationService.Certaficate,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.Certaficate),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Certaficate),
 
                 },
                 new REFItemAdministration()
                 {
-                    Title = "Déplacement\nClient",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(5,0,0,5)
+                    Id = AdministrationService.Move,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.Move),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Move),
 
                 },
                 new REFItemAdministration()
                 {
-                    Title = "Réclamation\nInterne",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(5,5,0,0)
+                    Id = AdministrationService.Complaint,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.Complaint),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Complaint),
 
                 }
                   ,
                 new REFItemAdministration()
                 {
-                    Title = "Projets\nClient",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(5,5,5,0)
+                    Id = AdministrationService.Project,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.Project),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Project),
 
                 }
                 ,
                 new REFItemAdministration()
                 {
-
-                    Title = "Espace\nStagaires",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(0,5,5,5)
-
-                }
-                ,
-                new REFItemAdministration()
-                {
-                    Title = "Données\nPersonnelles",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(0,5,5,0)
+                    Id = AdministrationService.Intership,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.Intership),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Intership),
 
                 }
                 ,
                 new REFItemAdministration()
                 {
-                    Title = "Délégations",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(5,5,5,5)
+                    Id = AdministrationService.PersonalData,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.PersonalData),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.PersonalData),
 
                 }
                 ,
                 new REFItemAdministration()
                 {
-                    Title = "Bulletins\nDe paie",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(5,5,0,5)
+                    Id = AdministrationService.Delegation,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.Delegation),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Delegation),
 
                 }
                 ,
                 new REFItemAdministration()
                 {
-                    Title = "RCAR",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(0,5,5,5)
+                    Id = AdministrationService.Payslips,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.Payslips),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Payslips),
 
                 }
                 ,
                 new REFItemAdministration()
                 {
-                    Title = "Recore",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(5,5,5,5)
+                    Id = AdministrationService.RCAR,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.RCAR),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.RCAR),
 
                 }
                 ,
                 new REFItemAdministration()
                 {
-                    Title = "Recore sur \nprime",
-                    ICone =  SvgImageSource.FromResource("XForms.Resources.Images.calendar2.svg", typeof(HomeViewModel).GetTypeInfo().Assembly)
-                    ,padding = new Thickness(5,5,0,5)
+                    Id = AdministrationService.Recore,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.Recore),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.Recore),
+
+                }
+                ,
+                new REFItemAdministration()
+                {
+                    Id = AdministrationService.RecorePrime,
+                    Title=ResourceHelpers.GetServiceTitle(AdministrationService.RecorePrime),
+                    ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.RecorePrime)
 
                 }
     };
+            
         }
+        public INavigation navigation { get; set; }
+        public bool canAdminisatrionNavigation = true;
+        public ICommand AdministraionNavigation => new Command<REFItemAdministration>(async (model) =>
+        {
+            try
+            {
+                canAdminisatrionNavigation = false;
+
+                if (model == null)
+                    return;
+
+                _ = model.Id switch
+                {
+                    AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveRequestPage()),
+                    AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new DisplacementPage()),
+
+
+                };
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            finally
+            {
+                canAdminisatrionNavigation = true;
+            }
+        },
+        (_) => canAdminisatrionNavigation);
     }
 }

@@ -11,7 +11,7 @@
     xmlns:chart="clr-namespace:Microcharts;assembly=Microcharts"
     xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     xmlns:Shared="clr-namespace:XForms.views.SharedViews"
-    x:Class="XForms.views.Leave.LeaveRequest"
+    x:Class="XForms.views.Leave.LeaveRequestPage"
     x:Name="this">
     <Base:BasePage.Content>
         <Grid

@@ -7,15 +7,20 @@
     x:Class="XForms.views.Administration.AdministrationCellView"
     x:Name="this"
     Padding="6"
-    RowDefinitions="*"
+    RowDefinitions="*" 
     >
+    <Grid.GestureRecognizers>
 
+        <TapGestureRecognizer
+            Tapped="SelectItem_Clicked"            
+            />
+
+    </Grid.GestureRecognizers>
     <pc:PancakeView
         BackgroundColor="{StaticResource BackgroundICon}"
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand"
         CornerRadius="6"
-        Shadow="{pc:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
         >
 
         <StackLayout
@@ -23,7 +28,7 @@
             >
 
             <svg:SvgCachedImage
-                HeightRequest="50"
+                HeightRequest="45"
                 Source="{Binding ICone, Source={x:Reference this}}"
                 Aspect="AspectFit"
                 />

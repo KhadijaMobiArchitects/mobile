@@ -263,7 +263,7 @@ namespace XForms.ViewModels
 
         public ICommand NavigationtonewRequest => new Command(() =>
         {
-            App.Current.MainPage.Navigation.PushAsync(new NewLeaveRequest());
+            App.Current.MainPage.Navigation.PushAsync(new NewLeaveRequestPage());
 
             HeadrActionList[0].IsSelected = true;
             HeadrActionList[1].IsSelected = false;

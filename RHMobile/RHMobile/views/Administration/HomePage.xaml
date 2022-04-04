@@ -95,7 +95,7 @@
                     <CollectionView
                         Grid.Row="1"
                         ItemsLayout="VerticalGrid,3"
-                        ItemsSource="{Binding AdminstrationList}"                        
+                        ItemsSource="{Binding AdminstrationList}"
                         >
                         <CollectionView.ItemTemplate                            
                             >
