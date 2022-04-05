@@ -122,15 +122,10 @@
                                 Date="{Binding EndDate}"
 
                         />
-                        <!--<Picker
-                                ItemsSource="{Binding ListLeave}"
-                                SelectedItem="{Binding SelectedType}"
-                                ItemDisplayBinding="{Binding Name}"
-                                
-                                />-->
+
                         <cc:MaterialPicker
                                 LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
-                                ItemsSource="{Binding ListLeave}"
+                                ItemsSource="{Binding TypesLeaveList}"
                                 Title="Type de congé"
                                 SelectedItem="{Binding SelectedLeave}"
                         />
@@ -151,7 +146,7 @@
                         <cc:MaterialPicker
                             Title="Projet"
                                 LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
-                                ItemsSource="{Binding ListProjet}"
+                                ItemsSource="{Binding ProjectsList}"
                                 SelectedItem="{Binding SelectedProjet}"
 
                         />
@@ -159,7 +154,7 @@
                         <cc:MaterialPicker
                                 Title="Votre situation sur le projet"
                                 LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
-                                ItemsSource="{Binding ListSituation}"
+                                ItemsSource="{Binding SituationsProjectList}"
                                 SelectedItem="{Binding SelectedSituationProjet}"
                         />
 

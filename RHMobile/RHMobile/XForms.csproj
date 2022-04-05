@@ -111,7 +111,7 @@
     <Folder Include="Models\" />
     <Folder Include="Models\Leave\" />
     <Folder Include="Models\Base\" />
-    <Folder Include="Models\Projet\" />
+    <Folder Include="Models\Project\" />
     <Folder Include="Data\" />
     <Folder Include="Constants\" />
     <Folder Include="HttpREST\" />
