@@ -4,27 +4,34 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using XForms.Constants;
 using XForms.HttpREST;
 using XForms.Models;
+using XForms.Validators.Leave;
 using XForms.views.Leave;
+
 
 namespace XForms.ViewModels
 {
-    public class NewLeaveRequestViewModel : BindableObject
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
+    public class NewLeaveRequestViewModel : BaseViewModel
     {
-        
+
         public List<Leave> ListLeave { get; set; }
         //public List<Projet> ListProjet { get; set; }
         //public List<SituationProjet> ListSituation { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; } 
-        public Leave SelectedLeave { get; set; }
+        public DateTime EndDate { get; set; }
+
+        //public Leave SelectedLeave { get; set; }
         public Project SelectedProjet { get; set; }
-        //public SituationProjet SelectedSituationProjet { get; set; }
+        public REFTypeLeave SelectedREFTypeLeave { get; set; }
+        public SituationProject SelectedSituationProject { get; set; }
+
         public List<REFTypeLeave> TypeLeaveData;
         public List<REFTypeLeave> TypesLeaveList { get; set; }
         public List<Project> ProjectData;
@@ -32,45 +39,64 @@ namespace XForms.ViewModels
 
         public List<SituationProject> SituationsProjectList { get; set; }
 
+        private bool ConfirmedBySquad;
+        public Color ButtonConfirmedBySquadBackground => ConfirmedBySquad ? Color.FromHex("#126BCD") : Color.White;
+
+
+        //public bool EnableButtonSendRequest => (SelectedProjet == null && SelectedREFTypeLeave == null && SelectedSituationProject == null);
+        public bool EnableButtonSendRequest { get; set; }
+        public Color ButtonSendRequestBackground => EnableButtonSendRequest ? Color.FromHex("#126BCD") : Color.FromHex("#B0B6BE");
+
+        public int NumberOfDays => (int) (EndDate - StartDate).TotalDays;
+
+        private NewLeaveRequestValidator validator;
+
+        public ValidationResult validationResult { get; set; }
+
+        public int SelectedREFTypeLeaveIndex { get; set; }
 
         public NewLeaveRequestViewModel()
         {
 
+
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
+
+
 
             getTypesLeave();
             getProjects();
             getSituationsProject();
 
-            //ListSituation = new List<SituationProjet>
-            //{
-            //    new SituationProjet(){
-            //        Name="Livré partiellement"
-            //    },
-            //    new SituationProjet(){
-            //        Name="Livré totalement"
-            //    }
-            //};
+            this.PropertyChanged += (s, e) =>
+            {
+                if (
+                e.PropertyName == nameof(StartDate) ||
+                e.PropertyName == nameof(EndDate) ||
+                e.PropertyName == nameof(SelectedREFTypeLeave) ||
+                e.PropertyName == nameof(SelectedProjet) ||
+                e.PropertyName == nameof(SelectedSituationProject)
+                )
+                {
+
+                    validationResult = validator.Validate(this);
+                     EnableButtonSendRequest = validationResult.IsValid;
+                    OnPropertyChanged(nameof(ButtonSendRequestBackground));
+
+                }
+            };
+
+        }
 
 
-            //API Post
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
 
-            //Leave item = new Leave()
-            //{
-            //    Type = "Leave annuel",
-            //    Status = "Reporté",
-            //    StartDate = StartDate,
-            //    EndDate = EndDate
-            //};
+            if (validator == null)
+                validator = new();
 
-            //var client = new HttpClient();
-
-            //string json = JsonConvert.SerializeObject(item);
-            //StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            //var responseMessage = client.PostAsync(AppUrls.GesRequestsListLeave, content);
-
-        } 
+        }
 
         public async void getTypesLeave()
         {
@@ -102,43 +128,44 @@ namespace XForms.ViewModels
 
         private bool CandSendRequest = true;
 
+
         public ICommand SendRequest => new Command(async () =>
             {
                 try
                 {
                     CandSendRequest = false;
 
-                    Leave item = new Leave()
+                    Leave postParams = new Leave()
                     {
-                        Type =SelectedLeave.Name,
                         StartDate = StartDate,
-                        EndDate = EndDate
+                        EndDate = EndDate,
+                        ConfirmedBySquad = ConfirmedBySquad,
+                        CreatedBy = "1",
+                        RefStatusLeaveId = 1,
+                        RefTypeLeaveId = SelectedREFTypeLeave.Id,
+                        RefSituationProjectId = SelectedSituationProject.Id,
+                        ProjectId = SelectedProjet.Id
+
+
                     };
 
-                    //RESTServiceResponse<Leave> response = new RESTServiceResponse<Leave>();
-                    //response.data = item;
 
-                    //var client = new HttpClient();
+                    var result = new RESTServiceResponse<object>();
+                    result = await App.AppServices.PostLeave(postParams);
 
-                    //string json = JsonConvert.SerializeObject(item);
-                    //StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    //var responseMessage = client.PostAsync(AppUrls.GesRequestsListLeave, content);
-
-                    //var result = await App.AppServices.PostLeave(item);
-
-                    App.Current.MainPage.Navigation.PushAsync(new LeaveRequestPage());
+                    App.Current.MainPage.Navigation.PopAsync();
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex);
                 }
                 finally
                 {
                     CandSendRequest = true;
                 }
             },
-            ()=> CandSendRequest
+            () => CandSendRequest
 
             );
         public ICommand NavigationBack => new Command(() =>
@@ -151,6 +178,15 @@ namespace XForms.ViewModels
     () => true
 
 
+    );
+        public ICommand NotifySquad => new Command(async () =>
+        {
+            ConfirmedBySquad = !ConfirmedBySquad;
+            OnPropertyChanged(nameof(ButtonConfirmedBySquadBackground));
+
+
+        },
+    () => true
     );
 
 

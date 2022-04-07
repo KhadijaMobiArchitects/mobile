@@ -19,6 +19,7 @@
     <Color x:Key="InProgressColor">#FEE07D</Color>
     <Color x:Key="postponedColor">#D59595</Color>
     <Color x:Key="BackgroundICon">#EBF1FE</Color>
+    <Color x:Key="Red">#EC2518</Color>
 
 
 </ResourceDictionary>

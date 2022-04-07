@@ -9,5 +9,15 @@ namespace XForms.Constants
         public const string GetRequestListTypeLeave = BaseUrl + "RefTypesLeave/";
         public const string GetRequestListProject = BaseUrl + "Projects/GetProjects";
         public const string GetRequestSituationProject = BaseUrl + "RefSituationsProject/";
+        public const string PostRequestLeave = BaseUrl + "leaves/postLeave/";
+        public const string DeleteRequestLeave = BaseUrl + "leaves/deleteLeave";
+
+
+
+
+        //public const string PostRequestLeave = "http://localhost:3000/Leaves";
+
+
+
     }
 }

@@ -1,60 +1,31 @@
 {
   "Leaves": [
     {
-      "StartDate": "2022-03-21T00:00:00+00:00",
-      "EndDate": "2022-03-23T00:00:00",
-      "Type": "Mensuel",
-      "StatusID": 0,
+      "StartDate": "2022-04-07T00:00:00",
+      "EndDate": "2022-04-09T00:00:00",
+      "ConfirmedBySquad": true,
+      "CreatedOn": "0001-01-01T00:00:00",
+      "CreatedBy": "1",
+      "RefStatusLeaveId": 1,
+      "RefTypeLeaveId": 1,
+      "LabelType": null,
+      "labelStatus": null,
+      "ProjectId": 1,
+      "RefSituationProjectId": 1,
       "id": 1
     },
     {
-      "StartDate": "2022-03-22T00:00:00",
-      "EndDate": "2022-03-25T00:00:00",
-      "Type": "Mensuel",
-      "StatusID": 0,
-      "id": 2
-    },
-    {
-      "StartDate": "2022-04-21T00:00:00",
-      "EndDate": "2022-04-24T00:00:00",
-      "Type": "Mensuel",
-      "StatusID": 1,
-      "id": 3
-    },
-    {
-      "StartDate": "2022-03-23T00:00:00",
-      "EndDate": "2022-03-27T00:00:00+00:00",
-      "Type": "Mensuel",
-      "StatusID": 2,
-      "id": 4
+      "startDate": "2022-04-05T14:14:58.203Z",
+      "endDate": "2022-04-05T14:14:58.203Z",
+      "confirmedBySquad": true,
+      "createdBy": "1",
+      "createdOn": "2022-04-05T14:14:58.203Z",
+      "isDeleted": true,
+      "isActif": true,
+      "refStatusLeaveId": 1,
+      "projectId": 1,
+      "refTypeLeaveId": 1,
+      "refSituationProjectId": 1
     }
-  ],
-  "Leaves": {
-    "succeeded": true,
-    "message": "Success",
-    "errors": null,
-    "data": [
-      {
-        "StartDate": "2022-03-21T00:00:00+00:00",
-        "EndDate": "2022-03-23T00:00:00",
-        "Type": "Mensuel",
-        "StatusID": 0,
-        "id": 1
-      },
-      {
-        "StartDate": "2022-03-21T00:00:00+00:00",
-        "EndDate": "2022-03-23T00:00:00",
-        "Type": "Mensuel",
-        "StatusID": 0,
-        "id": 2
-      },
-      {
-        "StartDate": "2022-03-21T00:00:00+00:00",
-        "EndDate": "2022-03-23T00:00:00",
-        "Type": "Mensuel",
-        "StatusID": 0,
-        "id": 3
-      }
-    ]
-  }
+  ]
 }

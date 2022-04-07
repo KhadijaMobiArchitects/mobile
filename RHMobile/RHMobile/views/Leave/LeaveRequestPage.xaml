@@ -58,7 +58,6 @@
 
                             >
                             <Grid
-                                BackgroundColor="Blue"
                                 >
                                 <microcharts:ChartView
                                     x:Name="chartV"

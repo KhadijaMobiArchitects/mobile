@@ -4,6 +4,7 @@ namespace XForms.Enum
     public enum HttpVerbs
     {
         GET,
-        POST
+        POST,
+        DELETE
     }
 }

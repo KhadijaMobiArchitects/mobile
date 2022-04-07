@@ -3,6 +3,8 @@ using Xamarin.Forms;
 
 namespace XForms.ViewModels
 {
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
+
     public class BaseViewModel : BindableObject
     {
         public BaseViewModel()

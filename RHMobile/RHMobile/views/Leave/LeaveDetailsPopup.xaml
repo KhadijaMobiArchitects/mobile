@@ -75,7 +75,7 @@
             <Grid
             Padding="30,0"
                 Grid.Row="3"
-                RowDefinitions="*,*,*"
+                RowDefinitions="*,*,*,*"
                 ColumnDefinitions="*,*"
                 RowSpacing="20"
                 Margin="0,30"
@@ -110,6 +110,22 @@
             Item="Situation sur le projet"
             Value="Livré partiellement"
             />
+                <StackLayout
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    >
+                    <cc:CustomButton
+                HorizontalOptions="Center"
+                Text="Annuler"
+                TextColor="{Binding SelectedLeave.TextColor}"
+                BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                FontSize="12"
+                Padding="20,5"
+                IsVisible="{Binding IsShowButtonCancelRequest}"
+                Command="{Binding CancelRequest}"
+                        />
+
+                </StackLayout>
             </Grid>
 
             <cc:CornerView

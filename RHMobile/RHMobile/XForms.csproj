@@ -25,6 +25,12 @@
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.1" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="Fody" Version="6.6.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -94,6 +100,10 @@
     <None Remove="Resources\Images\certaficate.svg" />
     <None Remove="ViewModels\Displacement\" />
     <None Remove="views\Displacement\" />
+    <None Remove="Validators\" />
+    <None Remove="Validators\Leave\" />
+    <None Remove="FluentValidation" />
+    <None Remove="PropertyChanged.Fody" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -127,6 +137,8 @@
     <Folder Include="Models\Administration\" />
     <Folder Include="ViewModels\Displacement\" />
     <Folder Include="views\Displacement\" />
+    <Folder Include="Validators\" />
+    <Folder Include="Validators\Leave\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

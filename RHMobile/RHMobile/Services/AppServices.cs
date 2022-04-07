@@ -31,7 +31,12 @@ namespace XForms.Services
 
         public async Task<RESTServiceResponse<object>> PostLeave(Leave postParams)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.GesRequestsListLeave}",postObject: postParams, method: HttpVerbs.POST);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostRequestLeave}",postObject: postParams, method: HttpVerbs.POST);
+        }
+
+        public async Task<RESTServiceResponse<object>> DeleteLeave(long Id)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteRequestLeave}/{Id}", method: HttpVerbs.DELETE);
         }
     }
 

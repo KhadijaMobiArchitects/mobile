@@ -82,8 +82,6 @@
                     Grid.Row="1"
                     RowDefinitions="auto,auto"
                     Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
-
-
                     >
                     <Label
                         Text="Administration"
@@ -115,9 +113,37 @@
 
                 <!--Footer-->
                 <Grid
+                    Padding="30,5"
                     Grid.Row="2"
-                    BackgroundColor="Brown"
+                    RowDefinitions="auto,auto"
                     >
+                    <Label
+                        Text="Actualités du mois"
+                        TextColor="{StaticResource LabelColor}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        />
+                    <pancake:PancakeView
+                        Grid.Row="1"
+                        BackgroundColor="#47D1EA"
+                        Padding="10,16"
+                        CornerRadius="6"
+                        >
+                        <StackLayout>
+                            <Label
+                                Text="Squad Ta7alil"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                />
+                            <Label
+                                Text="Vous avez gagner 5 Points sur la livraisonde la nouvelle projet Ta7alil version web."
+                                FontFamily="RubikLight"
+                                FontSize="12"
+                                TextColor="White"
+                                />
+                        </StackLayout>
+                    </pancake:PancakeView>
 
                 </Grid>
 

@@ -19,6 +19,7 @@ using XForms.views.Leave;
 
 namespace XForms.ViewModels
 {
+    [PropertyChanged.AddINotifyPropertyChangedInterface]           
     public class LeaveRequestViewModel : BaseViewModel
     {
         public List<REFItem> HeadrActionList { get; set; }
@@ -27,7 +28,7 @@ namespace XForms.ViewModels
         public ObservableRangeCollection<Leave> LeavesList { get; set; }
 
 
-        public List<Leave> LeaveItemsList { get; set; }
+        public ObservableRangeCollection<Leave> LeaveItemsList { get; set; }
         public List<ChartEntry> entries { get; set; }
 
 
@@ -44,15 +45,12 @@ namespace XForms.ViewModels
         public int InprogessDays { get; set; }
         public int PostponedDays { get; set; }
         public int TotalDays => ConfirmedDays + InprogessDays + PostponedDays;
-
+        
         public Leave SelectedLeave { get; set; }
 
         public string StatusName { get; set; }
 
-        //public INavigation Navigation;
-
-
-        //public ObservableRangeCollection<ObservableGroupCollection<string, Leave>> LeaveList { get; set; }
+        public bool IsShowButtonCancelRequest { get; set; }
 
         public LeaveRequestViewModel()
         {
@@ -78,7 +76,7 @@ namespace XForms.ViewModels
                 new REFItem()
                 {
                     Id = 3,
-                    Name = "reportée",
+                    Name = "Annulée",
                 }
             };
 
@@ -107,6 +105,12 @@ namespace XForms.ViewModels
             OnPropertyChanged(nameof(StatusName));
             await getLeavesList();
 
+            //LeaveItemsList = InprogessLeavesList;
+
+
+            //OnPropertyChanged(nameof(LeavesList));
+            OnPropertyChanged(nameof(LeaveItemsList));
+
 
             //StatusName = HeadrActionList[0].IsSelected ? HeadrActionList[0].Name : (HeadrActionList[1].IsSelected ? HeadrActionList[1].Name : HeadrActionList[2].Name);
 
@@ -125,11 +129,10 @@ namespace XForms.ViewModels
 
                 FilterLeaves(LeavesList);
                 DifferenceOfDays(InprogessLeavesList, ConfirmedLeavesList, PostponedLeavesList);
-                LeaveItemsList = InprogessLeavesList;
+                LeaveItemsList = new ObservableRangeCollection<Leave>(InprogessLeavesList);
                 numberOfRequests = LeaveItemsList.Count;
 
-                OnPropertyChanged(nameof(LeaveItemsList));
-                OnPropertyChanged(nameof(numberOfRequests));
+
 
                 entries = new List<ChartEntry>
             {
@@ -228,17 +231,17 @@ namespace XForms.ViewModels
 
                 if (HeadrActionList[0].IsSelected)
                 {
-                    LeaveItemsList = InprogessLeavesList;
+                    LeaveItemsList.ReplaceRange(InprogessLeavesList);
 
                 }
                 else if (HeadrActionList[1].IsSelected)
                 {
-                    LeaveItemsList = ConfirmedLeavesList;
+                    LeaveItemsList.ReplaceRange(ConfirmedLeavesList);
 
                 }
                 else if (HeadrActionList[2].IsSelected)
                 {
-                    LeaveItemsList = PostponedLeavesList;
+                    LeaveItemsList.ReplaceRange(PostponedLeavesList);
 
                 }
 
@@ -284,6 +287,7 @@ namespace XForms.ViewModels
 
                 if (model == null)
                     return;
+                IsShowButtonCancelRequest = HeadrActionList[0].IsSelected;
 
                 SelectedLeave = model;
 
@@ -309,7 +313,35 @@ namespace XForms.ViewModels
         },
         (_) => canOpenLeaveDetailsPopup );
 
-       
+        private bool CanCancelRequest=true;
+        public ICommand CancelRequest => new Command(async () =>
+        {
+            try
+            {
+                CanCancelRequest = false;
+                var result = await App.AppServices.DeleteLeave(SelectedLeave.Id);
+                if (result.succeeded)
+                {
+                    InprogessLeavesList.Remove(SelectedLeave);
+                    LeaveItemsList.Remove(SelectedLeave);
+
+                    numberOfRequests--;
+                }
+                await PopupNavigation.Instance.PopSafeAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                CanCancelRequest = true;
+
+            }
+
+        },
+() => CanCancelRequest
+);
 
 
     }

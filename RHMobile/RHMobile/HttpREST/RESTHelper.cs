@@ -36,13 +36,20 @@ namespace XForms.HttpREST
                             response = await client.GetAsync(uri);
                             break;
                         case HttpVerbs.POST:
-                            //var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, contentType);
-
-                            var json = JsonConvert.SerializeObject(postObject, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }).ToString();
-                            //var json = JsonConvert.SerializeObject(postObject).ToString();
-                            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                            var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, contentType);
                             response = await client.PostAsync(uri, content);
                             break;
+                        case HttpVerbs.DELETE:
+                            response = await client.DeleteAsync(uri);
+                            break;
+
+                        ////var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, contentType);
+
+                        //var json = JsonConvert.SerializeObject(postObject, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }).ToString();
+                        ////var json = JsonConvert.SerializeObject(postObject).ToString();
+                        //var content = new StringContent(json, Encoding.UTF8, "application/json");
+                        //response = await client.PostAsync(uri, content);
+                        //break;
                         default:
                             break;
                     }
