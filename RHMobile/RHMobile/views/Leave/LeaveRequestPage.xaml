@@ -78,7 +78,7 @@
                                         FontAttributes="Bold"
                                         />
                                     <Label
-                                        Text="Total du jours"
+                                        Text="Total des congés"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                         FontSize="13"
@@ -109,7 +109,7 @@
                                 <cc:MaterialDay
                                     NumberOfDays="{Binding PostponedDays}"
                                     StatusColor="{StaticResource postponedColor}"
-                                    StatusDays="reporté"
+                                    StatusDays="annulé"
                                     VerticalOptions="EndAndExpand"
                                     />
                             </StackLayout>

@@ -133,6 +133,8 @@ namespace XForms.ViewModels
             {
                 try
                 {
+                    AppHelpers.LoadingShow();
+
                     CandSendRequest = false;
 
                     Leave postParams = new Leave()
@@ -144,7 +146,9 @@ namespace XForms.ViewModels
                         RefStatusLeaveId = 1,
                         RefTypeLeaveId = SelectedREFTypeLeave.Id,
                         RefSituationProjectId = SelectedSituationProject.Id,
-                        ProjectId = SelectedProjet.Id
+                        ProjectId = SelectedProjet.Id,
+                        ProjectName = SelectedProjet.Name,
+                        SituationProjectName = SelectedSituationProject.Name
 
 
                     };
@@ -158,11 +162,14 @@ namespace XForms.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    //Console.WriteLine(ex);
+                    AppHelpers.LoadingHide();
+
                 }
                 finally
                 {
                     CandSendRequest = true;
+                    AppHelpers.LoadingHide();
                 }
             },
             () => CandSendRequest

@@ -22,6 +22,11 @@ namespace XForms.Models
         public int RefSituationProjectId { get; set; }
 
         [JsonIgnore]
+        public string ProjectName { get; set; }
+        [JsonIgnore]
+        public string SituationProjectName { get; set; }
+
+        [JsonIgnore]
         public string Name => LabelType;
 
         [JsonIgnore]

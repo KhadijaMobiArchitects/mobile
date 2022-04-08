@@ -44,7 +44,7 @@ namespace XForms.ViewModels
         public int ConfirmedDays { get; set; }
         public int InprogessDays { get; set; }
         public int PostponedDays { get; set; }
-        public int TotalDays => ConfirmedDays + InprogessDays + PostponedDays;
+        public int TotalDays { get; set;}
         
         public Leave SelectedLeave { get; set; }
 
@@ -86,7 +86,6 @@ namespace XForms.ViewModels
                 MaxValue = 26,
                 HoleRadius = 0.7f,
 
-
             };
 
         }
@@ -107,7 +106,6 @@ namespace XForms.ViewModels
 
             //LeaveItemsList = InprogessLeavesList;
 
-
             //OnPropertyChanged(nameof(LeavesList));
             OnPropertyChanged(nameof(LeaveItemsList));
 
@@ -120,6 +118,8 @@ namespace XForms.ViewModels
         {
             try
             {
+                AppHelpers.LoadingShow();
+
                 var result = await App.AppServices.GetLeaves();
 
                 LeaveDate = result.data.ToList();
@@ -161,6 +161,11 @@ namespace XForms.ViewModels
                 Console.WriteLine(ex);
 
             }
+            finally
+            {
+                AppHelpers.LoadingHide();
+
+            }
 
         }
 
@@ -170,18 +175,23 @@ namespace XForms.ViewModels
             InprogessDays = 0;
             PostponedDays = 0;
 
-            foreach (var item in ConfirmedLeavesList)
-            {
-                ConfirmedDays += item.DifferenceOfDays;
-            }
-            foreach (var item in InprogessLeavesList)
-            {
-                InprogessDays += item.DifferenceOfDays;
-            }
-            foreach (var item in PostponedLeavesList)
-            {
-                PostponedDays += item.DifferenceOfDays;
-            }
+            //foreach (var item in ConfirmedLeavesList)
+            //{
+            //    ConfirmedDays += item.DifferenceOfDays;
+            //}
+            //foreach (var item in InprogessLeavesList)
+            //{
+            //    InprogessDays += item.DifferenceOfDays;
+            //}
+            //foreach (var item in PostponedLeavesList)
+            //{
+            //    PostponedDays += item.DifferenceOfDays;
+            //}
+
+            ConfirmedDays = ConfirmedLeavesList.Count;
+            InprogessDays = InprogessLeavesList.Count;
+            PostponedDays = PostponedLeavesList.Count;
+            TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
 
             OnPropertyChanged(nameof(ConfirmedDays));
             OnPropertyChanged(nameof(InprogessDays));
@@ -302,7 +312,8 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                await PopupNavigation.Instance.PushSingleAsync(leaveDetailsPopup);
+
             }
             finally
             {
@@ -318,24 +329,30 @@ namespace XForms.ViewModels
         {
             try
             {
+                AppHelpers.LoadingShow();
                 CanCancelRequest = false;
                 var result = await App.AppServices.DeleteLeave(SelectedLeave.Id);
                 if (result.succeeded)
                 {
                     InprogessLeavesList.Remove(SelectedLeave);
                     LeaveItemsList.Remove(SelectedLeave);
-
                     numberOfRequests--;
+                    InprogessDays--;
+                    TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
+
                 }
-                await PopupNavigation.Instance.PopSafeAsync();
+                await PopupNavigation.Instance.PopAllAsync();
             }
             catch (Exception ex)
             {
+                AppHelpers.LoadingHide();
 
             }
             finally
             {
                 CanCancelRequest = true;
+                AppHelpers.LoadingHide();
+
 
             }
 

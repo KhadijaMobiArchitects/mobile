@@ -57,7 +57,7 @@
                             Grid.Column="1"
                            HasTitle="True"
                             HasDescription="True"
-                            Title="Mehdi Mountij"
+                            Title="Hassoun KAROUM"
                             Description="Art director and ui/ux designer"
                             HasNotification="True"
 
@@ -72,6 +72,35 @@
                         CornerRadius="8"
                         Shadow="{pancake:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}">
 
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Padding="20,10"
+                            >
+                            <svg:SvgCachedImage
+                                HeightRequest="30"
+                                WidthRequest="30"
+                                Aspect="AspectFit"
+                                Source="{Local:ImageResource balance.svg}"
+                                />
+                            <Label
+                                Text="Votre soldes est"
+                                VerticalTextAlignment="Center"
+                                Padding="10,0"
+                                TextColor="#33373D"
+                                FontSize="14"
+                                FontFamily="RubikLight"
+
+                                />
+                            <Label
+                                Text="40 pts"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalTextAlignment="Center"
+                                FontSize="24"
+                                FontAttributes="Bold"
+                                TextColor="#126BCD"
+                                />
+                            
+                        </StackLayout>
                     </pancake:PancakeView>
 
                 </Grid>

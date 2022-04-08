@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                        x:Class="XForms.Popups.LoadingPopup"
+                 xmlns:FF="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+                 Title="LoadingPopup">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1"
+                                   ScaleOut="1"
+                                   DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="SpringOut"
+                                   EasingOut="SpringIn"
+                                   HasBackgroundAnimation="false" />
+    </pages:PopupPage.Animation>
+    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+    <Grid VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand"
+          RowSpacing="0">
+        <lottie:AnimationView Grid.Row="0"
+                              Grid.RowSpan="2"
+                              x:Name="animLoading"
+                                        Animation="Resources.Assets.AnimLoadingLight.json"
+                                                AnimationSource="EmbeddedResource"
+                          RepeatMode="Infinite"
+                              AutoPlay="true"
+                              VerticalOptions="Center"
+                              HorizontalOptions="CenterAndExpand"
+                              HeightRequest="120"
+                              WidthRequest="120" />
+
+        <Grid.GestureRecognizers>
+            <!--<TapGestureRecognizer Tapped="Loading_Tapped" />-->
+            <SwipeGestureRecognizer Direction="Down" Swiped="Down_Swiped" />
+        </Grid.GestureRecognizers>
+        <!--Opacity=".5"-->
+        <!--     <StackLayout Grid.Row="1" x:Name="animSwipeView" VerticalOptions="FillAndExpand">
+            <lottie:AnimationView x:Name="animSwipe" Animation="animSwipe.json" Loop="false" AutoPlay="false" OnFinish="AnimSwipe_OnFinish" VerticalOptions="EndAndExpand" HeightRequest="200" WidthRequest="200" HorizontalOptions="CenterAndExpand" IsVisible="false" />
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Loading_Tapped" />
+                <SwipeGestureRecognizer Direction="Right" Swiped="Right_Swiped" />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>-->
+    </Grid>
+</pages:PopupPage>
