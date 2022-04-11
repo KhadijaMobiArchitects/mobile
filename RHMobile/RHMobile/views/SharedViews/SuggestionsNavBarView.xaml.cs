@@ -52,13 +52,38 @@ namespace XForms.views.SharedViews
         {
             get
             {
-                return (bool)GetValue(HasNotificationProperty);
+                return (bool)GetValue(HasBackButtonProperty);
             }
             set
             {
-                SetValue(HasNotificationProperty, value);
+                SetValue(HasBackButtonProperty, value);
             }
         }
+        public static readonly BindableProperty BackButtonColorProperty = BindableProperty.Create(nameof(BackButtonColor), typeof(Color), typeof(SuggestionsNavBarView), default);
+        public Color BackButtonColor
+        {
+            get
+            {
+                return (Color)GetValue(BackButtonColorProperty);
+            }
+            set
+            {
+                SetValue(BackButtonColorProperty, value);
+            }
+        }
+        public static readonly BindableProperty BackButtonBorderColorProperty = BindableProperty.Create(nameof(BackButtonBorderColor), typeof(Color), typeof(SuggestionsNavBarView), default);
+        public Color BackButtonBorderColor
+        {
+            get
+            {
+                return (Color)GetValue(BackButtonBorderColorProperty);
+            }
+            set
+            {
+                SetValue(BackButtonBorderColorProperty, value);
+            }
+        }
+
 
 
         public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(SuggestionsNavBarView), string.Empty);

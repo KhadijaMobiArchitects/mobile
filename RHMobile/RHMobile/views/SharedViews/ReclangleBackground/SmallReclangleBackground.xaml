@@ -2,15 +2,17 @@
 <Base:BaseContent
  xmlns:Base="clr-namespace:XForms.views.Base"    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cc="clr-namespace:XForms.Controls" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    x:Class="XForms.views.SharedViews.SmallReclangleBackground">
+    x:Class="XForms.views.SharedViews.SmallReclangleBackground"
+    x:Name="this"
+    >
     <Base:BaseContent.Content>
             <cc:CornerBox
                 ScaleX="{OnPlatform iOS='3',Android='1.5'}">
 
                 <cc:CornerBox.BackgroundGradientStops>
                     <pancake:GradientStopCollection>
-                        <pancake:GradientStop Color="{StaticResource StartGradient}" Offset="0.1"/>
-                        <pancake:GradientStop Color="{StaticResource EndGradient}" Offset="1"/>
+                        <pancake:GradientStop Color="{Binding StartGradient,Source={x:Reference this}}" Offset="0.1"/>
+                        <pancake:GradientStop Color="{Binding EndGradient,Source={x:Reference this}}" Offset="1"/>
                     </pancake:GradientStopCollection>
                 </cc:CornerBox.BackgroundGradientStops>
 

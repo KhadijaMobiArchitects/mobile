@@ -13,17 +13,18 @@
                     ColumnDefinitions="auto,5*,*"
             >
             <cc:CustomButton
-                        BackgroundColor="{StaticResource Secondenry}"
+                        BackgroundColor="{Binding BackButtonColor,Source={x:Reference this}}"
                         BorderWidth="4"
-                        BorderColor="{StaticResource Primary}"
+                        BorderColor="{Binding BackButtonBorderColor,Source={Reference this}}"
                         StyleCorner="Circle"
                         HeightRequest="40"
                         HorizontalOptions="Start"
                         VerticalOptions="Center"
                         IsVisible="{Binding HasBackButton,Source={x:Reference this}}"
-
                         Padding="5"
                         Command="{Binding NavigationBack}"
+                Opacity="0.8"
+                
                         >
                 <cc:CustomButton.ImageSource>
                     <FontImageSource                        
@@ -31,6 +32,7 @@
                         Glyph="{x:Static res:FontAwesomeFonts.Angleleft}"
                         Size="20"
                         Color="{StaticResource White}"
+                        
                         />
                 </cc:CustomButton.ImageSource>
             </cc:CustomButton>

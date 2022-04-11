@@ -49,7 +49,7 @@ namespace XForms.Models
         };
 
         [JsonIgnore]
-        public int DifferenceOfDays => (int)(EndDate - StartDate).TotalDays;
+        public int DifferenceOfDays => (int)(EndDate - StartDate).TotalDays+1;
 
         public Leave()
         {

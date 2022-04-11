@@ -7,18 +7,19 @@
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:Local="clr-namespace:XForms"
-    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:adminCell="clr-namespace:XForms.views.Administration"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:adminCell="clr-namespace:XForms.views.Administration"
     NavigationPage.HasNavigationBar="False"
 
-    x:Class="XForms.views.Administration.HomePage">
+    x:Class="XForms.views.Administration.HomeAdminPage">
     <Base:BasePage.Content>
         <Grid
             BackgroundColor="White"
             RowDefinitions="*,5*">
 
-            <Shared:SmallReclangleBackground
-                StartGradient="{StaticResource StartGradient}"
-                EndGradient="{StaticResource EndGradient}"
+    <Shared:SmallReclangleBackground
+                StartGradient="{StaticResource StartGradientAdmin}"
+                EndGradient="{StaticResource EndGradientAdmin}"
                 />
 
             <Grid
@@ -29,33 +30,35 @@
                 <!--Header-->
 
                 <Grid
-                    Padding="{OnPlatform iOS='30,30,30,10',Android='30,30,30,10'}"
+                    Padding="{OnPlatform iOS='30,0,30,10',Android='30,0,30,10'}"
                     ColumnDefinitions="auto"
-                    RowDefinitions="auto,*,*"
+                    RowDefinitions="*"
                     RowSpacing="0"                   
                     >
                     <Grid
                         ColumnDefinitions="auto,*"
-                        Padding="0,10,0,10"
+                        Padding="0,0,0,0"
                         >
                         <StackLayout
+                            VerticalOptions="Center"
                             >
                             <cc:CornerView
                             HeightRequest="45"
                             StyleCorner="Circle"
-                                
                             >
                                 <cc:CornerView.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding NavigateToAdmin}"
+                                        <TapGestureRecognizer
+                                        Command="{Binding NavigateToUser}"
                                         />
                                 </cc:CornerView.GestureRecognizers>
+
+
                                 <cc:CornerView.Border>
-                                    <pancake:Border Color="{StaticResource Secondenry}" Thickness="2"/>
+                                    <pancake:Border Color="{StaticResource EndGradientAdmin}" Thickness="3"/>
                                 </cc:CornerView.Border>
 
                                 <svg:SvgCachedImage
-                                Source="{Local:ImageResource profil.png}"
+                                Source="{Local:ImageResource profilAdmin.png}"
                                 Aspect="AspectFill"
                                 />
                             </cc:CornerView>
@@ -66,15 +69,15 @@
                             Grid.Column="1"
                            HasTitle="True"
                             HasDescription="True"
-                            Title="Hassoun KAROUM"
-                            Description="Full stack dev"
+                            Title="Warda Jbilou"
+                            Description="Chargée RH"
+                            HasBackButton="False"
                             HasNotification="True"
-                            BackButtonColor="{StaticResource EndGradient}"
-                            BackButtonBorderColor="{StaticResource StartGradient }"
+
                             />
                     </Grid>
 
-                    <pancake:PancakeView
+                    <!--<pancake:PancakeView
                         Grid.Row="1"
                         Grid.RowSpan="2"
                         Grid.ColumnSpan="2"
@@ -111,7 +114,7 @@
                                 />
                             
                         </StackLayout>
-                    </pancake:PancakeView>
+                    </pancake:PancakeView>-->
 
                 </Grid>
 
@@ -123,7 +126,7 @@
                     Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
                     >
                     <Label
-                        Text="Administration"
+                        Text="Services"
                         FontSize="16"
                         FontAttributes="Bold"
                         TextColor="{StaticResource LabelColor}"

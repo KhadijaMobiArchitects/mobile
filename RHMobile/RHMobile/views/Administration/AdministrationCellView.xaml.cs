@@ -43,9 +43,35 @@ BindableProperty.Create(nameof(ICone), typeof(SvgImageSource), typeof(View), nul
         {
             if ((sender as View).BindingContext is REFItemAdministration item)
             {
-                (this.Parent.BindingContext as HomeViewModel).AdministraionNavigation.Execute(item);
+                //try
+                //{
+                //    (this.Parent.BindingContext as HomeViewModel).AdministraionNavigation.Execute(item);
+
+
+                //}
+                //catch (Exception ex)
+                //{
+
+                //}
+
+                //try
+                //{
+                //    (this.Parent.BindingContext as HomeAdminViewModel).AdministraionNavigation.Execute(item);
+
+                //}
+                //catch (Exception ex)
+                //{
+
+                //}
+                if(this.Parent.BindingContext is HomeViewModel)
+                    (this.Parent.BindingContext as HomeViewModel).AdministraionNavigation.Execute(item);
+                else if(this.Parent.BindingContext is HomeAdminViewModel)
+                    (this.Parent.BindingContext as HomeAdminViewModel).AdministraionNavigation.Execute(item);
+
+
             }
 
         }
+
     }
 }

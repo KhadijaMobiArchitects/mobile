@@ -35,7 +35,10 @@
                     Title="Demande Congé"
                     Description="{Binding numberOfRequests,StringFormat='{0} demandes en cours'}"
                     HasNotification="True"
-                    HasBackButton="False"
+                    HasBackButton="True"
+                    BackButtonBorderColor="{StaticResource StartGradient}"
+                    BackButtonColor="{StaticResource EndGradient}"
+                    
                     />
 
                 <!--Body-->
@@ -109,7 +112,7 @@
                                 <cc:MaterialDay
                                     NumberOfDays="{Binding PostponedDays}"
                                     StatusColor="{StaticResource postponedColor}"
-                                    StatusDays="annulé"
+                                    StatusDays="reporté"
                                     VerticalOptions="EndAndExpand"
                                     />
                             </StackLayout>

@@ -14,7 +14,10 @@
         <Grid
             BackgroundColor="White"
             RowDefinitions="*,5*">
-            <Shared:SmallReclangleBackground/>
+            <Shared:SmallReclangleBackground
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                />
 
             <Grid
                 RowDefinitions="*,4*,*"
@@ -30,7 +33,12 @@
                     Description="hello"
                     HasNotification="True"
                     HasBackButton="True"
-                    />
+                    BackButtonColor="{StaticResource EndGradient}"
+                    BackButtonBorderColor="{StaticResource StartGradient }"
+            />
+
+
+                <!--Body-->
 
                 <Grid
                     Grid.Row="1"

@@ -109,6 +109,9 @@
     <None Remove="Com.Airbnb.Xamarin.Forms.Lottie" />
     <None Remove="Resources\Assets\AnimLoadingLight.json" />
     <None Remove="Resources\Images\balance.svg" />
+    <None Remove="views\AdminLeave\" />
+    <None Remove="Resources\Images\ProfilWomen.png" />
+    <None Remove="Resources\Images\profilAdmin.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -145,6 +148,7 @@
     <Folder Include="Validators\" />
     <Folder Include="Validators\Leave\" />
     <Folder Include="Popups\" />
+    <Folder Include="views\AdminLeave\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
@@ -173,6 +177,8 @@
     <EmbeddedResource Include="Resources\Images\certaficate.svg" />
     <EmbeddedResource Include="Resources\Assets\AnimLoadingLight.json" />
     <EmbeddedResource Include="Resources\Images\balance.svg" />
+    <EmbeddedResource Include="Resources\Images\ProfilWomen.png" />
+    <EmbeddedResource Include="Resources\Images\profilAdmin.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />

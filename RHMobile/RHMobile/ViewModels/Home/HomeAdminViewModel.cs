@@ -6,16 +6,16 @@ using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using XForms.Enum;
 using XForms.Models;
-using XForms.views.Administration;
+using XForms.views.AdminLeave;
 using XForms.views.Displacement;
 using XForms.views.Leave;
 
 namespace XForms.ViewModels
 {
-    public class HomeViewModel : BaseViewModel
+    public class HomeAdminViewModel : BaseViewModel
     {
         public List<REFItemAdministration> AdminstrationList { get; set; }
-        public HomeViewModel()
+        public HomeAdminViewModel()
         {
 
             AdminstrationList = new List<REFItemAdministration>
@@ -112,7 +112,7 @@ namespace XForms.ViewModels
 
                 }
     };
-            
+
         }
         public INavigation navigation { get; set; }
         public bool canAdminisatrionNavigation = true;
@@ -127,8 +127,8 @@ namespace XForms.ViewModels
 
                 _ = model.Id switch
                 {
-                    AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveRequestPage()),
-                    AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new DisplacementPage()),
+                    AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new AdminLeavePage()),
+                    //AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new DisplacementPage()),
 
 
                 };
@@ -145,13 +145,14 @@ namespace XForms.ViewModels
         },
         (_) => canAdminisatrionNavigation);
 
-        public bool canNavigateToAdmin = true;
-        public ICommand NavigateToAdmin => new Command(async =>
+
+        public bool canNavigateToUser = true;
+        public ICommand NavigateToUser => new Command(async =>
         {
             try
             {
-                canNavigateToAdmin = false;
-                App.Current.MainPage.Navigation.PushAsync(new HomeAdminPage());
+                canNavigateToUser = false;
+                App.Current.MainPage.Navigation.PopAsync();
 
 
             }
@@ -162,9 +163,11 @@ namespace XForms.ViewModels
             }
             finally
             {
-                canNavigateToAdmin = true;
+                canNavigateToUser = true;
             }
         },
-        (_) => canNavigateToAdmin);
+(_) => canNavigateToUser);
+
     }
 }
+

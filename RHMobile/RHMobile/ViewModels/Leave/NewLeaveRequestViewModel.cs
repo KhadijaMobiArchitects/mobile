@@ -175,17 +175,28 @@ namespace XForms.ViewModels
             () => CandSendRequest
 
             );
+        private bool canNavigationBack = true;
         public ICommand NavigationBack => new Command(() =>
         {
             //App.Current.MainPage.Navigation.PushAsync(new LeaveRequest());
-            App.Current.MainPage.Navigation.PopAsync();
+            try
+            {
+                canNavigationBack = false;
+                App.Current.MainPage.Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canNavigationBack = true;
+            }
 
 
         },
-    () => true
+    () => canNavigationBack );
 
-
-    );
         public ICommand NotifySquad => new Command(async () =>
         {
             ConfirmedBySquad = !ConfirmedBySquad;

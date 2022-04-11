@@ -15,6 +15,7 @@ using XForms.Constants;
 using XForms.Enum;
 using XForms.Models;
 using XForms.ViewModels;
+using XForms.views;
 using XForms.views.Leave;
 
 namespace XForms.ViewModels
@@ -23,12 +24,16 @@ namespace XForms.ViewModels
     public class LeaveRequestViewModel : BaseViewModel
     {
         public List<REFItem> HeadrActionList { get; set; }
+        public List<REFItem> HeadrActionListAdmin { get; set; }
+
 
         public List<Leave> LeaveDate { get; set; }
         public ObservableRangeCollection<Leave> LeavesList { get; set; }
 
 
         public ObservableRangeCollection<Leave> LeaveItemsList { get; set; }
+        public ObservableRangeCollection<Leave> LeaveItemsListAdmin { get; set; }
+
         public List<ChartEntry> entries { get; set; }
 
 
@@ -39,6 +44,8 @@ namespace XForms.ViewModels
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
         public int numberOfRequests { get; set; }
+        public int numberOfRequestsAdmin { get; set; }
+
         public DonutChart donutChart { get; set; }
 
         public int ConfirmedDays { get; set; }
@@ -77,6 +84,21 @@ namespace XForms.ViewModels
                 {
                     Id = 3,
                     Name = "Annulée",
+                }
+            };
+
+            HeadrActionListAdmin = new List<REFItem>()
+            {
+                new REFItem()
+                {
+                    Id = 1,
+                    Name = "en cours",
+                    IsSelected = true
+                },
+                new REFItem()
+                {
+                    Id = 2,
+                    Name = "validée",
                 }
             };
 
@@ -130,7 +152,11 @@ namespace XForms.ViewModels
                 FilterLeaves(LeavesList);
                 DifferenceOfDays(InprogessLeavesList, ConfirmedLeavesList, PostponedLeavesList);
                 LeaveItemsList = new ObservableRangeCollection<Leave>(InprogessLeavesList);
+                LeaveItemsListAdmin = new ObservableRangeCollection<Leave>(InprogessLeavesList);
+
                 numberOfRequests = LeaveItemsList.Count;
+                numberOfRequestsAdmin = LeaveItemsListAdmin.Count;
+
 
 
 
@@ -274,6 +300,65 @@ namespace XForms.ViewModels
         },
         (_) => CanSelectHeaderAction);
 
+        private bool CanSelectHeaderActionAdmin = true;
+        public ICommand SelectHeaderActionAdminCommand => new Command<REFItem>(async (model) =>
+        {
+            try
+            {
+
+                AppHelpers.LoadingHide();
+
+                CanSelectHeaderActionAdmin = false;
+
+                if (model == null) return;
+
+                foreach (var item in HeadrActionListAdmin)
+                {
+                    item.IsSelected = (item.Id == model.Id);
+                    OnPropertyChanged(nameof(item.IsSelected));
+
+
+                }
+
+                if (HeadrActionListAdmin[0].IsSelected)
+                {
+                    LeaveItemsListAdmin.ReplaceRange(InprogessLeavesList);
+
+                }
+                else if (HeadrActionListAdmin[1].IsSelected)
+                {
+                    LeaveItemsListAdmin.ReplaceRange(ConfirmedLeavesList);
+
+                }
+                //else if (HeadrActionList[2].IsSelected)
+                //{
+                //    LeaveItemsList.ReplaceRange(PostponedLeavesList);
+
+                //}
+
+                numberOfRequestsAdmin = LeaveItemsListAdmin.Count;
+                OnPropertyChanged(nameof(LeaveItemsListAdmin));
+                OnPropertyChanged(nameof(numberOfRequestsAdmin));
+
+                StatusName = HeadrActionListAdmin[0].IsSelected ? HeadrActionListAdmin[0].Name : HeadrActionList[1].Name + "s";
+                OnPropertyChanged(nameof(StatusName));
+
+            }
+            catch (Exception ex)
+            {
+                AppHelpers.LoadingHide();
+
+                //Logger.LogError(ex);
+            }
+            finally
+            {
+                AppHelpers.LoadingHide();
+
+                CanSelectHeaderActionAdmin = true;
+            }
+        },
+        (_) => CanSelectHeaderActionAdmin);
+
         public ICommand NavigationtonewRequest => new Command(() =>
         {
             App.Current.MainPage.Navigation.PushAsync(new NewLeaveRequestPage());
@@ -324,6 +409,45 @@ namespace XForms.ViewModels
         },
         (_) => canOpenLeaveDetailsPopup );
 
+        private ProfilLeaveDetailsPopup profilLeaveDetailsPopup;
+
+
+        private bool canOpenProfilLeaveDetailsPopup = true;
+        public ICommand OpenProfilLeaveDetailsPopupView => new Command<Leave>(async (model) =>
+        {
+            try
+            {
+                canOpenProfilLeaveDetailsPopup = false;
+
+                if (model == null)
+                    return;
+                //IsShowButtonCancelRequest = HeadrActionList[0].IsSelected;
+
+                SelectedLeave = model;
+
+                if (profilLeaveDetailsPopup == null)
+                {
+                    profilLeaveDetailsPopup = new ProfilLeaveDetailsPopup() { BindingContext = this };
+                }
+                OnPropertyChanged(nameof(SelectedLeave));
+
+                await PopupNavigation.Instance.PushSingleAsync(profilLeaveDetailsPopup);
+
+            }
+            catch (Exception ex)
+            {
+                await PopupNavigation.Instance.PushSingleAsync(profilLeaveDetailsPopup);
+
+            }
+            finally
+            {
+                canOpenProfilLeaveDetailsPopup = true;
+
+
+            }
+        },
+        (_) => canOpenProfilLeaveDetailsPopup);
+
         private bool CanCancelRequest=true;
         public ICommand CancelRequest => new Command(async () =>
         {
@@ -339,6 +463,9 @@ namespace XForms.ViewModels
                     numberOfRequests--;
                     InprogessDays--;
                     TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
+
+                    LeaveItemsListAdmin.Remove(SelectedLeave);
+                    numberOfRequestsAdmin--;
 
                 }
                 await PopupNavigation.Instance.PopAllAsync();
@@ -359,6 +486,28 @@ namespace XForms.ViewModels
         },
 () => CanCancelRequest
 );
+
+        private bool canNavigationBack = true;
+        public ICommand NavigationBack => new Command(() =>
+        {
+            //App.Current.MainPage.Navigation.PushAsync(new LeaveRequest());
+            try
+            {
+                canNavigationBack = false;
+                App.Current.MainPage.Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canNavigationBack = true;
+            }
+
+
+        },
+    () => canNavigationBack);
 
 
     }
