@@ -4,7 +4,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using XForms.Interfaces;
 using XForms.Popups;
+using XForms.views.Administration;
+using XForms.views.Authentication;
 
 namespace XForms
 {
@@ -147,6 +150,133 @@ namespace XForms
 
         //    return answer;
         //}
+
+        public static void SetInitialView()
+        {
+            try
+            {
+                //    if (!App.Current.Resources.ContainsKey("MainPageStyle")
+                //|| !App.Current.Resources.ContainsKey("MainGridStyle"))
+                //    {
+
+                //        //Set Top Padding
+                //        var mainPageStyle = new Style(typeof(ScrollView))
+                //        {
+                //            Setters = {
+                //        new Setter {
+                //            Property = Grid.PaddingProperty,
+                //            Value =  new Thickness(0, 10, 0, 0)
+                //        }
+                //    }
+                //        };
+
+                //        var mainGridStyle = new Style(typeof(Grid))
+                //        {
+                //            Setters = {
+                //        new Setter {
+                //            Property = Grid.PaddingProperty,
+                //            Value =  new Thickness(0, 10, 0, 0)
+                //        }
+                //    }
+                //        };
+
+                //        App.Current.Resources.Add("MainPageStyle", mainPageStyle);
+                //        App.Current.Resources.Add("MainGridStyle", mainGridStyle);
+
+                //        App.IsSetDynamicResources = false;
+                //    }
+
+                if (!App.Current.Resources.ContainsKey("MainPageStyle")
+                || !App.Current.Resources.ContainsKey("MainGridStyle")
+                || !App.IsSetDynamicResources)
+                {
+                    SetDynamicResources();
+                }
+
+                if (
+              (!string.IsNullOrEmpty(AppPreferences.Token)))
+                {
+                    Application.Current.MainPage = new NavigationPage(new HomePage());
+                }
+                else
+                {
+                    Application.Current.MainPage = new NavigationPage(new HomePage());
+                }
+            }
+            catch (Exception ex)
+            {
+                //Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+
+                Application.Current.MainPage = new NavigationPage(new SigninPage());
+            }
+        }
+
+        public static void SetDynamicResources()
+        {
+            #region Dynamic Resources
+            int topPadding = 10;
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                var isHasNotchScreen = AppHelpers.CheckHasNotchScreen();
+
+                topPadding = isHasNotchScreen ? 40 : 30;
+            }
+
+            //Set Top Padding
+            //var mainPageStyle = new Style(typeof(ScrollView))
+            //{
+            //    Setters = {
+            //        new Setter {
+            //            Property = Grid.PaddingProperty,
+            //            Value =  new Thickness(0, topPadding, 0, 0)
+            //        }
+            //    }
+            //};
+
+            var mainGridStyle = new Style(typeof(Grid))
+            {
+                Setters = {
+                    new Setter {
+                        Property = Grid.PaddingProperty,
+                        Value =  new Thickness(0, topPadding, 0, 0)
+                    }
+                }
+            };
+
+            if (App.Current.Resources.ContainsKey("MainPageStyle"))
+            {
+                App.Current.Resources.Remove("MainPageStyle");
+            }
+
+            if (App.Current.Resources.ContainsKey("MainGridStyle"))
+            {
+                App.Current.Resources.Remove("MainGridStyle");
+            }
+
+            //App.Current.Resources.Add("MainPageStyle", mainPageStyle);
+            App.Current.Resources.Add("MainGridStyle", mainGridStyle);
+
+            App.IsSetDynamicResources = true;
+            #endregion
+        }
+        public static bool CheckHasNotchScreen()
+        {
+            bool isHasNotchScreen;
+
+            if (!AppPreferences.IsAleardyCheckHasNotchScreen)
+            {
+                isHasNotchScreen = DependencyService.Get<INotchScreen>().CheckHasNotchScreen();
+                AppPreferences.IsAleardyCheckHasNotchScreen = true;
+                AppPreferences.IsHasNotchScreen = isHasNotchScreen;
+            }
+            else
+            {
+                isHasNotchScreen = AppPreferences.IsHasNotchScreen;
+            }
+
+            return isHasNotchScreen;
+        }
 
     }
 }

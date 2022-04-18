@@ -14,10 +14,8 @@ namespace XForms.HttpREST
         {
             try
             {
-
                  //Skip Certificate Validation
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(delegate { return true; });
-
 
                 HttpClientHandler clientHandler = new HttpClientHandler();
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
@@ -28,6 +26,11 @@ namespace XForms.HttpREST
                     //client.BaseAddress = uri;
                     //client.DefaultRequestHeaders.Accept.Clear();
                     //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
+
+                    if (isNeedAcces)
+                    {
+                        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + AppPreferences.Token);
+                    }
 
                     HttpResponseMessage response = new HttpResponseMessage();
                     switch (method)
@@ -42,14 +45,6 @@ namespace XForms.HttpREST
                         case HttpVerbs.DELETE:
                             response = await client.DeleteAsync(uri);
                             break;
-
-                        ////var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, contentType);
-
-                        //var json = JsonConvert.SerializeObject(postObject, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }).ToString();
-                        ////var json = JsonConvert.SerializeObject(postObject).ToString();
-                        //var content = new StringContent(json, Encoding.UTF8, "application/json");
-                        //response = await client.PostAsync(uri, content);
-                        //break;
                         default:
                             break;
                     }

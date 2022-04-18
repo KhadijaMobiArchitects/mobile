@@ -24,6 +24,26 @@
     <Color x:Key="Green">#4AC567</Color>
     <Color x:Key="Red">#EC2518</Color>
 
+     <Color x:Key="DarkText">#353232</Color>
+    
+    <Color
+        x:Key="Accent">#F3B72F</Color>
 
+
+        <!--STATUT COLORS-->
+    <Color
+        x:Key="GreenStatut">#4EB400</Color>
+    <Color
+        x:Key="RedStatut">#EF6767</Color>
+    <Color
+        x:Key="OrangeStatut">#F3B72F</Color>
+    <Color
+        x:Key="YellowStatut">#F6D397</Color>
+    <Color
+        x:Key="BlueStatut">#4D79CF</Color>
+    <Color
+        x:Key="PurpleStatut">#5C4BDA</Color>
+    <Color
+        x:Key="GrayStatut">#4A4B4D</Color>
 
 </ResourceDictionary>

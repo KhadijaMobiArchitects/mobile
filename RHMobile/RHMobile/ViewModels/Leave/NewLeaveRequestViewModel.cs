@@ -47,7 +47,7 @@ namespace XForms.ViewModels
         public bool EnableButtonSendRequest { get; set; }
         public Color ButtonSendRequestBackground => EnableButtonSendRequest ? Color.FromHex("#126BCD") : Color.FromHex("#B0B6BE");
 
-        public int NumberOfDays => (int) (EndDate - StartDate).TotalDays;
+        public int NumberOfDays => (int) (EndDate - StartDate).TotalDays + 1;
 
         private NewLeaveRequestValidator validator;
 
@@ -100,30 +100,52 @@ namespace XForms.ViewModels
 
         public async void getTypesLeave()
         {
-            var result = await App.AppServices.GetTypesLeave();
-            TypeLeaveData = result.data.ToList();
-            TypesLeaveList = TypeLeaveData;
+            try
+            {
+                var result = await App.AppServices.GetTypesLeave();
+                TypeLeaveData = result.data.ToList();
+                TypesLeaveList = TypeLeaveData;
 
-            OnPropertyChanged(nameof(TypesLeaveList));
+                OnPropertyChanged(nameof(TypesLeaveList));
+            }
+            catch (Exception ex)
+            {
+
+            }
+
 
         }
 
         public async void getProjects()
         {
-            var result = await App.AppServices.GetProjects();
-            ProjectData = result.data.ToList();
-            ProjectsList = ProjectData;
+            try
+            {
+                var result = await App.AppServices.GetProjects();
+                ProjectData = result.data.ToList();
+                ProjectsList = ProjectData;
 
-            OnPropertyChanged(nameof(ProjectsList));
+                OnPropertyChanged(nameof(ProjectsList));
 
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         public async void getSituationsProject()
         {
-            var result = await App.AppServices.GetSituationsProject();
-            SituationsProjectList = result.data.ToList();
+            try
+            {
+                var result = await App.AppServices.GetSituationsProject();
+                SituationsProjectList = result.data.ToList();
 
-            OnPropertyChanged(nameof(SituationsProjectList));
+                OnPropertyChanged(nameof(SituationsProjectList));
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private bool CandSendRequest = true;

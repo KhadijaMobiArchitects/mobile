@@ -26,5 +26,7 @@ namespace XForms.ViewModels
 
             }
         }
+        public virtual void OnDisappearing() { }
+
     }
 }

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+   xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:CellProject="clr-namespace:XForms.views"
+    NavigationPage.HasNavigationBar="False"
+    x:Class="XForms.views.ProjectPage">
+    <Base:BasePage.Content>
+        <Grid
+           BackgroundColor="White"
+            RowDefinitions="auto,80,80,3*"
+            >
+            <Shared:SmallReclangleBackground
+                Grid.RowSpan="2"
+                StartGradient="{StaticResource StartGradientAdmin}"
+                EndGradient="{StaticResource EndGradientAdmin}"
+                />
+                    <!--Header-->
+                    <Shared:SuggestionsNavBarView
+                    x:Name="MyHeader"
+                    HasTitle="True"
+                    HasDescription="True"
+                    Title="Nouvelle Demande"
+                    HasNotification="True"
+                    HasBackButton="True"
+                    Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
+                    BackButtonBorderColor="{StaticResource StartGradientAdmin}"
+                    BackButtonColor="{StaticResource EndGradientAdmin }"
+                    />
+
+            <CellProject:ProjectCellView
+                HorizontalOptions="Start"
+                WidthRequest="100"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                />
+           
+        </Grid>
+
+    </Base:BasePage.Content>
+</Base:BasePage>

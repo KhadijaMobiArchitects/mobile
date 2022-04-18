@@ -44,6 +44,8 @@ namespace XForms.ViewModels
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
         public int numberOfRequests { get; set; }
+        public string numberOfRequestsDescription { get; set; }
+
         public int numberOfRequestsAdmin { get; set; }
 
         public DonutChart donutChart { get; set; }
@@ -251,42 +253,42 @@ namespace XForms.ViewModels
         private bool CanSelectHeaderAction = true;
         public ICommand SelectHeaderActionCommand => new Command<REFItem>(async (model) =>
         {
-            try
+        try
+        {
+            CanSelectHeaderAction = false;
+
+            if (model == null) return;
+
+            foreach (var item in HeadrActionList)
             {
-                CanSelectHeaderAction = false;
-
-                if (model == null) return;
-
-                foreach (var item in HeadrActionList)
-                {
-                    item.IsSelected = (item.Id == model.Id);
-                    OnPropertyChanged(nameof(item.IsSelected));
+                item.IsSelected = (item.Id == model.Id);
+                OnPropertyChanged(nameof(item.IsSelected));
 
 
-                }
+            }
 
-                if (HeadrActionList[0].IsSelected)
-                {
-                    LeaveItemsList.ReplaceRange(InprogessLeavesList);
+            if (HeadrActionList[0].IsSelected)
+            {
+                LeaveItemsList.ReplaceRange(InprogessLeavesList);
 
-                }
-                else if (HeadrActionList[1].IsSelected)
-                {
-                    LeaveItemsList.ReplaceRange(ConfirmedLeavesList);
+            }
+            else if (HeadrActionList[1].IsSelected)
+            {
+                LeaveItemsList.ReplaceRange(ConfirmedLeavesList);
 
-                }
-                else if (HeadrActionList[2].IsSelected)
-                {
-                    LeaveItemsList.ReplaceRange(PostponedLeavesList);
+            }
+            else if (HeadrActionList[2].IsSelected)
+            {
+                LeaveItemsList.ReplaceRange(PostponedLeavesList);
 
-                }
+            }
 
-                numberOfRequests = LeaveItemsList.Count;
-                OnPropertyChanged(nameof(LeaveItemsList));
-                OnPropertyChanged(nameof(numberOfRequests));
+            numberOfRequests = LeaveItemsList.Count;
+            OnPropertyChanged(nameof(LeaveItemsList));
+            OnPropertyChanged(nameof(numberOfRequests));
 
-                StatusName = HeadrActionList[0].IsSelected ? HeadrActionList[0].Name : (HeadrActionList[1].IsSelected ? HeadrActionList[1].Name + "s" : HeadrActionList[2].Name + "s");
-                OnPropertyChanged(nameof(StatusName));
+            StatusName = HeadrActionList[0].IsSelected ? HeadrActionList[0].Name : (HeadrActionList[1].IsSelected ? HeadrActionList[1].Name + "s" : HeadrActionList[2].Name + "s");
+            OnPropertyChanged(nameof(StatusName));
 
             }
             catch (Exception ex)

@@ -5,11 +5,38 @@ using Xamarin.Forms.Xaml;
 using XForms.views.Leave;
 using XForms.views.Administration;
 using XForms.Services;
+using XForms.views.Walkthrough;
+using XForms.views;
 
 namespace XForms
 {
     public partial class App : Application
     {
+        public static bool CanRefreshHome = false;
+
+        public static bool IsSetDynamicResources;
+
+        public App()
+        {
+            InitializeComponent();
+
+            if (Xamarin.Essentials.VersionTracking.IsFirstLaunchEver)
+            {
+                AppPreferences.ClearCache();
+
+                MainPage = new NavigationPage(new WalkthroughPage());
+            }
+            else
+            {
+                //AppHelpers.SetInitialView();
+                MainPage = new NavigationPage(new ProjectPage());
+
+            }
+
+            //MainPage = new NavigationPage(new HomePage());
+
+        }
+
 
         //Design patterns : Singleton
 
@@ -37,14 +64,7 @@ namespace XForms
             }
         }
 
-        public App()
-        {
-            InitializeComponent();
 
-            Device.SetFlags(new string[] { "CollectionView_Experimental", "SwipeView_Experimental", "Shapes_Experimental", "FastRenderers_Experimental", "Brush_Experimental", "RadioButton_Experimental" });
-
-            MainPage = new NavigationPage(new HomePage());
-        }
 
         protected override void OnStart()
         {

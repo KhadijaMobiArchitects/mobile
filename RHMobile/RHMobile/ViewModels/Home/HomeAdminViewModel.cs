@@ -6,9 +6,10 @@ using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using XForms.Enum;
 using XForms.Models;
-using XForms.views.AdminLeave;
+using XForms.views.LeaveAdministration;
 using XForms.views.Displacement;
 using XForms.views.Leave;
+using XForms.views;
 
 namespace XForms.ViewModels
 {
@@ -127,8 +128,8 @@ namespace XForms.ViewModels
 
                 _ = model.Id switch
                 {
-                    AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new AdminLeavePage()),
-                    //AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new DisplacementPage()),
+                    AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveAdministrationPage()),
+                    AdministrationService.Project => App.Current.MainPage.Navigation.PushAsync(new ProjectPage()),
 
 
                 };

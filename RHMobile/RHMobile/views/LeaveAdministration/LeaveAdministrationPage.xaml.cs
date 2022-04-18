@@ -5,11 +5,11 @@ using Xamarin.Forms;
 using XForms.ViewModels;
 using XForms.views.Base;
 
-namespace XForms.views.AdminLeave
+namespace XForms.views.LeaveAdministration
 {
-    public partial class AdminLeavePage : BasePage
+    public partial class LeaveAdministrationPage : BasePage
     {
-        public AdminLeavePage()
+        public LeaveAdministrationPage()
         {
             InitializeComponent();
 

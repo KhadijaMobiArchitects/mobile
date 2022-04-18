@@ -109,9 +109,19 @@
     <None Remove="Com.Airbnb.Xamarin.Forms.Lottie" />
     <None Remove="Resources\Assets\AnimLoadingLight.json" />
     <None Remove="Resources\Images\balance.svg" />
-    <None Remove="views\AdminLeave\" />
+    <None Remove="views\LeaveAdministration\" />
     <None Remove="Resources\Images\ProfilWomen.png" />
     <None Remove="Resources\Images\profilAdmin.png" />
+    <None Remove="ViewModels\Authentification\" />
+    <None Remove="Models\Authentication\" />
+    <None Remove="Interface\" />
+    <None Remove="views\Walkthrough\" />
+    <None Remove="ViewModels\Walkthrough\" />
+    <None Remove="Models\Walkthrough\" />
+    <None Remove="Resources\Images\Walkthrough_2.png" />
+    <None Remove="Resources\Images\Walkthrough_1.png" />
+    <None Remove="views\Project\" />
+    <None Remove="ViewModels\Project\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -148,7 +158,15 @@
     <Folder Include="Validators\" />
     <Folder Include="Validators\Leave\" />
     <Folder Include="Popups\" />
-    <Folder Include="views\AdminLeave\" />
+    <Folder Include="views\LeaveAdministration\" />
+    <Folder Include="ViewModels\Authentication\" />
+    <Folder Include="Models\Authentication\" />
+    <Folder Include="Interface\" />
+    <Folder Include="views\Walkthrough\" />
+    <Folder Include="ViewModels\Walkthrough\" />
+    <Folder Include="Models\Walkthrough\" />
+    <Folder Include="views\Project\" />
+    <Folder Include="ViewModels\Project\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
@@ -179,6 +197,8 @@
     <EmbeddedResource Include="Resources\Images\balance.svg" />
     <EmbeddedResource Include="Resources\Images\ProfilWomen.png" />
     <EmbeddedResource Include="Resources\Images\profilAdmin.png" />
+    <EmbeddedResource Include="Resources\Images\Walkthrough_2.png" />
+    <EmbeddedResource Include="Resources\Images\Walkthrough_1.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />

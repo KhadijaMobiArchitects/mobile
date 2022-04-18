@@ -15,6 +15,10 @@ namespace XForms.Resources
         public const string Angledown = "\uf078";
         public const string Angleleft = "\uf104";
         public const string Check = "\uf00c";
+        public const string Eye = "\uf06e";
+        public const string EyeSlash = "\uf070";
+
+
 
 
 

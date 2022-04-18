@@ -5,6 +5,8 @@ namespace XForms.Constants
     {
         public const string BaseUrl = "https://rh-api-dev.azurewebsites.net/api/";
 
+        public const string Singin = BaseUrl + "Account/authenticate";
+
         public const string GesRequestsListLeave = BaseUrl + "leaves/getleaves/";
         public const string GetRequestListTypeLeave = BaseUrl + "RefTypesLeave/";
         public const string GetRequestListProject = BaseUrl + "Projects/GetProjects";

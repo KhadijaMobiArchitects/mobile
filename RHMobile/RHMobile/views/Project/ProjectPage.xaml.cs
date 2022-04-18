@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Xamarin.Forms;
 using XForms.ViewModels;
 using XForms.views.Base;
 
-namespace XForms.views.Administration
+namespace XForms.views
 {
-    public partial class HomePage : BasePage
+    public partial class ProjectPage : BasePage
     {
-        public HomePage()
+        public ProjectPage()
         {
             InitializeComponent();
 
-            BindingContext = new HomeViewModel();
+            BindingContext = new ProjectViewModel();
 
 
         }
@@ -24,9 +25,8 @@ namespace XForms.views.Administration
             {
                 var isHasNotchScreen = AppHelpers.CheckHasNotchScreen();
 
-                MyHeader.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 20, 0);
+                MyHeader.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 30, 0);
             }
         }
-
     }
 }

@@ -9,7 +9,7 @@
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:Cell="clr-namespace:XForms.views.Leave" xmlns:Cell2="clr-namespace:XForms.views"
     x:Name="this"
-    x:Class="XForms.views.AdminLeave.AdminLeavePage"
+    x:Class="XForms.views.LeaveAdministration.LeaveAdministrationPage"
     >
     <Base:BasePage.Content>
         <Grid
@@ -37,7 +37,7 @@
                     Title="Nouvelle Demande"
                     HasNotification="True"
                     HasBackButton="True"
-                    Description="{Binding numberOfRequestsAdmin,StringFormat='{0} Demandes'}"
+                    Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />
