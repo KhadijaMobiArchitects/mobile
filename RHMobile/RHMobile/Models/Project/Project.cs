@@ -1,4 +1,7 @@
 ﻿using System;
+using FFImageLoading.Svg.Forms;
+using Xamarin.Forms;
+
 namespace XForms.Models
 {
     public class Project
@@ -10,6 +13,9 @@ namespace XForms.Models
         public DateTime EndedAt { get; set; }
         public string OwnerBy { get; set; }
         public string CreatedBy { get; set; }
+        public  Color BackgroundColor { get; set; }
+        public Color TextColor { get; set; }
+        public ImageSource Image { get; set; }
 
         public Project()
         {

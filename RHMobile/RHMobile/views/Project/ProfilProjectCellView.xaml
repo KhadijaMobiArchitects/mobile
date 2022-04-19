@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="XForms.views.ProfilProjectCellView"
+    xmlns:Local="clr-namespace:XForms"
+    x:Name="this"
+    >
+    <ContentView.Content
+        >
+        <Grid
+            RowDefinitions="*,auto"            
+            >
+            <Grid.GestureRecognizers>
+
+        <TapGestureRecognizer           
+            Grid.ColumnSpan="2"
+            Tapped="SelectItem_Clicked"            
+            />
+
+            </Grid.GestureRecognizers>
+
+
+            <Grid
+            ColumnDefinitions="auto,*,auto"
+            Padding="0,10"
+                  ColumnSpacing="15"
+           >
+
+            <!--<BoxView
+                BackgroundColor="#FEE07D"
+                />-->
+
+            <cc:CornerView
+            HeightRequest="50"
+            StyleCorner="Circle"
+            >
+
+                <svg:SvgCachedImage
+                Source="{Local:ImageResource profil.png}"
+                Aspect="AspectFill"
+                />
+            </cc:CornerView>
+
+            <StackLayout
+                Grid.Column="1"
+                VerticalOptions="Center"
+                >
+                <Label
+                    Text="{Binding Name}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    TextColor="#33373D"
+                    VerticalTextAlignment="Center"
+                    />
+
+                <Label
+                    Text="{Binding fonction}"
+                    FontFamily="RubikRegular"
+                    FontSize="12"
+                    TextColor="#A3AEC5"
+                    VerticalTextAlignment="Center"
+                    />
+  
+
+            </StackLayout>
+
+            <cc:CornerView
+                VerticalOptions="CenterAndExpand"
+                Grid.Column="2"
+                StyleCorner="Default"
+                CornerRadius="4"
+                >
+                <Label
+                Text="Owner"
+                BackgroundColor="{StaticResource InProgressColor}"
+                TextColor="{StaticResource InProgressTextColor}"
+                FontSize="12"
+                FontFamily="RubikRegular"
+                Padding="10"
+                    />
+            </cc:CornerView>
+                
+        </Grid>
+
+            <BoxView
+                Grid.Row="1"
+                HeightRequest="1"
+                BackgroundColor="#EBF1FE"
+                HorizontalOptions="FillAndExpand"
+                />
+
+        </Grid>
+
+      
+
+    </ContentView.Content>
+</ContentView>

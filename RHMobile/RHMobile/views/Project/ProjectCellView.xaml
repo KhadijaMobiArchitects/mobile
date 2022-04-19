@@ -5,48 +5,70 @@
     xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:cc="clr-namespace:XForms.Controls" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     x:Class="XForms.views.ProjectCellView"
     xmlns:Local="clr-namespace:XForms"
+    Padding="5"
     >
     <ContentView.Content>
         <Grid            
-            RowDefinitions="*,20,20"
-            ColumnDefinitions="*,*,*"
+            RowDefinitions="*,15,15"
+            ColumnDefinitions="*,2*,*"
+            RowSpacing="0"
             >
             <pcview:PancakeView
-                BackgroundColor="blue"
+                CornerRadius="8"
+                BackgroundColor="{Binding BackgroundColor}"
                 Grid.RowSpan="2"
                 Grid.ColumnSpan="3"
+                Padding="0,4"
                 >
-                <StackLayout>
+                <StackLayout
+                    Spacing="4"
+                    >
             <cc:CornerView
-            HeightRequest="40"
+            HeightRequest="60"
             StyleCorner="Circle"
             HorizontalOptions="Center"
+                VerticalOptions="Center"
                 >
 
                 <svg:SvgCachedImage
-                Source="{Local:ImageResource profil.png}"
+                Source="{Binding Image}"
                 Aspect="AspectFill"
                 />
             </cc:CornerView>
                     <Label
-                        Text="Ta7alil"
+                        Text="{Binding Name}"
+                        HorizontalOptions="Center"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        HorizontalTextAlignment="Center"
                         />
                     <Label
                         Text="Mehdi mellali"
+                        FontSize="12"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        TextColor="White"
+                        FontFamily="RubikRegular"
                         />
                 </StackLayout>
 
             </pcview:PancakeView>
 
             <pcview:PancakeView
+                CornerRadius="8"
                 Grid.Row="1"
                 Grid.Column="1"
                 Grid.RowSpan="2"
-
+                BackgroundColor="#FE827D"
                 >
-                <Label
-                    Text="30%"
-                    BackgroundColor="Red"
+                <Label                    
+                    Text="{Binding Percent,StringFormat='{0} %'}"
+                    VerticalOptions="Center"
+                    TextColor="#BA1818"
+                    FontSize="12"
+                    HorizontalTextAlignment="Center"
+                    FontFamily="RubikRegular"
                     />
                 </pcview:PancakeView>
 

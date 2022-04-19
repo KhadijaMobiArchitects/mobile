@@ -25,7 +25,7 @@ namespace XForms.views
             {
                 var isHasNotchScreen = AppHelpers.CheckHasNotchScreen();
 
-                MyHeader.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 30, 0);
+                MyHeader.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 20) : new Thickness(30, 30, 30, 20);
             }
         }
     }

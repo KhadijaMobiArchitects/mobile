@@ -17,6 +17,8 @@ namespace XForms.Resources
         public const string Check = "\uf00c";
         public const string Eye = "\uf06e";
         public const string EyeSlash = "\uf070";
+        public const string PlusCircle = "\uf055";
+
 
 
 

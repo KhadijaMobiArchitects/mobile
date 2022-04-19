@@ -3,13 +3,15 @@
    xmlns:Base="clr-namespace:XForms.views.Base"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:CellProject="clr-namespace:XForms.views"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:CellProject="clr-namespace:XForms.views" xmlns:cc="clr-namespace:XForms.Controls"
     NavigationPage.HasNavigationBar="False"
+    xmlns:res="clr-namespace:XForms.Resources"
     x:Class="XForms.views.ProjectPage">
     <Base:BasePage.Content>
         <Grid
            BackgroundColor="White"
-            RowDefinitions="auto,80,80,3*"
+            RowDefinitions="auto,75,75,3*,auto"
             >
             <Shared:SmallReclangleBackground
                 Grid.RowSpan="2"
@@ -21,7 +23,7 @@
                     x:Name="MyHeader"
                     HasTitle="True"
                     HasDescription="True"
-                    Title="Nouvelle Demande"
+                    Title="Projets client"
                     HasNotification="True"
                     HasBackButton="True"
                     Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
@@ -29,13 +31,90 @@
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />
 
-            <CellProject:ProjectCellView
-                HorizontalOptions="Start"
-                WidthRequest="100"
+            <!--project List--> 
+
+            <CollectionView                
+                HorizontalScrollBarVisibility="Never"
+                ItemsSource="{Binding Projects}"
+                ItemsLayout="HorizontalGrid,1"               
                 Grid.Row="1"
                 Grid.RowSpan="2"
+                >
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CellProject:ProjectCellView
+                            HorizontalOptions="Start"
+                            WidthRequest="100"
+
+                            />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Members List-->
+
+            <CollectionView
+                Grid.Row="3"
+                Grid.RowSpan="2"
+                ItemsSource="{Binding Squad}"
+                Margin="30,10"
+                >
+                <CollectionView.Header                    
+                    >
+                    <Label
+                        Text="Squad Ta7alil"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        />
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CellProject:ProfilProjectCellView
+                            />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <!--<CollectionView.Footer                    
+                    >
+            <cc:CustomButton
+                Margin="5,10"
+                Text="Ajouter collaborateur"
+                CornerRadius="30"
                 />
-           
+
+                </CollectionView.Footer>-->
+                
+            </CollectionView>
+
+            <cc:CornerView
+                Margin="30,10,30,40"
+                Grid.Row="4"
+                StyleCorner="Circle"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Padding="0"
+                >
+                <cc:CustomButton
+                    BackgroundColor="Transparent"
+                    Padding="0"
+                    >
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource                        
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{x:Static res:FontAwesomeFonts.PlusCircle}"
+                        Size="50"
+                        Color="{StaticResource Primary}"
+                        
+                        />
+                </cc:CustomButton.ImageSource>
+                </cc:CustomButton>
+
+            </cc:CornerView>
+
+
         </Grid>
 
     </Base:BasePage.Content>

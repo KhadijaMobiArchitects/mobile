@@ -122,6 +122,10 @@
     <None Remove="Resources\Images\Walkthrough_1.png" />
     <None Remove="views\Project\" />
     <None Remove="ViewModels\Project\" />
+    <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\plus.png" />
+    <None Remove="Resources\Images\project.png" />
+    <None Remove="Models\Profil\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -167,6 +171,7 @@
     <Folder Include="Models\Walkthrough\" />
     <Folder Include="views\Project\" />
     <Folder Include="ViewModels\Project\" />
+    <Folder Include="Models\Profil\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
@@ -199,6 +204,9 @@
     <EmbeddedResource Include="Resources\Images\profilAdmin.png" />
     <EmbeddedResource Include="Resources\Images\Walkthrough_2.png" />
     <EmbeddedResource Include="Resources\Images\Walkthrough_1.png" />
+    <EmbeddedResource Include="Resources\Images\add.png" />
+    <EmbeddedResource Include="Resources\Images\plus.png" />
+    <EmbeddedResource Include="Resources\Images\project.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />
