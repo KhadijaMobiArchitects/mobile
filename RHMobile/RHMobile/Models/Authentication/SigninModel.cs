@@ -5,13 +5,13 @@ namespace XForms.Models
 {
     public class SinginRequestModel
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
     }
 
     public class SinginResponseModel
     {
-        public string Id { get; set; }
+        public string UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PrixDiagnostic { get; set; }

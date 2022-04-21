@@ -78,8 +78,6 @@
                         <cc:MaterialDatePicker
                                 Placeholder="Date Fin"
                                 Date="{Binding EndDate}"
-
-
                         />
 
                         <cc:MaterialPicker

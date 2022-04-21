@@ -42,7 +42,7 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), default,
         {
             if ((sender as View).BindingContext is Models.Leave item)
             {
-                (this.Parent.BindingContext as LeaveRequestViewModel).OpenProfilLeaveDetailsPopupView.Execute(item);
+                //(this.Parent.BindingContext as LeaveRequestViewModel).OpenProfilLeaveDetailsPopupView.Execute(item);
             }
 
         }

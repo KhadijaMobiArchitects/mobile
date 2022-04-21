@@ -164,7 +164,7 @@ namespace XForms.ViewModels
                         StartDate = StartDate,
                         EndDate = EndDate,
                         ConfirmedBySquad = ConfirmedBySquad,
-                        CreatedBy = "1",
+                        CreatedBy = AppPreferences.UserId,
                         RefStatusLeaveId = 1,
                         RefTypeLeaveId = SelectedREFTypeLeave.Id,
                         RefSituationProjectId = SelectedSituationProject.Id,
@@ -174,6 +174,8 @@ namespace XForms.ViewModels
 
 
                     };
+
+                    //Console.WriteLine(AppPreferences.UserId);
 
 
                     var result = new RESTServiceResponse<object>();

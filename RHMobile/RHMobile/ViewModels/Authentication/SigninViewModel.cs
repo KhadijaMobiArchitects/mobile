@@ -17,8 +17,8 @@ namespace XForms.ViewModels
 
         public SigninViewModel()
         {
-            SigninEmail = "KAROUM Hassoun";
-            SigninPassword = "123456";
+            SigninEmail = "salma@gmail.com";
+            SigninPassword = "test31234@";
 
         }
 
@@ -49,18 +49,18 @@ namespace XForms.ViewModels
 
                 var postParams = new SinginRequestModel()
                 {
-                    UserName = SigninEmail,
-                    Password = SigninEmail
+                    userName = SigninEmail,
+                    password = SigninPassword
                 };
+
 
                 var result = await App.AppServices.Singin(postParams);
 
                 if (result?.succeeded == true && result?.data != null)
                 {
                     AppPreferences.Token = result.data.JwToken;
-                    AppPreferences.UserId = result.data.Id;
+                    AppPreferences.UserId = result.data.UserId;
                     AppPreferences.IsVerified = result.data.isVerified;
-                    AppPreferences.PrixDiagnostic = result.data.PrixDiagnostic;
                     AppPreferences.FullName = result.data.UserName;
 
                     AppPreferences.IsSignIn = true;
@@ -96,6 +96,7 @@ namespace XForms.ViewModels
                 else
                 {
                     //AppHelpers.Alert(result?.message);
+                    Console.WriteLine("error");
                 }
             }
             catch (Exception ex)

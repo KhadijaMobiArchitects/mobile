@@ -11,7 +11,7 @@
     <!--Padding="{OnPlatform iOS='0,5,0,5',Android='20,5,0,5'}"-->
 
     <pcview:PancakeView
-        BackgroundColor="White"
+        BackgroundColor="{StaticResource InputBackground}"
         CornerRadius="{Binding CornerRadiuss,Source={x:Reference this}}"
         >
         <pcview:PancakeView.Border>
@@ -19,7 +19,6 @@
         </pcview:PancakeView.Border>
         <StackLayout
             Spacing="-8"
-            BackgroundColor="{StaticResource White}"
             >
 
             <StackLayout
@@ -41,7 +40,7 @@
                 TranslationX="-5"
                 StyleCorner="Circle"
                 Style="{StaticResource InputActionStyle}"
-                BackgroundColor="{StaticResource White}"
+                BackgroundColor="Transparent"
                 Scale=".8"
                 IsVisible="{Binding IsPassword, Source={x:Reference this}}"
                 Padding="5"
@@ -58,7 +57,7 @@
             </StackLayout>
 
             <BoxView
-                Style="{StaticResource OverEntryStyle}"
+                Style="{StaticResource EntryOverStyle}"
                 />
 
 

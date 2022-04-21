@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using XForms.views.Base;
 
@@ -18,6 +19,18 @@ namespace XForms.views.SharedViews
             set
             {
                 SetValue(HasTitleProperty, value);
+            }
+        }
+        public static readonly BindableProperty HasImageProfilProperty = BindableProperty.Create(nameof(HasImageProfil), typeof(bool), typeof(SuggestionsNavBarView), false);
+        public bool HasImageProfil
+        {
+            get
+            {
+                return (bool)GetValue(HasImageProfilProperty);
+            }
+            set
+            {
+                SetValue(HasImageProfilProperty, value);
             }
         }
 
@@ -84,8 +97,6 @@ namespace XForms.views.SharedViews
             }
         }
 
-
-
         public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(SuggestionsNavBarView), string.Empty);
         public string Title
         {
@@ -112,9 +123,30 @@ namespace XForms.views.SharedViews
             }
         }
 
+        public static readonly BindableProperty ImageProfilProperty =
+BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), null, BindingMode.TwoWay);
+
+        public ImageSource ImageProfil
+        {
+            get { return (ImageSource)GetValue(ImageProfilProperty); }
+            set
+            {
+                SetValue(ImageProfilProperty, value);
+            }
+        }
+
         public SuggestionsNavBarView()
         {
             InitializeComponent();
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                var isHasNotchScreen = AppHelpers.CheckHasNotchScreen();
+
+                this.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 20, 0);
+            }
         }
+        
+
     }
 }

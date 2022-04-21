@@ -16,20 +16,18 @@
     <Base:BasePage.Content>
         <Grid
             BackgroundColor="White"
-            RowDefinitions="*,2*">
+            RowDefinitions="auto,100,100,auto,*,auto"
+            RowSpacing="20"
+            >
 
-            <Shared:LargeRectangleBackground/>
-
-            <Grid
-                RowDefinitions="auto,*,auto"
-                Padding="{OnPlatform iOS='0,70,0,40',Android='0,50,0,40'}"
-                VerticalOptions="FillAndExpand"
+            <Shared:LargeRectangleBackground
                 Grid.RowSpan="2"
-                RowSpacing="20">
 
-                <!--Header-->
-                <Shared:SuggestionsNavBarView
-                    Padding="20,0"
+                />
+
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
                     HasTitle="True"
                     HasDescription="True"
                     Title="Demande Congé"
@@ -37,51 +35,46 @@
                     HasNotification="True"
                     HasBackButton="True"
                     BackButtonBorderColor="{StaticResource StartGradient}"
-                    BackButtonColor="{StaticResource EndGradient}"
-                    
+                    BackButtonColor="{StaticResource EndGradient}"                    
                     />
 
-                <!--Body-->
+            <!--Body-->
 
-                <Grid
-                    Grid.Row="1"
-                    RowDefinitions="auto,auto,auto,*"
-                    RowSpacing="20">
-                    <pcview:PancakeView
+            <pcview:PancakeView
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
                         Margin="20,0"
                         BackgroundColor="White"
-                        WidthRequest="335"
-                        HeightRequest="200"
                         CornerRadius="8"
                         Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
                         >
-                        <Grid
+                <Grid
                             ColumnDefinitions="3*,2*"
                             Padding="10"
 
                             >
-                            <Grid
+                    <Grid
                                 >
-                                <microcharts:ChartView
+                        <microcharts:ChartView
                                     x:Name="chartV"
                                     Chart="{Binding donutChart}"
                                    
                                     VerticalOptions="FillAndExpand"
                                     HorizontalOptions="FillAndExpand"
                                     />
-                                <StackLayout
+                        <StackLayout
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     
                                     >
-                                    <Label
+                            <Label
                                         Text="{Binding TotalDays}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                         FontSize="24"
                                         FontAttributes="Bold"
                                         />
-                                    <Label
+                            <Label
                                         Text="Total des congés"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
@@ -90,57 +83,57 @@
                                         TextColor="#B5BED0"
                                         />
 
-                                </StackLayout>
-                            </Grid>
-                            <StackLayout
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout
                                 Grid.Column="1"
                                 BackgroundColor="White"
                                 Padding="0,20"
                                 >
-                                <cc:MaterialDay
+                        <cc:MaterialDay
                                     NumberOfDays="{Binding ConfirmedDays}"
                                     StatusColor="{StaticResource ConfirmedColor}"
                                     StatusDays="consomé"
                                     VerticalOptions="StartAndExpand"
                                     
                                     />
-                                <cc:MaterialDay
+                        <cc:MaterialDay
                                     NumberOfDays="{Binding InprogessDays}"
                                     StatusColor="{StaticResource InProgressColor}"
                                     StatusDays="en vérification"
                                     VerticalOptions="CenterAndExpand"
                                     />
-                                <cc:MaterialDay
+                        <cc:MaterialDay
                                     NumberOfDays="{Binding PostponedDays}"
                                     StatusColor="{StaticResource postponedColor}"
                                     StatusDays="Annulé"
                                     VerticalOptions="EndAndExpand"
                                     />
-                            </StackLayout>
-                        </Grid>
+                    </StackLayout>
+                </Grid>
 
-                    </pcview:PancakeView>
+            </pcview:PancakeView>
 
-                    <!--Switch-->
+            <!--Switch-->
 
-                    <ScrollView
-                        Grid.Row="1"
+            <ScrollView
+                        Grid.Row="3"
                         x:Name="scroll"
                         Padding="20,0"
                         VerticalScrollBarVisibility="Never"
                         Orientation="Horizontal"
                         HorizontalScrollBarVisibility="Never">
-                        <StackLayout
+                <StackLayout
                             Spacing="15"
                             Orientation="Horizontal"
                             BindableLayout.ItemsSource="{Binding HeadrActionList}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
 
-                                        <!--Clicked="SelectItem_Clicked"-->
+                                <!--Clicked="SelectItem_Clicked"-->
 
-                                        <cc:CustomButton
+                                <cc:CustomButton
                                             Text="{Binding Name,StringFormat='Demande {0}'}"
                                             StyleCorner="RoundCorner"
                                             BackgroundColor="{Binding BackgroundColor}"
@@ -152,72 +145,65 @@
                                             Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionCommand}"
                                             CommandParameter="{Binding .}"
                                             />
-                                    </StackLayout>
+                            </StackLayout>
 
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
 
-                    </ScrollView>
-                    <StackLayout
-                        Grid.Row="2"
+            </ScrollView>
+
+            <ScrollView
                         Padding="20,0"
-
+                        Grid.Row="4"
+                        HorizontalScrollBarVisibility="Never"
+                        VerticalScrollBarVisibility="Never"
                         >
+                <CollectionView
+                            ItemsSource="{Binding LeaveItemsList}"
+                            >
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.Header>
                         <Label
                             Text="{Binding StatusName,StringFormat='Mes demandes {0}'}"
                             FontAttributes="Bold"
                             FontSize="16"
                             TextColor="#33373D"
                             />
-                    </StackLayout>
-
-                    <ScrollView
-                        Padding="20,0"
-                        Grid.Row="3"
-                        HorizontalScrollBarVisibility="Never"
-                        VerticalScrollBarVisibility="Never"
-                        >
-                        <CollectionView
-                            ItemsSource="{Binding LeaveItemsList}"
-                            >
-                            <CollectionView.GroupHeaderTemplate>
-                                <DataTemplate>
-                                </DataTemplate>
-                            </CollectionView.GroupHeaderTemplate>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Cell:LeaveRequestCellView
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Cell:LeaveRequestCellView
                                         BackgroundColorButton="{Binding BackgroundColor}"
                                         TextColor="{Binding TextColor}"
                                         
                                         />
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                    </ScrollView>
+            </ScrollView>
 
-                </Grid>
 
-                <!--Footer-->
+            <!--Footer-->
 
-                <Grid
-                    Grid.Row="2"
-                    Padding="20,0"
+            <Grid
+                Grid.Row="5"
+                Padding="10,0"
+                Margin="10"
                     >
-                    <cc:CustomButton
+                <cc:CustomButton
                         Text="Nouvelle demande"
                         FontSize="20"
                         Command="{Binding NavigationtonewRequest}"
                         />
 
-                </Grid>
-
             </Grid>
 
         </Grid>
-
 
     </Base:BasePage.Content>
 </Base:BasePage>

@@ -18,9 +18,11 @@ namespace XForms.Resources
         public const string Eye = "\uf06e";
         public const string EyeSlash = "\uf070";
         public const string PlusCircle = "\uf055";
+        public const string Image = "\uf03e";
 
 
 
+        
 
 
 

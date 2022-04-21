@@ -23,9 +23,9 @@ namespace XForms.HttpREST
                 using (var client = new HttpClient(clientHandler))
                 {
                     Uri uri = new Uri(url);
-                    //client.BaseAddress = uri;
-                    //client.DefaultRequestHeaders.Accept.Clear();
-                    //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
+                    client.BaseAddress = uri;
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
                     if (isNeedAcces)
                     {

@@ -24,56 +24,20 @@
                 EndGradient="{StaticResource EndGradient}"
                 Grid.RowSpan="2"
                 />
+     
+            <Shared:SuggestionsNavBarView
+                HasTitle="True"
+                HasDescription="True"
+                Title="Hassoun KAROUM"
+                Description="Full stack dev"
+                HasNotification="True"
+                BackButtonColor="{StaticResource EndGradient}"
+                BackButtonBorderColor="{StaticResource StartGradient }"
+                HasImageProfil="True"
+                ImageProfil="{Local:ImageResource profil.png}"
+                />
 
-            <!--Header-->
-
-            <Grid
-                    x:Name="MyHeader"
-                    ColumnDefinitions="auto"
-                    RowDefinitions="auto,*,*"
-                    RowSpacing="10"                   
-                    >
-                <Grid
-                        ColumnDefinitions="auto,*"
-                        Padding="0,5,0,5"
-                        >
-                    <StackLayout
-                            >
-                        <cc:CornerView
-                            HeightRequest="45"
-                            StyleCorner="Circle"
-                                
-                            >
-                            <cc:CornerView.GestureRecognizers>
-                                <TapGestureRecognizer
-                                        Command="{Binding NavigateToAdmin}"
-                                        />
-                            </cc:CornerView.GestureRecognizers>
-                            <cc:CornerView.Border>
-                                <pancake:Border Color="{StaticResource Secondenry}" Thickness="2"/>
-                            </cc:CornerView.Border>
-
-                            <svg:SvgCachedImage
-                                Source="{Local:ImageResource profil.png}"
-                                Aspect="AspectFill"
-                                />
-                        </cc:CornerView>
-                    </StackLayout>
-
-
-                    <Shared:SuggestionsNavBarView
-                            Grid.Column="1"
-                           HasTitle="True"
-                            HasDescription="True"
-                            Title="Hassoun KAROUM"
-                            Description="Full stack dev"
-                            HasNotification="True"
-                            BackButtonColor="{StaticResource EndGradient}"
-                            BackButtonBorderColor="{StaticResource StartGradient }"
-                            />
-                </Grid>
-
-            </Grid>
+            <!--pancakeView-->
 
             <pancake:PancakeView
                         Margin="30,0"
@@ -118,81 +82,81 @@
             <ScrollView
                 Grid.Row="3"
                 >
-                    <Grid
+                <Grid
 
                     RowDefinitions="auto"
                     Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
                     >
-                        <CollectionView
+                    <CollectionView
                         Grid.Row="1"
                         ItemsLayout="VerticalGrid,3"
                         VerticalScrollBarVisibility="Never"
                             HorizontalScrollBarVisibility="Never"
                         ItemsSource="{Binding AdminstrationList}"
                         >
-                            <CollectionView.Header>
-                                <Label
+                        <CollectionView.Header>
+                            <Label
                         Text="Administration"
                         FontSize="16"
                         FontAttributes="Bold"
                         TextColor="{StaticResource LabelColor}"
                         Padding="6,10"
                         />
-                            </CollectionView.Header>
-                            <CollectionView.ItemTemplate                            
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate                            
                             >
-                                <DataTemplate>
-                                    <adminCell:AdministrationCellView
+                            <DataTemplate>
+                                <adminCell:AdministrationCellView
                                     Title="{Binding Title}"
                                     ICone="{Binding ICone}"
                                     />
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
 
-                    <!--Footer-->
+                        <!--Footer-->
 
 
-                            <CollectionView.Footer>
-                    <Grid
+                        <CollectionView.Footer>
+                            <Grid
                     Padding="0,30"
                     Grid.Row="1"
                     RowDefinitions="auto,auto"
                     >
-                        <Label
+                                <Label
                         Text="Actualités du mois"
                         TextColor="{StaticResource LabelColor}"
                         FontSize="16"
                         FontAttributes="Bold"
                         />
-                        <pancake:PancakeView
+                                <pancake:PancakeView
                         Grid.Row="1"
                         BackgroundColor="#47D1EA"
                         Padding="10,16"
                         CornerRadius="6"
                         >
-                            <StackLayout>
-                                <Label
+                                    <StackLayout>
+                                        <Label
                                 Text="Squad Ta7alil"
                                 FontSize="15"
                                 FontAttributes="Bold"
                                 TextColor="White"
                                 />
-                                <Label
+                                        <Label
                                 Text="Vous avez gagner 5 Points sur la livraisonde la nouvelle projet Ta7alil version web."
                                 FontFamily="RubikLight"
                                 FontSize="12"
                                 TextColor="White"
                                 />
-                            </StackLayout>
-                        </pancake:PancakeView>
+                                    </StackLayout>
+                                </pancake:PancakeView>
 
-                    </Grid>
-                            </CollectionView.Footer>
-                        </CollectionView>
+                            </Grid>
+                        </CollectionView.Footer>
+                    </CollectionView>
 
-                    </Grid>
+                </Grid>
 
-                    <!--Footer-->
+                <!--Footer-->
 
             </ScrollView>
         </Grid>

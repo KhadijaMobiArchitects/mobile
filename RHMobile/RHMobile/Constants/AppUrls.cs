@@ -3,9 +3,12 @@ namespace XForms.Constants
 {
     public class AppUrls
     {
-        public const string BaseUrl = "https://rh-api-dev.azurewebsites.net/api/";
+        //public const string BaseUrl = "https://rh-api-dev.azurewebsites.net/api/";
+        public const string BaseUrl = "http://rh-api-dev-mobiarchitects.azurewebsites.net/api/";
 
-        public const string Singin = BaseUrl + "Account/authenticate";
+        
+
+        public const string Singin = BaseUrl + "Account/Authenticate";
 
         public const string GesRequestsListLeave = BaseUrl + "leaves/getleaves/";
         public const string GetRequestListTypeLeave = BaseUrl + "RefTypesLeave/";
