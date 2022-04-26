@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using Rg.Plugins.Popup.Services;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using XForms.Models;
 using XForms.views;
+using XForms.views.Project;
 
 namespace XForms.ViewModels
 {
@@ -19,95 +21,25 @@ namespace XForms.ViewModels
         public ObservableRangeCollection<SquadResponse> SquadResponseList { get; set; }
         public ObservableRangeCollection<ProfilResponse> SquadList { get; set; }
 
+        private Project AddProjectCell;
+
         public ProjectViewModel()
         {
-            Projects = new ObservableRangeCollection<Project>()
-            {
-                new Project()
-                {
-                    Id = 1,
-                    Name = "Ajouter",
-                    Percent = 30,
-                    BackgroundColor = Color.FromHex("#ffffff"),
-                    Image = AppHelpers.GetImageResource("add.png")
 
-
-                },
-
-                new Project()
-                {
-                    Id = 2,
-                    Name = "RH",
-                    Percent = 40,
-                    BackgroundColor = Color.FromHex("#1A26c9"),
-                    Image = AppHelpers.GetImageResource("project.png")
-
-
-
-                },
-
-                new Project()
-                {
-                    Id = 3,
-                    Name = "Margin",
-                    Percent = 80,
-                    BackgroundColor = Color.FromHex("#4AeFF9")
-
-
-                },
-
-                new Project()
-                {
-                    Id = 3,
-                    Name = "Margin",
-                    Percent = 80,
-                    BackgroundColor = Color.FromHex("#4ACer9")
-
-
-                },
-
-                new Project()
-                {
-                    Id = 3,
-                    Name = "Margin",
-                    Percent = 80,
-                    BackgroundColor = Color.FromHex("#33CFF9")
-
-
-                },
-
-                new Project()
-                {
-                    Id = 3,
-                    Name = "Margin",
-                    Percent = 80,
-                    BackgroundColor = Color.FromHex("#445CF9")
-
-
-                }
-
-            };
-
-            Squad = new ObservableRangeCollection<Profil>()
-            {
-                new Profil()
-                {
-                    Id="1",
-                    Name = "Hassoun Karoum",
-                    fonction = "Dev Mobile"
-                },
-                new Profil()
-                {
-                    Id = "2",
-                    Name = "Salma El Mejjaty",
-                    fonction = "Dev Web Back End"
-                }
-            };
         }
 
         public override void OnAppearing()
         {
             base.OnAppearing();
+
+            AddProjectCell = new Project()
+            {
+                Id = -1,
+                Name = "Ajouter",
+                OwnerBy = "Nouveau Projet",
+                ShowPercent = false,
+                PictureUrl = "https://cdn-icons-png.flaticon.com/512/70/70310.png"
+            };
 
             GetAllProjects();
 
@@ -121,8 +53,11 @@ namespace XForms.ViewModels
                 var result = await App.AppServices.GetProjects();
 
                 ProjectsList = new ObservableRangeCollection<Project>(result.data.ToList());
+                ProjectsList.Insert(0, AddProjectCell);
 
-                GetProjectSquad(ProjectsList[0].Id);
+                ProjectsList[1].IsSelected = true;
+
+                GetProjectSquad(ProjectsList[1].Id);
 
             }
             catch (Exception ex)
@@ -134,7 +69,6 @@ namespace XForms.ViewModels
         public async void GetProjectSquad(long ProjectId)
         {
             var result = await App.AppServices.GetProjectSquad(ProjectId);
-
             SquadList = new ObservableRangeCollection<ProfilResponse>(result.data.ToList());
 
 
@@ -174,7 +108,22 @@ namespace XForms.ViewModels
              {
                  canSelectProject = false;
 
-                 GetProjectSquad(model.Id);
+                 if(model.Id == -1)
+                 {
+                     App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
+                 }
+                 else
+                 {
+                     GetProjectSquad(model.Id);
+                     foreach (Project project in ProjectsList)
+                         project.IsSelected = false;
+
+                     model.IsSelected = true;
+
+                 }
+
+
+
 
              }
              catch (Exception ex)
@@ -188,6 +137,35 @@ namespace XForms.ViewModels
          }
         ,
         (_) => canSelectProject);
+
+
+        private AddMembersPopup addMembersPopup;
+        private bool canOpenAddMembersPopup = true;
+
+        public ICommand OpenAddMembersPopupCommand => new Command(async () =>
+        {
+            try
+            {
+                canOpenAddMembersPopup = false;
+
+                if (addMembersPopup == null)
+                    addMembersPopup = new AddMembersPopup() { BindingContext = this };
+
+                await PopupNavigation.Instance.PushSingleAsync(addMembersPopup);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canOpenAddMembersPopup = true;
+            }
+
+
+        }, () => canOpenAddMembersPopup);
+
+
     }
 }
 

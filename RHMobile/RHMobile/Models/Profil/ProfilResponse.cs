@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using XForms.Resources;
 
 namespace XForms.Models
 {
@@ -26,5 +27,8 @@ namespace XForms.Models
     public partial class ProfilResponse : BindableObject
     {
         public bool IsSelected { get; set; }
+
+
+        public string CheckedIcon => IsSelected ? FontAwesomeFonts.CheckCircle : FontAwesomeFonts.Circle;
     }
 }

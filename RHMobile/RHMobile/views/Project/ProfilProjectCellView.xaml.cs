@@ -33,6 +33,31 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), default,
             }
         }
 
+        public static readonly BindableProperty ShowOwnerProperty =
+BindableProperty.Create(nameof(ShowOwner), typeof(bool), typeof(View), false, BindingMode.TwoWay);
+
+        public bool ShowOwner
+        {
+            get { return (bool)GetValue(ShowOwnerProperty); }
+            set
+            {
+                SetValue(ShowOwnerProperty, value);
+            }
+        }
+
+        public static readonly BindableProperty ShowCheckBoxProperty =
+BindableProperty.Create(nameof(CheckBox), typeof(bool), typeof(View), false, BindingMode.TwoWay);
+
+        public bool ShowCheckBox
+        {
+            get { return (bool)GetValue(ShowCheckBoxProperty); }
+            set
+            {
+                SetValue(ShowCheckBoxProperty, value);
+            }
+        }
+
+
         public ProfilProjectCellView()
         {
             InitializeComponent();

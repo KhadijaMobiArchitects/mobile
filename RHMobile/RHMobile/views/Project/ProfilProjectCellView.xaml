@@ -6,6 +6,7 @@
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     x:Class="XForms.views.ProfilProjectCellView"
     xmlns:Local="clr-namespace:XForms"
+    xmlns:res="clr-namespace:XForms.Resources"
     x:Name="this"
     >
     <ContentView.Content
@@ -69,6 +70,7 @@
             </StackLayout>
 
             <cc:CornerView
+                IsVisible="{Binding ShowOwner,Source={x:Reference this}}"
                 VerticalOptions="CenterAndExpand"
                 Grid.Column="2"
                 StyleCorner="Default"
@@ -84,8 +86,26 @@
                 IsVisible="{Binding IsOwner}"
                     />
             </cc:CornerView>
-                
-        </Grid>
+
+            <cc:CustomButton
+                Grid.Column="2"
+                HeightRequest="20"
+                WidthRequest="20"
+                StyleCorner="Circle"
+                BackgroundColor="Transparent"
+                Padding="0"
+                IsVisible="{Binding ShowCheckBox,Source={x:Reference this}}"
+                >
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
+                        Glyph="{x:Static res:FontAwesomeFonts.CheckCircle}"
+                        Color="{StaticResource Green}"
+                        Size="20" />
+                </cc:CustomButton.ImageSource>
+
+            </cc:CustomButton>
+            </Grid>
 
             <BoxView
                 Grid.Row="1"

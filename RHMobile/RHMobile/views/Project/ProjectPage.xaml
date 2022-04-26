@@ -25,7 +25,7 @@
                     HasDescription="True"
                     Title="Projets client"
                     HasNotification="True"
-                    HasBackButton="False"
+                    HasBackButton="True"
                     Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
@@ -39,6 +39,7 @@
                 ItemsLayout="HorizontalGrid,1"               
                 Grid.Row="1"
                 Grid.RowSpan="2"
+                Margin="25,0,0,0"
                 >
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate>
@@ -74,6 +75,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <CellProject:ProfilProjectCellView
+                            ShowOwner="True"
                             />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -100,7 +102,7 @@
                 <cc:CustomButton
                     BackgroundColor="Transparent"
                     Padding="0"
-                    Command="{Binding AddProjectCommand}"
+                    Command="{Binding OpenAddMembersPopupCommand}"
                     >
                 <cc:CustomButton.ImageSource>
                     <FontImageSource                        

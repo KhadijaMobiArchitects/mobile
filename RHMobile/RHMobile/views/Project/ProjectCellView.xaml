@@ -29,7 +29,7 @@
                 Grid.ColumnSpan="3"
                 Padding="0,4"
                 Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
-                BackgroundColor="White"
+                BackgroundColor="{Binding BackgroundColor}"
                 >
                 <StackLayout
                     Spacing="4"
@@ -42,7 +42,7 @@
                 >
 
                 <svg:SvgCachedImage
-                Source="{Binding Image}"
+                Source="{Binding PictureUrl}"
                 Aspect="AspectFill"
                 />
             </cc:CornerView>
@@ -51,7 +51,7 @@
                         HorizontalOptions="Center"
                         FontSize="16"
                         FontAttributes="Bold"
-                        TextColor="Black"
+                        TextColor="{Binding TextColor}"
                         HorizontalTextAlignment="Center"
                         />
                     <Label
@@ -59,7 +59,7 @@
                         FontSize="12"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"
-                        TextColor="White"
+                        TextColor="{Binding TextColor}"
                         FontFamily="RubikRegular"
                         />
                 </StackLayout>
@@ -72,6 +72,7 @@
                 Grid.Column="1"
                 Grid.RowSpan="2"
                 BackgroundColor="#FE827D"
+                IsVisible="{Binding ShowPercent}"
                 >
                 <Label                    
                     Text="{Binding Percent,StringFormat='{0} %'}"

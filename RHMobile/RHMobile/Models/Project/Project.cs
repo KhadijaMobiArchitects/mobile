@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace XForms.Models
 {
-    public class Project : BindableObject
+    public partial class Project 
     { 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,9 +13,18 @@ namespace XForms.Models
         public DateTime EndedAt { get; set; }
         public string OwnerBy { get; set; }
         public string CreatedBy { get; set; }
-        public  Color BackgroundColor { get; set; }
-        public Color TextColor { get; set; }
-        public ImageSource Image { get; set; }
+        public string PictureUrl { get; set; }
 
+        //public ImageSource Image { get; set; }
+
+    }
+
+    public partial class Project : BindableObject
+    {
+        public bool IsSelected { get; set; }
+
+        public Color BackgroundColor => IsSelected ? Color.FromHex("#4ACFF9") : Color.White;
+        public Color TextColor => IsSelected ? Color.White : Color.Black;
+        public bool ShowPercent { get; set; } = true;
     }
 }
