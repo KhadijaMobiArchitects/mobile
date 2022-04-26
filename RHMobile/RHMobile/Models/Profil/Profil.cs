@@ -1,10 +1,18 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Xamarin.Forms;
+
 namespace XForms.Models
 {
-    public class Profil
+    public partial class Profil
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public String Name { get; set; }
         public String fonction { get; set; }
+        public bool IsSelected { get; set; }
+        public bool IsOwner { get; set; }
+
+
+
     }
 }

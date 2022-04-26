@@ -56,7 +56,7 @@
                         VerticalOptions="Center"
                         IsVisible="{Binding HasBackButton,Source={x:Reference this}}"
                         Padding="5"
-                        Command="{Binding NavigationBack}"
+                        Command="{Binding NavigationBack,Source={x:Reference this}}"
                 Opacity="0.8"                
                         >
 

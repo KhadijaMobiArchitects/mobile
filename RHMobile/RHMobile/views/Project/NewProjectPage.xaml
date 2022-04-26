@@ -8,11 +8,14 @@
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:Local="clr-namespace:XForms"
     xmlns:res="clr-namespace:XForms.Resources"
-    x:Class="XForms.views.NewProjectPage">
+    xmlns:CellProject="clr-namespace:XForms.views.Project"
+    x:Class="XForms.views.NewProjectPage"
+    x:Name="this"
+    >
     <Base:BasePage.Content>
         <Grid
            BackgroundColor="White"
-            RowDefinitions="auto,70,70,4*"
+            RowDefinitions="auto,30,30,10,4*"
             >
             <Shared:SmallReclangleBackground
                 Grid.RowSpan="2"
@@ -60,7 +63,7 @@
 
             </cc:CornerView>
             <Label
-                Grid.Row="2"
+                Grid.Row="3"
                 Text="Ajouter une identité visuel"
                 VerticalOptions="End"
                 HorizontalOptions="Center"
@@ -72,34 +75,123 @@
         <!--Body-->
 
         <Grid
-            Grid.Row="3"
-            Padding="30,10"
+            Grid.Row="4"
+            Padding="30,20"
+            RowDefinitions="auto,auto,auto"
+            RowSpacing="20"
             >
             <StackLayout>
 
-            <Label
+            <!--<Label
                 Text="Informations de projet"
                 TextColor="{StaticResource LabelColor}"
                 FontAttributes="Bold"
                 FontSize="15"
-                Padding="0,10"
+                />-->
+            <Label
+                Text="{Binding projectRequest.ProjectName}"
+                TextColor="{StaticResource LabelColor}"
+                FontAttributes="Bold"
+                FontSize="15"
                 />
 
             <cc:MaterialEntry
                 Placeholder="Nom du projet"
+                Text="{Binding projectRequest.ProjectName}"
                 />
             <cc:MaterialDatePicker
                     Placeholder="Date début"
-                    Date="{Binding StartDate}"
+                    Date="{Binding projectRequest.StartedAt}"
                     />
 
             <cc:MaterialDatePicker
                     Placeholder="Date Fin"
-                    Date="{Binding EndDate}"
+                    Date="{Binding projectRequest.EndedAt}"
             />
             </StackLayout>
-        </Grid>
+            <StackLayout
+                Grid.Row="1"
+                >
+            <Label
+                Text="Affectation des collaborateurs "
+                TextColor="{StaticResource LabelColor}"
+                FontAttributes="Bold"
+                FontSize="15"
+                />
 
+                <!--Chef du projet-->
+                <StackLayout>
+                    
+            <Label
+                Text="Chef du projet"
+                FontSize="13"
+                FontFamily="RubikRegular"
+                TextColor="{StaticResource PlaceholderColor}"
+                />
+            <CollectionView
+                ItemsSource="{Binding ProjectOwnerList}"
+                ItemsLayout="HorizontalGrid,1"
+                VerticalOptions="Start"
+                HorizontalScrollBarVisibility="Never"
+                >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding BindingContext.SelectOwnerCommand,Source={x:Reference this}}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                            </Grid.GestureRecognizers>
+                        <CellProject:SelectProfilCellView
+                            />
+                        </Grid>
+                    </DataTemplate>                    
+                </CollectionView.ItemTemplate>
+            </CollectionView>  
+                </StackLayout>
+
+            <!--Les membres de léquipe-->
+                <StackLayout>
+                    
+            <Label
+                Text="Choix des membres de l’équipe "
+                FontSize="13"
+                FontFamily="RubikRegular"
+                TextColor="{StaticResource PlaceholderColor}"
+                />
+            <CollectionView
+                ItemsSource="{Binding ProjectMembersList}"
+                ItemsLayout="HorizontalGrid,1"
+                VerticalOptions="Start"
+                HorizontalScrollBarVisibility="Never"
+
+                >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding BindingContext.SelectMemberCommand,Source={x:Reference this}}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                            </Grid.GestureRecognizers>
+                        <CellProject:SelectProfilCellView
+                            />
+                        </Grid>
+                    </DataTemplate>                    
+                </CollectionView.ItemTemplate>
+            </CollectionView>  
+                </StackLayout>
+
+
+            </StackLayout>
+            <cc:CustomButton
+                Grid.Row="2"
+                Text="Ajouter Projet"
+                CornerRadius="25"
+                />
+        </Grid>
         </Grid>
 
 

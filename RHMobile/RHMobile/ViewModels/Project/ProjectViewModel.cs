@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using XForms.Models;
+using XForms.views;
 
 namespace XForms.ViewModels
 {
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class ProjectViewModel :BaseViewModel
     {
         public ObservableRangeCollection<Project> Projects { get; set; }
-        public ObservableRangeCollection<Profil> Squad { get; set; }
+        public ObservableRangeCollection<Project> ProjectsList { get; set; }
 
+        public ObservableRangeCollection<Profil> Squad { get; set; }
+        public ObservableRangeCollection<SquadResponse> SquadResponseList { get; set; }
+        public ObservableRangeCollection<ProfilResponse> SquadList { get; set; }
 
         public ProjectViewModel()
         {
@@ -85,18 +92,102 @@ namespace XForms.ViewModels
             {
                 new Profil()
                 {
-                    Id=1,
+                    Id="1",
                     Name = "Hassoun Karoum",
                     fonction = "Dev Mobile"
                 },
                 new Profil()
                 {
-                    Id = 2,
+                    Id = "2",
                     Name = "Salma El Mejjaty",
                     fonction = "Dev Web Back End"
                 }
             };
+        }
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            GetAllProjects();
+
 
         }
+
+        public async void GetAllProjects()
+        {
+            try
+            {
+                var result = await App.AppServices.GetProjects();
+
+                ProjectsList = new ObservableRangeCollection<Project>(result.data.ToList());
+
+                GetProjectSquad(ProjectsList[0].Id);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public async void GetProjectSquad(long ProjectId)
+        {
+            var result = await App.AppServices.GetProjectSquad(ProjectId);
+
+            SquadList = new ObservableRangeCollection<ProfilResponse>(result.data.ToList());
+
+
+        }
+
+
+        private bool canAddProjectCommand = true;
+        public ICommand AddProjectCommand => new Command(async () =>
+        {
+            try
+            {
+                canAddProjectCommand = false;
+
+                App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
+
+
+                //var result = await App.AppServices.PostProject(projectRequest);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canAddProjectCommand = true;
+            }
+
+        },
+() => canAddProjectCommand);
+
+
+        private bool canSelectProject = true;
+        public ICommand SelectProjectCommand => new Command<Project>(async (model) =>
+         {
+             try
+             {
+                 canSelectProject = false;
+
+                 GetProjectSquad(model.Id);
+
+             }
+             catch (Exception ex)
+             {
+
+             }
+             finally
+             {
+                 canSelectProject = true;
+             }
+         }
+        ,
+        (_) => canSelectProject);
     }
 }
+

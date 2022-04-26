@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using XForms.views.Base;
@@ -134,6 +135,28 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
                 SetValue(ImageProfilProperty, value);
             }
         }
+
+        private bool canNavigationBack = true;
+        public ICommand NavigationBack => new Command(() =>
+        {
+            //App.Current.MainPage.Navigation.PushAsync(new LeaveRequest());
+            try
+            {
+                canNavigationBack = false;
+                App.Current.MainPage.Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canNavigationBack = true;
+            }
+
+
+        },
+    () => canNavigationBack);
 
         public SuggestionsNavBarView()
         {

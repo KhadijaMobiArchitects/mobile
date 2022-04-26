@@ -6,6 +6,7 @@
     x:Class="XForms.views.ProjectCellView"
     xmlns:Local="clr-namespace:XForms"
     Padding="5"
+    x:Name="this"
     >
     <ContentView.Content>
         <Grid            
@@ -13,12 +14,22 @@
             ColumnDefinitions="*,2*,*"
             RowSpacing="0"
             >
+            <Grid.GestureRecognizers                
+                >
+                <TapGestureRecognizer
+                    Grid.RowSpan="2"
+                    Grid.ColumnSpan="3"
+                    Command="{Binding Source={x:Reference this},Path=Parent.BindingContext.SelectProjectCommand}"
+                    CommandParameter="{Binding .}"
+                    />
+            </Grid.GestureRecognizers>
             <pcview:PancakeView
                 CornerRadius="8"
-                BackgroundColor="{Binding BackgroundColor}"
                 Grid.RowSpan="2"
                 Grid.ColumnSpan="3"
                 Padding="0,4"
+                Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
+                BackgroundColor="White"
                 >
                 <StackLayout
                     Spacing="4"
@@ -40,7 +51,7 @@
                         HorizontalOptions="Center"
                         FontSize="16"
                         FontAttributes="Bold"
-                        TextColor="White"
+                        TextColor="Black"
                         HorizontalTextAlignment="Center"
                         />
                     <Label

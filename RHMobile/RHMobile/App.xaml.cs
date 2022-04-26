@@ -24,12 +24,12 @@ namespace XForms
             {
                 AppPreferences.ClearCache();
 
-                MainPage = new NavigationPage(new WalkthroughPage());
+                MainPage = new NavigationPage(new SigninPage());
             }
             else
             {
-                AppHelpers.SetInitialView();
-                //MainPage = new NavigationPage(new SigninPage());
+                //AppHelpers.SetInitialView();
+                MainPage = new NavigationPage(new ProjectPage());
 
             }
 

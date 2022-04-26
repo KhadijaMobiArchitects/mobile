@@ -126,6 +126,7 @@
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\project.png" />
     <None Remove="Models\Profil\" />
+    <None Remove="Resources\Images\check.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -207,6 +208,7 @@
     <EmbeddedResource Include="Resources\Images\add.png" />
     <EmbeddedResource Include="Resources\Images\plus.png" />
     <EmbeddedResource Include="Resources\Images\project.png" />
+    <EmbeddedResource Include="Resources\Images\check.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />

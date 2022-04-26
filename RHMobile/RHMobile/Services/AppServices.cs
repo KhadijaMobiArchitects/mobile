@@ -24,6 +24,12 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListProject}", method: HttpVerbs.GET);
         }
+
+        public async Task<RESTServiceResponse<IEnumerable<ProfilResponse>>> GetProjectSquad(long projectId)
+        {
+            return await RESTHelper.GetRequest<IEnumerable<ProfilResponse>>(url: $"{AppUrls.GetRequestProjectSquad}?projectId={projectId}", method: HttpVerbs.GET);
+        }
+
         public async Task<RESTServiceResponse<IEnumerable<SituationProject>>> GetSituationsProject()
         {
             return await RESTHelper.GetRequest<IEnumerable<SituationProject>>(url: $"{AppUrls.GetRequestSituationProject}", method: HttpVerbs.GET);
@@ -31,7 +37,12 @@ namespace XForms.Services
 
         public async Task<RESTServiceResponse<object>> PostLeave(Leave postParams)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostRequestLeave}",postObject: postParams, method: HttpVerbs.POST);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostLeaveRequest}",postObject: postParams, method: HttpVerbs.POST);
+        }
+
+        public async Task<RESTServiceResponse<object>> PostProject(ProjectRequest postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostProjectRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
 
         public async Task<RESTServiceResponse<object>> DeleteLeave(long Id)

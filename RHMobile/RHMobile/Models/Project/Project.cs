@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace XForms.Models
 {
-    public class Project
+    public class Project : BindableObject
     { 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,8 +17,5 @@ namespace XForms.Models
         public Color TextColor { get; set; }
         public ImageSource Image { get; set; }
 
-        public Project()
-        {
-        }
     }
 }
