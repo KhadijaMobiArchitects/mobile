@@ -14,12 +14,17 @@ namespace XForms.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class ProjectViewModel :BaseViewModel
     {
-        public ObservableRangeCollection<Project> Projects { get; set; }
+        //public ObservableRangeCollection<Project> Projects { get; set; }
         public ObservableRangeCollection<Project> ProjectsList { get; set; }
 
         public ObservableRangeCollection<Profil> Squad { get; set; }
-        public ObservableRangeCollection<SquadResponse> SquadResponseList { get; set; }
         public ObservableRangeCollection<ProfilResponse> SquadList { get; set; }
+        public ObservableRangeCollection<ProfilResponse> AddMembersList { get; set; }
+        public ObservableRangeCollection<ProfilResponse> SearchMembersList { get; set; }
+
+
+        public String SearchWord { get; set; }
+
 
         private Project AddProjectCell;
 
@@ -42,6 +47,17 @@ namespace XForms.ViewModels
             };
 
             GetAllProjects();
+
+
+            this.PropertyChanged += (s, e) =>
+            {
+                if (
+                e.PropertyName == nameof(SearchWord)
+                )
+                {
+                    Search(SearchWord);
+                }
+            };
 
 
         }
@@ -68,8 +84,20 @@ namespace XForms.ViewModels
 
         public async void GetProjectSquad(long ProjectId)
         {
-            var result = await App.AppServices.GetProjectSquad(ProjectId);
-            SquadList = new ObservableRangeCollection<ProfilResponse>(result.data.ToList());
+            try
+            {
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.GetProjectSquad(ProjectId);
+                AppHelpers.LoadingHide();
+                SquadList = new ObservableRangeCollection<ProfilResponse>(result.data.ToList());
+                AddMembersList = new ObservableRangeCollection<ProfilResponse>(result.data.ToList());
+                SearchMembersList = AddMembersList;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
 
 
         }
@@ -138,6 +166,29 @@ namespace XForms.ViewModels
         ,
         (_) => canSelectProject);
 
+        private bool canSelectProfil = true;
+        public ICommand SelectProfilCommand => new Command<ProfilResponse>(async (model) =>
+        {
+            try
+            {
+                canSelectProfil = false;
+                model.IsSelected = ! model.IsSelected;
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canSelectProfil = true;
+            }
+        }
+       ,
+       (_) => canSelectProfil);
+
+
 
         private AddMembersPopup addMembersPopup;
         private bool canOpenAddMembersPopup = true;
@@ -164,6 +215,35 @@ namespace XForms.ViewModels
 
 
         }, () => canOpenAddMembersPopup);
+
+        public void Search(string word)
+        {
+
+            try
+            {
+                if (word.Length > 0)
+                {
+                    SearchMembersList = new ObservableRangeCollection<ProfilResponse>();
+                    foreach (ProfilResponse profil in AddMembersList)
+                    {
+                        if (profil.FirstName.ToLower().Contains(word.ToLower()) || profil.LastName.ToLower().Contains(word.ToLower()))
+                        {
+                            SearchMembersList.Add(profil);
+                        }
+                    }
+                }
+
+                else if(word.Length == 0)
+                    SearchMembersList = AddMembersList;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+
+            }
+
+        }
 
 
     }

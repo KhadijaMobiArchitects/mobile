@@ -18,6 +18,7 @@
                 StartGradient="{StaticResource StartGradientAdmin}"
                 EndGradient="{StaticResource EndGradientAdmin}"
                 />
+
                     <!--Header-->
                     <Shared:SuggestionsNavBarView
                     x:Name="MyHeader"

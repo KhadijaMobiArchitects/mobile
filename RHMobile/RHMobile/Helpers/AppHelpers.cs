@@ -69,6 +69,19 @@ namespace XForms
             }
         }
 
+        public static Color LookupColor(string key)
+        {
+            try
+            {
+                Application.Current.Resources.TryGetValue(key, out var newColor);
+                return (Color)newColor;
+            }
+            catch
+            {
+                return Color.White;
+            }
+        }
+
         //public static void Alert(string message = "", int durationInMs = 5000, Exception exception = default)
         //{
         //    if (exception != default)

@@ -18,8 +18,7 @@
 
         <TapGestureRecognizer           
             Grid.ColumnSpan="2"
-            Command="{Binding SelectProfil}"
-            CommandParameter="{Binding .}"
+            Tapped="TapGestureRecognizer_Tapped"
             />
 
             </Grid.GestureRecognizers>
@@ -39,7 +38,6 @@
             HeightRequest="50"
             StyleCorner="Circle"
             >
-
                 <svg:SvgCachedImage
                 Source="{Local:ImageResource profil.png}"
                 Aspect="AspectFill"
@@ -50,15 +48,24 @@
                 Grid.Column="1"
                 VerticalOptions="Center"
                 >
-                <Label
+                    <Label
                     Text="{Binding FirstName}"
                     FontAttributes="Bold"
                     FontSize="14"
                     TextColor="#33373D"
                     VerticalTextAlignment="Center"
-                    />
+                    >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding FirstName}" />
+                                <Span Text=" "/>
+                                <Span Text="{Binding LastName}"/>
+                            </FormattedString>
 
-                <Label
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label
                     Text="{Binding RefFunctionLabel}"
                     FontFamily="RubikRegular"
                     FontSize="12"
@@ -66,7 +73,6 @@
                     VerticalTextAlignment="Center"
                     />
   
-
             </StackLayout>
 
             <cc:CornerView
@@ -86,8 +92,10 @@
                 IsVisible="{Binding IsOwner}"
                     />
             </cc:CornerView>
+                                     <!--Glyph="{x:Static res:FontAwesomeFonts.CheckCircle}"-->
 
             <cc:CustomButton
+                x:Name="checkBox"
                 Grid.Column="2"
                 HeightRequest="20"
                 WidthRequest="20"
@@ -95,12 +103,13 @@
                 BackgroundColor="Transparent"
                 Padding="0"
                 IsVisible="{Binding ShowCheckBox,Source={x:Reference this}}"
+                Clicked="TapGestureRecognizer_Tapped"
                 >
                 <cc:CustomButton.ImageSource>
                     <FontImageSource
-                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
-                        Glyph="{x:Static res:FontAwesomeFonts.CheckCircle}"
-                        Color="{StaticResource Green}"
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{Binding CheckedIcon}"
+                        Color="{Binding CheckedColor}"
                         Size="20" />
                 </cc:CustomButton.ImageSource>
 

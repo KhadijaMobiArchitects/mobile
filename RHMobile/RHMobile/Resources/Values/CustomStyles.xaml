@@ -118,6 +118,27 @@
             Value="Material" />
     </Style>
 
+    <!--Title Style-->
+
+    <Style
+        x:Key="TitleStyle"
+        TargetType="Label"
+        >
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource LabelColor}"
+            />
+        <Setter
+            Property="FontAttributes"
+            Value="Bold"
+            />
+        <Setter
+            Property="FontSize"
+            Value="15"
+            />
+        
+    </Style>
+
 
 
 </ResourceDictionary>

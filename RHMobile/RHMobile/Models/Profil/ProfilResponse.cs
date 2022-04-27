@@ -30,5 +30,7 @@ namespace XForms.Models
 
 
         public string CheckedIcon => IsSelected ? FontAwesomeFonts.CheckCircle : FontAwesomeFonts.Circle;
+        public Color CheckedColor => IsSelected ? Color.Green : AppHelpers.LookupColor("PlaceholderColor");
+
     }
 }

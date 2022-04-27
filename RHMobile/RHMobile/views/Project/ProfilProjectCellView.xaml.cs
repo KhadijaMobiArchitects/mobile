@@ -46,7 +46,7 @@ BindableProperty.Create(nameof(ShowOwner), typeof(bool), typeof(View), false, Bi
         }
 
         public static readonly BindableProperty ShowCheckBoxProperty =
-BindableProperty.Create(nameof(CheckBox), typeof(bool), typeof(View), false, BindingMode.TwoWay);
+BindableProperty.Create(nameof(ShowCheckBox), typeof(bool), typeof(View), false, BindingMode.TwoWay);
 
         public bool ShowCheckBox
         {
@@ -71,5 +71,17 @@ BindableProperty.Create(nameof(CheckBox), typeof(bool), typeof(View), false, Bin
             }
 
         }
+
+        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            //checkBox.Focus();
+
+            if((sender as View).BindingContext is ProfilResponse item)
+            {
+                (this.Parent.BindingContext as ProjectViewModel).SelectProfilCommand.Execute(item);
+
+            }
+        }
+
     }
 }

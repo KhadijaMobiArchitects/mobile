@@ -56,6 +56,18 @@ namespace XForms.Controls
             }
         }
 
+        public static readonly BindableProperty IsSearchProperty =
+        BindableProperty.Create(nameof(IsSearch), typeof(bool), typeof(View), false, BindingMode.TwoWay);
+
+        public bool IsSearch
+        {
+            get { return (bool)GetValue(IsSearchProperty); }
+            set
+            {
+                SetValue(IsSearchProperty, value);
+            }
+        }
+
         public string PasswordGlyph { get; set; } = XForms.Resources.FontAwesomeFonts.Eye;
 
         public MaterialEntry()
@@ -79,6 +91,11 @@ namespace XForms.Controls
 
             NativeEntry.Focus();
             NativeEntry.CursorPosition = (NativeEntry.Text ?? "").Length;
+        }
+
+        void SearchButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            NativeEntry.Focus();
         }
     }
 }

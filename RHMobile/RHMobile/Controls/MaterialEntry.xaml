@@ -34,8 +34,8 @@
             IsPassword="{Binding IsPassword, Source={x:Reference this}}"
             HorizontalOptions="FillAndExpand"
             />
-
-                <cc:CustomButton
+                <Grid>
+                    <cc:CustomButton
                 x:Name="PasswordActionButton"
                 TranslationX="-5"
                 StyleCorner="Circle"
@@ -45,14 +45,35 @@
                 IsVisible="{Binding IsPassword, Source={x:Reference this}}"
                 Padding="5"
                 Clicked="ShowOrHidePassword_Clicked">
-                    <cc:CustomButton.ImageSource>
-                        <FontImageSource
+                        <cc:CustomButton.ImageSource>
+                            <FontImageSource
                         FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
                         Glyph="{Binding PasswordGlyph, Source={x:Reference this}}"
                         Size="20"
                             />
-                    </cc:CustomButton.ImageSource>
-                </cc:CustomButton>
+                        </cc:CustomButton.ImageSource>
+                    </cc:CustomButton>
+
+
+                    <cc:CustomButton
+                    Style="{StaticResource InputActionStyle}"
+                    Padding="5"
+                    StyleCorner="Circle"
+                    BackgroundColor="Transparent"
+                    Clicked="SearchButton_Clicked"
+                    IsVisible="{Binding IsSearch, Source={x:Reference this}}"
+                    >
+                        <cc:CustomButton.ImageSource>
+                            <FontImageSource
+                            FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                            Glyph="{x:Static res:FontAwesomeFonts.Search}"
+                            Size="20"
+                            Color="{StaticResource PlaceholderColor}"
+                            />
+                        </cc:CustomButton.ImageSource>
+
+                    </cc:CustomButton>
+                </Grid>
 
             </StackLayout>
 
