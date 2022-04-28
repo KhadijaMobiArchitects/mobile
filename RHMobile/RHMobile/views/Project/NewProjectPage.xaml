@@ -10,6 +10,9 @@
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:CellProject="clr-namespace:XForms.views.Project"
     x:Class="XForms.views.NewProjectPage"
+                 xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             Title="Safe Area"
+             ios:Page.UseSafeArea="False"
     x:Name="this"
     >
     <Base:BasePage.Content>

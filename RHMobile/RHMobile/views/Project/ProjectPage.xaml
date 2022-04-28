@@ -7,7 +7,12 @@
     xmlns:CellProject="clr-namespace:XForms.views" xmlns:cc="clr-namespace:XForms.Controls"
     NavigationPage.HasNavigationBar="False"
     xmlns:res="clr-namespace:XForms.Resources"
-    x:Class="XForms.views.ProjectPage">
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:Local="clr-namespace:XForms"
+    x:Class="XForms.views.ProjectPage"
+    x:Name="this"
+    >
     <Base:BasePage.Content>
         <Grid
            BackgroundColor="White"
@@ -19,8 +24,8 @@
                 EndGradient="{StaticResource EndGradientAdmin}"
                 />
 
-                    <!--Header-->
-                    <Shared:SuggestionsNavBarView
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
                     x:Name="MyHeader"
                     HasTitle="True"
                     HasDescription="True"
@@ -32,7 +37,7 @@
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />
 
-            <!--project List--> 
+            <!--project List-->
 
             <CollectionView                
                 HorizontalScrollBarVisibility="Never"
@@ -40,8 +45,65 @@
                 ItemsLayout="HorizontalGrid,1"               
                 Grid.Row="1"
                 Grid.RowSpan="2"
-                Margin="25,0,0,0"
                 >
+                <CollectionView.Header>
+                    <Grid
+                        Padding="25,5,5,5"
+                        RowDefinitions="*,15,15"
+                        RowSpacing="0"
+                        >
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Grid.RowSpan="3"
+                                Command="{Binding BindingContext.AddProjectCommmand,Source={x:Reference this}}"
+                                />
+                        </Grid.GestureRecognizers>
+
+                        <pcview:PancakeView
+                            Grid.RowSpan="2"
+                            HorizontalOptions="Start"
+                            WidthRequest="100"
+                            CornerRadius="8"
+                            Padding="0,4"
+                            Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
+                            BackgroundColor="White"
+                            >
+                            <StackLayout
+                                Spacing="4"
+                                >
+                                <cc:CornerView
+                                    HeightRequest="60"
+                                    StyleCorner="Circle"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    >
+                                    <svg:SvgCachedImage
+                                        Source="{Local:ImageResource plus.png }"
+                                        Aspect="AspectFill"
+                                        />
+                                </cc:CornerView>
+                                <Label
+                                    Text="Ajouter"
+                                    HorizontalOptions="Center"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    HorizontalTextAlignment="Center"
+                                    />
+                                <Label
+                                    Text="Nouveau Projet"
+                                    FontSize="12"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    TextColor="Black"
+                                    FontFamily="RubikRegular"
+                                    />
+                            </StackLayout>
+
+                        </pcview:PancakeView>
+                    </Grid>
+
+                </CollectionView.Header>
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate>
                     </DataTemplate>
@@ -89,7 +151,7 @@
                 />
 
                 </CollectionView.Footer>-->
-                
+
             </CollectionView>
 
             <cc:CornerView
@@ -105,15 +167,15 @@
                     Padding="0"
                     Command="{Binding OpenAddMembersPopupCommand}"
                     >
-                <cc:CustomButton.ImageSource>
-                    <FontImageSource                        
+                    <cc:CustomButton.ImageSource>
+                        <FontImageSource                        
                         FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
                         Glyph="{x:Static res:FontAwesomeFonts.PlusCircle}"
                         Size="50"
                         Color="{StaticResource Primary}"
                         
                         />
-                </cc:CustomButton.ImageSource>
+                    </cc:CustomButton.ImageSource>
                 </cc:CustomButton>
 
             </cc:CornerView>

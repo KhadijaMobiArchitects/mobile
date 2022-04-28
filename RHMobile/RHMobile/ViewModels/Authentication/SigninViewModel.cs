@@ -58,6 +58,7 @@ namespace XForms.ViewModels
 
                 if (result?.succeeded == true && result?.data != null)
                 {
+                    AppPreferences.IsAleardyCheckHasNotchScreen = false;
                     AppPreferences.Token = result.data.JwToken;
                     AppPreferences.UserId = result.data.UserId;
                     AppPreferences.IsVerified = result.data.isVerified;

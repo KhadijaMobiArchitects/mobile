@@ -55,7 +55,7 @@
                         HorizontalTextAlignment="Center"
                         />
                     <Label
-                        Text="Mehdi mellali"
+                        Text="{Binding Parent.BindingContext.ProjectOwnerName,Source={x:Reference this}}"
                         FontSize="12"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"

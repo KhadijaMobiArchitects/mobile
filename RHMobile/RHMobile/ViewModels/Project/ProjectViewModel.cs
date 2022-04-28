@@ -22,6 +22,9 @@ namespace XForms.ViewModels
         public ObservableRangeCollection<ProfilResponse> AddMembersList { get; set; }
         public ObservableRangeCollection<ProfilResponse> SearchMembersList { get; set; }
 
+        public string  ProjectOwnerName { get; set; }
+
+        public string SearchPartKeyword { get; set; }
 
         public String SearchWord { get; set; }
 
@@ -37,14 +40,14 @@ namespace XForms.ViewModels
         {
             base.OnAppearing();
 
-            AddProjectCell = new Project()
-            {
-                Id = -1,
-                Name = "Ajouter",
-                OwnerBy = "Nouveau Projet",
-                ShowPercent = false,
-                PictureUrl = "https://cdn-icons-png.flaticon.com/512/70/70310.png"
-            };
+            //AddProjectCell = new Project()
+            //{
+            //    Id = -1,
+            //    Name = "Ajouter",
+            //    OwnerBy = "Nouveau Projet",
+            //    ShowPercent = false,
+            //    PictureUrl = "https://cdn-icons-png.flaticon.com/512/70/70310.png"
+            //};
 
             GetAllProjects();
 
@@ -52,10 +55,11 @@ namespace XForms.ViewModels
             this.PropertyChanged += (s, e) =>
             {
                 if (
-                e.PropertyName == nameof(SearchWord)
+                e.PropertyName == nameof(SearchPartKeyword)
                 )
                 {
-                    Search(SearchWord);
+                    //Search(SearchWord);
+                    SearchCommand.Execute(null);
                 }
             };
 
@@ -69,11 +73,14 @@ namespace XForms.ViewModels
                 var result = await App.AppServices.GetProjects();
 
                 ProjectsList = new ObservableRangeCollection<Project>(result.data.ToList());
-                ProjectsList.Insert(0, AddProjectCell);
+                //ProjectsList.Insert(0, AddProjectCell);
 
-                ProjectsList[1].IsSelected = true;
+                if(ProjectsList.Any())
+                {
+                    ProjectsList[0].IsSelected = true;
+                    GetProjectSquad(ProjectsList[0].Id);
+                }
 
-                GetProjectSquad(ProjectsList[1].Id);
 
             }
             catch (Exception ex)
@@ -93,6 +100,16 @@ namespace XForms.ViewModels
                 AddMembersList = new ObservableRangeCollection<ProfilResponse>(result.data.ToList());
                 SearchMembersList = AddMembersList;
 
+                foreach (ProfilResponse profil in SquadList)
+                {
+                    if (profil.IsOwner)
+                    {
+                        ProjectOwnerName = profil.FirstName + " " + profil.LastName;
+                        break;
+                    }
+
+                }
+                    ProjectsList.FirstOrDefault(x => x.Id == ProjectId).OwnerName = ProjectOwnerName;
             }
             catch (Exception ex)
             {
@@ -136,20 +153,12 @@ namespace XForms.ViewModels
              {
                  canSelectProject = false;
 
-                 if(model.Id == -1)
-                 {
-                     App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
-                 }
-                 else
-                 {
-                     GetProjectSquad(model.Id);
-                     foreach (Project project in ProjectsList)
-                         project.IsSelected = false;
 
-                     model.IsSelected = true;
+                 GetProjectSquad(model.Id);
+                 foreach (Project project in ProjectsList)
+                     project.IsSelected = false;
 
-                 }
-
+                 model.IsSelected = true;
 
 
 
@@ -165,6 +174,26 @@ namespace XForms.ViewModels
          }
         ,
         (_) => canSelectProject);
+
+        private bool canAddProject = true;
+        public ICommand AddProjectCommmand => new Command(async () =>
+        {
+            try
+            {
+                canAddProject = false;
+                App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canAddProject = true;
+            }
+        },
+          () => canAddProject);
 
         private bool canSelectProfil = true;
         public ICommand SelectProfilCommand => new Command<ProfilResponse>(async (model) =>
@@ -244,6 +273,32 @@ namespace XForms.ViewModels
             }
 
         }
+
+        private bool CanSearch = true;
+        public ICommand SearchCommand => new Command(() =>
+        {
+            try
+            {
+                CanSearch = false;
+
+ 
+                SearchMembersList = new ObservableRangeCollection<ProfilResponse>();
+                var key = (SearchPartKeyword ?? "").ToLower();
+                if(AddMembersList?.Count > 0)
+                {
+                    var list = AddMembersList.Where(member => (member.LastName + member.FirstName ?? "").ToLower().Contains(key));
+                    SearchMembersList.ReplaceRange(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                //Logger?.LogError(ex, showError: true);
+            }
+            finally
+            {
+                CanSearch = true;
+            }
+        }, () => CanSearch);
 
 
     }

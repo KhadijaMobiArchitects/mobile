@@ -26,5 +26,6 @@ namespace XForms.Models
         public Color BackgroundColor => IsSelected ? Color.FromHex("#4ACFF9") : Color.White;
         public Color TextColor => IsSelected ? Color.White : Color.Black;
         public bool ShowPercent { get; set; } = true;
+        public String OwnerName { get; set; }
     }
 }

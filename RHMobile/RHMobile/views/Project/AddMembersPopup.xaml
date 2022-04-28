@@ -47,7 +47,7 @@
                 CornerRadiuss="20"
                 Padding="20,0"
                 IsSearch="True"
-                Text="{Binding SearchWord}"
+                Text="{Binding SearchPartKeyword}"
                 />
             <CollectionView
                 ItemsLayout="VerticalGrid,1"   
