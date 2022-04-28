@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XForms.Models;
@@ -9,6 +10,7 @@ namespace XForms.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class NewProjectViewModel : BaseViewModel
     {
+        public ObservableCollection<ProfilResponse> MembersList { get; set; }
         public ObservableCollection<ProfilResponse> ProjectMembersList { get; set; }
         public ObservableCollection<ProfilResponse> ProjectOwnerList { get; set; }
         public ProjectRequest projectRequest { get;set; }
@@ -19,24 +21,33 @@ namespace XForms.ViewModels
 
             projectRequest = new ProjectRequest();
 
-            ProjectMembersList = new ObservableCollection<ProfilResponse>()
+            GetProfils();
+        }
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+
+        }
+
+        public async void GetProfils()
+        {
+            try
             {
-                new ProfilResponse()
+                var result = await App.AppServices.GetProfils();
+                if(result.succeeded)
                 {
-                    RecId ="11"
+                    MembersList = new ObservableCollection<ProfilResponse>(result.data.ToList());
+                    ProjectOwnerList = MembersList;
+                    ProjectMembersList = MembersList;
 
                 }
-                
-            };
-            ProjectOwnerList = new ObservableCollection<ProfilResponse>()
+
+            }
+            catch (Exception ex)
             {
-                new ProfilResponse()
-                {
-                    RecId ="11"
 
-
-                }
-            };
+            }
         }
 
         #region Chef du projet
@@ -49,9 +60,10 @@ namespace XForms.ViewModels
                 canSelectOwner = false;
 
                 for (int i = 0; i < ProjectOwnerList.Count; i++)
-                    ProjectOwnerList[i].IsSelected = false;
+                    ProjectOwnerList[i].IsSelectedAsOwner = false;
+                //ProjectOwnerList.Where(x => (x.IsSelectedAsOwner = false));
 
-                model.IsSelected = true;
+                model.IsSelectedAsOwner = true;
 
             }
             catch (Exception ex)
@@ -76,7 +88,17 @@ namespace XForms.ViewModels
            try
            {
                canSelectMember = false;
-               model.IsSelected = !model.IsSelected;
+               if (model.IsOwner)
+               {
+                   model.IsSelectedAsMember = false;
+               }
+               else
+               {
+                   model.IsSelectedAsMember = !model.IsSelectedAsMember;
+               }
+
+
+               //var  owner = ProjectOwnerList.Where(owner => (owner.IsSelected));
            }
            catch (Exception ex)
            {

@@ -19,7 +19,6 @@ namespace XForms
         public App()
         {
             InitializeComponent();
-
             if (Xamarin.Essentials.VersionTracking.IsFirstLaunchEver)
             {
                 AppPreferences.ClearCache();

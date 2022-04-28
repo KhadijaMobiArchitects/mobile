@@ -27,5 +27,13 @@ namespace XForms.Models
         public Color TextColor => IsSelected ? Color.White : Color.Black;
         public bool ShowPercent { get; set; } = true;
         public String OwnerName { get; set; }
+
+        //public Color PercentBackgroundColor => Percent switch
+        //{
+        //    Percent < 30 => AppHelpers.LookupColor("postponedColor"),
+        //    (Percent > 30 && Percent < 70) => AppHelpers.LookupColor("InProgessColor"),
+        //    Percent > 70 => AppHelpers.LookupColor("InProgessColor")
+
+        //};
     }
 }

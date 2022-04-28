@@ -23,17 +23,41 @@ BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(View),false, Bi
             }
         }
 
-//        public static readonly BindableProperty SelectProfilProperty =
-//BindableProperty.Create(nameof(SelectProfil), typeof(ICommand), typeof(View), default, BindingMode.TwoWay);
+        public static readonly BindableProperty IsSelectionOwnerProperty =
+BindableProperty.Create(nameof(IsSelectionOwner), typeof(bool), typeof(View), false, BindingMode.TwoWay);
 
-//        public ICommand SelectProfil
-//        {
-//            get { return (ICommand)GetValue(SelectProfilProperty); }
-//            set
-//            {
-//                SetValue(SelectProfilProperty, value);
-//            }
-//        }
+        public bool IsSelectionOwner
+        {
+            get { return (bool)GetValue(IsSelectionOwnerProperty); }
+            set
+            {
+                SetValue(IsSelectionOwnerProperty, value);
+            }
+        }
+
+        public static readonly BindableProperty IsSelectionMembersProperty =
+BindableProperty.Create(nameof(IsSelectionMembers), typeof(bool), typeof(View), false, BindingMode.TwoWay);
+
+        public bool IsSelectionMembers
+        {
+            get { return (bool)GetValue(IsSelectionMembersProperty); }
+            set
+            {
+                SetValue(IsSelectionMembersProperty, value);
+            }
+        }
+
+        //        public static readonly BindableProperty SelectProfilProperty =
+        //BindableProperty.Create(nameof(SelectProfil), typeof(ICommand), typeof(View), default, BindingMode.TwoWay);
+
+        //        public ICommand SelectProfil
+        //        {
+        //            get { return (ICommand)GetValue(SelectProfilProperty); }
+        //            set
+        //            {
+        //                SetValue(SelectProfilProperty, value);
+        //            }
+        //        }
 
         public SelectProfilCellView()
         {

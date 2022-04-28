@@ -31,12 +31,26 @@
                     <!--IsVisible="{Binding IsChecked,Source={x:Reference this}}"-->
 
             <cc:CornerView
-                IsVisible="{Binding IsSelected}"
+                IsVisible="{Binding IsSelectionOwner,Source={x:Reference this}}"
                 Grid.Column="2"
                 Grid.Row="0"
                 StyleCorner="Circle"
                 >
                 <svg:SvgCachedImage
+                    IsVisible="{Binding IsSelectedAsOwner}"
+                    Source="{Local:ImageResource check.png}"
+                    Aspect="AspectFill"
+                    />
+            </cc:CornerView>
+
+            <cc:CornerView
+                IsVisible="{Binding IsSelectionMembers,Source={x:Reference this}}"
+                Grid.Column="2"
+                Grid.Row="0"
+                StyleCorner="Circle"
+                >
+                <svg:SvgCachedImage
+                    IsVisible="{Binding IsSelectedAsMember}"
                     Source="{Local:ImageResource check.png}"
                     Aspect="AspectFill"
                     />

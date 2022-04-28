@@ -22,6 +22,8 @@ namespace XForms.ViewModels
         public ObservableRangeCollection<ProfilResponse> AddMembersList { get; set; }
         public ObservableRangeCollection<ProfilResponse> SearchMembersList { get; set; }
 
+        public int NumberOfProjects { get; set; }
+
         public string  ProjectOwnerName { get; set; }
 
         public string SearchPartKeyword { get; set; }
@@ -51,7 +53,6 @@ namespace XForms.ViewModels
 
             GetAllProjects();
 
-
             this.PropertyChanged += (s, e) =>
             {
                 if (
@@ -62,8 +63,6 @@ namespace XForms.ViewModels
                     SearchCommand.Execute(null);
                 }
             };
-
-
         }
 
         public async void GetAllProjects()
@@ -80,7 +79,7 @@ namespace XForms.ViewModels
                     ProjectsList[0].IsSelected = true;
                     GetProjectSquad(ProjectsList[0].Id);
                 }
-
+                NumberOfProjects = ProjectsList.Count;
 
             }
             catch (Exception ex)
@@ -115,10 +114,7 @@ namespace XForms.ViewModels
             {
 
             }
-
-
         }
-
 
         private bool canAddProjectCommand = true;
         public ICommand AddProjectCommand => new Command(async () =>
@@ -128,7 +124,6 @@ namespace XForms.ViewModels
                 canAddProjectCommand = false;
 
                 App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
-
 
                 //var result = await App.AppServices.PostProject(projectRequest);
 

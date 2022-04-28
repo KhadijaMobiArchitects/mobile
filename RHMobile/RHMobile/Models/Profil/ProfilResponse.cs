@@ -27,7 +27,8 @@ namespace XForms.Models
     public partial class ProfilResponse : BindableObject
     {
         public bool IsSelected { get; set; }
-
+        public bool IsSelectedAsOwner { get; set; }
+        public bool IsSelectedAsMember { get; set; } 
 
         public string CheckedIcon => IsSelected ? FontAwesomeFonts.CheckCircle : FontAwesomeFonts.Circle;
         public Color CheckedColor => IsSelected ? Color.Green : AppHelpers.LookupColor("PlaceholderColor");

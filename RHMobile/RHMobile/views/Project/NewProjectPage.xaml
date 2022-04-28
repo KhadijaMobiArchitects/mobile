@@ -10,15 +10,15 @@
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:CellProject="clr-namespace:XForms.views.Project"
     x:Class="XForms.views.NewProjectPage"
-                 xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             Title="Safe Area"
-             ios:Page.UseSafeArea="False"
+        xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    Title="Safe Area"
+    ios:Page.UseSafeArea="False"
     x:Name="this"
     >
     <Base:BasePage.Content>
         <Grid
            BackgroundColor="White"
-            RowDefinitions="auto,30,30,10,4*"
+            RowDefinitions="auto,20,20,10,4*"
             >
             <Shared:SmallReclangleBackground
                 Grid.RowSpan="2"
@@ -30,11 +30,9 @@
             <Shared:SuggestionsNavBarView
                     x:Name="MyHeader"
                     HasTitle="True"
-                    HasDescription="True"
-                    Title="Projets client"
-                    HasNotification="True"
+                    HasDescription="False"
+                    Title="Nouveau projet"
                     HasBackButton="True"
-                    Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />
@@ -45,19 +43,17 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 BackgroundColor="#D2DCF1"
-                HeightRequest="80"
-
                 >
 
                 <cc:CustomButton
-                    Padding="0"
+                    Padding="10"
                     BackgroundColor="Transparent"
                     >
                     <cc:CustomButton.ImageSource>
                    <FontImageSource                        
                         FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
                         Glyph="{x:Static res:FontAwesomeFonts.Image}"
-                        Size="30"
+                        Size="40"
                         Color="{StaticResource PlaceholderColor}"
                         
                         />
@@ -67,12 +63,12 @@
             </cc:CornerView>
             <Label
                 Grid.Row="3"
-                Text="Ajouter une identité visuel"
-                VerticalOptions="End"
+                Text="Ajouter une identité visuelle"
+                VerticalOptions="Center"
                 HorizontalOptions="Center"
                 FontFamily="RubikBold"
                 Opacity="0.4"
-                FontSize="13"
+                FontSize="10"
                 />
 
         <!--Body-->
@@ -88,13 +84,9 @@
             <Label
                 Text="Informations de projet"
                 Style="{StaticResource TitleStyle}"
+                Padding="0,0,0,8"
                 />
-            <!--<Label
-                Text="{Binding projectRequest.ProjectName}"
-                TextColor="{StaticResource LabelColor}"
-                FontAttributes="Bold"
-                FontSize="15"
-                />-->
+
 
             <cc:MaterialEntry
                 Placeholder="Nom du projet"
@@ -146,6 +138,7 @@
                                     />
                             </Grid.GestureRecognizers>
                         <CellProject:SelectProfilCellView
+                            IsSelectionOwner="True"
                             />
                         </Grid>
                     </DataTemplate>                    
@@ -179,6 +172,7 @@
                                     />
                             </Grid.GestureRecognizers>
                         <CellProject:SelectProfilCellView
+                            IsSelectionMembers="True"
                             />
                         </Grid>
                     </DataTemplate>                    

@@ -166,7 +166,7 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
             {
                 var isHasNotchScreen = AppHelpers.CheckHasNotchScreen();
 
-                this.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 20, 0);
+                this.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 30, 0);
             }
         }
         

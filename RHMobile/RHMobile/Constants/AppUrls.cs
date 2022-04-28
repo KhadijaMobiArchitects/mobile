@@ -15,11 +15,13 @@ namespace XForms.Constants
         public const string GetRequestListProject = BaseUrl + "Projects/GetProjects";
         public const string GetRequestSituationProject = BaseUrl + "RefSituationsProject/";
         public const string GetRequestProjectSquad = BaseUrl + "projects/getSquad/";
+        public const string GetRequestProfils = BaseUrl + "Profils/GetProfils";
+
 
 
 
         public const string PostLeaveRequest = BaseUrl + "leaves/postLeave/";
-        public const string DeleteRequestLeave = BaseUrl + "leaves/deleteLeave";
+        public const string DeleteLeaveRequest = BaseUrl + "leaves/deleteLeave";
         public const string PostProjectRequest = BaseUrl + "projects/CreateProject";
 
 

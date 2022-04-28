@@ -30,6 +30,11 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<IEnumerable<ProfilResponse>>(url: $"{AppUrls.GetRequestProjectSquad}?projectId={projectId}", method: HttpVerbs.GET);
         }
 
+        public async Task<RESTServiceResponse<IEnumerable<ProfilResponse>>> GetProfils()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<ProfilResponse>>(url: $"{AppUrls.GetRequestProfils}", method: HttpVerbs.GET);
+        }
+
         public async Task<RESTServiceResponse<IEnumerable<SituationProject>>> GetSituationsProject()
         {
             return await RESTHelper.GetRequest<IEnumerable<SituationProject>>(url: $"{AppUrls.GetRequestSituationProject}", method: HttpVerbs.GET);
@@ -47,7 +52,7 @@ namespace XForms.Services
 
         public async Task<RESTServiceResponse<object>> DeleteLeave(long Id)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteRequestLeave}/{Id}", method: HttpVerbs.DELETE);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteLeaveRequest}/{Id}", method: HttpVerbs.DELETE);
         }
     }
 
