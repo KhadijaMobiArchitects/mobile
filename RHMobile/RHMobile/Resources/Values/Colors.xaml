@@ -10,4 +10,43 @@
     <Color x:Key="PlaceholderColor">#737A83</Color>
     <Color x:Key="InputBorder">#DDE4F3</Color>
     <Color x:Key="White">#ffffff</Color>
+    <Color x:Key="StartGradient">#0C4599</Color>
+    <Color x:Key="EndGradient">#0D69B6</Color>
+    <Color x:Key="StartGradientAdmin">#3B0C99</Color>
+    <Color x:Key="EndGradientAdmin">#710DB6</Color>        
+    <Color x:Key="InputBackground">#F2F6FE</Color>
+    <Color x:Key="LabelColor">#33373D</Color>
+    <Color x:Key="Secondenry">#1275D0</Color>
+    <Color x:Key="ConfirmedColor">#95D5A4</Color>
+    <Color x:Key="ConfirmedTextColor">#589266</Color>
+    <Color x:Key="InProgressColor">#FEE07D</Color>
+    <Color x:Key="InProgressTextColor">#E6992A</Color>
+    <Color x:Key="postponedColor">#D59595</Color>
+    <Color x:Key="postponedTextColor">#BA1818</Color>
+    <Color x:Key="BackgroundICon">#EBF1FE</Color>
+    <Color x:Key="Green">#4AC567</Color>
+    <Color x:Key="Red">#EC2518</Color>
+
+     <Color x:Key="DarkText">#353232</Color>
+    
+    <Color
+        x:Key="Accent">#F3B72F</Color>
+
+
+        <!--STATUT COLORS-->
+    <Color
+        x:Key="GreenStatut">#4EB400</Color>
+    <Color
+        x:Key="RedStatut">#EF6767</Color>
+    <Color
+        x:Key="OrangeStatut">#F3B72F</Color>
+    <Color
+        x:Key="YellowStatut">#F6D397</Color>
+    <Color
+        x:Key="BlueStatut">#4D79CF</Color>
+    <Color
+        x:Key="PurpleStatut">#5C4BDA</Color>
+    <Color
+        x:Key="GrayStatut">#4A4B4D</Color>
+
 </ResourceDictionary>

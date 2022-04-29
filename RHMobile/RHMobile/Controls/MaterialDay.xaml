@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    x:Class="XForms.Controls.MaterialDay"
+    x:Name="this"
+    >
+    <Grid
+        RowDefinitions="auto,auto"
+        ColumnDefinitions="auto,*"
+        RowSpacing="0"
+        >
+        <cc:CornerView
+            HeightRequest="12"
+            StyleCorner="Circle"
+            BackgroundColor="{Binding StatusColor,Source={x:Reference this}}"
+            />
+        <Label
+            Grid.Column="1"
+            Text="{Binding NumberOfDays,StringFormat='{0} congé',Source={x:Reference this}}"
+            FontSize="13"
+            FontAttributes="Bold"
+            TextColor="#33373D"
+            />
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding StatusDays, Source={x:Reference this}}"
+            FontSize="13"
+            FontFamily="RubikRegular"
+            TextColor="#B5BED0"
+            />
+    </Grid>
+</StackLayout>

@@ -1,10 +1,11 @@
 ﻿using System;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 using XForms.Enums;
 
 namespace XForms.Controls
 {
-    public class CornerView : Frame
+    public class CornerView : PancakeView
     {
         private ControlStyleCorner styleCorner = ControlStyleCorner.Circle;
         public ControlStyleCorner StyleCorner
@@ -16,7 +17,7 @@ namespace XForms.Controls
         public CornerView()
         {
             this.Padding = 0;
-            this.HasShadow = false;
+            //this.HasShadow = false;
             this.IsClippedToBounds = true;
 
             this.SizeChanged += (object sender, EventArgs e) =>
@@ -35,6 +36,7 @@ namespace XForms.Controls
                         break;
 
                 };
+
             };
         }
     }

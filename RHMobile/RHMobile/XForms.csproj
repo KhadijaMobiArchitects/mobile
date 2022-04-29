@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,8 +8,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
@@ -17,6 +21,18 @@
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2337" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.1" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="Fody" Version="6.6.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -40,6 +56,81 @@
     <None Remove="Resources\Assets\RubikRegular.ttf" />
     <None Remove="Resources\Assets\RubikLight.ttf" />
     <None Remove="Resources\Assets\RubikBold.ttf" />
+    <None Remove="views\Leave\" />
+    <None Remove="Resources\Assets\FontAwesome5Brands.ttf" />
+    <None Remove="Resources\Assets\FontAwesome5Regular.otf" />
+    <None Remove="Resources\Assets\FontAwesome5Regular.ttf" />
+    <None Remove="Resources\Assets\FontAwesome5Solid.ttf" />
+    <None Remove="Models\" />
+    <None Remove="Fody" />
+    <None Remove="Models\Leave\" />
+    <None Remove="Models\Base\" />
+    <None Remove="Models\Projet\" />
+    <None Remove="Data\" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Constants\" />
+    <None Remove="HttpREST\" />
+    <None Remove="views\DashBoard\" />
+    <None Remove="Resources\Images\ImageProfil.svg" />
+    <None Remove="Resources\Images\profil.png" />
+    <None Remove="Microcharts.Forms" />
+    <None Remove="ViewModels\Base\" />
+    <None Remove="views\SharedView\" />
+    <None Remove="views\SharedViews\ReclangleBackground\" />
+    <None Remove="Resources\Images\calendar.svg" />
+    <None Remove="Resources\Images\calendar2.svg" />
+    <None Remove="Services\" />
+    <None Remove="Services\Base\" />
+    <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Rg.Plugins.Popup" />
+    <None Remove="Helpers\" />
+    <None Remove="ViewModels\Leave\" />
+    <None Remove="coverlet.msbuild" />
+    <None Remove="ViewModels\Home\" />
+    <None Remove="Models\Administration\" />
+    <None Remove="Resources\Images\certificate.svg" />
+    <None Remove="Resources\Images\complaint.svg" />
+    <None Remove="Resources\Images\delegation.svg" />
+    <None Remove="Resources\Images\intership.svg" />
+    <None Remove="Resources\Images\move.svg" />
+    <None Remove="Resources\Images\payslips.svg" />
+    <None Remove="Resources\Images\personalData.svg" />
+    <None Remove="Resources\Images\project.svg" />
+    <None Remove="Resources\Images\rcar.svg" />
+    <None Remove="Resources\Images\recore.svg" />
+    <None Remove="Resources\Images\recoreprime.svg" />
+    <None Remove="Resources\Images\certaficate.svg" />
+    <None Remove="ViewModels\Displacement\" />
+    <None Remove="views\Displacement\" />
+    <None Remove="Validators\" />
+    <None Remove="Validators\Leave\" />
+    <None Remove="FluentValidation" />
+    <None Remove="PropertyChanged.Fody" />
+    <None Remove="Popups\" />
+    <None Remove="Com.Airbnb.Xamarin.Forms.Lottie" />
+    <None Remove="Resources\Assets\AnimLoadingLight.json" />
+    <None Remove="Resources\Images\balance.svg" />
+    <None Remove="views\LeaveAdministration\" />
+    <None Remove="Resources\Images\ProfilWomen.png" />
+    <None Remove="Resources\Images\profilAdmin.png" />
+    <None Remove="ViewModels\Authentification\" />
+    <None Remove="Models\Authentication\" />
+    <None Remove="Interface\" />
+    <None Remove="views\Walkthrough\" />
+    <None Remove="ViewModels\Walkthrough\" />
+    <None Remove="Models\Walkthrough\" />
+    <None Remove="Resources\Images\Walkthrough_2.png" />
+    <None Remove="Resources\Images\Walkthrough_1.png" />
+    <None Remove="views\Project\" />
+    <None Remove="ViewModels\Project\" />
+    <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\plus.png" />
+    <None Remove="Resources\Images\project.png" />
+    <None Remove="Models\Profil\" />
+    <None Remove="Resources\Images\check.png" />
+    <None Remove="Xam.Plugin.Media" />
+    <None Remove="Resources\Images\image.png" />
+    <None Remove="Resources\Images\image2.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -53,6 +144,39 @@
     <Folder Include="Enum\" />
     <Folder Include="Resources\Values\" />
     <Folder Include="Resources\Assets\" />
+    <Folder Include="views\Leave\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\Leave\" />
+    <Folder Include="Models\Base\" />
+    <Folder Include="Models\Project\" />
+    <Folder Include="Data\" />
+    <Folder Include="Constants\" />
+    <Folder Include="HttpREST\" />
+    <Folder Include="views\Administration\" />
+    <Folder Include="ViewModels\Base\" />
+    <Folder Include="views\SharedViews\" />
+    <Folder Include="views\SharedViews\ReclangleBackground\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Base\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="ViewModels\Leave\" />
+    <Folder Include="ViewModels\Home\" />
+    <Folder Include="Models\Administration\" />
+    <Folder Include="ViewModels\Displacement\" />
+    <Folder Include="views\Displacement\" />
+    <Folder Include="Validators\" />
+    <Folder Include="Validators\Leave\" />
+    <Folder Include="Popups\" />
+    <Folder Include="views\LeaveAdministration\" />
+    <Folder Include="ViewModels\Authentication\" />
+    <Folder Include="Models\Authentication\" />
+    <Folder Include="Interface\" />
+    <Folder Include="views\Walkthrough\" />
+    <Folder Include="ViewModels\Walkthrough\" />
+    <Folder Include="Models\Walkthrough\" />
+    <Folder Include="views\Project\" />
+    <Folder Include="ViewModels\Project\" />
+    <Folder Include="Models\Profil\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
@@ -60,8 +184,47 @@
     <EmbeddedResource Include="Resources\Assets\RubikRegular.ttf" />
     <EmbeddedResource Include="Resources\Assets\RubikLight.ttf" />
     <EmbeddedResource Include="Resources\Assets\RubikBold.ttf" />
+    <EmbeddedResource Include="Resources\Assets\FontAwesome5Brands.ttf" />
+    <EmbeddedResource Include="Resources\Assets\FontAwesome5Regular.otf" />
+    <EmbeddedResource Include="Resources\Assets\FontAwesome5Regular.ttf" />
+    <EmbeddedResource Include="Resources\Assets\FontAwesome5Solid.ttf" />
+    <EmbeddedResource Include="Resources\Images\ImageProfil.svg" />
+    <EmbeddedResource Include="Resources\Images\profil.png" />
+    <EmbeddedResource Include="Resources\Images\calendar.svg" />
+    <EmbeddedResource Include="Resources\Images\calendar2.svg" />
+    <EmbeddedResource Include="Resources\Images\complaint.svg" />
+    <EmbeddedResource Include="Resources\Images\delegation.svg" />
+    <EmbeddedResource Include="Resources\Images\intership.svg" />
+    <EmbeddedResource Include="Resources\Images\move.svg" />
+    <EmbeddedResource Include="Resources\Images\payslips.svg" />
+    <EmbeddedResource Include="Resources\Images\personalData.svg" />
+    <EmbeddedResource Include="Resources\Images\project.svg" />
+    <EmbeddedResource Include="Resources\Images\rcar.svg" />
+    <EmbeddedResource Include="Resources\Images\recore.svg" />
+    <EmbeddedResource Include="Resources\Images\recoreprime.svg" />
+    <EmbeddedResource Include="Resources\Images\certaficate.svg" />
+    <EmbeddedResource Include="Resources\Assets\AnimLoadingLight.json" />
+    <EmbeddedResource Include="Resources\Images\balance.svg" />
+    <EmbeddedResource Include="Resources\Images\ProfilWomen.png" />
+    <EmbeddedResource Include="Resources\Images\profilAdmin.png" />
+    <EmbeddedResource Include="Resources\Images\Walkthrough_2.png" />
+    <EmbeddedResource Include="Resources\Images\Walkthrough_1.png" />
+    <EmbeddedResource Include="Resources\Images\add.png" />
+    <EmbeddedResource Include="Resources\Images\plus.png" />
+    <EmbeddedResource Include="Resources\Images\project.png" />
+    <EmbeddedResource Include="Resources\Images\check.png" />
+    <EmbeddedResource Include="Resources\Images\image.png" />
+    <EmbeddedResource Include="Resources\Images\image2.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="views\Leave\NouvelleDemande.xaml.cs">
+      <DependentUpon>NouvelleDemande.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\CustomDatePicker.xaml.cs">
+      <DependentUpon>CustomDatePicker.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

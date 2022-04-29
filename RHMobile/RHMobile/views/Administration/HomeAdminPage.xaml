@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+ xmlns:Base="clr-namespace:XForms.views.Base"    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:adminCell="clr-namespace:XForms.views.Administration"
+    NavigationPage.HasNavigationBar="False"
+
+    x:Class="XForms.views.Administration.HomeAdminPage">
+    <Base:BasePage.Content>
+        <Grid
+            BackgroundColor="White"
+            RowDefinitions="*,5*">
+
+    <Shared:SmallReclangleBackground
+                StartGradient="{StaticResource StartGradientAdmin}"
+                EndGradient="{StaticResource EndGradientAdmin}"
+                />
+
+            <Grid
+                RowDefinitions="*,3*,*"
+                VerticalOptions="FillAndExpand"
+                Grid.RowSpan="2"
+                RowSpacing="0">
+                <!--Header-->
+
+                    <Shared:SuggestionsNavBarView
+                        HasTitle="True"
+                        HasDescription="True"
+                        Title="Warda Jbilou"
+                        Description="Chargée RH"
+                        HasBackButton="False"
+                        HasNotification="True"
+                        HasImageProfil="True"
+                        ImageProfil="{Local:ImageResource profilAdmin.png}"
+                        />
+   
+                <!--Body-->
+
+                <Grid
+                    Grid.Row="1"
+                    RowDefinitions="auto,auto"
+                    Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
+                    >
+                    <Label
+                        Text="Services"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource LabelColor}"
+                        Padding="6,0"
+                        />
+                    <CollectionView
+                        Grid.Row="1"
+                        ItemsLayout="VerticalGrid,3"
+                        ItemsSource="{Binding AdminstrationList}"
+                        >
+                        <CollectionView.ItemTemplate                            
+                            >
+                            <DataTemplate>
+                                <adminCell:AdministrationCellView
+                                    Title="{Binding Title}"
+                                    ICone="{Binding ICone}"
+                                    />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>                 
+
+                </Grid>
+
+
+
+                <!--Footer-->
+                <Grid
+                    Padding="30,5"
+                    Grid.Row="2"
+                    RowDefinitions="auto,auto"
+                    >
+                    <Label
+                        Text="Actualités du mois"
+                        TextColor="{StaticResource LabelColor}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        />
+                    <pancake:PancakeView
+                        Grid.Row="1"
+                        BackgroundColor="#47D1EA"
+                        Padding="10,16"
+                        CornerRadius="6"
+                        >
+                        <StackLayout>
+                            <Label
+                                Text="Squad Ta7alil"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                />
+                            <Label
+                                Text="Vous avez gagner 5 Points sur la livraisonde la nouvelle projet Ta7alil version web."
+                                FontFamily="RubikLight"
+                                FontSize="12"
+                                TextColor="White"
+                                />
+                        </StackLayout>
+                    </pancake:PancakeView>
+
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+    </Base:BasePage.Content>
+
+</Base:BasePage>

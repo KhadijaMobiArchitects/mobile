@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    x:Class="XForms.views.Leave.NewLeaveRequestPage"
+    x:Name="this"
+    >
+    <Base:BasePage.Content>
+        <Grid
+            BackgroundColor="White"
+            RowDefinitions="*,5*">
+            <Shared:SmallReclangleBackground
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                />
+
+            <Grid
+                RowDefinitions="*,4*,*"
+                Padding="{OnPlatform iOS='30,0,30,0',Android='30,0,30,0'}"
+                VerticalOptions="FillAndExpand"
+                Grid.RowSpan="2"
+                RowSpacing="0">
+                <!--Header-->
+                <Shared:SuggestionsNavBarView
+                    HasTitle="True"
+                   HasDescription="False"
+                    Title="Nouvelle Demande"
+                    Description="hello"
+                    HasNotification="True"
+                    HasBackButton="True"
+                    BackButtonColor="{StaticResource EndGradient}"
+                    BackButtonBorderColor="{StaticResource StartGradient }"
+            />
+
+
+                <!--Body-->
+
+                <Grid
+                    Grid.Row="1"
+                    RowDefinitions="auto,auto,auto"
+                    >
+
+                    <StackLayout
+                        Grid.Row="0"
+                        >
+                        <StackLayout
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand"
+                            >
+                            <Label
+                                Text="Informations du congé"
+                                TextColor="{StaticResource LabelColor}"
+                                FontAttributes="Bold"
+                                FontSize="15"
+                                Padding="0,10"
+                            />
+                            <Label
+                                Text="{Binding NumberOfDays ,StringFormat='{0} jours'}"
+                                TextColor="{StaticResource Red}"
+                                FontAttributes="Bold"
+                                FontSize="15"
+                                Padding="0,10"
+                                HorizontalOptions="EndAndExpand"
+                                IsVisible="{Binding EnableButtonSendRequest}"
+                                />
+                        </StackLayout>
+
+                        <cc:MaterialDatePicker
+                                Placeholder="Date début"
+                                Date="{Binding StartDate}"
+                                />
+
+                        <cc:MaterialDatePicker
+                                Placeholder="Date Fin"
+                                Date="{Binding EndDate}"
+                        />
+
+                        <cc:MaterialPicker
+                                Title="Type de congé"
+                                LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                                ItemsSource="{Binding TypesLeaveList}"
+                                SelectedItem="{Binding SelectedREFTypeLeave}"                            
+                        />
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Row="1"
+                        >
+                        <Label
+                            Text="Activités Actuelles"
+                            TextColor="{StaticResource LabelColor}"
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Padding="0,10"
+
+                            />
+
+                        <cc:MaterialPicker
+
+                            Title="Projet"
+                            LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                            ItemsSource="{Binding ProjectsList}"
+                            SelectedItem="{Binding SelectedProjet}"
+
+
+                        />
+
+                        <cc:MaterialPicker
+                                Title="Votre situation sur le projet"
+                                LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                                ItemsSource="{Binding SituationsProjectList}"
+                                SelectedItem="{Binding SelectedSituationProject}"
+
+                        />
+
+                    </StackLayout>
+                    <StackLayout
+                            Padding="0,20"
+                            Orientation="Horizontal"
+                            Grid.Row="2"
+                            >
+
+                        <cc:CustomButton
+                                StyleCorner="Circle"
+                                BackgroundColor="{Binding ButtonConfirmedBySquadBackground}"
+                                BorderColor="{StaticResource InputBackground}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                BorderWidth="2"
+                                HeightRequest="30"
+                                Padding="8"
+                                Command="{Binding NotifySquad}"
+                                >
+                            <cc:CustomButton.ImageSource>
+                                <FontImageSource
+
+                    FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                    Glyph="{x:Static res:FontAwesomeFonts.Check}"
+                    Color="White"
+                    Size="20" />
+                            </cc:CustomButton.ImageSource>
+                        </cc:CustomButton>
+
+                        <Label
+                            Text="Confirmation congé par squad"
+                            TextColor="{StaticResource LabelColor}"
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Padding="0,10"
+
+                            />
+                    </StackLayout>
+
+                </Grid>
+                <!--Footer-->
+
+                <Grid
+                    Grid.Row="2"
+                    >
+                    <cc:CustomButton
+                        Text="Envoyer ma demande"
+                        FontSize="20"
+                        BackgroundColor="{Binding ButtonSendRequestBackground}"
+                        TextColor="{StaticResource White}"
+                        VerticalOptions="Center"
+                        Command="{Binding SendRequest}"
+                        IsEnabled="{Binding EnableButtonSendRequest}"
+
+                        />
+
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Base:BasePage.Content>
+
+</Base:BasePage>

@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    x:Class="XForms.views.Leave.LeaveDetailsPopup"
+    xmlns:res="clr-namespace:XForms.Resources"
+    CloseWhenBackgroundIsClicked="True"
+    HasKeyboardOffset="False"
+    BackgroundColor="#90000000"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:animations="http://rotorgames.com"
+    >
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+    </Base:BasePopupView.Animation>
+
+    <Grid
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"
+        >
+        <Grid  
+           
+            RowDefinitions="40,40,auto,auto"
+            >
+            <BoxView
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="30,30,0,0"
+            VerticalOptions="FillAndExpand" />
+
+            <StackLayout
+                Grid.Row="2"
+                >
+
+                <cc:MaterialItemValue                    
+                    HorizontalOptions="CenterAndExpand"
+                    Item="{Binding SelectedLeave.LabelType,StringFormat='Congé {0}',Mode=OneWay}"
+                    Value="16/09/2021"
+                    HorizontalTextAlignment="Center"
+            />
+
+            <cc:CornerView
+                BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                Padding="5"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                StyleCorner="Default"
+                CornerRadius="4"
+
+                >
+                <Label
+                    HorizontalOptions="Center"
+                    Text="{Binding SelectedLeave.labelStatus}"
+                    TextColor="{Binding SelectedLeave.TextColor}"
+                    BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                    FontSize="12"
+                    Padding="5"                    
+                    />
+
+            </cc:CornerView>
+
+            </StackLayout>
+
+
+            <Grid
+            Padding="30,0"
+                Grid.Row="3"
+                RowDefinitions="*,*,*,*"
+                ColumnDefinitions="*,*"
+                RowSpacing="20"
+                Margin="0,30"
+                >
+                <cc:MaterialItemValue
+            Item="Date début"
+            Value="{Binding SelectedLeave.StartDate,StringFormat='{0:dd/MM/yyyy}'}"
+            />
+                <cc:MaterialItemValue
+            Grid.Column="1"
+            Item="Date Fin"
+            Value="{Binding SelectedLeave.EndDate,StringFormat='{0:dd/MM/yyyy}'}"
+
+            />
+                <cc:MaterialItemValue
+            Grid.Row="1"
+            Item="Type de congé"
+            Value="{Binding SelectedLeave.LabelType}"
+
+            />
+
+                <cc:MaterialItemValue
+            Grid.Row="1"
+                    Grid.Column="1"
+            Item="Projet"
+            Value="Ta7alil"
+            />
+                <cc:MaterialItemValue
+            Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    VerticalOptions="Start"
+            Item="Situation sur le projet"
+            Value="Livré partiellement"
+            />
+                <StackLayout
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    >
+                    <cc:CustomButton
+                HorizontalOptions="Center"
+                Text="Annuler"
+                TextColor="{Binding SelectedLeave.TextColor}"
+                BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                FontSize="12"
+                Padding="20,5"
+                IsVisible="{Binding IsShowButtonCancelRequest}"
+                Command="{Binding CancelRequest}"
+                        />
+
+                </StackLayout>
+            </Grid>
+
+            <cc:CornerView
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                Padding="5"
+                BackgroundColor="{StaticResource BackgroundICon}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <cc:CornerView
+                    Padding="5"
+                    >
+                    <svg:SvgCachedImage                    
+                        Visual="Default"
+                        Margin="10"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Local:ImageResource calendar2.svg}"
+                        />
+                </cc:CornerView>
+            </cc:CornerView>
+        </Grid>
+    </Grid>
+
+</Base:BasePopupView>

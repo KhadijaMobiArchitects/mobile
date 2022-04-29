@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:Cell="clr-namespace:XForms.views.Leave"
+    xmlns:chart="clr-namespace:Microcharts;assembly=Microcharts"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    x:Class="XForms.views.Leave.LeaveRequestPage"
+    x:Name="this">
+    <Base:BasePage.Content>
+        <Grid
+            BackgroundColor="White"
+            RowDefinitions="auto,100,100,auto,*,auto"
+            RowSpacing="20"
+            >
+
+            <Shared:LargeRectangleBackground
+                Grid.RowSpan="2"
+
+                />
+
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                    HasTitle="True"
+                    HasDescription="True"
+                    Title="Demande Congé"
+                    Description="{Binding numberOfRequests,StringFormat='{0} demandes'}"
+                    HasNotification="True"
+                    HasBackButton="True"
+                    BackButtonBorderColor="{StaticResource StartGradient}"
+                    BackButtonColor="{StaticResource EndGradient}"                    
+                    />
+
+            <!--Body-->
+
+            <pcview:PancakeView
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Margin="20,0"
+                        BackgroundColor="White"
+                        CornerRadius="8"
+                        Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
+                        >
+                <Grid
+                            ColumnDefinitions="3*,2*"
+                            Padding="10"
+
+                            >
+                    <Grid
+                                >
+                        <microcharts:ChartView
+                                    x:Name="chartV"
+                                    Chart="{Binding donutChart}"
+                                   
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    />
+                        <StackLayout
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    
+                                    >
+                            <Label
+                                        Text="{Binding TotalDays}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                        FontSize="24"
+                                        FontAttributes="Bold"
+                                        />
+                            <Label
+                                        Text="Total des congés"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                        FontSize="13"
+                                        FontFamily="RubikRegular"
+                                        TextColor="#B5BED0"
+                                        />
+
+                        </StackLayout>
+                    </Grid>
+                    <StackLayout
+                                Grid.Column="1"
+                                BackgroundColor="White"
+                                Padding="0,20"
+                                >
+                        <cc:MaterialDay
+                                    NumberOfDays="{Binding ConfirmedDays}"
+                                    StatusColor="{StaticResource ConfirmedColor}"
+                                    StatusDays="consomé"
+                                    VerticalOptions="StartAndExpand"
+                                    
+                                    />
+                        <cc:MaterialDay
+                                    NumberOfDays="{Binding InprogessDays}"
+                                    StatusColor="{StaticResource InProgressColor}"
+                                    StatusDays="en vérification"
+                                    VerticalOptions="CenterAndExpand"
+                                    />
+                        <cc:MaterialDay
+                                    NumberOfDays="{Binding PostponedDays}"
+                                    StatusColor="{StaticResource postponedColor}"
+                                    StatusDays="Annulé"
+                                    VerticalOptions="EndAndExpand"
+                                    />
+                    </StackLayout>
+                </Grid>
+
+            </pcview:PancakeView>
+
+            <!--Switch-->
+
+            <ScrollView
+                        Grid.Row="3"
+                        x:Name="scroll"
+                        Padding="20,0"
+                        VerticalScrollBarVisibility="Never"
+                        Orientation="Horizontal"
+                        HorizontalScrollBarVisibility="Never">
+                <StackLayout
+                            Spacing="15"
+                            Orientation="Horizontal"
+                            BindableLayout.ItemsSource="{Binding HeadrActionList}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+
+                                <!--Clicked="SelectItem_Clicked"-->
+
+                                <cc:CustomButton
+                                            Text="{Binding Name,StringFormat='Demande {0}'}"
+                                            StyleCorner="RoundCorner"
+                                            BackgroundColor="{Binding BackgroundColor}"
+                                            TextColor="{StaticResource White}"
+                                            HorizontalOptions="Start"
+                                            Padding="15,5"
+                                            FontSize="12"
+                                            Visual="Default"
+                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionCommand}"
+                                            CommandParameter="{Binding .}"
+                                            />
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </ScrollView>
+
+            <ScrollView
+                        Padding="20,0"
+                        Grid.Row="4"
+                        HorizontalScrollBarVisibility="Never"
+                        VerticalScrollBarVisibility="Never"
+                        >
+                <CollectionView
+                            ItemsSource="{Binding LeaveItemsList}"
+                            >
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.Header>
+                        <Label
+                            Text="{Binding StatusName,StringFormat='Mes demandes {0}'}"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            TextColor="#33373D"
+                            />
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Cell:LeaveRequestCellView
+                                        BackgroundColorButton="{Binding BackgroundColor}"
+                                        TextColor="{Binding TextColor}"
+                                        
+                                        />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </ScrollView>
+
+
+            <!--Footer-->
+
+            <Grid
+                Grid.Row="5"
+                Padding="10,0"
+                Margin="10"
+                    >
+                <cc:CustomButton
+                        Text="Nouvelle demande"
+                        FontSize="20"
+                        Command="{Binding NavigationtonewRequest}"
+                        />
+
+            </Grid>
+
+        </Grid>
+
+    </Base:BasePage.Content>
+</Base:BasePage>
+
+<!--BackgroundColorButton="{Binding Source={x:Reference this}, Path=BindingContext.BackgroundColor}"
+TextColor="{Binding Source={x:Reference this},Path=BindingContext.TextColor}"-->

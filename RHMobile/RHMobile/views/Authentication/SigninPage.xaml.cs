@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using XForms.views.Base;
 using Xamarin.Forms;
+using XForms.ViewModels;
 
 namespace XForms.views.Authentication
 {
@@ -10,6 +11,13 @@ namespace XForms.views.Authentication
         public SigninPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext == null)
+                BindingContext = new SigninViewModel();
         }
     }
 }

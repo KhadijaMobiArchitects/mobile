@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:CellProject="clr-namespace:XForms.views.Project"
+    x:Class="XForms.views.NewProjectPage"
+        xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    Title="Safe Area"
+    ios:Page.UseSafeArea="False"
+    x:Name="this"
+    >
+    <Base:BasePage.Content>
+        <Grid
+           BackgroundColor="White"
+            RowDefinitions="auto,30,30,4*"
+            >
+            <Shared:SmallReclangleBackground
+                Grid.RowSpan="2"
+                StartGradient="{StaticResource StartGradientAdmin}"
+                EndGradient="{StaticResource EndGradientAdmin}"
+                />
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                    x:Name="MyHeader"
+                    HasTitle="True"
+                    HasDescription="False"
+                    Title="Nouveau projet"
+                    HasBackButton="True"
+                    BackButtonBorderColor="{StaticResource StartGradientAdmin}"
+                    BackButtonColor="{StaticResource EndGradientAdmin }"
+                    />
+
+
+            <!--Body-->
+
+          <ScrollView
+                Grid.Row="2"
+              Grid.RowSpan="2"
+                Padding="0,20,0,0"
+              >
+              <Grid
+                RowDefinitions="auto,auto,auto,auto"
+                RowSpacing="20"
+                >
+                <StackLayout
+                    Padding="30,0"
+                    >
+                    <cc:CustomButton
+                        Text="Ajouter une identité visuelle"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        FontFamily="RubikBold"
+                        TextColor="{StaticResource LabelColor}"
+                        Opacity="0.4"
+                        FontSize="12"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding PickPictureCommand}"
+                        />
+
+                    <Label
+                        Text="Informations de projet"
+                        Style="{StaticResource TitleStyle}"
+                        Padding="0,0,0,10"
+                        />
+
+
+                    <cc:MaterialEntry
+                        Placeholder="Nom du projet"
+                        Text="{Binding projectRequest.ProjectName}"
+                        CornerRadiuss="6"
+                        />
+                    <cc:MaterialDatePicker
+                        Placeholder="Date début"
+                        Date="{Binding projectRequest.StartedAt}"
+                        />
+
+                    <cc:MaterialDatePicker
+                        Placeholder="Date Fin"
+                        Date="{Binding projectRequest.EndedAt}"
+                        />
+                </StackLayout>
+
+                <StackLayout
+                Grid.Row="1"
+                >
+                    <Label
+                        Text="Affectation des collaborateurs "
+                        TextColor="{StaticResource LabelColor}"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        Padding="30,0"
+                />
+
+                    <!--Chef du projet-->
+                    <StackLayout>
+
+                        <Label
+                            Text="Chef du projet"
+                            FontSize="13"
+                            FontFamily="RubikRegular"
+                            TextColor="{StaticResource PlaceholderColor}"
+                            Padding="30,0"
+                            />
+                        <CollectionView
+                            ItemsSource="{Binding ProjectOwnerList}"
+                            ItemsLayout="HorizontalGrid,1"
+                            HeightRequest="100"
+                            HorizontalScrollBarVisibility="Never"
+                            VerticalScrollBarVisibility="Never"
+                            >
+                            <CollectionView.Header                                
+                                >
+                                <BoxView
+                                    BackgroundColor="Transparent"
+                                    WidthRequest="20"                                   
+                                    />
+
+                            </CollectionView.Header>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding BindingContext.SelectOwnerCommand,Source={x:Reference this}}"
+                                                CommandParameter="{Binding .}"
+                                                />
+                                        </Grid.GestureRecognizers>
+                                        <CellProject:SelectProfilCellView
+                                                IsSelectionOwner="True"
+                                                />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <!--Les membres de léquipe-->
+                    <StackLayout>
+                        <Label
+                            Text="Choix des membres de l'équipe "
+                            FontSize="13"
+                            FontFamily="RubikRegular"
+                            TextColor="{StaticResource PlaceholderColor}"
+                            Padding="30,0"
+                            />
+                        <CollectionView
+                            ItemsSource="{Binding ProjectMembersList}"
+                            ItemsLayout="HorizontalGrid,1"
+                            HeightRequest="100"
+                            HorizontalScrollBarVisibility="Never"
+                            VerticalScrollBarVisibility="Never"
+                            >
+                            <CollectionView.Header                                
+                                >
+                                <BoxView
+                                    BackgroundColor="Transparent"
+                                    WidthRequest="20"                                   
+                                    />
+                            </CollectionView.Header>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding BindingContext.SelectMemberCommand,Source={x:Reference this}}"
+                                                CommandParameter="{Binding .}"
+                                    />
+                                        </Grid.GestureRecognizers>
+                                        <CellProject:SelectProfilCellView
+                                            IsSelectionMembers="True"
+                            />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </StackLayout>
+                <cc:CustomButton
+                    Margin="30,0"
+                    Grid.Row="2"
+                    Text="Ajouter Projet"
+                    CornerRadius="25"
+                    Command="{Binding AddProjectCommand}"
+                />
+            </Grid>
+          </ScrollView>
+
+            <cc:CornerView
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                BackgroundColor="#D2DCF1"
+                >
+                <svg:SvgCachedImage
+                    Source="{Binding UserPictureSource}"
+                    Aspect="AspectFill"
+                    HeightRequest="80"
+                    >
+                    <svg:SvgCachedImage.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding PickPictureCommand}"
+                            />
+                    </svg:SvgCachedImage.GestureRecognizers>
+
+                </svg:SvgCachedImage>
+
+            </cc:CornerView>
+
+        </Grid>
+
+    </Base:BasePage.Content>
+
+</Base:BasePage>

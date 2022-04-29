@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    x:Class="XForms.views.Project.SelectProfilCellView"
+    x:Name="this"
+    >
+    <ContentView.Content>
+        <Grid
+            RowDefinitions="15,15,15"
+            ColumnDefinitions="15,15,15"
+            Padding="5"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            >
+                                <!--Tapped="TapGestureRecognizer_Tapped"-->
+            <cc:CornerView
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="3"
+                StyleCorner="Circle"
+                >
+                <svg:SvgCachedImage
+                    Source="{Local:ImageResource profil.png}"
+                    Aspect="AspectFill"
+                    />
+            </cc:CornerView>
+                    <!--IsVisible="{Binding IsChecked,Source={x:Reference this}}"-->
+
+            <cc:CornerView
+                IsVisible="{Binding IsSelectionOwner,Source={x:Reference this}}"
+                Grid.Column="2"
+                Grid.Row="0"
+                StyleCorner="Circle"
+                >
+                <svg:SvgCachedImage
+                    IsVisible="{Binding IsSelectedAsOwner}"
+                    Source="{Local:ImageResource check.png}"
+                    Aspect="AspectFill"
+                    />
+            </cc:CornerView>
+
+            <cc:CornerView
+                IsVisible="{Binding IsSelectionMembers,Source={x:Reference this}}"
+                Grid.Column="2"
+                Grid.Row="0"
+                StyleCorner="Circle"
+                >
+                <svg:SvgCachedImage
+                    IsVisible="{Binding IsSelectedAsMember}"
+                    Source="{Local:ImageResource check.png}"
+                    Aspect="AspectFill"
+                    />
+            </cc:CornerView>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

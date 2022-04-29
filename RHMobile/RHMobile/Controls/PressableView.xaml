@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="XForms.Controls.PressableView"
+    x:Name="this"
+    >
+    <ContentView.GestureRecognizers>
+
+        <TapGestureRecognizer
+            Command="{Binding Command, Source={x:Reference this}}"
+            CommandParameter="{Binding CommandParameter, Source={x:Reference this}}"
+            />
+
+    </ContentView.GestureRecognizers>
+</ContentView>

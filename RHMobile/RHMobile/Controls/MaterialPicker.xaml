@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="XForms.Controls.MaterialPicker"
+    xmlns:res="clr-namespace:XForms.Resources" xmlns:cc="clr-namespace:XForms.Controls"
+    x:Name="this"
+    >
+            <!--Padding="{OnPlatform iOS='20,0,15,0',Android='20,0,0,0'}"-->
+
+    <pcview:PancakeView
+        BackgroundColor="{StaticResource InputBackground}"
+        CornerRadius="6"
+        >
+        <pcview:PancakeView.Border>
+            <pcview:Border Color="{StaticResource InputBorder}" Thickness="1"/>
+        </pcview:PancakeView.Border>
+        <Grid
+            ColumnSpacing="0"
+            ColumnDefinitions="*,auto"
+            RowDefinitions="auto"
+            >
+            <!--<Label
+                Text="{Binding Date,Source={x:Reference this}}"
+                TextColor="{StaticResource InputTextColor}"
+                FontSize="14"
+                VerticalTextAlignment="Center"
+                />-->
+            <cc:CustomNativePicker
+                x:Name="NativePicker"
+                Grid.ColumnSpan="2"
+                TextColor="Black"
+                ItemsSource="{Binding ItemsSource,Source={x:Reference this}}"
+                ItemDisplayBinding="{Binding Name}"
+                Style="{StaticResource TransparentPickerStyle}"
+                Title="{Binding Title, Source={x:Reference this}}"
+                SelectedItem="{Binding SelectedItem,Source={x:Reference this}}"
+                SelectedIndex="{Binding SelectedIndex, Source={x:Reference this}}"
+                />
+
+            <cc:CustomButton
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                StyleCorner="Circle"
+                Opacity="0.6"
+                Style="{StaticResource InputActionStyle}"
+                FocsudView="{x:Reference NativePicker}"
+                >
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{Binding LeftGlyph, Source={x:Reference this}}"
+                        Size="20"
+                        Color="{StaticResource PlaceholderColor}"
+                        />
+                </cc:CustomButton.ImageSource>
+
+                </cc:CustomButton>
+            <BoxView
+                Grid.ColumnSpan="2"
+                Style="{StaticResource EntryOverStyle}"
+                />
+        </Grid>
+
+    </pcview:PancakeView>
+
+</StackLayout>

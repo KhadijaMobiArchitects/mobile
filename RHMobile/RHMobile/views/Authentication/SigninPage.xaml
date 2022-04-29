@@ -4,7 +4,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Local="clr-namespace:XForms"
-    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms" xmlns:controls="clr-namespace:XForms.Controls" xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:controls="clr-namespace:XForms.Controls"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
     x:Class="XForms.views.Authentication.SigninPage">
     <Base:BasePage.Content>
 
@@ -62,6 +65,7 @@
                         FontSize="14"
                         TextColor="#126BCD"
                         FontFamily="RubikLight"
+                                
                                 />
                         </StackLayout>
 
@@ -93,10 +97,13 @@
                             <cc:MaterialEntry
                             Placeholder="Email"
                             CornerRadiuss="8,8,0,0"
+                                Text="{Binding SigninEmail}"
                             />
                             <cc:MaterialEntry
                             Placeholder="Mot de passe"
                             CornerRadiuss="0,0,8,8"
+                                IsPassword="True"
+                                Text="{Binding SigninPassword }"
 
                             />
 
@@ -106,6 +113,8 @@
                             >
                             <cc:CustomButton
                                 Text="Se connecter"
+                                FontSize="20"
+                        Command="{Binding SubmitCommand}"
                                 />
                         </StackLayout>
                     </Grid>
@@ -118,6 +127,7 @@
                         <cc:CustomButton
                         Text="Se connecter avec face ID"
                         BackgroundColor="#24B3D6"
+                        FontSize="20"
                         />
                     </Grid>
 

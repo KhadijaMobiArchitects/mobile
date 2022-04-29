@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+   xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:CellProject="clr-namespace:XForms.views" xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:Local="clr-namespace:XForms"
+    x:Class="XForms.views.ProjectPage"
+    x:Name="this"
+    >
+    <Base:BasePage.Content>
+        <Grid
+           BackgroundColor="White"
+            RowDefinitions="auto,75,75,3*,auto"
+            >
+            <Shared:SmallReclangleBackground
+                Grid.RowSpan="2"
+                StartGradient="{StaticResource StartGradientAdmin}"
+                EndGradient="{StaticResource EndGradientAdmin}"
+                />
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                    x:Name="MyHeader"
+                    HasTitle="True"
+                    HasDescription="True"
+                    Title="Projets client"
+                    HasNotification="True"
+                    HasBackButton="True"
+                    Description="{Binding NumberOfProjects,StringFormat='{0} projet en cours'}"
+                    BackButtonBorderColor="{StaticResource StartGradientAdmin}"
+                    BackButtonColor="{StaticResource EndGradientAdmin }"
+                    />
+
+            <!--project List-->
+
+            <CollectionView                
+                HorizontalScrollBarVisibility="Never"
+                ItemsSource="{Binding ProjectsList}"
+                ItemsLayout="HorizontalGrid,1"               
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                >
+                <CollectionView.Header>
+                    <Grid
+                        Padding="25,5,5,5"
+                        RowDefinitions="*,15,15"
+                        RowSpacing="0"
+                        >
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Grid.RowSpan="3"
+                                Command="{Binding BindingContext.AddProjectCommmand,Source={x:Reference this}}"
+                                />
+                        </Grid.GestureRecognizers>
+
+                        <pcview:PancakeView
+                            Grid.RowSpan="2"
+                            HorizontalOptions="Start"
+                            WidthRequest="120"
+                            CornerRadius="8"
+                            Padding="0,4"
+                            Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
+                            BackgroundColor="White"
+                            >
+                            <StackLayout
+                                Spacing="4"
+                                >
+                                <cc:CornerView
+                                    HeightRequest="60"
+                                    StyleCorner="Circle"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    >
+                                    <svg:SvgCachedImage
+                                        Source="{Local:ImageResource plus.png }"
+                                        Aspect="AspectFill"
+                                        />
+                                </cc:CornerView>
+                                <Label
+                                    Text="Ajouter"
+                                    HorizontalOptions="Center"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    HorizontalTextAlignment="Center"
+                                    />
+                                <Label
+                                    Text="Nouveau Projet"
+                                    FontSize="12"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    TextColor="Black"
+                                    FontFamily="RubikRegular"
+                                    />
+                            </StackLayout>
+
+                        </pcview:PancakeView>
+                    </Grid>
+
+                </CollectionView.Header>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CellProject:ProjectCellView
+                            HorizontalOptions="Start"
+                            WidthRequest="120"
+
+                            />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Members List-->
+
+            <CollectionView
+                Grid.Row="3"
+                Grid.RowSpan="2"
+                ItemsSource="{Binding SquadList}"
+                Margin="30,10"
+                >
+                <CollectionView.Header                    
+                    >
+                    <Label
+                        Text="Squad Ta7alil"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        />
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CellProject:ProfilProjectCellView
+                            ShowOwner="True"
+                            />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <!--<CollectionView.Footer                    
+                    >
+            <cc:CustomButton
+                Margin="5,10"
+                Text="Ajouter collaborateur"
+                CornerRadius="30"
+                />
+
+                </CollectionView.Footer>-->
+
+            </CollectionView>
+
+            <cc:CornerView
+                Margin="30,10,30,40"
+                Grid.Row="4"
+                StyleCorner="Circle"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Padding="0"
+                >
+                <cc:CustomButton
+                    BackgroundColor="Transparent"
+                    Padding="0"
+                    Command="{Binding OpenAddMembersPopupCommand}"
+                    >
+                    <cc:CustomButton.ImageSource>
+                        <FontImageSource                        
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{x:Static res:FontAwesomeFonts.PlusCircle}"
+                        Size="50"
+                        Color="{StaticResource Primary}"
+                        
+                        />
+                    </cc:CustomButton.ImageSource>
+                </cc:CustomButton>
+
+            </cc:CornerView>
+
+
+        </Grid>
+
+    </Base:BasePage.Content>
+</Base:BasePage>

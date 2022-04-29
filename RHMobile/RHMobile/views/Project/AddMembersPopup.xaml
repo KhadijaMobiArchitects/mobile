@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="http://rotorgames.com" xmlns:cc="clr-namespace:XForms.Controls" xmlns:Cell="clr-namespace:XForms.views"
+    BackgroundColor="#90000000"
+    HasSystemPadding="False"
+    x:Class="XForms.views.Project.AddMembersPopup">
+
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+    </Base:BasePopupView.Animation>
+
+    <Grid
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"
+        Margin="0,100,0,0"
+        >
+        <Grid  
+           
+            RowDefinitions="auto,auto,auto"
+            >
+            <BoxView
+            Grid.RowSpan="4"
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="30,30,0,0"
+            VerticalOptions="FillAndExpand" />
+
+            <Label
+                Text="Liste des collaborateurs"
+                Style="{StaticResource TitleStyle}"
+                Padding="20,10"
+                HorizontalOptions="Center"
+                VerticalTextAlignment="Center"
+                />
+            <cc:MaterialEntry
+                Grid.Row="1"
+                Placeholder="Nom du collaborateur"
+                CornerRadiuss="20"
+                Padding="20,0"
+                IsSearch="True"
+                Text="{Binding SearchPartKeyword}"
+                />
+            <CollectionView
+                ItemsLayout="VerticalGrid,1"   
+                Margin="20,0"
+                Grid.Row="2"
+                ItemsSource="{Binding SearchMembersList}"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Cell:ProfilProjectCellView
+                            ShowCheckBox="True"
+                            ShowOwner="False"
+                            />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Grid>
+    </Grid>
+
+</Base:BasePopupView>

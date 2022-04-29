@@ -1,0 +1,31 @@
+{
+  "Leaves": [
+    {
+      "StartDate": "2022-04-07T00:00:00",
+      "EndDate": "2022-04-09T00:00:00",
+      "ConfirmedBySquad": true,
+      "CreatedOn": "0001-01-01T00:00:00",
+      "CreatedBy": "1",
+      "RefStatusLeaveId": 1,
+      "RefTypeLeaveId": 1,
+      "LabelType": null,
+      "labelStatus": null,
+      "ProjectId": 1,
+      "RefSituationProjectId": 1,
+      "id": 1
+    },
+    {
+      "startDate": "2022-04-05T14:14:58.203Z",
+      "endDate": "2022-04-05T14:14:58.203Z",
+      "confirmedBySquad": true,
+      "createdBy": "1",
+      "createdOn": "2022-04-05T14:14:58.203Z",
+      "isDeleted": true,
+      "isActif": true,
+      "refStatusLeaveId": 1,
+      "projectId": 1,
+      "refTypeLeaveId": 1,
+      "refSituationProjectId": 1
+    }
+  ]
+}

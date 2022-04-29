@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="XForms.views.ProfilProjectCellView"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:res="clr-namespace:XForms.Resources"
+    x:Name="this"
+    >
+    <ContentView.Content
+        >
+        <Grid
+            RowDefinitions="*,auto"            
+            >
+            <Grid.GestureRecognizers>
+
+        <TapGestureRecognizer           
+            Grid.ColumnSpan="2"
+            Tapped="TapGestureRecognizer_Tapped"
+            />
+
+            </Grid.GestureRecognizers>
+
+
+            <Grid
+            ColumnDefinitions="auto,*,auto"
+            Padding="0,10"
+                  ColumnSpacing="15"
+           >
+
+            <!--<BoxView
+                BackgroundColor="#FEE07D"
+                />-->
+
+            <cc:CornerView
+            HeightRequest="50"
+            StyleCorner="Circle"
+            >
+                <svg:SvgCachedImage
+                Source="{Local:ImageResource profil.png}"
+                Aspect="AspectFill"
+                />
+            </cc:CornerView>
+
+            <StackLayout
+                Grid.Column="1"
+                VerticalOptions="Center"
+                >
+                    <Label
+                    Text="{Binding FirstName}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    TextColor="#33373D"
+                    VerticalTextAlignment="Center"
+                    >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding FirstName}" />
+                                <Span Text=" "/>
+                                <Span Text="{Binding LastName}"/>
+                            </FormattedString>
+
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label
+                    Text="{Binding RefFunctionLabel}"
+                    FontFamily="RubikRegular"
+                    FontSize="12"
+                    TextColor="#A3AEC5"
+                    VerticalTextAlignment="Center"
+                    />
+  
+            </StackLayout>
+
+            <cc:CornerView
+                IsVisible="{Binding ShowOwner,Source={x:Reference this}}"
+                VerticalOptions="CenterAndExpand"
+                Grid.Column="2"
+                StyleCorner="Default"
+                CornerRadius="4"
+                >
+                <Label
+                Text="Owner"
+                BackgroundColor="{StaticResource InProgressColor}"
+                TextColor="{StaticResource InProgressTextColor}"
+                FontSize="12"
+                FontFamily="RubikRegular"
+                Padding="10"
+                IsVisible="{Binding IsOwner}"
+                    />
+            </cc:CornerView>
+                                     <!--Glyph="{x:Static res:FontAwesomeFonts.CheckCircle}"-->
+
+            <cc:CustomButton
+                x:Name="checkBox"
+                Grid.Column="2"
+                HeightRequest="20"
+                WidthRequest="20"
+                StyleCorner="Circle"
+                BackgroundColor="Transparent"
+                Padding="0"
+                IsVisible="{Binding ShowCheckBox,Source={x:Reference this}}"
+                Clicked="TapGestureRecognizer_Tapped"
+                >
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{Binding CheckedIcon}"
+                        Color="{Binding CheckedColor}"
+                        Size="20" />
+                </cc:CustomButton.ImageSource>
+
+            </cc:CustomButton>
+            </Grid>
+
+            <BoxView
+                Grid.Row="1"
+                HeightRequest="1"
+                BackgroundColor="#EBF1FE"
+                HorizontalOptions="FillAndExpand"
+                />
+
+        </Grid>
+
+      
+
+    </ContentView.Content>
+</ContentView>

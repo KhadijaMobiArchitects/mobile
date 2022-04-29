@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BaseContent
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="XForms.views.SharedViews.SuggestionsNavBarView"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:Local="clr-namespace:XForms"
+    x:Name="this"
+    >
+    <Base:BaseContent.Content>
+        <Grid
+            RowDefinitions="auto"
+            ColumnDefinitions="auto,*"
+            >
+                    <StackLayout
+                        Grid.Column="0"
+                            >
+                        <cc:CornerView
+                            HeightRequest="45"
+                            StyleCorner="Circle"
+                            IsVisible="{Binding HasImageProfil,Source={x:Reference this}}"
+                                                            
+                            >
+                            <cc:CornerView.GestureRecognizers>
+                                <TapGestureRecognizer
+                                        Command="{Binding NavigateToAdmin}"
+                                        />
+                            </cc:CornerView.GestureRecognizers>
+                            <cc:CornerView.Border>
+                                <pancake:Border Color="{StaticResource Secondenry}" Thickness="2"/>
+                            </cc:CornerView.Border>
+
+                            <svg:SvgCachedImage
+                                Source="{Binding ImageProfil,Source={x:Reference this}}"
+                                Aspect="AspectFill"
+                                />
+                        </cc:CornerView>
+                    </StackLayout>
+
+            <Grid
+                Grid.Column="1"
+
+                    ColumnDefinitions="auto,5*,*"
+            >
+                <cc:CustomButton
+                        BackgroundColor="{Binding BackButtonColor,Source={x:Reference this}}"
+                        BorderWidth="4"
+                        BorderColor="{Binding BackButtonBorderColor,Source={Reference this}}"
+                        StyleCorner="Circle"
+                        HeightRequest="40"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        IsVisible="{Binding HasBackButton,Source={x:Reference this}}"
+                        Padding="5"
+                        Command="{Binding NavigationBack,Source={x:Reference this}}"
+                Opacity="0.8"                
+                        >
+
+                    <cc:CustomButton.ImageSource>
+                        <FontImageSource                        
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{x:Static res:FontAwesomeFonts.Angleleft}"
+                        Size="20"
+                        Color="{StaticResource White}"                        
+                        />
+
+                    </cc:CustomButton.ImageSource>
+                </cc:CustomButton>
+                <StackLayout
+                    Grid.Column="1"
+                    Spacing="2"
+                    VerticalOptions="CenterAndExpand">
+                    <Label
+                    Text="{Binding Title ,Source={x:Reference this}}"
+                    IsVisible="{Binding HasTitle,Source={x:Reference this}}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    VerticalTextAlignment="Center"
+                    />
+
+                    <Label
+                    Text="{Binding Description,Source={x:Reference this}}"
+                    IsVisible="{Binding HasDescription,Source={x:Reference this}}"
+                    FontFamily="RubilRegular"
+                    TextColor="White"
+                    FontSize="13"
+                    Opacity="0.5"
+                    VerticalTextAlignment="Center"
+                    />
+
+                </StackLayout>
+
+                <cc:CustomButton
+                    Padding="0"
+                    StyleCorner="Circle"
+                    BackgroundColor="Transparent"
+                    IsVisible="{Binding HasNotification,Source={x:Reference this}}"
+                    Grid.Column="2"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+
+                    <cc:CustomButton.ImageSource>
+                        <FontImageSource
+                    FontFamily="{x:Static res:FontAwesomeFonts.FontFamilyRegular}"
+                    Glyph="{x:Static res:FontAwesomeFonts.Bell}"
+                    Color="White"
+                    Size="24" />
+                    </cc:CustomButton.ImageSource>
+
+                </cc:CustomButton>
+
+
+            </Grid>
+        </Grid>
+
+    </Base:BaseContent.Content>
+
+</Base:BaseContent>

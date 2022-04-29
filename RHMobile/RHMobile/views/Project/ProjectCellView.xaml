@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:cc="clr-namespace:XForms.Controls" xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="XForms.views.ProjectCellView"
+    xmlns:Local="clr-namespace:XForms"
+    Padding="5"
+    x:Name="this"
+    >
+    <ContentView.Content>
+        <Grid            
+            RowDefinitions="*,15,15"
+            ColumnDefinitions="*,2*,*"
+            RowSpacing="0"
+            >
+            <Grid.GestureRecognizers                
+                >
+                <TapGestureRecognizer
+                    Grid.RowSpan="2"
+                    Grid.ColumnSpan="3"
+                    Command="{Binding Source={x:Reference this},Path=Parent.BindingContext.SelectProjectCommand}"
+                    CommandParameter="{Binding .}"
+                    />
+            </Grid.GestureRecognizers>
+            <pcview:PancakeView
+                CornerRadius="8"
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="3"
+                Padding="0,4"
+                Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
+                BackgroundColor="{Binding BackgroundColor}"
+                >
+                <StackLayout
+                    Spacing="4"
+                    >
+            <cc:CornerView
+            HeightRequest="60"
+            StyleCorner="Circle"
+            HorizontalOptions="Center"
+                VerticalOptions="Center"
+                >
+
+                <svg:SvgCachedImage
+                Source="{Binding PictureUrl}"
+                Aspect="AspectFill"
+                />
+            </cc:CornerView>
+                    <Label
+                        Text="{Binding Name}"
+                        HorizontalOptions="Center"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="{Binding TextColor}"
+                        HorizontalTextAlignment="Center"
+                        />
+                    <Label
+                        Text="{Binding Parent.BindingContext.ProjectOwnerName,Source={x:Reference this}}"
+                        FontSize="12"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        TextColor="{Binding TextColor}"
+                        FontFamily="RubikRegular"
+                        />
+                </StackLayout>
+
+            </pcview:PancakeView>
+
+            <pcview:PancakeView
+                CornerRadius="8"
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.RowSpan="2"
+                BackgroundColor="{Binding PercentBackgroundColor}"
+                IsVisible="{Binding ShowPercent}"
+                >
+                <Label                    
+                    Text="{Binding Percent,StringFormat='{0} %'}"
+                    VerticalOptions="Center"
+                    TextColor="{Binding PercentTextColor}"
+                    FontSize="12"
+                    HorizontalTextAlignment="Center"
+                    FontFamily="RubikRegular"
+                    />
+                </pcview:PancakeView>
+
+        </Grid>
+        
+    </ContentView.Content>
+</ContentView>

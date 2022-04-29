@@ -44,10 +44,58 @@ namespace XForms.Controls
             }
         }
 
+        public static readonly BindableProperty IsPasswordProperty =
+                BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(View), false, BindingMode.TwoWay);
+
+        public bool IsPassword
+        {
+            get { return (bool)GetValue(IsPasswordProperty); }
+            set
+            {
+                SetValue(IsPasswordProperty, value);
+            }
+        }
+
+        public static readonly BindableProperty IsSearchProperty =
+        BindableProperty.Create(nameof(IsSearch), typeof(bool), typeof(View), false, BindingMode.TwoWay);
+
+        public bool IsSearch
+        {
+            get { return (bool)GetValue(IsSearchProperty); }
+            set
+            {
+                SetValue(IsSearchProperty, value);
+            }
+        }
+
+        public string PasswordGlyph { get; set; } = XForms.Resources.FontAwesomeFonts.Eye;
 
         public MaterialEntry()
         {
             InitializeComponent();
+        }
+
+
+        private void ShowOrHidePassword_Clicked(object sender, EventArgs e)
+        {
+            if (NativeEntry.IsPassword)
+            {
+                NativeEntry.IsPassword = false;
+                PasswordGlyph = XForms.Resources.FontAwesomeFonts.EyeSlash;
+            }
+            else
+            {
+                NativeEntry.IsPassword = true;
+                PasswordGlyph = XForms.Resources.FontAwesomeFonts.Eye;
+            }
+
+            NativeEntry.Focus();
+            NativeEntry.CursorPosition = (NativeEntry.Text ?? "").Length;
+        }
+
+        void SearchButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            NativeEntry.Focus();
         }
     }
 }

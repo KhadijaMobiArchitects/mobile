@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:adminCell="clr-namespace:XForms.views.Administration"
+    NavigationPage.HasNavigationBar="False"   
+    x:Class="XForms.views.Administration.HomePage">
+    <Base:BasePage.Content>
+        <Grid
+            RowDefinitions="auto,30,15,auto"
+            VerticalOptions="FillAndExpand"
+            RowSpacing="0"
+            >
+
+            <Shared:SmallReclangleBackground
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                Grid.RowSpan="2"
+                />
+     
+            <Shared:SuggestionsNavBarView
+                HasTitle="True"
+                HasDescription="True"
+                Title="Hassoun KAROUM"
+                Description="Full stack dev"
+                HasNotification="True"
+                BackButtonColor="{StaticResource EndGradient}"
+                BackButtonBorderColor="{StaticResource StartGradient }"
+                HasImageProfil="True"
+                ImageProfil="{Local:ImageResource profil.png}"
+                />
+
+            <!--pancakeView-->
+
+            <pancake:PancakeView
+                        Margin="30,0"
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        BackgroundColor="White"
+                        CornerRadius="8"
+                        Shadow="{pancake:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}">
+
+                <StackLayout
+                            Orientation="Horizontal"
+                            Padding="20,10"
+                            >
+                    <svg:SvgCachedImage
+                                HeightRequest="30"
+                                WidthRequest="30"
+                                Aspect="AspectFit"
+                                Source="{Local:ImageResource balance.svg}"
+                                />
+                    <Label
+                                Text="Votre soldes est"
+                                VerticalTextAlignment="Center"
+                                Padding="10,0"
+                                TextColor="#33373D"
+                                FontSize="14"
+                                FontFamily="RubikLight"
+
+                                />
+                    <Label
+                                Text="40 pts"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalTextAlignment="Center"
+                                FontSize="20"
+                                FontAttributes="Bold"
+                                TextColor="#126BCD"
+                                />
+
+                </StackLayout>
+            </pancake:PancakeView>
+
+            <!--Body-->
+            <ScrollView
+                Grid.Row="3"
+                >
+                <Grid
+
+                    RowDefinitions="auto"
+                    Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
+                    >
+                    <CollectionView
+                        Grid.Row="1"
+                        ItemsLayout="VerticalGrid,3"
+                        VerticalScrollBarVisibility="Never"
+                            HorizontalScrollBarVisibility="Never"
+                        ItemsSource="{Binding AdminstrationList}"
+                        >
+                        <CollectionView.Header>
+                            <Label
+                        Text="Administration"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource LabelColor}"
+                        Padding="6,10"
+                        />
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate                            
+                            >
+                            <DataTemplate>
+                                <adminCell:AdministrationCellView
+                                    Title="{Binding Title}"
+                                    ICone="{Binding ICone}"
+                                    />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <!--Footer-->
+
+
+                        <CollectionView.Footer>
+                            <Grid
+                    Padding="0,30"
+                    Grid.Row="1"
+                    RowDefinitions="auto,auto"
+                    >
+                                <Label
+                        Text="Actualités du mois"
+                        TextColor="{StaticResource LabelColor}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        />
+                                <pancake:PancakeView
+                        Grid.Row="1"
+                        BackgroundColor="#47D1EA"
+                        Padding="10,16"
+                        CornerRadius="6"
+                        >
+                                    <StackLayout>
+                                        <Label
+                                Text="Squad Ta7alil"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                />
+                                        <Label
+                                Text="Vous avez gagner 5 Points sur la livraisonde la nouvelle projet Ta7alil version web."
+                                FontFamily="RubikLight"
+                                FontSize="12"
+                                TextColor="White"
+                                />
+                                    </StackLayout>
+                                </pancake:PancakeView>
+
+                            </Grid>
+                        </CollectionView.Footer>
+                    </CollectionView>
+
+                </Grid>
+
+                <!--Footer-->
+
+            </ScrollView>
+        </Grid>
+    </Base:BasePage.Content>
+
+</Base:BasePage>
