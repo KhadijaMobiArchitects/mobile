@@ -28,12 +28,29 @@ namespace XForms.Models
         public bool ShowPercent { get; set; } = true;
         public String OwnerName { get; set; }
 
-        //public Color PercentBackgroundColor => Percent switch
-        //{
-        //    Percent < 30 => AppHelpers.LookupColor("postponedColor"),
-        //    (Percent > 30 && Percent < 70) => AppHelpers.LookupColor("InProgessColor"),
-        //    Percent > 70 => AppHelpers.LookupColor("InProgessColor")
+        public Color PercentBackgroundColor {
+            get {
+                if (Percent < 30)
+                    return AppHelpers.LookupColor("postponedColor");
+                else if (Percent >= 30 && Percent <= 70)
+                    return AppHelpers.LookupColor("InProgessColor");
+                else
+                    return AppHelpers.LookupColor("ConfirmedColor");
+            }
+        }
 
-        //};
+        public Color PercentTextColor
+        {
+            get
+            {
+                if (Percent < 30)
+                    return AppHelpers.LookupColor("postponedTextColor");
+                else if (Percent >= 30 && Percent <= 70)
+                    return AppHelpers.LookupColor("InProgessTextColor");
+                else
+                    return AppHelpers.LookupColor("ConfirmedTextColor");
+            }
+        }
+
     }
 }

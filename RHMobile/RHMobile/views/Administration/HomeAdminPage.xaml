@@ -29,95 +29,17 @@
                 RowSpacing="0">
                 <!--Header-->
 
-                <Grid
-                    Padding="{OnPlatform iOS='30,0,30,10',Android='30,0,30,10'}"
-                    ColumnDefinitions="auto"
-                    RowDefinitions="*"
-                    RowSpacing="0"                   
-                    >
-                    <Grid
-                        ColumnDefinitions="auto,*"
-                        Padding="0,0,0,0"
-                        >
-                        <StackLayout
-                            VerticalOptions="Center"
-                            >
-                            <cc:CornerView
-                            HeightRequest="45"
-                            StyleCorner="Circle"
-                            >
-                                <cc:CornerView.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                        Command="{Binding NavigateToUser}"
-                                        />
-                                </cc:CornerView.GestureRecognizers>
-
-
-                                <cc:CornerView.Border>
-                                    <pancake:Border Color="{StaticResource EndGradientAdmin}" Thickness="3"/>
-                                </cc:CornerView.Border>
-
-                                <svg:SvgCachedImage
-                                Source="{Local:ImageResource profilAdmin.png}"
-                                Aspect="AspectFill"
-                                />
-                            </cc:CornerView>
-                        </StackLayout>
-
-
-                        <Shared:SuggestionsNavBarView
-                            Grid.Column="1"
-                           HasTitle="True"
-                            HasDescription="True"
-                            Title="Warda Jbilou"
-                            Description="Chargée RH"
-                            HasBackButton="False"
-                            HasNotification="True"
-
-                            />
-                    </Grid>
-
-                    <!--<pancake:PancakeView
-                        Grid.Row="1"
-                        Grid.RowSpan="2"
-                        Grid.ColumnSpan="2"
-                        BackgroundColor="White"
-                        CornerRadius="8"
-                        Shadow="{pancake:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}">
-
-                        <StackLayout
-                            Orientation="Horizontal"
-                            Padding="20,10"
-                            >
-                            <svg:SvgCachedImage
-                                HeightRequest="30"
-                                WidthRequest="30"
-                                Aspect="AspectFit"
-                                Source="{Local:ImageResource balance.svg}"
-                                />
-                            <Label
-                                Text="Votre soldes est"
-                                VerticalTextAlignment="Center"
-                                Padding="10,0"
-                                TextColor="#33373D"
-                                FontSize="14"
-                                FontFamily="RubikLight"
-
-                                />
-                            <Label
-                                Text="40 pts"
-                                HorizontalOptions="EndAndExpand"
-                                VerticalTextAlignment="Center"
-                                FontSize="24"
-                                FontAttributes="Bold"
-                                TextColor="#126BCD"
-                                />
-                            
-                        </StackLayout>
-                    </pancake:PancakeView>-->
-
-                </Grid>
-
+                    <Shared:SuggestionsNavBarView
+                        HasTitle="True"
+                        HasDescription="True"
+                        Title="Warda Jbilou"
+                        Description="Chargée RH"
+                        HasBackButton="False"
+                        HasNotification="True"
+                        HasImageProfil="True"
+                        ImageProfil="{Local:ImageResource profilAdmin.png}"
+                        />
+   
                 <!--Body-->
 
                 <Grid

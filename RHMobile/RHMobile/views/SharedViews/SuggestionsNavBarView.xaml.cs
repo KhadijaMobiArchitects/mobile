@@ -168,6 +168,8 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
 
                 this.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 30, 0);
             }
+            else if (Device.RuntimePlatform == Device.Android)
+                this.Padding = new Thickness(30, 20, 30, 0);
         }
         
 

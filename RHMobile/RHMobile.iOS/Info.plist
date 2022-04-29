@@ -33,5 +33,11 @@
 	<string>RHMobile</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Nous avons besoin d&amp;apos;un accès à l&amp;apos;appareil photo pour prendre une photo de vous</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Nous avons besoin d&amp;apos;accéder à la galerie pour récupérer et enregistrer des photos ou documents de vos produits</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Nous avons besoin d&amp;apos;accéder aux photos pour récupérer et enregistrer des photos ou documents de vos produits</string>
 </dict>
 </plist>

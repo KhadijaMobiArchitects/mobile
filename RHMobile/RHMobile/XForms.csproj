@@ -32,6 +32,7 @@
     </PackageReference>
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -127,6 +128,9 @@
     <None Remove="Resources\Images\project.png" />
     <None Remove="Models\Profil\" />
     <None Remove="Resources\Images\check.png" />
+    <None Remove="Xam.Plugin.Media" />
+    <None Remove="Resources\Images\image.png" />
+    <None Remove="Resources\Images\image2.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -209,6 +213,8 @@
     <EmbeddedResource Include="Resources\Images\plus.png" />
     <EmbeddedResource Include="Resources\Images\project.png" />
     <EmbeddedResource Include="Resources\Images\check.png" />
+    <EmbeddedResource Include="Resources\Images\image.png" />
+    <EmbeddedResource Include="Resources\Images\image2.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />

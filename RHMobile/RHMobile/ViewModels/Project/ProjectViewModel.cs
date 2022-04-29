@@ -17,7 +17,6 @@ namespace XForms.ViewModels
         //public ObservableRangeCollection<Project> Projects { get; set; }
         public ObservableRangeCollection<Project> ProjectsList { get; set; }
 
-        public ObservableRangeCollection<Profil> Squad { get; set; }
         public ObservableRangeCollection<ProfilResponse> SquadList { get; set; }
         public ObservableRangeCollection<ProfilResponse> AddMembersList { get; set; }
         public ObservableRangeCollection<ProfilResponse> SearchMembersList { get; set; }

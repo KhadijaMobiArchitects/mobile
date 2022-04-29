@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 using XForms.Models;
 
@@ -14,8 +15,7 @@ namespace XForms.ViewModels
         public ObservableCollection<ProfilResponse> ProjectMembersList { get; set; }
         public ObservableCollection<ProfilResponse> ProjectOwnerList { get; set; }
         public ProjectRequest projectRequest { get;set; }
-
-
+        public ImageSource UserPictureSource { get; set; } = AppHelpers.GetImageResource("image.png");
         public NewProjectViewModel()
         {
 
@@ -59,6 +59,12 @@ namespace XForms.ViewModels
             {
                 canSelectOwner = false;
 
+                if (model.IsSelectedAsOwner)
+                {
+                    model.IsSelectedAsOwner = false;
+                    return;
+                }
+
                 for (int i = 0; i < ProjectOwnerList.Count; i++)
                     ProjectOwnerList[i].IsSelectedAsOwner = false;
                 //ProjectOwnerList.Where(x => (x.IsSelectedAsOwner = false));
@@ -88,7 +94,7 @@ namespace XForms.ViewModels
            try
            {
                canSelectMember = false;
-               if (model.IsOwner)
+               if (model.IsSelectedAsOwner)
                {
                    model.IsSelectedAsMember = false;
                }
@@ -121,19 +127,22 @@ namespace XForms.ViewModels
             {
                 canAddProjectCommand = false;
 
-                foreach (ProfilResponse profil in ProjectMembersList)
-                {
-                    if (profil.IsSelected)
-                        projectRequest.members.Add(profil.RecId);
-                }
-                foreach (ProfilResponse profil in ProjectOwnerList)
-                {
-                    if (profil.IsSelected)
-                    {
-                        projectRequest.OwnerBy = profil.RecId;
-                        break;
-                    }
-                }
+                //foreach (ProfilResponse profil in ProjectMembersList)
+                //{
+                //    if (profil.IsSelected)
+                //        projectRequest.members.Add(profil.RecId);
+                //}
+                //foreach (ProfilResponse profil in ProjectOwnerList)
+                //{
+                //    if (profil.IsSelected)
+                //    {
+                //        projectRequest.OwnerBy = profil.RecId;
+                //        break;
+                //    }
+                //}
+
+                projectRequest.members = ProjectMembersList.Where(profil => (profil.IsSelectedAsMember)).Select(x=> x.RecId)?.ToList();
+                projectRequest.OwnerBy = ProjectOwnerList.FirstOrDefault(profil => (profil.IsSelectedAsOwner)).RecId;
 
                 //var result = await App.AppServices.PostProject(projectRequest);
 
@@ -149,6 +158,45 @@ namespace XForms.ViewModels
 
         },
         () => canAddProjectCommand);
+
+        //public MediaFile file { get; set; }
+
+        private bool canPickPicture = true;
+        public ICommand PickPictureCommand => new Command(async () =>
+        {
+            try
+            {
+                canPickPicture = false;
+                 var pickedFile = await AppHelpers.TakeOrPickPhoto();
+                 var fileStream = pickedFile.GetStream();
+
+                byte[] photoBytes;
+
+                using (var memoryStream = new System.IO.MemoryStream())
+                {
+                    var stream = fileStream;
+
+                    stream.CopyTo(memoryStream);
+
+                    stream.Dispose();
+                    stream.Close();
+
+                    photoBytes = memoryStream.ToArray();
+                }
+
+                UserPictureSource = ImageSource.FromStream(() => { return fileStream; });
+                OnPropertyChanged(nameof(UserPictureSource));
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canPickPicture = true;
+            }
+
+        }, () =>canPickPicture);
 
 
     }

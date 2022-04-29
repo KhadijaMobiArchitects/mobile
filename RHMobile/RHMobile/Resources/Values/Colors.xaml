@@ -18,9 +18,11 @@
     <Color x:Key="LabelColor">#33373D</Color>
     <Color x:Key="Secondenry">#1275D0</Color>
     <Color x:Key="ConfirmedColor">#95D5A4</Color>
+    <Color x:Key="ConfirmedTextColor">#589266</Color>
     <Color x:Key="InProgressColor">#FEE07D</Color>
     <Color x:Key="InProgressTextColor">#E6992A</Color>
     <Color x:Key="postponedColor">#D59595</Color>
+    <Color x:Key="postponedTextColor">#BA1818</Color>
     <Color x:Key="BackgroundICon">#EBF1FE</Color>
     <Color x:Key="Green">#4AC567</Color>
     <Color x:Key="Red">#EC2518</Color>

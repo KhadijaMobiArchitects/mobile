@@ -12,28 +12,25 @@
     x:Class="XForms.views.LeaveAdministration.LeaveAdministrationPage"
     >
     <Base:BasePage.Content>
-        <Grid
-            BackgroundColor="White"
-            RowDefinitions="*,3*">
+
+            <Grid
+                RowDefinitions="auto,auto,auto"
+                VerticalOptions="FillAndExpand"
+                Grid.RowSpan="2"
+                RowSpacing="10"
+                BackgroundColor="White"               
+                >
+
             <Shared:SmallReclangleBackground
                 StartGradient="{StaticResource StartGradientAdmin}"
                 EndGradient="{StaticResource EndGradientAdmin}"
+                Grid.RowSpan="2"
                 />
 
-            <Grid
-                RowDefinitions="*,4*"
-                Padding="{OnPlatform iOS='30,30,30,0',Android='30,30,30,0'}"
-                VerticalOptions="FillAndExpand"
-                Grid.RowSpan="2"
-                RowSpacing="0">
-
-                <Grid
-
-                    Padding="0,15">
                     <!--Header-->
                     <Shared:SuggestionsNavBarView
                     HasTitle="True"
-                   HasDescription="True"
+                    HasDescription="True"
                     Title="Nouvelle Demande"
                     HasNotification="True"
                     HasBackButton="True"
@@ -45,11 +42,11 @@
                     <!--Switch-->
 
                     <StackLayout
-                            Grid.Row="1"
-                        Padding="0,10"
-                            Spacing="15"
-                            Orientation="Horizontal"
-                            BindableLayout.ItemsSource="{Binding HeadrActionListAdmin}">
+                        Grid.Row="1"
+                        Padding="30,0,30,20"
+                        Spacing="15"
+                        Orientation="Horizontal"
+                        BindableLayout.ItemsSource="{Binding HeadrActionListAdmin}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
@@ -57,49 +54,39 @@
                                     <!--Clicked="SelectItem_Clicked"-->
 
                                     <cc:CustomButton
-                                            Text="{Binding Name,StringFormat='Demande {0}'}"
-                                            StyleCorner="RoundCorner"
-                                            BackgroundColor="{Binding BackgroundColorAdmin}"
-                                            TextColor="{Binding TextColorAdmin}"
-                                            HorizontalOptions="Start"
-                                            Padding="25,5"
-                                            FontSize="12"
-                                            Visual="Default"
-                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionAdminCommand}"
-                                            CommandParameter="{Binding .}"
-                                            />
+                                        Text="{Binding Name,StringFormat='Demande {0}'}"
+                                        StyleCorner="RoundCorner"
+                                        BackgroundColor="{Binding BackgroundColorAdmin}"
+                                        TextColor="{Binding TextColorAdmin}"
+                                        HorizontalOptions="Start"
+                                        Padding="25,5"
+                                        FontSize="12"
+                                        Visual="Default"
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionAdminCommand}"
+                                        CommandParameter="{Binding .}"
+                                        />
                                 </StackLayout>
-
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
 
-                </Grid>
-
-                <Grid
-                    Grid.Row="1"
-                    RowDefinitions="auto,*"
-                        >
-                    <StackLayout
-                        Padding="0,30"
-
-                        >
-                        <Label
-                            Text="{Binding  StatusName,StringFormat='Les demandes {0}'}"
-                            FontAttributes="Bold"
-                            FontSize="18"
-                            TextColor="#6C0DB3"
-                            />
-                    </StackLayout>
-
                     <ScrollView
-                        Grid.Row="1"
+                        Padding="30,0"
+                        Grid.Row="2"
                         HorizontalScrollBarVisibility="Never"
                         VerticalScrollBarVisibility="Never"
                         >
                         <CollectionView
                             ItemsSource="{Binding LeaveItemsListAdmin}"
                             >
+                            <CollectionView.Header>
+                                <Label
+                                    Text="{Binding  StatusName,StringFormat='Les demandes {0}'}"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    TextColor="#6C0DB3"
+                                    />
+                            </CollectionView.Header>
                             <CollectionView.GroupHeaderTemplate>
                                 <DataTemplate>
                                 </DataTemplate>
@@ -109,20 +96,11 @@
                                     <Cell2:ProfilRequestCellView
                                         BackgroundColorButton="{Binding BackgroundColor}"
                                         TextColor="{Binding TextColor}"
-                                        
                                         />
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-
                     </ScrollView>
-
-
-
                 </Grid>
-
-            </Grid>
-        </Grid>
-
     </Base:BasePage.Content>
 </Base:BasePage>

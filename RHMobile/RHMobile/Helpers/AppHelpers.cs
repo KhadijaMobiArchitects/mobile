@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using XForms.Interfaces;
@@ -289,6 +291,87 @@ namespace XForms
             }
 
             return isHasNotchScreen;
+        }
+
+        public async static Task<MediaFile> TakePhoto(string fileName = "")
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                //Alert("Caméra Introuvable !");
+                return null;
+            }
+
+            StoreCameraMediaOptions storeCameraMediaOptions;
+
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                storeCameraMediaOptions = new StoreCameraMediaOptions
+                {
+                    SaveToAlbum = true,
+                    AllowCropping = true,
+                    RotateImage = true,
+                    PhotoSize = PhotoSize.Medium,
+                    DefaultCamera = CameraDevice.Rear,
+                    Name = fileName
+                };
+            }
+            else
+            {
+                storeCameraMediaOptions = new StoreCameraMediaOptions
+                {
+                    SaveToAlbum = true,
+                    AllowCropping = true,
+                    RotateImage = true,
+                    PhotoSize = PhotoSize.Small,
+                    DefaultCamera = CameraDevice.Rear,
+                };
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(storeCameraMediaOptions);
+            return file;
+        }
+
+        public async static Task<MediaFile> PickPhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsTakePhotoSupported)
+            {
+                //Alert("Autorisation non accordée aux photos");
+                return null;
+            }
+
+            var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+            {
+                RotateImage = true,
+                PhotoSize = PhotoSize.Small
+            });
+
+            return file;
+        }
+
+        public async static Task<MediaFile> TakeOrPickPhoto()
+        {
+            string action = await Application.Current.MainPage.DisplayActionSheet("Sélectionner une photo", "Annulé", null, "Caméra", "Galerie");
+
+            MediaFile file = null;
+
+            if (action == "Caméra")
+            {
+                file = await TakePhoto();
+            }
+            else if (action == "Galerie")
+            {
+                file = await PickPhoto();
+            }
+            else if (action == "Annulé")
+            {
+                file = default;
+            }
+
+            return file;
         }
 
     }
