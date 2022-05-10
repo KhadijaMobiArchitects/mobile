@@ -25,9 +25,19 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListProject}", method: HttpVerbs.GET);
         }
 
+        public async Task<RESTServiceResponse<IEnumerable<Project>>> GetProfilProjects()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListProfilProject}", method: HttpVerbs.GET);
+        }
+
         public async Task<RESTServiceResponse<IEnumerable<ProfilResponse>>> GetProjectSquad(long projectId)
         {
             return await RESTHelper.GetRequest<IEnumerable<ProfilResponse>>(url: $"{AppUrls.GetRequestProjectSquad}?projectId={projectId}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<ProfilResponse>>> GetProjectStaffMembersToAdd(long projectId)
+        {
+            return await RESTHelper.GetRequest<IEnumerable<ProfilResponse>>(url: $"{AppUrls.GetStaffMembersToAddRequest}?projectId={projectId}", method: HttpVerbs.GET);
         }
 
         public async Task<RESTServiceResponse<IEnumerable<ProfilResponse>>> GetProfils()
@@ -48,6 +58,11 @@ namespace XForms.Services
         public async Task<RESTServiceResponse<object>> PostProject(ProjectRequest postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostProjectRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
+
+        public async Task<RESTServiceResponse<object>> PostMembers(AddMembersRequest postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostMembersRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
 
         public async Task<RESTServiceResponse<object>> DeleteLeave(long Id)

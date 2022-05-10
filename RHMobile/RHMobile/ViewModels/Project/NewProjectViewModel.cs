@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
+using FFImageLoading.Cache;
+using FFImageLoading.Forms;
 using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 using XForms.Models;
@@ -169,23 +172,26 @@ namespace XForms.ViewModels
                 canPickPicture = false;
                  var pickedFile = await AppHelpers.TakeOrPickPhoto();
                  var fileStream = pickedFile.GetStream();
+                //UserPictureSource = ImageSource.FromStream(() => { return fileStream; });
+                //await CachedImage.InvalidateCache(UserPictureSource, CacheType.All);
 
-                byte[] photoBytes;
+                //byte[] photoBytes;
+                //var _fileStream = fileStream;
+                //using (var memoryStream = new System.IO.MemoryStream())
+                //{
+                //    var stream = _fileStream;
 
-                using (var memoryStream = new System.IO.MemoryStream())
-                {
-                    var stream = fileStream;
+                //    stream.CopyTo(memoryStream);
 
-                    stream.CopyTo(memoryStream);
+                //    stream.Dispose();
+                //    stream.Close();
 
-                    stream.Dispose();
-                    stream.Close();
+                //    photoBytes = memoryStream.ToArray();
+                //}
 
-                    photoBytes = memoryStream.ToArray();
-                }
+                var byteArray = AppHelpers.ConvertStreamToByteArray(fileStream);
+                UserPictureSource = ImageSource.FromFile(pickedFile.Path);
 
-                UserPictureSource = ImageSource.FromStream(() => { return fileStream; });
-                OnPropertyChanged(nameof(UserPictureSource));
             }
             catch (Exception ex)
             {
@@ -194,6 +200,8 @@ namespace XForms.ViewModels
             finally
             {
                 canPickPicture = true;
+                OnPropertyChanged(nameof(UserPictureSource));
+
             }
 
         }, () =>canPickPicture);

@@ -21,14 +21,13 @@
 
             <Grid
                 RowDefinitions="*,4*,*"
-                Padding="{OnPlatform iOS='30,0,30,0',Android='30,0,30,0'}"
                 VerticalOptions="FillAndExpand"
                 Grid.RowSpan="2"
                 RowSpacing="0">
                 <!--Header-->
                 <Shared:SuggestionsNavBarView
                     HasTitle="True"
-                   HasDescription="False"
+                    HasDescription="False"
                     Title="Nouvelle Demande"
                     Description="hello"
                     HasNotification="True"
@@ -41,8 +40,10 @@
                 <!--Body-->
 
                 <Grid
+
                     Grid.Row="1"
                     RowDefinitions="auto,auto,auto"
+                    Padding="30,0"
                     >
 
                     <StackLayout
@@ -160,6 +161,7 @@
 
                 <Grid
                     Grid.Row="2"
+                    Padding="30"
                     >
                     <cc:CustomButton
                         Text="Envoyer ma demande"

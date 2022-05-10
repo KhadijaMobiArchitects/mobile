@@ -22,45 +22,41 @@
 
             <Shared:LargeRectangleBackground
                 Grid.RowSpan="2"
-
                 />
-
 
             <!--Header-->
             <Shared:SuggestionsNavBarView
-                    HasTitle="True"
-                    HasDescription="True"
-                    Title="Demande Congé"
-                    Description="{Binding numberOfRequests,StringFormat='{0} demandes'}"
-                    HasNotification="True"
-                    HasBackButton="True"
-                    BackButtonBorderColor="{StaticResource StartGradient}"
-                    BackButtonColor="{StaticResource EndGradient}"                    
-                    />
+                HasTitle="True"
+                HasDescription="True"
+                Title="Demande Congé"
+                Description="{Binding numberOfRequests,StringFormat='{0} demandes'}"
+                HasNotification="True"
+                HasBackButton="True"
+                BackButtonBorderColor="{StaticResource StartGradient}"
+                BackButtonColor="{StaticResource EndGradient}"
+                />
 
             <!--Body-->
 
             <pcview:PancakeView
-                        Grid.Row="1"
-                        Grid.RowSpan="2"
-                        Margin="20,0"
-                        BackgroundColor="White"
-                        CornerRadius="8"
-                        Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
-                        >
-                <Grid
-                            ColumnDefinitions="3*,2*"
-                            Padding="10"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Margin="20,0"
+                BackgroundColor="White"
+                CornerRadius="8"
+                Shadow="{pcview:ShadowMarkup Color=#CCCCCC, Offset='0,0', BlurRadius=4}"
+                >
 
-                            >
-                    <Grid
-                                >
+                <Grid
+                    ColumnDefinitions="3*,2*"
+                    Padding="10"
+                    >
+                    <Grid>
                         <microcharts:ChartView
-                                    x:Name="chartV"
-                                    Chart="{Binding donutChart}"
-                                   
-                                    VerticalOptions="FillAndExpand"
-                                    HorizontalOptions="FillAndExpand"
+                            x:Name="chartV"
+                            Chart="{Binding donutChart}"                                   
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
                                     />
                         <StackLayout
                                     VerticalOptions="Center"
@@ -68,12 +64,13 @@
                                     
                                     >
                             <Label
-                                        Text="{Binding TotalDays}"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                        FontSize="24"
-                                        FontAttributes="Bold"
-                                        />
+
+                                Text="{Binding TotalDays}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                                FontSize="24"
+                                FontAttributes="Bold"
+                                />
                             <Label
                                         Text="Total des congés"
                                     VerticalOptions="Center"
@@ -192,7 +189,7 @@
 
             <Grid
                 Grid.Row="5"
-                Padding="10,0"
+                Padding="10"
                 Margin="10"
                     >
                 <cc:CustomButton

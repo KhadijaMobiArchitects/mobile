@@ -131,6 +131,7 @@
     <None Remove="Xam.Plugin.Media" />
     <None Remove="Resources\Images\image.png" />
     <None Remove="Resources\Images\image2.png" />
+    <None Remove="Models\Files\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -177,6 +178,7 @@
     <Folder Include="views\Project\" />
     <Folder Include="ViewModels\Project\" />
     <Folder Include="Models\Profil\" />
+    <Folder Include="Models\Files\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

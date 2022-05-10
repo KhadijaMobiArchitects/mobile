@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
+using XForms.ViewModels;
+using XForms.views.Administration;
 using XForms.views.Base;
 
 namespace XForms.views.SharedViews
@@ -171,7 +173,15 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
             else if (Device.RuntimePlatform == Device.Android)
                 this.Padding = new Thickness(30, 20, 30, 0);
         }
-        
+
+        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            if ((sender as View) is HomeAdminViewModel)
+                App.Current.MainPage.Navigation.PopAsync();
+
+            if ((sender as View) is HomeViewModel)
+                App.Current.MainPage.Navigation.PushAsync(new HomeAdminPage());
+        }
 
     }
 }

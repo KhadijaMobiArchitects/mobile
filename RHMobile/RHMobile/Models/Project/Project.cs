@@ -32,10 +32,11 @@ namespace XForms.Models
             get {
                 if (Percent < 30)
                     return AppHelpers.LookupColor("postponedColor");
-                else if (Percent >= 30 && Percent <= 70)
-                    return AppHelpers.LookupColor("InProgessColor");
-                else
+                else if (Percent > 29 && Percent < 90)
+                    return AppHelpers.LookupColor("InProgressColor");
+                else if(Percent > 89)
                     return AppHelpers.LookupColor("ConfirmedColor");
+                return Color.White;
             }
         }
 
@@ -45,10 +46,11 @@ namespace XForms.Models
             {
                 if (Percent < 30)
                     return AppHelpers.LookupColor("postponedTextColor");
-                else if (Percent >= 30 && Percent <= 70)
-                    return AppHelpers.LookupColor("InProgessTextColor");
-                else
+                else if (Percent > 29 && Percent < 89)
+                    return AppHelpers.LookupColor("InProgressTextColor");
+                else if (Percent > 89)
                     return AppHelpers.LookupColor("ConfirmedTextColor");
+                return Color.Black;
             }
         }
 

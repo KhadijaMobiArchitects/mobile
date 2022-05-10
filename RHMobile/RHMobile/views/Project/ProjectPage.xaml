@@ -26,21 +26,23 @@
 
             <!--Header-->
             <Shared:SuggestionsNavBarView
-                    x:Name="MyHeader"
-                    HasTitle="True"
-                    HasDescription="True"
-                    Title="Projets client"
-                    HasNotification="True"
-                    HasBackButton="True"
-                    Description="{Binding NumberOfProjects,StringFormat='{0} projet en cours'}"
-                    BackButtonBorderColor="{StaticResource StartGradientAdmin}"
-                    BackButtonColor="{StaticResource EndGradientAdmin }"
-                    />
+
+                x:Name="MyHeader"
+                HasTitle="True"
+                HasDescription="True"
+                Title="Projets client"
+                HasNotification="True"
+                HasBackButton="True"
+                Description="{Binding NumberOfProjects,StringFormat='{0} projet en cours'}"
+                BackButtonBorderColor="{StaticResource StartGradientAdmin}"
+                BackButtonColor="{StaticResource EndGradientAdmin }"
+                />
 
             <!--project List-->
 
             <CollectionView                
                 HorizontalScrollBarVisibility="Never"
+                VerticalScrollBarVisibility="Never"
                 ItemsSource="{Binding ProjectsList}"
                 ItemsLayout="HorizontalGrid,1"               
                 Grid.Row="1"
@@ -113,7 +115,6 @@
                         <CellProject:ProjectCellView
                             HorizontalOptions="Start"
                             WidthRequest="120"
-
                             />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -137,9 +138,17 @@
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding BindingContext.OpenProfilDetailsPopupCommand ,Source={x:Reference this}}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                            </Grid.GestureRecognizers>
                         <CellProject:ProfilProjectCellView
                             ShowOwner="True"
                             />
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <!--<CollectionView.Footer                    

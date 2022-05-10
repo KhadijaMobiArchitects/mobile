@@ -17,7 +17,6 @@
             ColumnDefinitions="auto,*"
             >
                     <StackLayout
-                        Grid.Column="0"
                             >
                         <cc:CornerView
                             HeightRequest="45"
@@ -27,8 +26,8 @@
                             >
                             <cc:CornerView.GestureRecognizers>
                                 <TapGestureRecognizer
-                                        Command="{Binding NavigateToAdmin}"
-                                        />
+                                    Tapped="TapGestureRecognizer_Tapped"
+                                    />
                             </cc:CornerView.GestureRecognizers>
                             <cc:CornerView.Border>
                                 <pancake:Border Color="{StaticResource Secondenry}" Thickness="2"/>

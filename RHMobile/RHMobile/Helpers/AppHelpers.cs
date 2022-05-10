@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Plugin.Media;
@@ -372,6 +373,30 @@ namespace XForms
             }
 
             return file;
+        }
+        public static byte[] ConvertStreamToByteArray(Stream stream)
+        {
+            try
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    stream.CopyTo(memoryStream);
+                    stream.Dispose();
+                    stream.Close();
+                    return memoryStream.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                //Alert(message: ex.Message, exception: ex);
+                stream.Dispose();
+                stream.Close();
+                return null;
+            }
+            finally
+            {
+
+            }
         }
 
     }

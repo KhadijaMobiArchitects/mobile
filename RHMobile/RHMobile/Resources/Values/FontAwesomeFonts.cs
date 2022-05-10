@@ -22,6 +22,13 @@ namespace XForms.Resources
         public const string CheckCircle = "\uf058";
         public const string Circle = "\uf1ce";
         public const string Search = "\uf002";
+        public const string PlusCicrle = "\uf055";
+        public const string MinusCircle = "\uf056";
+
+
+
+
+
 
 
 

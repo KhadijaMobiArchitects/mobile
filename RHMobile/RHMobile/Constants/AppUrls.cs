@@ -13,6 +13,7 @@ namespace XForms.Constants
         public const string GesRequestsListLeave = BaseUrl + "leaves/getleaves/";
         public const string GetRequestListTypeLeave = BaseUrl + "RefTypesLeave/";
         public const string GetRequestListProject = BaseUrl + "Projects/GetProjects";
+        public const string GetRequestListProfilProject = BaseUrl + "Projects/GetProfilProjects";
         public const string GetRequestSituationProject = BaseUrl + "RefSituationsProject/";
         public const string GetRequestProjectSquad = BaseUrl + "projects/getSquad/";
         public const string GetRequestProfils = BaseUrl + "Profils/GetProfils";
@@ -23,7 +24,8 @@ namespace XForms.Constants
         public const string PostLeaveRequest = BaseUrl + "leaves/postLeave/";
         public const string DeleteLeaveRequest = BaseUrl + "leaves/deleteLeave";
         public const string PostProjectRequest = BaseUrl + "projects/CreateProject";
-
+        public const string GetStaffMembersToAddRequest = BaseUrl + "Projects/GetStaffMembersToAdd";
+        public const string PostMembersRequest = BaseUrl + "Projects/AddStaffMembers";
 
 
 

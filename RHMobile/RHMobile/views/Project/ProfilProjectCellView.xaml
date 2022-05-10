@@ -14,14 +14,15 @@
         <Grid
             RowDefinitions="*,auto"            
             >
-            <Grid.GestureRecognizers>
+            <!--<Grid.GestureRecognizers>
 
         <TapGestureRecognizer           
             Grid.ColumnSpan="2"
-            Tapped="TapGestureRecognizer_Tapped"
+            Command="{Binding Source={x:Reference this},Path=Parent.BindingContext.OpenProfilDetailsPopupCommand}"
+            CommandParameter="{Binding .}"
             />
 
-            </Grid.GestureRecognizers>
+            </Grid.GestureRecognizers>-->
 
 
             <Grid
