@@ -1,14 +1,37 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Base:BasePage
- xmlns:Base="clr-namespace:XForms.views.Base"    xmlns="http://xamarin.com/schemas/2014/forms"
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
     NavigationPage.HasBackButton="False"
     NavigationPage.HasNavigationBar="False"
-    x:Class="XForms.views.Displacement.DisplacementPage">
+    xmlns:Local="clr-namespace:XForms"
+    x:Class="XForms.views.DisplacementPage">
     <Base:BasePage.Content>
-        <Label
-            Text="Deplacement"
-            />
+        <Grid
+           BackgroundColor="White"
+            RowDefinitions="auto,30,30,4*"
+            >
+            <Shared:SmallReclangleBackground
+                Grid.RowSpan="2"
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                />
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                x:Name="MyHeader"
+                HasTitle="True"
+                HasDescription="True"
+                Title="Nouveau projet"
+                HasBackButton="True"
+                BackButtonBorderColor="{StaticResource StartGradient}"
+                BackButtonColor="{StaticResource EndGradient}"
+                Description="1 demandes en cours"
+                />
+
+            </Grid>
     </Base:BasePage.Content>
     
 </Base:BasePage>

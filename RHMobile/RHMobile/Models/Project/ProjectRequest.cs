@@ -24,6 +24,8 @@ namespace XForms.Models
 
         public string Picture { get; set; }
 
+        public Models.File ProjectFile { get; set; }
+
 
     }
 }

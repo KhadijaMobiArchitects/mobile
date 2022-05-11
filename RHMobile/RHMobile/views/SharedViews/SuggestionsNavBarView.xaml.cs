@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Input;
 using FFImageLoading.Svg.Forms;
@@ -156,7 +157,6 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
                 canNavigationBack = true;
             }
 
-
         },
     () => canNavigationBack);
 
@@ -168,7 +168,7 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
             {
                 var isHasNotchScreen = AppHelpers.CheckHasNotchScreen();
 
-                this.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 30, 0);
+                this.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 10) : new Thickness(30, 30, 30, 10);
             }
             else if (Device.RuntimePlatform == Device.Android)
                 this.Padding = new Thickness(30, 20, 30, 0);
@@ -176,10 +176,10 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
 
         void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
-            if ((sender as View) is HomeAdminViewModel)
+            if (App.Current.MainPage.Navigation.NavigationStack.LastOrDefault().GetType() == typeof(HomeAdminPage))
                 App.Current.MainPage.Navigation.PopAsync();
 
-            if ((sender as View) is HomeViewModel)
+            else 
                 App.Current.MainPage.Navigation.PushAsync(new HomeAdminPage());
         }
 

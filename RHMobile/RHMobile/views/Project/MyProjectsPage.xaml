@@ -94,9 +94,9 @@
                 CornerRadius="30"
                 />
                 </CollectionView.Footer>-->
+                            <!--IsVisible="{Binding IsProjectOwner}"-->
 
 
-            <!--IsVisible="{Binding IsProjectOwner}"-->
             </CollectionView>
                 <cc:CustomButton
                     Grid.Row="4"
@@ -107,7 +107,7 @@
                     Text="Modifier le pourcentage"
                     Command="{Binding OpenChangePercentPopup}"
                     >
-                    <!--<cc:CustomButton.ImageSource>
+                    <cc:CustomButton.ImageSource>
                         <FontImageSource                        
                         FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
                         Glyph="{x:Static res:FontAwesomeFonts.PlusCircle}"
@@ -115,7 +115,7 @@
                         Color="{StaticResource Primary}"
                         
                         />
-                    </cc:CustomButton.ImageSource>-->
+                    </cc:CustomButton.ImageSource>
                 </cc:CustomButton>
 
         </Grid>

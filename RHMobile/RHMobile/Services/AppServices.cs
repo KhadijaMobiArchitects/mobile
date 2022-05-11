@@ -55,10 +55,16 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostLeaveRequest}",postObject: postParams, method: HttpVerbs.POST);
         }
 
+        //public async Task<RESTServiceResponse<object>> PostProject(ProjectRequest postParams)
+        //{
+        //    return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostProjectRequest}", postObject: postParams, method: HttpVerbs.POST);
+        //}
+
         public async Task<RESTServiceResponse<object>> PostProject(ProjectRequest postParams)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostProjectRequest}", postObject: postParams, method: HttpVerbs.POST);
+            return await RESTHelper.UploadAdministratifPjAsync(postParams);
         }
+
 
         public async Task<RESTServiceResponse<object>> PostMembers(AddMembersRequest postParams)
         {

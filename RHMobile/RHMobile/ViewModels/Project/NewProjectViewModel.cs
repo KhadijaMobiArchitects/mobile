@@ -123,6 +123,7 @@ namespace XForms.ViewModels
 
         #endregion
 
+        private Models.File projectFile;
         private bool canAddProjectCommand = true;
         public ICommand AddProjectCommand => new Command(async () =>
         {
@@ -144,10 +145,28 @@ namespace XForms.ViewModels
                 //    }
                 //}
 
-                projectRequest.members = ProjectMembersList.Where(profil => (profil.IsSelectedAsMember)).Select(x=> x.RecId)?.ToList();
-                projectRequest.OwnerBy = ProjectOwnerList.FirstOrDefault(profil => (profil.IsSelectedAsOwner)).RecId;
 
-                //var result = await App.AppServices.PostProject(projectRequest);
+                var members = ProjectMembersList.Where(profil => (profil.IsSelectedAsMember)).Select(x=> x.RecId)?.ToList();
+                var OwnerBy = ProjectOwnerList.FirstOrDefault(profil => (profil.IsSelectedAsOwner)).RecId;
+
+                var projectRequest2 = new ProjectRequest()
+                {
+                    ProjectName = "RH",
+                    StartedAt = DateTime.Now,
+                    EndedAt = DateTime.Now,
+                    OwnerBy = OwnerBy,
+                    members = members,
+                    ProjectFile = projectFile
+
+                };
+
+                AppHelpers.LoadingShow();
+
+                var result = await App.AppServices.PostProject(projectRequest2);
+
+                AppHelpers.LoadingHide();
+
+               await App.Current.MainPage.Navigation.PopAsync();
 
             }
             catch (Exception ex)
@@ -189,9 +208,14 @@ namespace XForms.ViewModels
                 //    photoBytes = memoryStream.ToArray();
                 //}
 
-                var byteArray = AppHelpers.ConvertStreamToByteArray(fileStream);
+                //var byteArray = AppHelpers.ConvertStreamToByteArray(fileStream);
                 UserPictureSource = ImageSource.FromFile(pickedFile.Path);
-
+                projectFile = new Models.File()
+                {
+                    Name = System.IO.Path.GetFileName(pickedFile.Path),
+                    Path = pickedFile.Path
+                };
+                
             }
             catch (Exception ex)
             {

@@ -400,22 +400,6 @@ namespace XForms.ViewModels
         (_)=> canRemoveMember);
 
 
-
-
-        private bool canChangePercent = true;
-        public ICommand ChangePercentCommand => new Command(async () =>
-        {
-            try
-            {
-                canChangePercent = true;
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }, () => canChangePercent);
-
         private ChangePercentPopup changePercentPopup;
         private bool canOpenChangePercentPopup = true;
         public ICommand OpenChangePercentPopup => new Command(async () =>
@@ -441,12 +425,12 @@ namespace XForms.ViewModels
         ,() => canOpenChangePercentPopup);
 
         private AddPointsPopup addPointsPopup;
-        private bool canAddPoints = true;
-        public ICommand AddPointsCommand => new Command<ProfilResponse>(async (model) =>
+        private bool canOpenAddPointsPopup = true;
+        public ICommand OpenAddPointsPopupCommand => new Command<ProfilResponse>(async (model) =>
         {
             try
             {
-                canAddPoints = false;
+                canOpenAddPointsPopup = false;
                 if(addPointsPopup == null)
                     addPointsPopup = new AddPointsPopup() { BindingContext = this };
                 await PopupNavigation.Instance.PopAsync();
@@ -461,12 +445,33 @@ namespace XForms.ViewModels
             }
             finally
             {
-                canAddPoints = true;
+                canOpenAddPointsPopup = true;
             }
 
         },
-        (_) => canAddPoints); 
+        (_) => canOpenAddPointsPopup);
 
+
+        private bool canChangePercent = true;
+        public ICommand ChangePercentCommand => new Command(async () =>
+        {
+            try
+            {
+                canChangePercent = false;
+                await PopupNavigation.Instance.PopAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canChangePercent = true;
+
+            }
+
+        },
+        () => canChangePercent);
     }
 }
 

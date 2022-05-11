@@ -44,7 +44,7 @@
             <cc:MaterialEntry
                 Grid.ColumnSpan="2"
                 Grid.Row="1"
-                Placeholder="Saisissez une valeur de 0 - 100"
+                Placeholder="Saisissez une valeur entre 0 - 100"
                 CornerRadiuss="6"
                 />
             <Label
@@ -63,6 +63,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 BackgroundColor="Transparent"
+                Command="{Binding ChangePercentCommand}"
                 >
                 <cc:CustomButton.ImageSource>
                     <FontImageSource
@@ -72,11 +73,8 @@
                         Color="{StaticResource Green}"
                         />
                 </cc:CustomButton.ImageSource>
-
             </cc:CustomButton>
-
         </Grid>
-
     </Grid>
 
 </Base:BasePopupView>
