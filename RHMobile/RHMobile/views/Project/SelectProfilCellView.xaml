@@ -27,7 +27,7 @@
                 StyleCorner="Circle"
                 >
                 <svg:SvgCachedImage
-                    Source="{Local:ImageResource profil.png}"
+                    Source="{Binding PictureUrl}"
                     Aspect="AspectFill"
                     />
             </cc:CornerView>

@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using XForms.Interface;
 using XForms.Interfaces;
 using XForms.Popups;
 using XForms.views.Administration;
 using XForms.views.Authentication;
+using Microsoft.AppCenter.Crashes;
+using XForms.Enum;
 
 namespace XForms
 {
@@ -85,87 +89,88 @@ namespace XForms
             }
         }
 
-        //public static void Alert(string message = "", int durationInMs = 5000, Exception exception = default)
-        //{
-        //    if (exception != default)
-        //    {
-        //        //message = "Une erreur s'est produite";
-        //        message = exception.Message;
-        //    }
+        public static void Alert(string message = "", int durationInMs = 5000, Exception exception = default)
+        {
+            if (exception != default)
+            {
+                //message = "Une erreur s'est produite";
+                message = exception.Message;
+            }
 
-        //    if (!string.IsNullOrEmpty(message))
-        //    {
-        //        ToastLength toastLength = durationInMs >= 4000 ? ToastLength.LONG : ToastLength.SHORT;
+            if (!string.IsNullOrEmpty(message))
+            {
+                ToastLength toastLength = durationInMs >= 4000 ? ToastLength.LONG : ToastLength.SHORT;
 
-        //        Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
-        //        {
-        //            //    DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    //    DependencyService.Get<IToast>().Alert(message, toastLength, false);
 
 
-        //            if (Device.RuntimePlatform == Device.Android)
-        //            {
-        //                DependencyService.Get<IToast>().Alert(message, toastLength, false);
-        //            }
-        //            else
-        //            {
-        //                if (PopupNavigation.Instance.PopupStack.Any())
-        //                {
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                    }
+                    else
+                    {
+                        if (PopupNavigation.Instance.PopupStack.Any())
+                        {
 
-        //                    foreach (var item in PopupNavigation.Instance.PopupStack)
-        //                    {
-        //                        if (item.GetType() == typeof(LoadingPopup) && PopupNavigation.Instance.PopupStack.Count > 0)
-        //                        {
-        //                            Device.BeginInvokeOnMainThread(async () =>
-        //                            {
-        //                                await Task.Delay(1000);
+                            foreach (var item in PopupNavigation.Instance.PopupStack)
+                            {
+                                if (item.GetType() == typeof(LoadingPopup) && PopupNavigation.Instance.PopupStack.Count > 0)
+                                {
+                                    Device.BeginInvokeOnMainThread(async () =>
+                                    {
+                                        await Task.Delay(1000);
 
-        //                                //DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                                        //DependencyService.Get<IToast>().Alert(message, toastLength, false);
 
-        //                                //UserDialogs.Instance.Toast(new ToastConfig(message)
-        //                                //{
-        //                                //    Duration = TimeSpan.FromMilliseconds(durationInMs),
-        //                                //    //BackgroundColor = System.Drawing.Color.FromArgb(90, 0, 0, 0)
-        //                                //});
+                                        //UserDialogs.Instance.Toast(new ToastConfig(message)
+                                        //{
+                                        //    Duration = TimeSpan.FromMilliseconds(durationInMs),
+                                        //    //BackgroundColor = System.Drawing.Color.FromArgb(90, 0, 0, 0)
+                                        //});
 
-        //                                DependencyService.Get<IToast>().Alert(message, toastLength, false);
-        //                            });
+                                        DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                                    });
 
-        //                            return;
-        //                        }
-        //                        else
-        //                        {
-        //                            DependencyService.Get<IToast>().Alert(message, toastLength, false);
-        //                        }
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    DependencyService.Get<IToast>().Alert(message, toastLength, false);
-        //                }
-        //            }
-        //        });
-        //    }
+                                    return;
+                                }
+                                else
+                                {
+                                    DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                        }
+                    }
+                });
+            }
 
-        //    if (exception != default)
-        //    {
-        //        Crashes.TrackError(exception);
-        //    }
-        //}
+            if (exception != default)
+            {
+                Crashes.TrackError(exception);
+            }
+        }
 
-        //public static async Task OkAlert(string tilte, string message, string cancelTitle, string confirmTitle = null)
-        //{
-        //    if (string.IsNullOrWhiteSpace(tilte))
-        //        return;
+        public static async Task OkAlert(string tilte, string message, string cancelTitle, string confirmTitle = null)
+        {
+            if (string.IsNullOrWhiteSpace(tilte))
+                return;
 
-        //    await Application.Current.MainPage.DisplayAlert(tilte, message, cancelTitle);
-        //}
+            await Application.Current.MainPage.DisplayAlert(tilte, message, cancelTitle);
+        }
 
-        //public static async Task<bool> AcceptAlert(string tilte, string message, string acceptTitle, string cancelTitle)
-        //{
-        //    var answer = await Application.Current.MainPage.DisplayAlert(tilte, message, acceptTitle, cancelTitle);
+        public static async Task<bool> AcceptAlert(string tilte, string message, string acceptTitle, string cancelTitle)
+        {
+            var answer = await Application.Current.MainPage.DisplayAlert(tilte, message, acceptTitle, cancelTitle);
 
-        //    return answer;
-        //}
+            return answer;
+        }
+
 
         public static void SetInitialView()
         {
@@ -212,11 +217,20 @@ namespace XForms
                 if (
               (!string.IsNullOrEmpty(AppPreferences.Token)))
                 {
-                    Application.Current.MainPage = new NavigationPage(new HomePage());
+                    string Collaborateur = System.Enum.GetName(typeof(RolesEnum), RolesEnum.Collaborateur);
+                    string Manager = System.Enum.GetName(typeof(RolesEnum), RolesEnum.Manager);
+
+                    if (AppPreferences.UserRole.Equals(Collaborateur))
+                        Application.Current.MainPage = new NavigationPage(new HomePage());
+
+                    else if (AppPreferences.UserRole.Equals(Manager))
+                        Application.Current.MainPage = new NavigationPage(new HomeAdminPage());
+
+
                 }
                 else
                 {
-                    Application.Current.MainPage = new NavigationPage(new HomePage());
+                    Application.Current.MainPage = new NavigationPage(new SigninPage());
                 }
             }
             catch (Exception ex)

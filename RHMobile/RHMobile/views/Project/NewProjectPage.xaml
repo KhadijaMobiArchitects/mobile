@@ -53,7 +53,7 @@
                     Padding="30,0"
                     >
                     <cc:CustomButton
-                        Text="Ajouter une identité visuelle"
+                        Text="Ajouter une image"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         FontFamily="RubikBold"
@@ -74,17 +74,17 @@
 
                     <cc:MaterialEntry
                         Placeholder="Nom du projet"
-                        Text="{Binding projectRequest.ProjectName}"
+                        Text="{Binding ProjectName}"
                         CornerRadiuss="6"
                         />
                     <cc:MaterialDatePicker
                         Placeholder="Date début"
-                        Date="{Binding projectRequest.StartedAt}"
+                        Date="{Binding StartedAt}"
                         />
 
                     <cc:MaterialDatePicker
                         Placeholder="Date Fin"
-                        Date="{Binding projectRequest.EndedAt}"
+                        Date="{Binding EndedAt}"
                         />
                 </StackLayout>
 

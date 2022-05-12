@@ -24,6 +24,9 @@ namespace XForms.Resources
         public const string Search = "\uf002";
         public const string PlusCicrle = "\uf055";
         public const string MinusCircle = "\uf056";
+        public const string SignOut = "\uf08b";
+        public const string SignOutAlt = "\uf2f5";
+
 
 
 

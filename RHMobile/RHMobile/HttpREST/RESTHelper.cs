@@ -160,11 +160,10 @@ namespace XForms.HttpREST
                 formData.Add(fileStreamContent);
 
                 formData.Add(new StringContent(fileData.ProjectName),"ProjectName");
-                formData.Add(new StringContent(fileData.StartedAt.ToString()), "startedAt");
-                formData.Add(new StringContent(fileData.EndedAt.ToString()), "EndedAt");
+                formData.Add(new StringContent(fileData.StartedAt.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")), "startedAt");
+                formData.Add(new StringContent(fileData.EndedAt.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")), "EndedAt");
                 formData.Add(new StringContent(fileData.OwnerBy), "ownerBy");
-                formData.Add(new StringContent(fileData.members[0]), "members");
-
+                formData.Add(new StringContent(fileData.members), "members");
 
                 var response = await client.PostAsync(AppUrls.PostProjectRequest, formData);
 

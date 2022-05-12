@@ -64,6 +64,19 @@ namespace XForms.views.SharedViews
             }
         }
 
+        public static readonly BindableProperty HasSignOutProperty = BindableProperty.Create(nameof(HasSignOut), typeof(bool), typeof(SuggestionsNavBarView), false);
+        public bool HasSignOut
+        {
+            get
+            {
+                return (bool)GetValue(HasSignOutProperty);
+            }
+            set
+            {
+                SetValue(HasSignOutProperty, value);
+            }
+        }
+
         public static readonly BindableProperty HasBackButtonProperty = BindableProperty.Create(nameof(HasBackButton), typeof(bool), typeof(SuggestionsNavBarView),false);
         public bool HasBackButton
         {
@@ -176,12 +189,17 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
 
         void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
-            if (App.Current.MainPage.Navigation.NavigationStack.LastOrDefault().GetType() == typeof(HomeAdminPage))
-                App.Current.MainPage.Navigation.PopAsync();
+            //if (App.Current.MainPage.Navigation.NavigationStack.LastOrDefault().GetType() == typeof(HomeAdminPage))
+            //    App.Current.MainPage.Navigation.PopAsync();
 
-            else 
-                App.Current.MainPage.Navigation.PushAsync(new HomeAdminPage());
+            //else 
+            //    App.Current.MainPage.Navigation.PushAsync(new HomeAdminPage());
         }
 
+        void SignOutButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+
+
+        }
     }
 }

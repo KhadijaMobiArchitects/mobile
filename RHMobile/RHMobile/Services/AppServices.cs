@@ -25,6 +25,11 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListProject}", method: HttpVerbs.GET);
         }
 
+        public async Task<RESTServiceResponse<IEnumerable<Project>>> GetAcualProjects()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListActualProject}", method: HttpVerbs.GET);
+        }
+
         public async Task<RESTServiceResponse<IEnumerable<Project>>> GetProfilProjects()
         {
             return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListProfilProject}", method: HttpVerbs.GET);
@@ -43,6 +48,11 @@ namespace XForms.Services
         public async Task<RESTServiceResponse<IEnumerable<ProfilResponse>>> GetProfils()
         {
             return await RESTHelper.GetRequest<IEnumerable<ProfilResponse>>(url: $"{AppUrls.GetRequestProfils}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<ProfilResponse>>> GetOwners()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<ProfilResponse>>(url: $"{AppUrls.GetRequestOwners}", method: HttpVerbs.GET);
         }
 
         public async Task<RESTServiceResponse<IEnumerable<SituationProject>>> GetSituationsProject()
@@ -70,7 +80,10 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostMembersRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
-
+        public async Task<RESTServiceResponse<object>> PostChangePercent(ChangePercentModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostChangePercentRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
         public async Task<RESTServiceResponse<object>> DeleteLeave(long Id)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteLeaveRequest}/{Id}", method: HttpVerbs.DELETE);

@@ -76,6 +76,8 @@
     <Compile Include="Renderers.cs" />
     <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <Compile Include="DependencyServices\HasScreenNotch.cs" />
+    <Compile Include="DependencyServices\ToastiOS.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -176,6 +178,7 @@
   <ItemGroup>
     <Folder Include="Renderers\" />
     <Folder Include="DependencyServices\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

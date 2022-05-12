@@ -39,8 +39,12 @@ namespace XForms.Models
         //private Color backgroundColor = Color.Gray;
 
         public Color BackgroundColor => IsSelected ? Color.FromHex("#0C53A4") : Color.FromHex("#D4DBEA");
+        public Color CertaficateBackgroundColor => IsSelected ? Color.White : Color.FromHex("#0D69B6");
+
         public Color BackgroundColorAdmin => IsSelected ? Color.White : Color.FromHex("#a855f7");
         public Color TextColorAdmin => IsSelected ? Color.FromHex("#690DB1") : Color.White;
+        public Color TextColor => IsSelected ? AppHelpers.LookupColor("EndGradient") : Color.White;
+
 
 
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows.Input;
 using Xamarin.Forms;
+using XForms.views.Authentication;
 
 namespace XForms.ViewModels
 {
@@ -28,5 +30,28 @@ namespace XForms.ViewModels
         }
         public virtual void OnDisappearing() { }
 
+        private bool CanLogout = true;
+        public ICommand LogoutCommand => new Command(() =>
+        {
+            try
+            {
+                CanLogout = false;
+
+                AppPreferences.ClearCache();
+
+                Application.Current.MainPage = new NavigationPage(new SigninPage());
+            }
+            catch (Exception ex)
+            {
+                //Logger?.LogError(ex, showError: true);
+            }
+            finally
+            {
+                CanLogout = true;
+            }
+        }, () => CanLogout);
+
     }
+
 }
+

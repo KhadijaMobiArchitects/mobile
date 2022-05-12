@@ -20,7 +20,7 @@ namespace XForms.Models
 
         public string OwnerBy { get; set; }
 
-        public List<string> members { get; set; }
+        public string members { get; set; }
 
         public string Picture { get; set; }
 

@@ -32,12 +32,13 @@
                     <Shared:SuggestionsNavBarView
                         HasTitle="True"
                         HasDescription="True"
-                        Title="Warda Jbilou"
+                        Title="{Binding FullName}"
                         Description="Chargée RH"
                         HasBackButton="False"
                         HasNotification="True"
                         HasImageProfil="True"
-                        ImageProfil="{Local:ImageResource profilAdmin.png}"
+                        ImageProfil="{Binding PictureUrl}"
+                        HasSignOut="True"
                         />
    
                 <!--Body-->

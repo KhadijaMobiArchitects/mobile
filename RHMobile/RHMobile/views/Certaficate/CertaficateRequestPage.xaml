@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+ xmlns:Base="clr-namespace:XForms.views.Base"    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    x:Class="XForms.views.CertaficateRequestPage"
+    x:Name="this"
+    >
+    <Base:BasePage.Content>
+        <Grid
+            BackgroundColor="{StaticResource White}"
+            RowDefinitions="auto,auto,auto"
+            VerticalOptions="FillAndExpand"
+            >
+            
+            <Shared:SmallReclangleBackground
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                Grid.RowSpan="2"
+                />
+                        <!--Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"-->
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                HasTitle="True"
+                HasDescription="True"
+                Title="Demande Attestation"
+                HasNotification="True"
+                HasBackButton="True"
+                BackButtonBorderColor="{StaticResource StartGradient}"
+                BackButtonColor="{StaticResource EndGradient}"
+                Description="1 demandes en cours"
+                />
+                                <!--Switch-->
+                    <StackLayout
+                        Grid.Row="1"
+                        Padding="30,0,30,20"
+                        Spacing="15"
+                        Orientation="Horizontal"
+                        BindableLayout.ItemsSource="{Binding HeadrActionList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+
+                                    <!--Clicked="SelectItem_Clicked"-->
+
+                                    <cc:CustomButton
+                                        Text="{Binding Name,StringFormat='Demande {0}'}"
+                                        StyleCorner="RoundCorner"
+                                        BackgroundColor="{Binding CertaficateBackgroundColor}"
+                                        TextColor="{Binding TextColor}"
+                                        HorizontalOptions="Start"
+                                        Padding="25,5"
+                                        FontSize="12"
+                                        Visual="Default"
+                                        Command="{Binding BindingContext.SelectHeaderActionCommand, Source={x:Reference this}}"
+                                        CommandParameter="{Binding .}"
+                                        />
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+        </Grid>
+    </Base:BasePage.Content>
+</Base:BasePage>

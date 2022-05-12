@@ -15,10 +15,13 @@ namespace XForms.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         public List<REFItemAdministration> AdminstrationList { get; set; }
-        public string UserName { get; set; }
+        public string FullName { get; set; }
+        public string PictureUrl { get; set; }
+
         public HomeViewModel()
         {
-            UserName = AppPreferences.FullName;
+            FullName = AppPreferences.FullName;
+            PictureUrl = AppPreferences.PictureUrl;
 
             AdminstrationList = new List<REFItemAdministration>
             {
@@ -132,6 +135,8 @@ namespace XForms.ViewModels
                     AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveRequestPage()),
                     AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new DisplacementPage()),
                     AdministrationService.Project =>  App.Current.MainPage.Navigation.PushAsync(new MyProjectsPage()),
+                    AdministrationService.Certaficate => App.Current.MainPage.Navigation.PushAsync(new CertaficateRequestPage()),
+
 
                 };
             }

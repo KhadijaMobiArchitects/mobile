@@ -74,7 +74,7 @@
                 <CollectionView.Header                    
                     >
                     <Label
-                        Text="Squad Ta7alil"
+                        Text="{Binding SelectedProjectName , StringFormat='Squad {0}'}"
                         FontSize="16"
                         FontAttributes="Bold"
                         />
@@ -100,22 +100,14 @@
             </CollectionView>
                 <cc:CustomButton
                     Grid.Row="4"
-                    Margin="30,30,30,30"
+                    Margin="30"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="Center"
-                    Padding="10,5"
+                    Padding="20,5"
                     Text="Modifier le pourcentage"
                     Command="{Binding OpenChangePercentPopup}"
                     >
-                    <cc:CustomButton.ImageSource>
-                        <FontImageSource                        
-                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
-                        Glyph="{x:Static res:FontAwesomeFonts.PlusCircle}"
-                        Size="50"
-                        Color="{StaticResource Primary}"
-                        
-                        />
-                    </cc:CustomButton.ImageSource>
+
                 </cc:CustomButton>
 
         </Grid>

@@ -116,6 +116,12 @@ namespace XForms
             set { Preferences.Set(nameof(ValidSession), value); }
         }
 
+        public static string PictureUrl
+        {
+            get { return Preferences.Get(nameof(PictureUrl), string.Empty); }
+            set { Preferences.Set(nameof(PictureUrl), value); }
+        }
+
         public static void ClearCache()
         {
             Preferences.Remove(nameof(CurrentSiteId));

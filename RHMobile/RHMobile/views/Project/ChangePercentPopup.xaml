@@ -45,6 +45,7 @@
                 Grid.ColumnSpan="2"
                 Grid.Row="1"
                 Placeholder="Saisissez une valeur entre 0 - 100"
+                Text="{Binding Percent}"
                 CornerRadiuss="6"
                 />
             <Label

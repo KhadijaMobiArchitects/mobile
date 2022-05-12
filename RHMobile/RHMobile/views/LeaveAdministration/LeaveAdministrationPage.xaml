@@ -16,7 +16,6 @@
             <Grid
                 RowDefinitions="auto,auto,auto"
                 VerticalOptions="FillAndExpand"
-                Grid.RowSpan="2"
                 RowSpacing="10"
                 BackgroundColor="White"               
                 >
@@ -40,7 +39,6 @@
                     />
 
                     <!--Switch-->
-
                     <StackLayout
                         Grid.Row="1"
                         Padding="30,0,30,20"

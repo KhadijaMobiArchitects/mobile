@@ -17,14 +17,21 @@ namespace XForms.ViewModels
         public ObservableCollection<ProfilResponse> MembersList { get; set; }
         public ObservableCollection<ProfilResponse> ProjectMembersList { get; set; }
         public ObservableCollection<ProfilResponse> ProjectOwnerList { get; set; }
-        public ProjectRequest projectRequest { get;set; }
+        public ProjectRequest projectRequest { get; set; }
         public ImageSource UserPictureSource { get; set; } = AppHelpers.GetImageResource("image.png");
+        public string ProjectName { get; set; }
+        public DateTime StartedAt { get;set;}
+        public DateTime EndedAt { get; set; }
+
+        public ProfilResponse Owner { get; set; }
+
         public NewProjectViewModel()
         {
 
             projectRequest = new ProjectRequest();
 
             GetProfils();
+            GetOwners();
         }
 
         public override void OnAppearing()
@@ -38,14 +45,32 @@ namespace XForms.ViewModels
             try
             {
                 var result = await App.AppServices.GetProfils();
-                if(result.succeeded)
+                if (result?.succeeded == true)
                 {
-                    MembersList = new ObservableCollection<ProfilResponse>(result.data.ToList());
-                    ProjectOwnerList = MembersList;
-                    ProjectMembersList = MembersList;
+                    ProjectMembersList = new ObservableCollection<ProfilResponse>(result.data.ToList());
 
                 }
+                else
+                    AppHelpers.Alert(result?.message);
 
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public async void GetOwners()
+        {
+            try
+            {
+                var result = await App.AppServices.GetOwners();
+                if (result?.succeeded == true)
+                {
+                    ProjectOwnerList = new ObservableCollection<ProfilResponse>(result.data.ToList()); ;
+
+                }
+                else
+                    AppHelpers.Alert(result?.message);
             }
             catch (Exception ex)
             {
@@ -61,6 +86,8 @@ namespace XForms.ViewModels
             try
             {
                 canSelectOwner = false;
+
+                Owner = model;
 
                 if (model.IsSelectedAsOwner)
                 {
@@ -97,7 +124,7 @@ namespace XForms.ViewModels
            try
            {
                canSelectMember = false;
-               if (model.IsSelectedAsOwner)
+               if (Owner?.RecId == model?.RecId)
                {
                    model.IsSelectedAsMember = false;
                }
@@ -105,9 +132,6 @@ namespace XForms.ViewModels
                {
                    model.IsSelectedAsMember = !model.IsSelectedAsMember;
                }
-
-
-               //var  owner = ProjectOwnerList.Where(owner => (owner.IsSelected));
            }
            catch (Exception ex)
            {
@@ -131,29 +155,22 @@ namespace XForms.ViewModels
             {
                 canAddProjectCommand = false;
 
-                //foreach (ProfilResponse profil in ProjectMembersList)
-                //{
-                //    if (profil.IsSelected)
-                //        projectRequest.members.Add(profil.RecId);
-                //}
-                //foreach (ProfilResponse profil in ProjectOwnerList)
-                //{
-                //    if (profil.IsSelected)
-                //    {
-                //        projectRequest.OwnerBy = profil.RecId;
-                //        break;
-                //    }
-                //}
-
-
-                var members = ProjectMembersList.Where(profil => (profil.IsSelectedAsMember)).Select(x=> x.RecId)?.ToList();
+                var memberslist = ProjectMembersList.Where(profil => (profil.IsSelectedAsMember)).Select(x=> x.RecId)?.ToList();
                 var OwnerBy = ProjectOwnerList.FirstOrDefault(profil => (profil.IsSelectedAsOwner)).RecId;
+                string members ="";
+
+                foreach (string  id in memberslist)
+                {
+                    members += id+",";
+                }
+                if (members != "")
+                    members = members.Remove(members.Length - 1);
 
                 var projectRequest2 = new ProjectRequest()
                 {
-                    ProjectName = "RH",
-                    StartedAt = DateTime.Now,
-                    EndedAt = DateTime.Now,
+                    ProjectName = ProjectName,
+                    StartedAt = StartedAt,
+                    EndedAt = EndedAt,
                     OwnerBy = OwnerBy,
                     members = members,
                     ProjectFile = projectFile
@@ -165,8 +182,10 @@ namespace XForms.ViewModels
                 var result = await App.AppServices.PostProject(projectRequest2);
 
                 AppHelpers.LoadingHide();
+                AppHelpers.Alert(result?.message);
 
-               await App.Current.MainPage.Navigation.PopAsync();
+
+                await App.Current.MainPage.Navigation.PopAsync();
 
             }
             catch (Exception ex)

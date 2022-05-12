@@ -29,14 +29,15 @@
             <Shared:SuggestionsNavBarView
                 HasTitle="True"
                 HasDescription="True"
-                Title="{Binding UserName}"
+                Title="{Binding FullName}"
                 Description="Full stack dev"
                 HasNotification="True"
                 BackButtonColor="{StaticResource EndGradient}"
                 BackButtonBorderColor="{StaticResource StartGradient }"
                 HasImageProfil="True"
-                ImageProfil="{Local:ImageResource profil.png}"
-                    />
+                ImageProfil="{Binding PictureUrl}"
+                HasSignOut="True"
+                />
 
             <!--pancakeView-->
 
