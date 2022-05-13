@@ -361,16 +361,29 @@ namespace XForms.ViewModels
         },
         (_) => CanSelectHeaderActionAdmin);
 
+        private bool canNavigateToNewRequest = true;
         public ICommand NavigationtonewRequest => new Command(() =>
         {
-            App.Current.MainPage.Navigation.PushAsync(new NewLeaveRequestPage());
+            try
+            {
+                canNavigateToNewRequest = false;
+                App.Current.MainPage.Navigation.PushAsync(new NewLeaveRequestPage());
 
-            HeadrActionList[0].IsSelected = true;
-            HeadrActionList[1].IsSelected = false;
-            HeadrActionList[2].IsSelected = false;
+                HeadrActionList[0].IsSelected = true;
+                HeadrActionList[1].IsSelected = false;
+                HeadrActionList[2].IsSelected = false;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canNavigateToNewRequest = true;
+            }
 
         },
-    () => true
+    () => canNavigateToNewRequest
     );
 
         private LeaveDetailsPopup leaveDetailsPopup;

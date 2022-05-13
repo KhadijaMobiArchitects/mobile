@@ -21,8 +21,8 @@ namespace XForms.ViewModels
         {
             //Collaborateur
 
-            //SigninEmail = "abdelahasserhihe@gmail.com";
-            //SigninPassword = "Password2022!!";
+            SigninEmail = "abdelahasserhihe@gmail.com";
+            SigninPassword = "Password2022!!";
 
             //Chef_projet
 
@@ -41,8 +41,8 @@ namespace XForms.ViewModels
 
             //Responsable RH
 
-            SigninEmail = "rimrh@gmail.com";
-            SigninPassword = "Password2022!!";
+            //SigninEmail = "rimrh@gmail.com";
+            //SigninPassword = "Password2022!!";
 
 
 
@@ -142,7 +142,6 @@ namespace XForms.ViewModels
                 else
                 {
                     AppHelpers.Alert(result?.message);
-                    Console.WriteLine("error");
                 }
             }
             catch (Exception ex)

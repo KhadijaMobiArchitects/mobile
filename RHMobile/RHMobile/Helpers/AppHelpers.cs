@@ -176,56 +176,19 @@ namespace XForms
         {
             try
             {
-                //    if (!App.Current.Resources.ContainsKey("MainPageStyle")
-                //|| !App.Current.Resources.ContainsKey("MainGridStyle"))
-                //    {
-
-                //        //Set Top Padding
-                //        var mainPageStyle = new Style(typeof(ScrollView))
-                //        {
-                //            Setters = {
-                //        new Setter {
-                //            Property = Grid.PaddingProperty,
-                //            Value =  new Thickness(0, 10, 0, 0)
-                //        }
-                //    }
-                //        };
-
-                //        var mainGridStyle = new Style(typeof(Grid))
-                //        {
-                //            Setters = {
-                //        new Setter {
-                //            Property = Grid.PaddingProperty,
-                //            Value =  new Thickness(0, 10, 0, 0)
-                //        }
-                //    }
-                //        };
-
-                //        App.Current.Resources.Add("MainPageStyle", mainPageStyle);
-                //        App.Current.Resources.Add("MainGridStyle", mainGridStyle);
-
-                //        App.IsSetDynamicResources = false;
-                //    }
-
-                if (!App.Current.Resources.ContainsKey("MainPageStyle")
-                || !App.Current.Resources.ContainsKey("MainGridStyle")
-                || !App.IsSetDynamicResources)
-                {
-                    SetDynamicResources();
-                }
-
                 if (
               (!string.IsNullOrEmpty(AppPreferences.Token)))
                 {
-                    string Collaborateur = System.Enum.GetName(typeof(RolesEnum), RolesEnum.Collaborateur);
-                    string Manager = System.Enum.GetName(typeof(RolesEnum), RolesEnum.Manager);
 
-                    if (AppPreferences.UserRole.Equals(Collaborateur))
+
+                    if (AppPreferences.UserRole.Equals(Roles.Collaborateur)
+                        || AppPreferences.UserRole.Equals(Roles.Stagiaire)
+                        || AppPreferences.UserRole.Equals(Roles.Chef_projet))
                         Application.Current.MainPage = new NavigationPage(new HomePage());
 
-                    else if (AppPreferences.UserRole.Equals(Manager))
+                    else if (AppPreferences.UserRole.Equals(Roles.Manager)
+                             || AppPreferences.UserRole.Equals(Roles.Responsable_RH))
                         Application.Current.MainPage = new NavigationPage(new HomeAdminPage());
-
 
                 }
                 else

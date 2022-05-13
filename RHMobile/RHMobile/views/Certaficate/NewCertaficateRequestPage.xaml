@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:res="clr-namespace:XForms.Resources"
+    x:Class="XForms.views.NewCertaficateRequestPage">
+    <Base:BasePage.Content>
+
+        <Grid
+            RowDefinitions="auto,20,*,auto"
+            >
+            <Shared:SmallReclangleBackground
+                Grid.RowSpan="2"
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                />
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                HasTitle="True"
+                HasDescription="False"
+                Title="Nouvelle Demande"
+                Description="hello"
+                HasNotification="True"
+                HasBackButton="True"
+                BackButtonColor="{StaticResource EndGradient}"
+                BackButtonBorderColor="{StaticResource StartGradient }"
+                />
+
+            <!--Body-->
+            <Grid
+                Padding="30,10"
+                Grid.Row="2"
+                RowDefinitions="auto,auto,auto"
+                RowSpacing="20"
+                >
+                <Label
+                    Text="Information de l'attestation"
+                    Style="{StaticResource TitleStyle}"
+                    />
+                <cc:MaterialPicker
+                    Grid.Row="1"
+                    Title="Type de congé"
+                    LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                    />
+
+                <Grid
+                    Grid.Row="2"
+                    RowDefinitions="80,Auto">
+                    <cc:CustomEditor
+                        x:Name="ProductDescriptionEditor"
+                        Text="{Binding ProductDescription}"
+                        Placeholder="Description"
+                        IsCustom="True"
+                        Grid.RowSpan="2"
+                        Style="{StaticResource TransparentEditorStyle}"
+                        BorderColor="#DDE4F3"
+                        IsHasBorder="True"
+                        BorderWidth="2"
+                        />
+
+                </Grid>
+            </Grid>
+
+            <!--Footer-->
+
+            <Grid
+                Grid.Row="3"
+                Padding="30"
+                VerticalOptions="EndAndExpand"
+                >
+                <cc:CustomButton
+                    Text="Envoyer ma demande"
+                    FontSize="20"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center"
+                    Command="{Binding SendRequest}"
+                    IsEnabled="{Binding EnableButtonSendRequest}"
+                    />
+            </Grid>
+                       
+        </Grid>
+
+    </Base:BasePage.Content>
+</Base:BasePage>

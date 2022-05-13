@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="XForms.views.CertaficateRequestCellView"
+    xmlns:Local="clr-namespace:XForms"
+    x:Name="this"
+    >
+    <ContentView.Content
+        >
+        <Grid
+            RowDefinitions="*,auto"            
+            >
+            <Grid.GestureRecognizers>
+
+        <TapGestureRecognizer           
+            Grid.ColumnSpan="2"
+            Tapped="SelectItem_Clicked"            
+            />
+
+            </Grid.GestureRecognizers>
+
+
+            <Grid
+            ColumnDefinitions="auto,*,auto"
+            Padding="0,10"
+                  ColumnSpacing="15"
+           >
+
+            <!--<BoxView
+                BackgroundColor="#FEE07D"
+                />-->
+
+                <svg:SvgCachedImage
+                    HeightRequest="45"
+                Source="{Local:ImageResource certaficate.svg}"
+                Aspect="AspectFit"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+            />
+
+            <StackLayout
+                Grid.Column="1"
+                VerticalOptions="Center"
+                >
+                <Label
+                    Text="{Binding LabelType}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    TextColor="#33373D"
+                    VerticalTextAlignment="Center"
+                    />
+
+                <Label
+                    FontFamily="RubikRegular"
+                    FontSize="12"
+                    TextColor="#A3AEC5"
+                    VerticalTextAlignment="Center"
+                    Text="{Binding StartDate,StringFormat='{0:dd/MM/yyyy}'}"
+                    />
+
+                <!--<Label
+
+                    />-->
+
+            </StackLayout>
+
+            <cc:CornerView
+                VerticalOptions="CenterAndExpand"
+                Grid.Column="2"
+                StyleCorner="Default"
+                CornerRadius="4"
+                >
+                <Label
+                Text="{Binding labelStatus}"
+                BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
+                TextColor="{Binding TextColor,Source = {x:Reference this}}"
+                FontSize="12"
+                FontFamily="RubikRegular"
+                Padding="10"
+                    />
+            </cc:CornerView>
+                
+        </Grid>
+
+            <BoxView
+                Grid.Row="1"
+                HeightRequest="1"
+                BackgroundColor="#EBF1FE"
+                HorizontalOptions="FillAndExpand"
+                />
+
+        </Grid>
+
+      
+
+    </ContentView.Content>
+</ContentView>

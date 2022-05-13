@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XForms.Models;
+using XForms.views;
 
 namespace XForms.ViewModels
 {
@@ -54,6 +55,32 @@ namespace XForms.ViewModels
                 CanSelectHeaderAction = true;
             }
         },
+            
         (_) => CanSelectHeaderAction);
-     }
+
+
+        private bool canNavigateToNewRequest = true;
+        public ICommand NavigationtonewRequest => new Command(() =>
+        {
+            try
+            {
+                canNavigateToNewRequest = false;
+                App.Current.MainPage.Navigation.PushAsync(new NewCertaficateRequestPage());
+
+                HeadrActionList[0].IsSelected = true;
+                HeadrActionList[1].IsSelected = false;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canNavigateToNewRequest = true;
+            }
+
+        },
+    () => canNavigateToNewRequest
+    );
+    }
 }

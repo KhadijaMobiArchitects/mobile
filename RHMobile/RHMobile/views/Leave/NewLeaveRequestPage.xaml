@@ -34,13 +34,12 @@
                     HasBackButton="True"
                     BackButtonColor="{StaticResource EndGradient}"
                     BackButtonBorderColor="{StaticResource StartGradient }"
-            />
+                    />
 
 
                 <!--Body-->
 
                 <Grid
-
                     Grid.Row="1"
                     RowDefinitions="auto,auto,auto"
                     Padding="30,0"

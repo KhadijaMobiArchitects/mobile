@@ -124,10 +124,16 @@ namespace XForms
 
         public static void ClearCache()
         {
-            Preferences.Remove(nameof(CurrentSiteId));
-            Preferences.Remove(nameof(IsSignIn));
-            Preferences.Remove(nameof(StoredSitesData));
-            Preferences.Remove(nameof(HashPass));
+            //Preferences.Remove(nameof(CurrentSiteId));
+            //Preferences.Remove(nameof(IsSignIn));
+            //Preferences.Remove(nameof(StoredSitesData));
+            //Preferences.Remove(nameof(HashPass));
+            //Preferences.Remove(nameof(Token));
+            //Preferences.Remove(nameof(PictureUrl));
+            Preferences.Clear();
+
+
+
             //Preferences.Remove(nameof(ProductsInCartList));
         }
     }
