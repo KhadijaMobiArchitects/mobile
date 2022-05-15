@@ -1,5 +1,4 @@
 ﻿using System;
-<<<<<<< Updated upstream
 using Xamarin.Forms;
 using XForms.Enum;
 
@@ -7,11 +6,6 @@ namespace XForms.Models
 {
 
     public partial class LeaveResponse
-=======
-namespace XForms.Models
-{
-    public class LeaveResponse
->>>>>>> Stashed changes
     {
         public int id { get; set; }
         public DateTime startDate { get; set; }
@@ -25,7 +19,6 @@ namespace XForms.Models
         public string labelStatus { get; set; }
         public int refTypeLeaveId { get; set; }
         public string labelType { get; set; }
-<<<<<<< Updated upstream
         public string pictureUrl { get; set; }
 
     }
@@ -47,7 +40,5 @@ namespace XForms.Models
 
         public string FullName => firstName + " " + lastName;
 
-=======
->>>>>>> Stashed changes
     }
 }

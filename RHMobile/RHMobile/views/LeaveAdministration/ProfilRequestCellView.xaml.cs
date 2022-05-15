@@ -38,7 +38,6 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), Color.Ye
             InitializeComponent();
         }
 
-<<<<<<< Updated upstream
         //void SelectItem_Clicked(System.Object sender, System.EventArgs e)
         //{
         //    if ((sender as View).BindingContext is LeaveResponse item)
@@ -47,15 +46,6 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), Color.Ye
         //    }
 
         //}
-=======
-        void SelectItem_Clicked(System.Object sender, System.EventArgs e)
-        {
-            if ((sender as View).BindingContext is Models.LeaveModel item)
-            {
-                (this.Parent.BindingContext as LeaveRequestViewModel).OpenProfilLeaveDetailsPopupView.Execute(item);
-            }
 
-        }
->>>>>>> Stashed changes
     }
 }

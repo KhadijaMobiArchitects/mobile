@@ -10,7 +10,6 @@ namespace XForms.Constants
 
         public const string Singin = BaseUrl + "Account/Authenticate";
 
-<<<<<<< Updated upstream
         public const string GetRequestsListProfilsLeave = BaseUrl + "leaves/GetAllLeaves/";
         public const string GetRequestInProgressProfilsLeave = BaseUrl + "leaves/GetInProgressLeaves/";
         public const string GetRequestValidatedProfilsLeave = BaseUrl + "leaves/GetValidatedLeaves/";
@@ -20,11 +19,6 @@ namespace XForms.Constants
         public const string GetRequestsListProfilLeaves = BaseUrl + "leaves/getprofilleaves/";
 
         //ProfilLeaves
-
-=======
-        public const string GetRequestsListprofilsLeave = BaseUrl + "leaves/getleaves/";
-        public const string GetRequestsListprofilLeaves = BaseUrl + "leaves/getprofilleaves/";
->>>>>>> Stashed changes
 
         public const string GetRequestListTypeLeave = BaseUrl + "RefTypesLeave/";
         public const string GetRequestListProject = BaseUrl + "Projects/GetProjects";
