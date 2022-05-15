@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XForms.Models;
 using XForms.views.Authentication;
 
 namespace XForms.ViewModels
@@ -9,8 +11,26 @@ namespace XForms.ViewModels
 
     public class BaseViewModel : BindableObject
     {
+        public List<REFItem> HeadrActionList { get; set; }
+        public List<REFItem> HeadrActionListAdmin { get; set; }
+
+
         public BaseViewModel()
         {
+            HeadrActionList = new List<REFItem>()
+            {
+                new REFItem()
+                {
+                    Id = 1,
+                    Name = "en cours",
+                    IsSelected = true
+                },
+                new REFItem()
+                {
+                    Id = 2,
+                    Name = "validée",
+                }
+            };
         }
 
         public virtual void OnAppearing()

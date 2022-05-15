@@ -13,7 +13,17 @@ namespace XForms.Services
     {
         public async Task<RESTServiceResponse<IEnumerable<LeaveResponse>>> GetProfilsLeave()
         {
+<<<<<<< Updated upstream
             return await RESTHelper.GetRequest<IEnumerable<LeaveResponse>>(url: $"{AppUrls.GetRequestsListProfilsLeave}", method: HttpVerbs.GET);
+=======
+            return await RESTHelper.GetRequest<IEnumerable<LeaveResponse>>(url: $"{AppUrls.GetRequestsListprofilsLeave}", method: HttpVerbs.GET);
+        }
+
+
+        public async Task<RESTServiceResponse<IEnumerable<LeaveModel>>> GetProfilLeaves()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<LeaveModel>>(url: $"{AppUrls.GetRequestsListprofilLeaves}", method: HttpVerbs.GET);
+>>>>>>> Stashed changes
         }
 
         public async Task<RESTServiceResponse<IEnumerable<LeaveResponse>>> GetInProgressProfilsLeave()

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Xamarin.Forms;
-using XForms.ViewModels;
-using XForms.Models;
 
 namespace XForms.views
 {
-    public partial class ProfilRequestCellView : ContentView
+    public partial class ProfilCertaficateCellView : ContentView
     {
-
         public static readonly BindableProperty BackgroundColorButtonProperty =
 BindableProperty.Create(nameof(BackgroundColorButton), typeof(Color), typeof(View), Color.Yellow, BindingMode.TwoWay);
 
@@ -32,30 +30,13 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), Color.Ye
                 SetValue(TextColorProperty, value);
             }
         }
-
-        public ProfilRequestCellView()
+        public ProfilCertaficateCellView()
         {
             InitializeComponent();
         }
 
-<<<<<<< Updated upstream
-        //void SelectItem_Clicked(System.Object sender, System.EventArgs e)
-        //{
-        //    if ((sender as View).BindingContext is LeaveResponse item)
-        //    {
-        //        (this.Parent.BindingContext as LeaveAdministrationViewModel).OpenProfilLeaveDetailsPopupView.Execute(item);
-        //    }
-
-        //}
-=======
-        void SelectItem_Clicked(System.Object sender, System.EventArgs e)
+        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
-            if ((sender as View).BindingContext is Models.LeaveModel item)
-            {
-                (this.Parent.BindingContext as LeaveRequestViewModel).OpenProfilLeaveDetailsPopupView.Execute(item);
-            }
-
         }
->>>>>>> Stashed changes
     }
 }

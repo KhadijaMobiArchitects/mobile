@@ -9,24 +9,9 @@ namespace XForms.ViewModels
 {
     public class CertaficateViewModel : BaseViewModel
     {
-        public List<REFItem> HeadrActionList { get; set; }
-
         public CertaficateViewModel()
         {
-            HeadrActionList = new List<REFItem>()
-            {
-                new REFItem()
-                {
-                    Id = 1,
-                    Name = "en cours",
-                    IsSelected = true
-                },
-                new REFItem()
-                {
-                    Id = 2,
-                    Name = "validée",
-                }
-            };
+
         }
 
         private bool CanSelectHeaderAction = true;

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Base:BasePage
-    xmlns:Base="clr-namespace:XForms.views.Base"
+ xmlns:Base="clr-namespace:XForms.views.Base"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cc="clr-namespace:XForms.Controls"
@@ -9,11 +9,9 @@
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:Cell="clr-namespace:XForms.views.Leave" xmlns:Cell2="clr-namespace:XForms.views"
     x:Name="this"
-    x:Class="XForms.views.LeaveAdministrationPage"
-    >
+    x:Class="XForms.views.CertaficateAdministrationPage">
     <Base:BasePage.Content>
-
-            <Grid
+<Grid
                 RowDefinitions="auto,auto,auto"
                 VerticalOptions="FillAndExpand"
                 RowSpacing="10"
@@ -30,21 +28,20 @@
                     <Shared:SuggestionsNavBarView
                     HasTitle="True"
                     HasDescription="True"
-                    Title="Demande Congé"
+                    Title="Demande Attestation"
                     HasNotification="True"
                     HasBackButton="True"
                     Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />
-
-                    <!--Switch-->
+                   <!--Switch-->
                     <StackLayout
                         Grid.Row="1"
                         Padding="30,0,30,20"
                         Spacing="15"
                         Orientation="Horizontal"
-                        BindableLayout.ItemsSource="{Binding HeadrActionListAdmin}">
+                        BindableLayout.ItemsSource="{Binding HeadrActionList}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
@@ -60,14 +57,13 @@
                                         Padding="25,5"
                                         FontSize="12"
                                         Visual="Default"
-                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionAdminCommand}"
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionCommand}"
                                         CommandParameter="{Binding .}"
                                         />
                                 </StackLayout>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
-
                     <ScrollView
                         Padding="30,0"
                         Grid.Row="2"
@@ -75,7 +71,7 @@
                         VerticalScrollBarVisibility="Never"
                         >
                         <CollectionView
-                            ItemsSource="{Binding LeaveItemsListAdmin}"
+                            ItemsSource="{Binding LeaveItemsList}"
                             >
                             <CollectionView.Header>
                                 <Label
@@ -91,14 +87,15 @@
                             </CollectionView.GroupHeaderTemplate>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Cell2:ProfilRequestCellView
+                                    <Cell2:ProfilCertaficateCellView
                                         BackgroundColorButton="{Binding BackgroundColor}"
                                         TextColor="{Binding TextColor}"
                                         />
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                    </ScrollView>
-                </Grid>
+                </ScrollView>
+    </Grid>
+
     </Base:BasePage.Content>
 </Base:BasePage>

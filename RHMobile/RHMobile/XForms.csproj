@@ -139,6 +139,7 @@
     <None Remove="views\Certaficate\" />
     <None Remove="ViewModels\Certaficate\" />
     <None Remove="Resources\Images\user.png" />
+    <None Remove="Models\Certaficate\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -188,6 +189,7 @@
     <Folder Include="Models\Files\" />
     <Folder Include="views\Certaficate\" />
     <Folder Include="ViewModels\Certaficate\" />
+    <Folder Include="Models\Certaficate\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

@@ -7,23 +7,19 @@ using XForms.views.Base;
 
 namespace XForms.views
 {
-    public partial class LeaveAdministrationPage : BasePage
+    public partial class CertaficateAdministrationPage : BasePage
     {
-        public LeaveAdministrationPage()
+        public CertaficateAdministrationPage()
         {
             InitializeComponent();
-
-            //if (BindingContext == null)
-            //    BindingContext = new LeaveRequestViewModel();
         }
-
         protected async override void OnAppearing()
         {
             try
             {
                 if (BindingContext == null)
                 {
-                    BindingContext = new LeaveAdministrationViewModel();
+                    BindingContext = new CertaficateViewModel();
                 }
 
                 base.OnAppearing();
@@ -37,6 +33,4 @@ namespace XForms.views
             //await (BindingContext as LeaveRequestViewModel).getLeavesList();
         }
     }
-
 }
-

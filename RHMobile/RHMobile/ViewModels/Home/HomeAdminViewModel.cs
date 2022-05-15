@@ -6,7 +6,6 @@ using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using XForms.Enum;
 using XForms.Models;
-using XForms.views.LeaveAdministration;
 using XForms.views.Leave;
 using XForms.views;
 
@@ -117,7 +116,7 @@ namespace XForms.ViewModels
                     ICone =(SvgImageSource)ResourceHelpers.GetServiceIcon(AdministrationService.RecorePrime)
 
                 }
-    };
+            };
 
         }
         public INavigation navigation { get; set; }
@@ -135,8 +134,7 @@ namespace XForms.ViewModels
                 {
                     AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveAdministrationPage()),
                     AdministrationService.Project => App.Current.MainPage.Navigation.PushAsync(new ProjectPage()),
-
-
+                    AdministrationService.Certaficate => App.Current.MainPage.Navigation.PushAsync(new CertaficateAdministrationPage()),
                 };
             }
             catch (Exception ex)
@@ -159,12 +157,9 @@ namespace XForms.ViewModels
             {
                 canNavigateToUser = false;
                 App.Current.MainPage.Navigation.PopAsync();
-
-
             }
             catch (Exception ex)
             {
-
 
             }
             finally

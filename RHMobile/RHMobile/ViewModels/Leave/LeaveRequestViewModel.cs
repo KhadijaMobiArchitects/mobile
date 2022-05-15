@@ -31,6 +31,10 @@ namespace XForms.ViewModels
 
 
         public ObservableRangeCollection<LeaveModel> LeaveItemsList { get; set; }
+<<<<<<< Updated upstream
+=======
+        public ObservableRangeCollection<LeaveModel> LeaveItemsListAdmin { get; set; }
+>>>>>>> Stashed changes
 
         public List<ChartEntry> entries { get; set; }
 
@@ -129,7 +133,7 @@ namespace XForms.ViewModels
             {
                 AppHelpers.LoadingShow();
 
-                var result = await App.AppServices.GetLeaves();
+                var result = await App.AppServices.GetProfilLeaves;
 
                 LeaveDate = result.data.ToList();
                 LeavesList = new ObservableRangeCollection<LeaveModel>(LeaveDate);
@@ -139,6 +143,10 @@ namespace XForms.ViewModels
                 FilterLeaves(LeavesList);
                 DifferenceOfDays(InprogessLeavesList, ConfirmedLeavesList, PostponedLeavesList);
                 LeaveItemsList = new ObservableRangeCollection<LeaveModel>(InprogessLeavesList);
+<<<<<<< Updated upstream
+=======
+                LeaveItemsListAdmin = new ObservableRangeCollection<LeaveModel>(InprogessLeavesList);
+>>>>>>> Stashed changes
 
                 numberOfRequests = LeaveItemsList.Count;
 
@@ -247,7 +255,6 @@ namespace XForms.ViewModels
                 item.IsSelected = (item.Id == model.Id);
                 OnPropertyChanged(nameof(item.IsSelected));
 
-
             }
 
             if (HeadrActionList[0].IsSelected)
@@ -285,6 +292,59 @@ namespace XForms.ViewModels
         },
         (_) => CanSelectHeaderAction);
 
+<<<<<<< Updated upstream
+=======
+        private bool CanSelectHeaderActionAdmin = true;
+        public ICommand SelectHeaderActionAdminCommand => new Command<REFItem>(async (model) =>
+        {
+            try
+            {
+                AppHelpers.LoadingHide();
+
+                CanSelectHeaderActionAdmin = false;
+
+                if (model == null) return;
+
+                foreach (var item in HeadrActionListAdmin)
+                {
+                    item.IsSelected = (item.Id == model.Id);
+                    OnPropertyChanged(nameof(item.IsSelected));
+                }
+
+                if (HeadrActionListAdmin[0].IsSelected)
+                {
+                    LeaveItemsListAdmin.ReplaceRange(InprogessLeavesList);
+
+                }
+                else if (HeadrActionListAdmin[1].IsSelected)
+                {
+                    LeaveItemsListAdmin.ReplaceRange(ConfirmedLeavesList);
+
+                }
+                //else if (HeadrActionList[2].IsSelected)
+                //{
+                //    LeaveItemsList.ReplaceRange(PostponedLeavesList);
+
+                //}
+
+                numberOfRequestsAdmin = LeaveItemsListAdmin.Count;
+                OnPropertyChanged(nameof(LeaveItemsListAdmin));
+                OnPropertyChanged(nameof(numberOfRequestsAdmin));
+
+                StatusName = HeadrActionListAdmin[0].IsSelected ? HeadrActionListAdmin[0].Name : HeadrActionList[1].Name + "s";
+                OnPropertyChanged(nameof(StatusName));
+
+            }
+            catch (Exception ex)
+            {
+                AppHelpers.LoadingHide();
+
+                //Logger.LogError(ex);
+            }
+            finally
+            {
+                AppHelpers.LoadingHide();
+>>>>>>> Stashed changes
 
 
         private bool canNavigateToNewRequest = true;
@@ -350,6 +410,47 @@ namespace XForms.ViewModels
         },
         (_) => canOpenLeaveDetailsPopup );
 
+<<<<<<< Updated upstream
+=======
+        private ProfilLeaveDetailsPopup profilLeaveDetailsPopup;
+
+
+        private bool canOpenProfilLeaveDetailsPopup = true;
+        public ICommand OpenProfilLeaveDetailsPopupView => new Command<LeaveModel>(async (model) =>
+        {
+            try
+            {
+                canOpenProfilLeaveDetailsPopup = false;
+
+                if (model == null)
+                    return;
+                //IsShowButtonCancelRequest = HeadrActionList[0].IsSelected;
+
+                SelectedLeave = model;
+
+                if (profilLeaveDetailsPopup == null)
+                {
+                    profilLeaveDetailsPopup = new ProfilLeaveDetailsPopup() { BindingContext = this };
+                }
+                OnPropertyChanged(nameof(SelectedLeave));
+
+                await PopupNavigation.Instance.PushSingleAsync(profilLeaveDetailsPopup);
+
+            }
+            catch (Exception ex)
+            {
+                await PopupNavigation.Instance.PushSingleAsync(profilLeaveDetailsPopup);
+
+            }
+            finally
+            {
+                canOpenProfilLeaveDetailsPopup = true;
+
+
+            }
+        },
+        (_) => canOpenProfilLeaveDetailsPopup);
+>>>>>>> Stashed changes
 
         private bool CanCancelRequest=true;
         public ICommand CancelRequest => new Command(async () =>
