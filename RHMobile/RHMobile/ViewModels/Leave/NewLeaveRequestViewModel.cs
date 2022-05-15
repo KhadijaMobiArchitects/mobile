@@ -21,7 +21,7 @@ namespace XForms.ViewModels
     public class NewLeaveRequestViewModel : BaseViewModel
     {
 
-        public List<Leave> ListLeave { get; set; }
+        public List<LeaveModel> ListLeave { get; set; }
         //public List<Projet> ListProjet { get; set; }
         //public List<SituationProjet> ListSituation { get; set; }
         public DateTime StartDate { get; set; }
@@ -159,7 +159,7 @@ namespace XForms.ViewModels
 
                     CandSendRequest = false;
 
-                    Leave postParams = new Leave()
+                    LeaveModel postParams = new LeaveModel()
                     {
                         StartDate = StartDate,
                         EndDate = EndDate,
@@ -180,8 +180,15 @@ namespace XForms.ViewModels
 
                     var result = new RESTServiceResponse<object>();
                     result = await App.AppServices.PostLeave(postParams);
+                    if(result?.succeeded == true)
+                    {
+                        App.Current.MainPage.Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        AppHelpers.Alert(result?.message);
+                    }
 
-                    App.Current.MainPage.Navigation.PopAsync();
 
                 }
                 catch (Exception ex)

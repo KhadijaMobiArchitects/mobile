@@ -10,7 +10,17 @@ namespace XForms.Constants
 
         public const string Singin = BaseUrl + "Account/Authenticate";
 
-        public const string GesRequestsListLeave = BaseUrl + "leaves/getleaves/";
+        public const string GetRequestsListProfilsLeave = BaseUrl + "leaves/GetAllLeaves/";
+        public const string GetRequestInProgressProfilsLeave = BaseUrl + "leaves/GetInProgressLeaves/";
+        public const string GetRequestValidatedProfilsLeave = BaseUrl + "leaves/GetValidatedLeaves/";
+
+
+
+        public const string GetRequestsListProfilLeaves = BaseUrl + "leaves/getprofilleaves/";
+
+        //ProfilLeaves
+
+
         public const string GetRequestListTypeLeave = BaseUrl + "RefTypesLeave/";
         public const string GetRequestListProject = BaseUrl + "Projects/GetProjects";
         public const string GetRequestListActualProject = BaseUrl + "Projects/getactualprojects";
@@ -23,7 +33,7 @@ namespace XForms.Constants
 
         
 
-        public const string PostLeaveRequest = BaseUrl + "leaves/postLeave/";
+        public const string PostLeaveRequest = BaseUrl + "leaves/CreateLeave/";
         public const string DeleteLeaveRequest = BaseUrl + "leaves/deleteLeave";
         public const string PostProjectRequest = BaseUrl + "projects/CreateProject";
         public const string GetStaffMembersToAddRequest = BaseUrl + "Projects/GetStaffMembersToAdd";

@@ -11,10 +11,30 @@ namespace XForms.Services
 {
     public class AppServices : BaseService
     {
-        public async Task<RESTServiceResponse<IEnumerable<Leave>>> GetLeaves()
+        public async Task<RESTServiceResponse<IEnumerable<LeaveResponse>>> GetProfilsLeave()
         {
-            return await RESTHelper.GetRequest<IEnumerable<Leave>>(url: $"{AppUrls.GesRequestsListLeave}", method: HttpVerbs.GET);
+            return await RESTHelper.GetRequest<IEnumerable<LeaveResponse>>(url: $"{AppUrls.GetRequestsListProfilsLeave}", method: HttpVerbs.GET);
         }
+
+        public async Task<RESTServiceResponse<IEnumerable<LeaveResponse>>> GetInProgressProfilsLeave()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<LeaveResponse>>(url: $"{AppUrls.GetRequestInProgressProfilsLeave}", method: HttpVerbs.GET);
+        }
+        public async Task<RESTServiceResponse<IEnumerable<LeaveResponse>>> GetValidatedProfilsLeave()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<LeaveResponse>>(url: $"{AppUrls.GetRequestValidatedProfilsLeave}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<LeaveModel>>> GetProfilLeaves()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<LeaveModel>>(url: $"{AppUrls.GetRequestsListProfilLeaves}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<LeaveModel>>> GetLeaves()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<LeaveModel>>(url: $"{AppUrls.GetRequestsListProfilLeaves}", method: HttpVerbs.GET);
+        }
+
 
         public async Task<RESTServiceResponse<IEnumerable<REFTypeLeave>>> GetTypesLeave()
         {
@@ -60,7 +80,7 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<IEnumerable<SituationProject>>(url: $"{AppUrls.GetRequestSituationProject}", method: HttpVerbs.GET);
         }
 
-        public async Task<RESTServiceResponse<object>> PostLeave(Leave postParams)
+        public async Task<RESTServiceResponse<object>> PostLeave(LeaveModel postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostLeaveRequest}",postObject: postParams, method: HttpVerbs.POST);
         }

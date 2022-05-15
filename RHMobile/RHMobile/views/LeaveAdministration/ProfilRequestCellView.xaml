@@ -17,16 +17,16 @@
 
         <TapGestureRecognizer           
             Grid.ColumnSpan="2"
-            Tapped="SelectItem_Clicked"            
+            Command="{Binding Parent.BindingContext.OpenProfilLeaveDetailsPopupView,Source={x:Reference this}}"
+            CommandParameter="{Binding .}"
             />
-
             </Grid.GestureRecognizers>
 
 
             <Grid
-            ColumnDefinitions="auto,*,auto"
-            Padding="0,10"
-                  ColumnSpacing="15"
+                ColumnDefinitions="auto,*,auto"
+                Padding="0,10"
+                ColumnSpacing="15"
            >
 
             <!--<BoxView
@@ -39,7 +39,7 @@
             >
 
                 <svg:SvgCachedImage
-                Source="{Local:ImageResource profil.png}"
+                Source="{Binding pictureUrl}"
                 Aspect="AspectFill"
                 />
             </cc:CornerView>
@@ -54,10 +54,23 @@
                     FontSize="14"
                     TextColor="#33373D"
                     VerticalTextAlignment="Center"
-                    />
+                    >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                Text="{Binding firstName}"
+                                />
+                            <Span
+                                Text=" "
+                                />
+                            <Span
+                                Text="{Binding lastName}"
+                                />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
                 <Label
-                    Text="{Binding StartDate}"
                     FontFamily="RubikRegular"
                     FontSize="12"
                     TextColor="#A3AEC5"
@@ -67,13 +80,13 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
-                                Text="{Binding StartDate,StringFormat='{0:dd/MM/yyyy}'}"
+                                Text="{Binding startDate,StringFormat='{0:dd/MM/yyyy}'}"
                                 />
                             <Span
                                 Text=" - "
                                 />
                             <Span
-                                Text="{Binding EndDate,StringFormat='{0:dd/MM/yyyy}'}"
+                                Text="{Binding endDate,StringFormat='{0:dd/MM/yyyy}'}"
                                 />
                         </FormattedString>
                     </Label.FormattedText>

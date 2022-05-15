@@ -44,7 +44,7 @@
 
                 <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
-                    Item="KAROUM Hassoun"
+                    Item="{Binding SelectedLeave.FullName}"
                     Value="Full stack dev"
                     HorizontalTextAlignment="Center"
             />
@@ -62,18 +62,18 @@
                 >
                 <cc:MaterialItemValue
             Item="Date début"
-            Value="{Binding SelectedLeave.StartDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedLeave.startDate,StringFormat='{0:dd/MM/yyyy}'}"
             />
                 <cc:MaterialItemValue
             Grid.Column="1"
             Item="Date Fin"
-            Value="{Binding SelectedLeave.EndDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedLeave.endDate,StringFormat='{0:dd/MM/yyyy}'}"
 
             />
                 <cc:MaterialItemValue
             Grid.Row="1"
             Item="Type de congé"
-            Value="{Binding SelectedLeave.LabelType}"
+            Value="{Binding SelectedLeave.labelType}"
 
             />
 
@@ -147,7 +147,7 @@
                         Margin="-5"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Local:ImageResource profil.png}"
+                        Source="{Binding SelectedLeave.pictureUrl}"
                         Aspect="AspectFill"
                         />
                 </cc:CornerView>

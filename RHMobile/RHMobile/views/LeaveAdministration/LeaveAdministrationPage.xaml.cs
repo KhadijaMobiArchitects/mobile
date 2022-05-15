@@ -23,7 +23,7 @@ namespace XForms.views.LeaveAdministration
             {
                 if (BindingContext == null)
                 {
-                    BindingContext = new LeaveRequestViewModel();
+                    BindingContext = new LeaveAdministrationViewModel();
                 }
 
                 base.OnAppearing();

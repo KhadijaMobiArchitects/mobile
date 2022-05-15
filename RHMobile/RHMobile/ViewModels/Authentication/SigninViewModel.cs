@@ -21,8 +21,8 @@ namespace XForms.ViewModels
         {
             //Collaborateur
 
-            SigninEmail = "abdelahasserhihe@gmail.com";
-            SigninPassword = "Password2022!!";
+            //SigninEmail = "abdelahasserhihe@gmail.com";
+            //SigninPassword = "Password2022!!";
 
             //Chef_projet
 
@@ -36,8 +36,8 @@ namespace XForms.ViewModels
 
             //Manager
 
-            //SigninEmail = "samirghaouissi@gmail.com";
-            //SigninPassword = "Password2022!!";
+            SigninEmail = "samirghaouissi@gmail.com";
+            SigninPassword = "Password2022!!";
 
             //Responsable RH
 
