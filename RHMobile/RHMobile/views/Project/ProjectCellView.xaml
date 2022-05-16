@@ -57,7 +57,7 @@
                         LineBreakMode="TailTruncation"
                         />
                     <Label
-                        Text="{Binding Parent.BindingContext.ProjectOwnerName,Source={x:Reference this}}"
+                        Text="{Binding OwnerFullName}"
                         FontSize="12"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"

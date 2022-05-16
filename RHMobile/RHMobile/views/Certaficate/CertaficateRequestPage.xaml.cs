@@ -12,6 +12,8 @@ namespace XForms.views
         public CertaficateRequestPage()
         {
             InitializeComponent();
+            BindingContext = new CertaficateViewModel();
+
 
         }
 

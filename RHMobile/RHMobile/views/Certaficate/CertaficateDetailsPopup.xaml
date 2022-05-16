@@ -7,6 +7,7 @@
     xmlns:res="clr-namespace:XForms.Resources"
     CloseWhenBackgroundIsClicked="True"
     HasKeyboardOffset="False"
+    HasSystemPadding="False"
     BackgroundColor="#90000000"
     xmlns:Local="clr-namespace:XForms"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
@@ -74,44 +75,23 @@
             <Grid
             Padding="30,0"
                 Grid.Row="3"
-                RowDefinitions="*,*,*,*"
-                ColumnDefinitions="*,*"
+                RowDefinitions="auto,*,auto"
                 RowSpacing="20"
                 Margin="0,30"
                 >
-                <cc:MaterialItemValue
-            Item="Date début"
-            Value="{Binding SelectedLeave.StartDate,StringFormat='{0:dd/MM/yyyy}'}"
-            />
-                <cc:MaterialItemValue
-            Grid.Column="1"
-            Item="Date Fin"
-            Value="{Binding SelectedLeave.EndDate,StringFormat='{0:dd/MM/yyyy}'}"
+                <Label
+                    Text="Votre Demande"
+                    Style="{StaticResource TitleStyle}"
 
-            />
-                <cc:MaterialItemValue
-            Grid.Row="1"
-            Item="Type de congé"
-            Value="{Binding SelectedLeave.LabelType}"
-
-            />
-
-                <cc:MaterialItemValue
-            Grid.Row="1"
-                    Grid.Column="1"
-            Item="Projet"
-            Value="Ta7alil"
-            />
-                <cc:MaterialItemValue
-            Grid.Row="2"
-                    Grid.ColumnSpan="2"
-                    VerticalOptions="Start"
-            Item="Situation sur le projet"
-            Value="Livré partiellement"
-            />
+                    />
+                <Label
+                    Grid.Row="1"
+                    FontSize="12"
+                    FontFamily="RubikRegular"
+                    Text="Bonjour Madame/Monsieur, Pour des raisons administratives, je vousdemande par la présente de bien vouloir m'adresser une attestation d'emploi mentionnant le poste que j'occupe au sein de la société,le montant de mon salaire et la date de mon embauche. Je vous remercie par avance"
+                    />
                 <StackLayout
                     Grid.Row="3"
-                    Grid.ColumnSpan="2"
                     >
                     <cc:CustomButton
                 HorizontalOptions="Center"

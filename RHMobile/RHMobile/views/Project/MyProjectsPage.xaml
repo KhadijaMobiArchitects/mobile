@@ -32,7 +32,7 @@
                 Title="Projets client"
                 HasNotification="True"
                 HasBackButton="True"
-                Description="{Binding NumberOfProjects,StringFormat='{0} projet en cours'}"
+                Description="{Binding NumberOfMyProjects,StringFormat='{0} projet en cours'}"
                 BackButtonBorderColor="{StaticResource StartGradient}"
                 BackButtonColor="{StaticResource EndGradient }"
                 />

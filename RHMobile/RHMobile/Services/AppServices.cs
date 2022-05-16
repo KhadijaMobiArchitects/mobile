@@ -41,19 +41,19 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<IEnumerable<REFTypeLeave>>(url: $"{AppUrls.GetRequestListTypeLeave}", method: HttpVerbs.GET);
         }
-        public async Task<RESTServiceResponse<IEnumerable<Project>>> GetProjects()
+        public async Task<RESTServiceResponse<IEnumerable<ProjectModel>>> GetProjects()
         {
-            return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListProject}", method: HttpVerbs.GET);
+            return await RESTHelper.GetRequest<IEnumerable<ProjectModel>>(url: $"{AppUrls.GetRequestListProject}", method: HttpVerbs.GET);
         }
 
-        public async Task<RESTServiceResponse<IEnumerable<Project>>> GetAcualProjects()
+        public async Task<RESTServiceResponse<IEnumerable<ProjectModel>>> GetAcualProjects()
         {
-            return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListActualProject}", method: HttpVerbs.GET);
+            return await RESTHelper.GetRequest<IEnumerable<ProjectModel>>(url: $"{AppUrls.GetRequestListActualProject}", method: HttpVerbs.GET);
         }
 
-        public async Task<RESTServiceResponse<IEnumerable<Project>>> GetProfilProjects()
+        public async Task<RESTServiceResponse<IEnumerable<ProjectModel>>> GetProfilProjects()
         {
-            return await RESTHelper.GetRequest<IEnumerable<Project>>(url: $"{AppUrls.GetRequestListProfilProject}", method: HttpVerbs.GET);
+            return await RESTHelper.GetRequest<IEnumerable<ProjectModel>>(url: $"{AppUrls.GetRequestListProfilProject}", method: HttpVerbs.GET);
         }
 
         public async Task<RESTServiceResponse<IEnumerable<ProfilResponse>>> GetProjectSquad(long projectId)

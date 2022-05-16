@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace XForms.Models
 {
-    public partial class Project : BindableObject
+    public partial class ProjectModel : BindableObject
     { 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,14 +14,17 @@ namespace XForms.Models
         public string OwnerBy { get; set; }
         public string CreatedBy { get; set; }
         public string PictureUrl { get; set; }
+        public string FirstName_Owner { get; set; }
+        public string LastName_Owner { get; set; }
 
         //public ImageSource Image { get; set; }
 
     }
 
-    public partial class Project : BindableObject
+    public partial class ProjectModel : BindableObject
     {
         public bool IsSelected { get; set; }
+        public string OwnerFullName => FirstName_Owner + " " + LastName_Owner;
 
         public Color BackgroundColor => IsSelected ? Color.FromHex("#4ACFF9") : Color.White;
         public Color TextColor => IsSelected ? Color.White : Color.Black;
@@ -53,6 +56,7 @@ namespace XForms.Models
                 return Color.Black;
             }
         }
+
 
     }
 }

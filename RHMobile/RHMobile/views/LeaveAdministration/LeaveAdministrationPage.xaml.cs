@@ -15,6 +15,8 @@ namespace XForms.views
 
             //if (BindingContext == null)
             //    BindingContext = new LeaveRequestViewModel();
+            BindingContext = new LeaveAdministrationViewModel();
+
         }
 
         protected async override void OnAppearing()

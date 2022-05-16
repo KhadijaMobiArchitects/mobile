@@ -28,14 +28,14 @@ namespace XForms.ViewModels
         public DateTime EndDate { get; set; }
 
         //public Leave SelectedLeave { get; set; }
-        public Project SelectedProjet { get; set; }
+        public ProjectModel SelectedProjet { get; set; }
         public REFTypeLeave SelectedREFTypeLeave { get; set; }
         public SituationProject SelectedSituationProject { get; set; }
 
         public List<REFTypeLeave> TypeLeaveData;
         public List<REFTypeLeave> TypesLeaveList { get; set; }
-        public List<Project> ProjectData;
-        public List<Project> ProjectsList { get; set; }
+        public List<ProjectModel> ProjectData;
+        public List<ProjectModel> ProjectsList { get; set; }
 
         public List<SituationProject> SituationsProjectList { get; set; }
 

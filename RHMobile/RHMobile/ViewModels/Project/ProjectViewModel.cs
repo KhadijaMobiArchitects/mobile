@@ -16,8 +16,8 @@ namespace XForms.ViewModels
     public class ProjectViewModel : BaseViewModel
     {
         //public ObservableRangeCollection<Project> Projects { get; set; }
-        public ObservableRangeCollection<Project> ProjectsList { get; set; }
-        public ObservableRangeCollection<Project> ProfilProjectsList { get; set; }
+        public ObservableRangeCollection<ProjectModel> ProjectsList { get; set; }
+        public ObservableRangeCollection<ProjectModel> ProfilProjectsList { get; set; }
 
 
         public ObservableRangeCollection<ProfilResponse> SquadList { get; set; }
@@ -40,14 +40,14 @@ namespace XForms.ViewModels
         public int SelectedProjectId { get; set; }
         public string SelectedProjectName { get; set; } = "";
 
-        public Project SelectedProjet { get; set; }
+        public ProjectModel SelectedProjet { get; set; }
 
         public bool IsProjectOwner { get; set; }
 
         public string ProjectName { get; set; } = "";
 
 
-        private Project AddProjectCell;
+        private ProjectModel AddProjectCell;
 
         public int MyNotes { get; set; } = 0;
         public int Percent { get; set; } = 0;
@@ -85,7 +85,7 @@ namespace XForms.ViewModels
                 var result = await App.AppServices.GetAcualProjects();
                 if (result?.succeeded == true)
                 {
-                    ProjectsList = new ObservableRangeCollection<Project>(result.data.ToList());
+                    ProjectsList = new ObservableRangeCollection<ProjectModel>(result.data.ToList());
 
                     if (ProjectsList.Any())
                     {
@@ -119,7 +119,7 @@ namespace XForms.ViewModels
 
                 if (result?.succeeded == true)
                 {
-                    ProfilProjectsList = new ObservableRangeCollection<Project>(result.data.ToList());
+                    ProfilProjectsList = new ObservableRangeCollection<ProjectModel>(result.data.ToList());
 
                     if (ProfilProjectsList.Any())
                     {
@@ -127,6 +127,8 @@ namespace XForms.ViewModels
                         ProfilProjectsList[0].IsSelected = true;
                         GetProjectSquad(SelectedProjectId);
                         ProjectName = ProfilProjectsList[0].Name;
+                        IsProjectOwner = ProfilProjectsList[0].OwnerBy.Equals(AppPreferences.UserId);
+
                     }
                     NumberOfMyProjects = ProfilProjectsList.Count;
                     //SelectedProjetId = SelectedProjetId;
@@ -154,6 +156,7 @@ namespace XForms.ViewModels
                     AppHelpers.LoadingHide();
                     SquadList = new ObservableRangeCollection<ProfilResponse>(result.data.ToList());
 
+
                 }
                 else
                 {
@@ -173,8 +176,6 @@ namespace XForms.ViewModels
                 {
                     AppHelpers.Alert(result2?.message);
                 }
-
-                IsProjectOwner = SelectedProjet.OwnerBy == AppPreferences.UserId;
 
                 foreach (ProfilResponse profil in SquadList)
                 {
@@ -219,7 +220,7 @@ namespace XForms.ViewModels
 
 
         private bool canSelectProject = true;
-        public ICommand SelectProjectCommand => new Command<Project>(async (model) =>
+        public ICommand SelectProjectCommand => new Command<ProjectModel>(async (model) =>
          {
              try
              {
@@ -230,17 +231,19 @@ namespace XForms.ViewModels
                  GetProjectSquad(model.Id);
                  if(ProjectsList != null)
                  {
-                     foreach (Project project in ProjectsList)
+                     foreach (ProjectModel project in ProjectsList)
                          project.IsSelected = false;
                  }
                  if(ProfilProjectsList != null)
                  {
-                     foreach (Project project in ProfilProjectsList)
+                     foreach (ProjectModel project in ProfilProjectsList)
                          project.IsSelected = false;
                  }
 
                  model.IsSelected = true;
                  ProjectName = model?.Name;
+                 IsProjectOwner = model.OwnerBy.Equals(AppPreferences.UserId);
+
 
              }
              catch (Exception ex)
@@ -518,7 +521,10 @@ namespace XForms.ViewModels
 
                 };
                 var result = await App.AppServices.PostChangePercent(changePercentModel);
+                AppHelpers.Alert(result?.message);
+                 GetProfilProjects();
                 await PopupNavigation.Instance.PopAsync();
+                
             }
             catch (Exception ex)
             {
