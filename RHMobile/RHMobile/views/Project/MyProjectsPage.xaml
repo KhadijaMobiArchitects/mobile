@@ -26,7 +26,6 @@
 
             <!--Header-->
             <Shared:SuggestionsNavBarView
-
                 x:Name="MyHeader"
                 HasTitle="True"
                 HasDescription="True"
@@ -74,7 +73,7 @@
                 <CollectionView.Header                    
                     >
                     <Label
-                        Text="{Binding SelectedProjectName , StringFormat='Squad {0}'}"
+                        Text="{Binding BindingContext.ProjectName,Source={x:Reference this},StringFormat='Squad {0}'}"
                         FontSize="16"
                         FontAttributes="Bold"
                         />
@@ -94,11 +93,11 @@
                 CornerRadius="30"
                 />
                 </CollectionView.Footer>-->
-                            <!--IsVisible="{Binding IsProjectOwner}"-->
 
 
             </CollectionView>
                 <cc:CustomButton
+                    IsVisible="{Binding IsProjectOwner}"
                     Grid.Row="4"
                     Margin="30"
                     HorizontalOptions="CenterAndExpand"

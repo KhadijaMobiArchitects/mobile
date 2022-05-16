@@ -33,7 +33,7 @@
                         HasTitle="True"
                         HasDescription="True"
                         Title="{Binding FullName}"
-                        Description="Chargée RH"
+                        Description="{Binding RefFunctionLabel}"
                         HasBackButton="False"
                         HasNotification="True"
                         HasImageProfil="True"

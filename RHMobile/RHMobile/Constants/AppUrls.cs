@@ -15,7 +15,6 @@ namespace XForms.Constants
         public const string GetRequestValidatedProfilsLeave = BaseUrl + "leaves/GetValidatedLeaves/";
 
 
-
         public const string GetRequestsListProfilLeaves = BaseUrl + "leaves/getprofilleaves/";
 
         //ProfilLeaves
@@ -38,6 +37,9 @@ namespace XForms.Constants
         public const string GetStaffMembersToAddRequest = BaseUrl + "Projects/GetStaffMembersToAdd";
         public const string PostMembersRequest = BaseUrl + "Projects/AddStaffMembers";
         public const string PostChangePercentRequest = BaseUrl + "Projects/ChangePercent";
+        public const string PostUpdateLeaveRequest = BaseUrl + "leaves/UpdateLeave";
+
+
 
 
 

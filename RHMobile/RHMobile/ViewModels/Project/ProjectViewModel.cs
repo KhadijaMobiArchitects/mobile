@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Rg.Plugins.Popup.Services;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
+using XForms.Enum;
 using XForms.Models;
 using XForms.views;
 using XForms.views.Project;
@@ -20,6 +21,8 @@ namespace XForms.ViewModels
 
 
         public ObservableRangeCollection<ProfilResponse> SquadList { get; set; }
+        public ObservableRangeCollection<ProfilResponse> MySquadList { get; set; }
+
         public ObservableRangeCollection<ProfilResponse> AddMembersList { get; set; }
         public ObservableRangeCollection<ProfilResponse> SearchMembersList { get; set; }
 
@@ -41,6 +44,8 @@ namespace XForms.ViewModels
 
         public bool IsProjectOwner { get; set; }
 
+        public string ProjectName { get; set; } = "";
+
 
         private Project AddProjectCell;
 
@@ -54,9 +59,10 @@ namespace XForms.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
-
-            GetActualProjects();
-            GetProfilProjects();
+            if(AppPreferences.UserRole == Roles.Manager)
+                GetActualProjects();
+            if(AppPreferences.UserRole == Roles.Collaborateur || AppPreferences.UserRole == Roles.Chef_projet)
+                GetProfilProjects();
 
 
             this.PropertyChanged += (s, e) =>
@@ -86,10 +92,10 @@ namespace XForms.ViewModels
                         SelectedProjectId = (int)(ProjectsList?.FirstOrDefault()?.Id);
                         ProjectsList[0].IsSelected = true;
                         GetProjectSquad(SelectedProjectId);
+                        ProjectName = ProjectsList[0].Name;
                     }
                     NumberOfProjects = ProjectsList.Count;
-                    //SelectedProjetId = SelectedProjetId;
-                    
+                    //SelectedProjetId = SelectedProjetId;                    
                 }
 
                 else
@@ -120,8 +126,9 @@ namespace XForms.ViewModels
                         SelectedProjectId = (int)(ProfilProjectsList?.FirstOrDefault()?.Id);
                         ProfilProjectsList[0].IsSelected = true;
                         GetProjectSquad(SelectedProjectId);
+                        ProjectName = ProfilProjectsList[0].Name;
                     }
-                    NumberOfMyProjects = ProjectsList.Count;
+                    NumberOfMyProjects = ProfilProjectsList.Count;
                     //SelectedProjetId = SelectedProjetId;
                 }
                 else
@@ -152,7 +159,6 @@ namespace XForms.ViewModels
                 {
                     AppHelpers.Alert(result?.message);
                 }
-
 
 
                 AppHelpers.LoadingShow();
@@ -222,12 +228,19 @@ namespace XForms.ViewModels
                  SelectedProjectName = model?.Name;
 
                  GetProjectSquad(model.Id);
-                 foreach (Project project in ProjectsList)
-                     project.IsSelected = false;
-                 foreach (Project project in ProfilProjectsList)
-                     project.IsSelected = false;
+                 if(ProjectsList != null)
+                 {
+                     foreach (Project project in ProjectsList)
+                         project.IsSelected = false;
+                 }
+                 if(ProfilProjectsList != null)
+                 {
+                     foreach (Project project in ProfilProjectsList)
+                         project.IsSelected = false;
+                 }
 
                  model.IsSelected = true;
+                 ProjectName = model?.Name;
 
              }
              catch (Exception ex)

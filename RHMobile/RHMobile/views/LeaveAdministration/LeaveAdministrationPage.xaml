@@ -33,7 +33,7 @@
                     Title="Demande Congé"
                     HasNotification="True"
                     HasBackButton="True"
-                    Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
+                    Description="{Binding numberOfRequests,StringFormat='{0} demande'}"
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />
@@ -44,7 +44,7 @@
                         Padding="30,0,30,20"
                         Spacing="15"
                         Orientation="Horizontal"
-                        BindableLayout.ItemsSource="{Binding HeadrActionListAdmin}">
+                        BindableLayout.ItemsSource="{Binding HeadrActionList}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>

@@ -15,13 +15,8 @@ namespace XForms.ViewModels
     {
         public List<REFItemAdministration> AdminstrationList { get; set; }
 
-        public string FullName { get; set; }
-        public string PictureUrl { get; set; }
-
         public HomeAdminViewModel()
         {
-            FullName = AppPreferences.FullName;
-            PictureUrl =  AppPreferences.PictureUrl;
 
             AdminstrationList = new List<REFItemAdministration>
             {

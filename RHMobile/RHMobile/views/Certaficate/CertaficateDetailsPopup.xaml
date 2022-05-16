@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Base:BasePopupView
-    xmlns:Base="clr-namespace:XForms.views.Base"
+ xmlns:Base="clr-namespace:XForms.views.Base"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
     xmlns:res="clr-namespace:XForms.Resources"
     CloseWhenBackgroundIsClicked="True"
     HasKeyboardOffset="False"
@@ -10,10 +11,7 @@
     xmlns:Local="clr-namespace:XForms"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:animations="http://rotorgames.com"
-
-    x:Class="XForms.views.ProfilLeaveDetailsPopup"
-
-    >
+    x:Class="XForms.views.Certaficate.CertaficateDetailsPopup">
     <Base:BasePopupView.Animation>
         <animations:ScaleAnimation
             PositionIn="Bottom"
@@ -24,7 +22,6 @@
             DurationOut="200"
             HasBackgroundAnimation="True" />
     </Base:BasePopupView.Animation>
-
     <Grid
         VerticalOptions="EndAndExpand"
         BackgroundColor="Transparent"
@@ -46,10 +43,30 @@
 
                 <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
-                    Item="{Binding SelectedLeave.FullName}"
-                    Value="Full stack dev"
+                    Item="{Binding SelectedLeave.LabelType,StringFormat='Congé {0}',Mode=OneWay}"
+                    Value="16/09/2021"
                     HorizontalTextAlignment="Center"
             />
+
+            <cc:CornerView
+                BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                Padding="5"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                StyleCorner="Default"
+                CornerRadius="4"
+
+                >
+                <Label
+                    HorizontalOptions="Center"
+                    Text="{Binding SelectedLeave.labelStatus}"
+                    TextColor="{Binding SelectedLeave.TextColor}"
+                    BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                    FontSize="12"
+                    Padding="5"                    
+                    />
+
+            </cc:CornerView>
 
             </StackLayout>
 
@@ -57,25 +74,25 @@
             <Grid
             Padding="30,0"
                 Grid.Row="3"
-                RowDefinitions="*,*,*,*,Auto"
-                ColumnDefinitions="3*,2*"
-                Margin="0,30"
+                RowDefinitions="*,*,*,*"
+                ColumnDefinitions="*,*"
                 RowSpacing="20"
+                Margin="0,30"
                 >
                 <cc:MaterialItemValue
             Item="Date début"
-            Value="{Binding SelectedLeave.startDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedLeave.StartDate,StringFormat='{0:dd/MM/yyyy}'}"
             />
                 <cc:MaterialItemValue
             Grid.Column="1"
             Item="Date Fin"
-            Value="{Binding SelectedLeave.endDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedLeave.EndDate,StringFormat='{0:dd/MM/yyyy}'}"
 
             />
                 <cc:MaterialItemValue
             Grid.Row="1"
             Item="Type de congé"
-            Value="{Binding SelectedLeave.labelType}"
+            Value="{Binding SelectedLeave.LabelType}"
 
             />
 
@@ -92,45 +109,19 @@
             Item="Situation sur le projet"
             Value="Livré partiellement"
             />
-                <cc:MaterialItemValue
-            Grid.Row="3"
-                    VerticalOptions="Start"
-            Item="Confirmation par squad"
-            Value="Confirmer"
-                 
-            />
-                <cc:MaterialItemValue
-            Grid.Row="2"
-                 Grid.Column="1"
-                    VerticalOptions="Start"
-            Item="Nombre de jours"
-            Value="{Binding SelectedLeave.DifferenceOfDays }"
-            />
                 <StackLayout
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Grid.ColumnSpan="2"
                     >
                     <cc:CustomButton
-
-                        Text="Confirmer"
-                        TextColor="{StaticResource White}"
-                        BackgroundColor="{StaticResource Green }"
-                        FontSize="12"
-                        Padding="20,5"
-                        HorizontalOptions="FillAndExpand"
-                        CornerRadius="20"
-                        Command="{Binding ValidateLeaveCommand}"
-
-                        />
-                    <cc:CustomButton
-                        HorizontalOptions="FillAndExpand"
-                        Text="Réfuser"
-                        TextColor="{StaticResource White}"
-                        BackgroundColor="{StaticResource Red}"
-                        FontSize="12"
-                        Padding="20,5"
-                        Command="{Binding RejectLeaveCommand}"
-                        CornerRadius="20"
+                HorizontalOptions="Center"
+                Text="Annuler"
+                TextColor="{Binding SelectedLeave.TextColor}"
+                BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                FontSize="12"
+                Padding="20,5"
+                IsVisible="{Binding IsShowButtonCancelRequest}"
+                Command="{Binding CancelRequest}"
                         />
 
                 </StackLayout>
@@ -148,11 +139,10 @@
                     >
                     <svg:SvgCachedImage                    
                         Visual="Default"
-                        Margin="-5"
+                        Margin="10"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Binding SelectedLeave.pictureUrl}"
-                        Aspect="AspectFill"
+                        Source="{Local:ImageResource certaficate.svg}"
                         />
                 </cc:CornerView>
             </cc:CornerView>

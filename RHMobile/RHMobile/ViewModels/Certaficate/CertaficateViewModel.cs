@@ -1,16 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Rg.Plugins.Popup.Services;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using XForms.Models;
+using XForms.Models.Certaficate;
 using XForms.views;
+using XForms.views.Certaficate;
 
 namespace XForms.ViewModels
 {
     public class CertaficateViewModel : BaseViewModel
     {
+        public ObservableRangeCollection<CertaficateModel> CertaficatesList { get; set; }
+
         public CertaficateViewModel()
         {
+            CertaficatesList = new ObservableRangeCollection<CertaficateModel>()
+            {
+                new CertaficateModel()
+                {
+                    Id = 1,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now ,
+                    LabelStatus = "En cours",
+                    LabelType = "Attestation du stage",
+                },
+              new CertaficateModel()
+                {
+                    Id = 1,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now ,
+                    LabelStatus = "En cours",
+                    LabelType = "Attestation du travail"
+                }
+            };
 
         }
 
@@ -65,7 +90,32 @@ namespace XForms.ViewModels
             }
 
         },
-    () => canNavigateToNewRequest
-    );
+    () => canNavigateToNewRequest);
+
+        private CertaficateDetailsPopup certaficateDetailsPopup;
+        private bool canCertaficateDetailsPopup = true;
+
+        public ICommand OpenCertaficateDetailsPopupCommand => new Command<CertaficateModel>(async (model) =>
+        {
+            try
+            {
+                canCertaficateDetailsPopup = false;
+
+                if (certaficateDetailsPopup == null)
+                    certaficateDetailsPopup = new CertaficateDetailsPopup() { BindingContext = this };
+
+                await PopupNavigation.Instance.PushSingleAsync(certaficateDetailsPopup);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canCertaficateDetailsPopup = true;
+            }
+
+
+        }, (_) => canCertaficateDetailsPopup);
     }
 }

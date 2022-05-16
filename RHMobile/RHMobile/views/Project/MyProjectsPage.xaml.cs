@@ -22,6 +22,9 @@ namespace XForms.views
         {
             base.OnAppearing();
 
+            if (BindingContext == null)
+                BindingContext = new ProjectViewModel();
+
         }
     }
 }

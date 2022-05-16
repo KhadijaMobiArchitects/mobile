@@ -10,10 +10,8 @@
     xmlns:Local="clr-namespace:XForms"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:animations="http://rotorgames.com"
+    x:Class="XForms.views.Certaficate.ProfilCertaficatePopup">
 
-    x:Class="XForms.views.ProfilLeaveDetailsPopup"
-
-    >
     <Base:BasePopupView.Animation>
         <animations:ScaleAnimation
             PositionIn="Bottom"
@@ -24,7 +22,6 @@
             DurationOut="200"
             HasBackgroundAnimation="True" />
     </Base:BasePopupView.Animation>
-
     <Grid
         VerticalOptions="EndAndExpand"
         BackgroundColor="Transparent"
@@ -39,7 +36,6 @@
             BackgroundColor="{StaticResource White}"
             CornerRadius="30,30,0,0"
             VerticalOptions="FillAndExpand" />
-
             <StackLayout
                 Grid.Row="2"
                 >
@@ -52,7 +48,6 @@
             />
 
             </StackLayout>
-
 
             <Grid
             Padding="30,0"

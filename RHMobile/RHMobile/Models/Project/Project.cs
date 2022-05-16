@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace XForms.Models
 {
-    public partial class Project 
+    public partial class Project : BindableObject
     { 
         public int Id { get; set; }
         public string Name { get; set; }

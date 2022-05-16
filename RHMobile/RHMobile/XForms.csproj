@@ -240,5 +240,8 @@
     <Compile Update="Controls\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
     </Compile>
+    <Compile Update="views\Certaficate\CertaficateDetailsPopup.xaml.cs">
+      <DependentUpon>CertaficateDetailsPopup.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

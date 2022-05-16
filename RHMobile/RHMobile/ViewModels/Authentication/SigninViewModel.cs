@@ -91,6 +91,7 @@ namespace XForms.ViewModels
                     AppPreferences.FullName = result.data.LastName + " " + result.data.FirstName;
                     AppPreferences.UserRole = result.data.Roles.FirstOrDefault();
                     AppPreferences.PictureUrl = result.data.PictureUrl;
+                    AppPreferences.RefFunctionLabel = result.data.RefFunctionLabel;
 
                     AppPreferences.IsSignIn = true;
 

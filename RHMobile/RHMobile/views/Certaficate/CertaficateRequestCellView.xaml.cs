@@ -10,7 +10,7 @@ namespace XForms.views
     {
 
         public static readonly BindableProperty BackgroundColorButtonProperty =
-BindableProperty.Create(nameof(BackgroundColorButton), typeof(Color), typeof(View), Color.Yellow, BindingMode.TwoWay);
+BindableProperty.Create(nameof(BackgroundColorButton), typeof(Color), typeof(View), default, BindingMode.TwoWay);
 
         public Color BackgroundColorButton
         {
@@ -22,7 +22,7 @@ BindableProperty.Create(nameof(BackgroundColorButton), typeof(Color), typeof(Vie
         }
 
         public static readonly BindableProperty TextColorProperty =
-BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), Color.Yellow, BindingMode.TwoWay);
+BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), default, BindingMode.TwoWay);
 
         public Color TextColor
         {

@@ -20,6 +20,8 @@ namespace XForms.Models
         public bool isVerified { get; set; }
         public string JwToken { get; set; }
         public string RefreshToken { get; set; }
+        public string RefFunctionLabel { get; set; }
+
 
     }
 }

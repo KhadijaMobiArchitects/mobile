@@ -71,7 +71,7 @@
                         VerticalScrollBarVisibility="Never"
                         >
                         <CollectionView
-                            ItemsSource="{Binding LeaveItemsList}"
+                            ItemsSource="{Binding CertaficateProfils}"
                             >
                             <CollectionView.Header>
                                 <Label

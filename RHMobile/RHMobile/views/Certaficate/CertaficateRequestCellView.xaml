@@ -17,7 +17,8 @@
 
         <TapGestureRecognizer           
             Grid.ColumnSpan="2"
-            Tapped="SelectItem_Clicked"            
+            Command="{Binding Parent.BindingContext.OpenCertaficateDetailsPopupCommand ,Source={x:Reference this}}"
+            CommandParameter="{Binding .}"
             />
 
             </Grid.GestureRecognizers>
@@ -74,7 +75,7 @@
                 CornerRadius="4"
                 >
                 <Label
-                Text="{Binding labelStatus}"
+                Text="{Binding LabelStatus}"
                 BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
                 TextColor="{Binding TextColor,Source = {x:Reference this}}"
                 FontSize="12"
@@ -93,8 +94,6 @@
                 />
 
         </Grid>
-
-      
-
+ 
     </ContentView.Content>
 </ContentView>

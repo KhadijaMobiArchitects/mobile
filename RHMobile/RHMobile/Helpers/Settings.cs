@@ -122,6 +122,12 @@ namespace XForms
             set { Preferences.Set(nameof(PictureUrl), value); }
         }
 
+        public static string RefFunctionLabel
+        {
+            get { return Preferences.Get(nameof(RefFunctionLabel), string.Empty); }
+            set { Preferences.Set(nameof(RefFunctionLabel), value); }
+        }
+
         public static void ClearCache()
         {
             //Preferences.Remove(nameof(CurrentSiteId));

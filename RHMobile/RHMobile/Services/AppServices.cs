@@ -109,6 +109,11 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteLeaveRequest}/{Id}", method: HttpVerbs.DELETE);
         }
+
+        public async Task<RESTServiceResponse<object>> PostUpdateLeave(UpdateLeaveModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
     }
 
 

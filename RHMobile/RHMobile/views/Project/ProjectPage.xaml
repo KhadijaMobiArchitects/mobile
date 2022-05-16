@@ -131,7 +131,7 @@
                 <CollectionView.Header                    
                     >
                     <Label
-                        Text="Squad Ta7alil"
+                        Text="{Binding BindingContext.ProjectName,Source={x:Reference this},StringFormat='Squad {0}'}"
                         FontSize="16"
                         FontAttributes="Bold"
                         />
@@ -168,7 +168,7 @@
                 Grid.Row="4"
                 StyleCorner="Circle"
                 HeightRequest="50"
-                HorizontalOptions="Center"
+                HorizontalOptions="End"
                 Padding="0"
                 >
                 <cc:CustomButton

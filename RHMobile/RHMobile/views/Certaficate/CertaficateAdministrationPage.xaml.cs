@@ -12,6 +12,8 @@ namespace XForms.views
         public CertaficateAdministrationPage()
         {
             InitializeComponent();
+            BindingContext = new CertaficateAdministrationViewModel();
+
         }
         protected async override void OnAppearing()
         {
@@ -19,7 +21,7 @@ namespace XForms.views
             {
                 if (BindingContext == null)
                 {
-                    BindingContext = new CertaficateViewModel();
+                    BindingContext = new CertaficateAdministrationViewModel();
                 }
 
                 base.OnAppearing();

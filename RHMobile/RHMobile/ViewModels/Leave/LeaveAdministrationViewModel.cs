@@ -24,8 +24,6 @@ namespace XForms.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class LeaveAdministrationViewModel : BaseViewModel
     {
-        public List<REFItem> HeadrActionListAdmin { get; set; }
-
         public ObservableRangeCollection<LeaveResponse> LeaveListAdmin { get; set; }
         public ObservableRangeCollection<LeaveResponse> LeaveItemsListAdmin { get; set; }
 
@@ -34,23 +32,12 @@ namespace XForms.ViewModels
 
         public LeaveResponse SelectedLeave { get; set; }
 
+        public bool canOpenProfilLeaveDetailsPopup { get; set; }
+        public int numberOfRequests { get; set;}
 
         public LeaveAdministrationViewModel()
         {
-            HeadrActionListAdmin = new List<REFItem>()
-            {
-                new REFItem()
-                {
-                    Id = 1,
-                    Name = "en cours",
-                    IsSelected = true
-                },
-                new REFItem()
-                {
-                    Id = 2,
-                    Name = "validée",
-                }
-            };
+
         }
         public async override void OnAppearing()
         {
@@ -73,7 +60,8 @@ namespace XForms.ViewModels
                     InprogessLeavesList = LeaveListAdmin.Where(x => (x.refStatusLeaveId == 1)).ToList();
                     ConfirmedLeavesList = LeaveListAdmin.Where(x => (x.refStatusLeaveId == 2)).ToList();
                     LeaveItemsListAdmin.ReplaceRange(InprogessLeavesList);
-
+                    canOpenProfilLeaveDetailsPopup = true;
+                    numberOfRequests = LeaveItemsListAdmin.Count;
                 }
                 else
                 {
@@ -88,7 +76,7 @@ namespace XForms.ViewModels
 
             }
         }
-        private bool CanSelectHeaderActionAdmin = true;
+        private bool CanSelectHeaderAction = true;
         public ICommand SelectHeaderActionAdminCommand => new Command<REFItem>(async (model) =>
         {
             try
@@ -96,11 +84,11 @@ namespace XForms.ViewModels
 
                 AppHelpers.LoadingHide();
 
-                CanSelectHeaderActionAdmin = false;
+                CanSelectHeaderAction = false;
 
                 if (model == null) return;
 
-                foreach (var item in HeadrActionListAdmin)
+                foreach (var item in HeadrActionList)
                 {
                     item.IsSelected = (item.Id == model.Id);
                     OnPropertyChanged(nameof(item.IsSelected));
@@ -108,16 +96,18 @@ namespace XForms.ViewModels
 
                 }
 
-                if (HeadrActionListAdmin[0].IsSelected)
+                if (HeadrActionList[0].IsSelected)
                 {
                     LeaveItemsListAdmin.ReplaceRange(InprogessLeavesList);
 
                 }
-                else if (HeadrActionListAdmin[1].IsSelected)
+                else if (HeadrActionList[1].IsSelected)
                 {
                     LeaveItemsListAdmin.ReplaceRange(ConfirmedLeavesList);
 
                 }
+                canOpenProfilLeaveDetailsPopup = HeadrActionList[0].IsSelected;
+                numberOfRequests = LeaveItemsListAdmin.Count;
 
 
                 //StatusName = HeadrActionListAdmin[0].IsSelected ? HeadrActionListAdmin[0].Name : HeadrActionList[1].Name + "s";
@@ -134,14 +124,13 @@ namespace XForms.ViewModels
             {
                 AppHelpers.LoadingHide();
 
-                CanSelectHeaderActionAdmin = true;
+                CanSelectHeaderAction = true;
             }
         },
-        (_) => CanSelectHeaderActionAdmin);
+        (_) => CanSelectHeaderAction);
 
 
         private ProfilLeaveDetailsPopup profilLeaveDetailsPopup;
-        private bool canOpenProfilLeaveDetailsPopup = true;
         public ICommand OpenProfilLeaveDetailsPopupView => new Command<LeaveResponse>(async (model) =>
         {
             try
@@ -176,5 +165,74 @@ namespace XForms.ViewModels
             }
         },
         (_) => canOpenProfilLeaveDetailsPopup);
+
+        private bool canValidateLeave = true;
+        public ICommand ValidateLeaveCommand => new Command<LeaveResponse>(async (model) =>
+        {
+            try
+            {
+                canValidateLeave = false;
+
+                var postParam = new UpdateLeaveModel()
+                {
+                    id = SelectedLeave.id,
+                    refStatusLeaveId = 2
+                };
+
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.PostUpdateLeave(postParam);
+                await PopupNavigation.Instance.PopAllAsync();
+                await getLeavesList();
+
+                //if (result?.succeeded == true)
+                //{
+                //    AppHelpers.Alert(result?.message);
+                //}
+                //else
+                //{
+                //    AppHelpers.Alert(result?.message);
+                //}
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }, (_) => canValidateLeave);
+
+        private bool canRejectLeave = true;
+
+        public ICommand RejectLeaveCommand => new Command<LeaveResponse>(async (model) =>
+        {
+            try
+            {
+                canRejectLeave = false;
+
+                var postParam = new UpdateLeaveModel()
+                {
+                    id = SelectedLeave.id,
+                    refStatusLeaveId = 3
+                };
+
+                AppHelpers.LoadingShow();
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.PostUpdateLeave(postParam);
+                await PopupNavigation.Instance.PopAllAsync();
+                await getLeavesList();
+
+
+                //if (result?.succeeded == true)
+                //{
+                //    AppHelpers.Alert(result?.message);
+                //}
+                //else
+                //{
+                //    AppHelpers.Alert(result?.message);
+                //}
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }, (_) => canRejectLeave);
     }
 }

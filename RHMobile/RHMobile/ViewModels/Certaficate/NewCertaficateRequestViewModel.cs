@@ -1,5 +1,5 @@
 ﻿using System;
-namespace XForms.ViewModels.Certaficate
+namespace XForms.ViewModels
 {
     public class NewCertaficateRequestViewModel
     {

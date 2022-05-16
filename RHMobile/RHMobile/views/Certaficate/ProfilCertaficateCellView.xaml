@@ -17,7 +17,8 @@
 
         <TapGestureRecognizer           
             Grid.ColumnSpan="2"
-            Tapped="TapGestureRecognizer_Tapped"            
+            Command="{Binding Parent.BindingContext.OpenCertaficateDetailsPopupCommand,Source={x:Reference this}}"
+            CommandParameter="{Binding .}"
             />
 
             </Grid.GestureRecognizers>
@@ -43,7 +44,7 @@
                 VerticalOptions="Center"
                 >
                 <Label
-                    Text="KAROUM Hassoun"
+                    Text="{Binding FullName}"
                     FontAttributes="Bold"
                     FontSize="14"
                     TextColor="#33373D"
@@ -51,26 +52,12 @@
                     />
 
                 <Label
-                    Text="{Binding StartDate}"
+                    Text="{Binding LabelType}"
                     FontFamily="RubikRegular"
                     FontSize="12"
                     TextColor="#A3AEC5"
                     VerticalTextAlignment="Center"
-
                     >
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                Text="{Binding StartDate,StringFormat='{0:dd/MM/yyyy}'}"
-                                />
-                            <Span
-                                Text=" - "
-                                />
-                            <Span
-                                Text="{Binding EndDate,StringFormat='{0:dd/MM/yyyy}'}"
-                                />
-                        </FormattedString>
-                    </Label.FormattedText>
                 </Label>
 
                 <!--<Label
@@ -86,7 +73,7 @@
                 CornerRadius="4"
                 >
                 <Label
-                Text="{Binding labelStatus}"
+                Text="{Binding LabelStatus}"
                 BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
                 TextColor="{Binding TextColor,Source = {x:Reference this}}"
                 FontSize="12"

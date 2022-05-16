@@ -52,4 +52,15 @@ namespace XForms.Models
         public int DifferenceOfDays => (int)(EndDate - StartDate).TotalDays+1;
 
     }
+
+    public class UpdateLeaveModel
+    {
+        public int id { get; set; }
+        public int refStatusLeaveId { get; set; }
+    }
+
+    public class DeleteLeaveModel
+    {
+        public int leaveId { get; set; }
+    }
 }
