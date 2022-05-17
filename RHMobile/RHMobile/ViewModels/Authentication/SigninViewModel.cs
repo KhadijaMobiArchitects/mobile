@@ -31,13 +31,13 @@ namespace XForms.ViewModels
 
             //Stagiaire
 
-            SigninEmail = "hajarharkaoui@gmail.com";
-            SigninPassword = "Password2022!!";
+            //SigninEmail = "hajarharkaoui@gmail.com";
+            //SigninPassword = "Password2022!!";
 
             //Manager
 
-            //SigninEmail = "samirghaouissi@gmail.com";
-            //SigninPassword = "Password2022!!";
+            SigninEmail = "samirghaouissi@gmail.com";
+            SigninPassword = "Password2022!!";
 
             //Responsable RH
 

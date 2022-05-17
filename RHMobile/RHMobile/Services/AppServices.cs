@@ -129,13 +129,13 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
-        public async Task<RESTServiceResponse<object>> DemandCertificate(CertaficateModel postParams)
+        public async Task<RESTServiceResponse<object>> PostCertificate(CertaficateModel postParams)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostDemandCertaficate}", postObject: postParams, method: HttpVerbs.POST);
         }
         public async Task<RESTServiceResponse<object>> TraitementDemandCertificate(CertaficateTreatementRequest postParams)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostTraitementDemandCertificate}", postObject: postParams, method: HttpVerbs.POST);
         }
     }
 

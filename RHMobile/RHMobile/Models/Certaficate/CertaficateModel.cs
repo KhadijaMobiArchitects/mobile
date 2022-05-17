@@ -13,7 +13,6 @@ namespace XForms.Models
 
     public class CertaficateModel
     {
-        public int Id { get; set; }
         public string Objectif { get; set; } = null!;
         public int RefTypeCertificateId { get; set; }
 
@@ -31,5 +30,6 @@ namespace XForms.Models
     {
         public int Id { get; set; }
         public string Label { get; set; }
+        public string Name => Label;
     }
 }

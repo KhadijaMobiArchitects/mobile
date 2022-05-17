@@ -34,6 +34,7 @@ namespace XForms.Models
         public string UpdatedByName { get; set; }
         public DateTime? UpdatedOn { get; set; }
 
+        public string imageUrl { get; set; }
 
         public int RefTypeCertificateId { get; set; }
         public string RefTypeCertificateLabel { get; set; }

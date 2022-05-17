@@ -44,13 +44,12 @@
 
                 <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
-                    Item="{Binding SelectedLeave.LabelType,StringFormat='Congé {0}',Mode=OneWay}"
-                    Value="16/09/2021"
+                    Item="{Binding SelectedCertaficate.RefTypeCertificateLabel,StringFormat='Attestation de {0}',Mode=OneWay}"
                     HorizontalTextAlignment="Center"
             />
 
             <cc:CornerView
-                BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                BackgroundColor="{Binding SelectedCertaficate.BackgroundColor}"
                 Padding="5"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
@@ -60,9 +59,9 @@
                 >
                 <Label
                     HorizontalOptions="Center"
-                    Text="{Binding SelectedLeave.labelStatus}"
-                    TextColor="{Binding SelectedLeave.TextColor}"
-                    BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
+                    Text="{Binding SelectedCertaficate.RefStatusCertificateLabel}"
+                    TextColor="{Binding SelectedCertaficate.TextColor}"
+                    BackgroundColor="{Binding SelectedCertaficate.BackgroundColor}"
                     FontSize="12"
                     Padding="5"                    
                     />
@@ -88,7 +87,7 @@
                     Grid.Row="1"
                     FontSize="12"
                     FontFamily="RubikRegular"
-                    Text="Bonjour Madame/Monsieur, Pour des raisons administratives, je vousdemande par la présente de bien vouloir m'adresser une attestation d'emploi mentionnant le poste que j'occupe au sein de la société,le montant de mon salaire et la date de mon embauche. Je vous remercie par avance"
+                    Text="{Binding SelectedCertaficate.Objectif}"
                     />
                 <StackLayout
                     Grid.Row="3"
@@ -112,10 +111,19 @@
                         Padding="20,5"
                         Command="{Binding CancelRequest}"
                         />
-                    <cc:MaterialUploadFile
-                        IsVisible="{Binding IsCertaficateRequestConfirmed}"
-                        Title="Télécharger votre document"
-                        />
+                    <Grid
+                            IsVisible="{Binding IsCertaficateRequestConfirmed}"
+                        >
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding DownloadCertaficatCommand}"
+                                CommandParameter="{Binding .}"
+                                />
+                        </Grid.GestureRecognizers>
+                        <cc:MaterialUploadFile
+                            Title="Télécharger votre document" 
+                            />
+                    </Grid>
                 </StackLayout>
             </Grid>
 
@@ -127,7 +135,6 @@
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="CenterAndExpand">
                 <cc:CornerView
-                    Padding="5"
                     >
                     <svg:SvgCachedImage                    
                         Visual="Default"

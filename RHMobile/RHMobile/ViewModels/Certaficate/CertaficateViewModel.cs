@@ -16,7 +16,6 @@ namespace XForms.ViewModels
     public class CertaficateViewModel : BaseViewModel
     {
         public ObservableRangeCollection<CertaficateResponse> ProfilCertaficatesList { get; set; }
-        public ObservableRangeCollection<TypeCertaficate> TypesCertaficateList { get; set; }
 
         public ObservableRangeCollection<CertaficateResponse> ProfilConfirmedCertaficatesList { get; set; }
         public ObservableRangeCollection<CertaficateResponse> ProfilInProgressCertaficatesList { get; set; }
@@ -27,42 +26,16 @@ namespace XForms.ViewModels
         public bool IsCertaficateRequestInProgress { get; set; }
         public bool IsCertaficateRequestConfirmed { get; set; }
 
-
+        public CertaficateResponse SelectedCertaficate { get; set; }
 
         public CertaficateViewModel()
         {
-            //CertaficatesList = new ObservableRangeCollection<CertaficateModel>()
-            //{
-            //    new CertaficateModel()
-            //    {
-            //        Id = 1,
-            //        StartDate = DateTime.Now,
-            //        EndDate = DateTime.Now ,
-            //        LabelStatus = "En cours",
-            //        LabelType = "Attestation du stage",
-            //    },
-            //  new CertaficateModel()
-            //    {
-            //        Id = 1,
-            //        StartDate = DateTime.Now,
-            //        EndDate = DateTime.Now ,
-            //        LabelStatus = "En cours",
-            //        LabelType = "Attestation du travail"
-            //    }
-            //};
-
         }
         public async override void OnAppearing()
         {
             base.OnAppearing();
             await getProfilCertaficates();
-            //this.PropertyChanged += (s, e) =>
-            //{
-            //    if (e.PropertyName == nameof(HeadrActionList))
-            //    {
-
-            //    }
-            //};
+  
             ProfilCertaficatesItemsList = new ObservableRangeCollection<CertaficateResponse>();
             ProfilCertaficatesItemsList = ProfilInProgressCertaficatesList;
 
@@ -87,19 +60,7 @@ namespace XForms.ViewModels
                 AppHelpers.Alert(result?.message);
             }
         }
-        public async Task GetTypeCertificates()
-        {
-            var result = await App.AppServices.GetTypeCertificates();
-            if (result?.succeeded == true)
-            {
-                TypesCertaficateList = new ObservableRangeCollection<TypeCertaficate>(result.data.ToList());
 
-            }
-            else
-            {
-                AppHelpers.Alert(result?.message);
-            }
-        }
         private bool CanSelectHeaderAction = true;
         public ICommand SelectHeaderActionCommand => new Command<REFItem>(async (model) =>
         {
@@ -159,7 +120,6 @@ namespace XForms.ViewModels
 
         private CertaficateDetailsPopup certaficateDetailsPopup;
         private bool canCertaficateDetailsPopup = true;
-
         public ICommand OpenCertaficateDetailsPopupCommand => new Command<CertaficateResponse>(async (model) =>
         {
             try
@@ -169,8 +129,7 @@ namespace XForms.ViewModels
                 if (certaficateDetailsPopup == null)
                     certaficateDetailsPopup = new CertaficateDetailsPopup() { BindingContext = this };
 
-                //IsCertaficateRequestInProgress =
-
+                SelectedCertaficate = model;
                 await PopupNavigation.Instance.PushSingleAsync(certaficateDetailsPopup);
             }
             catch (Exception ex)
@@ -184,5 +143,23 @@ namespace XForms.ViewModels
 
 
         }, (_) => canCertaficateDetailsPopup);
+
+        private bool canDownloadCertaficate = true;
+        public ICommand DownloadCertaficatCommand => new Command(async () =>
+        {
+            try
+            {
+                canDownloadCertaficate = false;
+                AppHelpers.DownloadPDF();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canDownloadCertaficate = true;
+            }
+        },()=>canDownloadCertaficate);
     }
 }

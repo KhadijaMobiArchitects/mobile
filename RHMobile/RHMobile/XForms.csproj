@@ -35,6 +35,7 @@
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.5.1" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.5.1" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.2.0.564" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -140,6 +141,7 @@
     <None Remove="ViewModels\Certaficate\" />
     <None Remove="Resources\Images\user.png" />
     <None Remove="Models\Certaficate\" />
+    <None Remove="Acr.UserDialogs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -245,6 +247,9 @@
     </Compile>
     <Compile Update="views\Certaficate\ProfilCertaficatePopup.xaml.cs">
       <DependentUpon>ProfilCertaficatePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MaterialUploadFile.xaml.cs">
+      <DependentUpon>MaterialUploadFile.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

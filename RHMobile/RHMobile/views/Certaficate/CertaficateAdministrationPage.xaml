@@ -71,7 +71,7 @@
                         VerticalScrollBarVisibility="Never"
                         >
                         <CollectionView
-                            ItemsSource="{Binding CertaficateProfils}"
+                            ItemsSource="{Binding ProfilsCertaficateItemsList}"
                             >
                             <CollectionView.Header>
                                 <Label

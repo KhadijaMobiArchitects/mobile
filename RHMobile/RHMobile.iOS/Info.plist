@@ -44,5 +44,7 @@
 		<key>SAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key></key>
+	<string></string>
 </dict>
 </plist>

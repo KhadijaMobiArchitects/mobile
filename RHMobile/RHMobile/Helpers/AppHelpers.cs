@@ -15,7 +15,8 @@ using XForms.views.Administration;
 using XForms.views.Authentication;
 using Microsoft.AppCenter.Crashes;
 using XForms.Enum;
-
+using System.Net;
+using Acr.UserDialogs;
 namespace XForms
 {
     public static class AppHelpers
@@ -374,6 +375,139 @@ namespace XForms
             {
 
             }
+        }
+
+        //public static async Task DownloadFileAndOpenLocalFilePath(Models.File fileModel)
+        //{
+        //    if (fileModel == null) return;
+
+        //    //var progress = ProgressDonut("Chargement");
+
+        //    try
+        //    {
+        //        //if (!IsConnected())
+        //        //{
+        //        //    Alert("Vous n'êtes pas connéctés !");
+        //        //    return;
+        //        //}
+
+        //        var fileExtension = ".jpg";
+
+        //        var fileUrl = fileModel.URL.Split('?').FirstOrDefault();
+
+        //        if (!string.IsNullOrEmpty(fileUrl))
+        //        {
+        //            fileExtension = Path.GetExtension(fileUrl);
+        //        }
+
+        //        var fileName = Path.GetFileNameWithoutExtension(fileModel.Name).Replace(" ", "");
+
+        //        if (string.IsNullOrWhiteSpace(fileExtension))
+        //        {
+        //            Alert("N'ont pas d'extension de fichier");
+        //            return;
+        //        }
+
+        //        var loweredExtension = fileExtension.ToLower().Replace(".", string.Empty);
+
+        //        using (var client = new WebClient())
+        //        {
+        //            client.Headers.Clear();
+        //            client.Headers.Add(HttpRequestHeader.Authorization, "Bearer " + AppPreferences.Token);
+
+        //            //client.DownloadProgressChanged += async (s, e) =>
+        //            //{
+        //            //    progress.PercentComplete = e.ProgressPercentage;
+        //            //    if (Device.RuntimePlatform == Device.iOS)
+        //            //    {
+        //            //        progress.Title = $"{Environment.NewLine}{e.ProgressPercentage}%";
+        //            //    }
+        //            //    if (e.ProgressPercentage == 100)
+        //            //    {
+        //            //        progress.Hide();
+        //            //        progress.Dispose();
+        //            //    }
+        //            //};
+
+        //            //progress.Show();
+
+        //            var documentBytes = await client.DownloadDataTaskAsync(fileUrl);
+
+        //            var appdataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create), $"{fileName}.{loweredExtension}");
+
+        //            using (Stream stream = new MemoryStream(documentBytes))
+        //            {
+        //                using (var file = System.IO.File.Create(appdataPath))
+        //                {
+        //                    await stream.CopyToAsync(file);
+        //                }
+        //            }
+
+        //            var uri = new Uri(appdataPath);
+
+        //            //Device.BeginInvokeOnMainThread(() =>
+        //            //{
+        //            //    if (Device.RuntimePlatform == Device.iOS)
+        //            //    {
+        //            //        DependencyService.Get<IOpenLocalPath>().OpenPath(fileName, uri.AbsolutePath);
+        //            //    }
+        //            //    else if (Device.RuntimePlatform == Device.Android)
+        //            //    {
+        //            //        DependencyService.Get<IOpenLocalPath>().OpenPath(fileName, uri.AbsolutePath);
+        //            //    }
+        //            //});
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //progress.Hide();
+        //        //progress.Dispose();
+        //        //Alert(ex.Message);
+        //        return;
+        //    }
+        //    finally
+        //    {
+        //        //progress.Hide();
+        //        //progress.Dispose();
+        //    }
+        //}
+
+       //public async Task DownloadAttachement()
+       // {
+       //     try
+       //     {
+       //         AppHelpers.LoadingShow();
+
+       //         var model = new AttachementModel
+       //         {
+       //             FileId = 1,
+       //         };
+
+       //         var result = StaticData.GetAttachement(model);
+
+       //         await Xamarin.Essentials.Browser.OpenAsync(result.FileUrl);
+
+       //         await Close();
+       //     }
+       //     catch (Exception ex)
+       //     {
+
+       //     }
+       //     finally
+       //     {
+       //         AppHelpers.LoadingHide();
+       //     }
+       // }
+
+        public static async Task DownloadPDF()
+        {
+            var webClient = new WebClient();
+
+            var url = new Uri("https://st0rh0profils0dev.blob.core.windows.net/certificatedocs/1486ffa1-30e2-4cba-8706-8910b6c5817d637883047280952836-attestation-travail-intermediaire-146.pdf");
+            await Xamarin.Essentials.Browser.OpenAsync(url);
+
+            //webClient.DownloadDataAsync(url);
+
         }
 
     }

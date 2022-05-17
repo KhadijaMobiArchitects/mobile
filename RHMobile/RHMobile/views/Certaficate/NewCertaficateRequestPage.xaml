@@ -45,6 +45,8 @@
                     Grid.Row="1"
                     Title="Type de congé"
                     LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                    ItemsSource="{Binding TypesCertaficateList}"
+                    SelectedItem="{Binding SelectedType}"
                     />
 
                 <Grid
@@ -52,7 +54,7 @@
                     RowDefinitions="80,Auto">
                     <cc:CustomEditor
                         x:Name="ProductDescriptionEditor"
-                        Text="{Binding ProductDescription}"
+                        Text="{Binding CertaficateObjectif}"
                         Placeholder="Description"
                         IsCustom="True"
                         Grid.RowSpan="2"
@@ -73,11 +75,12 @@
                 VerticalOptions="EndAndExpand"
                 >
                 <cc:CustomButton
+
                     Text="Envoyer ma demande"
                     FontSize="20"
                     TextColor="{StaticResource White}"
                     VerticalOptions="Center"
-                    Command="{Binding SendRequest}"
+                    Command="{Binding SendRequestCommand}"
                     IsEnabled="{Binding EnableButtonSendRequest}"
                     />
             </Grid>
