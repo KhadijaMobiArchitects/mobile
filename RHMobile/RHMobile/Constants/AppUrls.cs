@@ -29,7 +29,12 @@ namespace XForms.Constants
         public const string GetRequestProfils = BaseUrl + "Profils/GetProfils";
         public const string GetRequestOwners = BaseUrl + "Profils/GetOwners";
 
-        
+        public const string GetRequestAllCertaficates = BaseUrl + "Certificate/GetAllCertificates";
+        public const string GetRequestProfilCertificates = BaseUrl + "Certificate/GetProfilCertificates";
+        public const string GetRequestTypeCertificates = BaseUrl + "Certificate/GetTypeCertificates";
+
+
+
 
         public const string PostLeaveRequest = BaseUrl + "leaves/CreateLeave/";
         public const string DeleteLeaveRequest = BaseUrl + "leaves/deleteLeave";
@@ -38,6 +43,10 @@ namespace XForms.Constants
         public const string PostMembersRequest = BaseUrl + "Projects/AddStaffMembers";
         public const string PostChangePercentRequest = BaseUrl + "Projects/ChangePercent";
         public const string PostUpdateLeaveRequest = BaseUrl + "leaves/UpdateLeave";
+        public const string PostDemandCertaficate = BaseUrl + "Certificate/DemandCertificate";
+        public const string PostTraitementDemandCertificate = BaseUrl + "Certificate/DemandCertificate";
+
+
 
 
 

@@ -26,6 +26,10 @@ namespace XForms.Resources
         public const string MinusCircle = "\uf056";
         public const string SignOut = "\uf08b";
         public const string SignOutAlt = "\uf2f5";
+        public const string Download = "\uf019";
+
+
+        
 
 
 

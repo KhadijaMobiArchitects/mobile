@@ -68,7 +68,7 @@
             VerticalScrollBarVisibility="Never"
             >
                 <CollectionView
-                    ItemsSource="{Binding CertaficatesList}"
+                    ItemsSource="{Binding ProfilCertaficatesItemsList}"
                         >
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate>

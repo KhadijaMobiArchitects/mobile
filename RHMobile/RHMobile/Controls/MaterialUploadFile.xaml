@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:res="clr-namespace:XForms.Resources"
+    x:Class="XForms.Controls.MaterialUploadFile"
+    x:Name="this"
+    >
+
+    <pcview:PancakeView
+        CornerRadius="8"
+        BackgroundColor="{StaticResource InputBackground}"
+        Padding="20,10"
+        >
+        <pcview:PancakeView.Border>
+            <pcview:Border Color="#D2DCF1" Thickness="1" DashPattern="6"/>
+        </pcview:PancakeView.Border>
+        <Grid
+            ColumnDefinitions="5*,*"
+            >
+            <Label
+                Text="{Binding Title,Source={x:Reference this}}"
+                FontSize="13"
+                VerticalOptions="Center"
+                FontAttributes="Bold"
+                Opacity="0.6"
+                TextColor="{StaticResource LabelColor}"
+                
+                />
+            <cc:CustomButton
+                Grid.Column="1"
+                StyleCorner="Circle"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                HeightRequest="40"
+                Padding="0"
+                BackgroundColor="Transparent"
+                Opacity="0.6"
+                >
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{x:Static res:FontAwesomeFonts.Download}"
+                        Size="24"
+                        />
+                </cc:CustomButton.ImageSource>
+
+            </cc:CustomButton>
+        </Grid>
+
+    </pcview:PancakeView>
+
+    </StackLayout>

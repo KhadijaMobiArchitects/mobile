@@ -15,25 +15,25 @@ namespace XForms.ViewModels
 
         public CertaficateAdministrationViewModel()
         {
-            CertaficateProfils = new ObservableRangeCollection<CertaficateResponse>()
-            {
-                new CertaficateResponse()
-                {
-                    Id =1,
-                    FirstName = "Hassun",
-                    LastName = "Karoum",
-                    LabelStatus = "En cours",
-                    LabelType = "Attestation Scolaire"
-                },
-                new CertaficateResponse()
-                {
-                    Id =1,
-                    FirstName = "salma",
-                    LastName = "Mejjaty",
-                    LabelStatus = "En cours",
-                    LabelType = "Attestation du travail"
-                }
-            };
+            //CertaficateProfils = new ObservableRangeCollection<CertaficateResponse>()
+            //{
+            //    new CertaficateResponse()
+            //    {
+            //        Id =1,
+            //        FirstName = "Hassun",
+            //        LastName = "Karoum",
+            //        LabelStatus = "En cours",
+            //        LabelType = "Attestation Scolaire"
+            //    },
+            //    new CertaficateResponse()
+            //    {
+            //        Id =1,
+            //        FirstName = "salma",
+            //        LastName = "Mejjaty",
+            //        LabelStatus = "En cours",
+            //        LabelType = "Attestation du travail"
+            //    }
+            //};
         }
 
         private ProfilCertaficatePopup profilCertaficatePopup;

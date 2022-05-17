@@ -7,4 +7,11 @@ namespace XForms.Enum
         Confirmed ,
         Postponed
     }
+
+    public enum Status
+    {
+        Inprogress = 1,
+        Confirmed,
+        Postponed
+    }
 }

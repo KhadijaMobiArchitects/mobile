@@ -92,18 +92,30 @@
                     />
                 <StackLayout
                     Grid.Row="3"
+                    Spacing="20"
                     >
-                    <cc:CustomButton
-                HorizontalOptions="Center"
-                Text="Annuler"
-                TextColor="{Binding SelectedLeave.TextColor}"
-                BackgroundColor="{Binding SelectedLeave.BackgroundColor}"
-                FontSize="12"
-                Padding="20,5"
-                IsVisible="{Binding IsShowButtonCancelRequest}"
-                Command="{Binding CancelRequest}"
+                    <Label
+                        IsVisible="{Binding IsCertaficateRequestInProgress}"
+                        Text="Votre document est en cours de préparation"
+                        TextColor="{StaticResource Red}"
+                        FontFamily="RubikBold"
+                        FontSize="13"
+                        HorizontalOptions="Center"
                         />
-
+                    <cc:CustomButton
+                        IsVisible="{Binding IsCertaficateRequestInProgress}"
+                        HorizontalOptions="Center"
+                        Text="Annuler la demande"
+                        TextColor="{StaticResource InProgressColor}"
+                        BackgroundColor="{StaticResource InProgressTextColor}"
+                        FontSize="13"
+                        Padding="20,5"
+                        Command="{Binding CancelRequest}"
+                        />
+                    <cc:MaterialUploadFile
+                        IsVisible="{Binding IsCertaficateRequestConfirmed}"
+                        Title="Télécharger votre document"
+                        />
                 </StackLayout>
             </Grid>
 

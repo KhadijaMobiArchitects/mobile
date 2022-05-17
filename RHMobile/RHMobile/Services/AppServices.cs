@@ -81,6 +81,21 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<IEnumerable<SituationProject>>(url: $"{AppUrls.GetRequestSituationProject}", method: HttpVerbs.GET);
         }
 
+        public async Task<RESTServiceResponse<IEnumerable<CertaficateResponse>>> GetAllCertificates()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<CertaficateResponse>>(url: $"{AppUrls.GetRequestAllCertaficates}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<CertaficateResponse>>> GetProfilCertificates()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<CertaficateResponse>>(url: $"{AppUrls.GetRequestProfilCertificates}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<TypeCertaficate>>> GetTypeCertificates()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<TypeCertaficate>>(url: $"{AppUrls.GetRequestTypeCertificates}", method: HttpVerbs.GET);
+        }
+
         public async Task<RESTServiceResponse<object>> PostLeave(LeaveModel postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostLeaveRequest}",postObject: postParams, method: HttpVerbs.POST);
@@ -111,6 +126,14 @@ namespace XForms.Services
         }
 
         public async Task<RESTServiceResponse<object>> PostUpdateLeave(UpdateLeaveModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
+        public async Task<RESTServiceResponse<object>> DemandCertificate(CertaficateModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
+        public async Task<RESTServiceResponse<object>> TraitementDemandCertificate(CertaficateTreatementRequest postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
