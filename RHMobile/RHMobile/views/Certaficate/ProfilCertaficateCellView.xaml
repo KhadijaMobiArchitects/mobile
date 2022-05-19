@@ -34,7 +34,7 @@
             StyleCorner="Circle"
             >
                 <svg:SvgCachedImage
-                Source="{Binding imageUrl}"
+                Source="{Binding ImageUrl}"
                 Aspect="AspectFill"
                 />
             </cc:CornerView>

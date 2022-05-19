@@ -17,6 +17,9 @@ using Microsoft.AppCenter.Crashes;
 using XForms.Enum;
 using System.Net;
 using Acr.UserDialogs;
+using Xamarin.Essentials;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace XForms
 {
     public static class AppHelpers
@@ -81,7 +84,7 @@ namespace XForms
         {
             try
             {
-                Application.Current.Resources.TryGetValue(key, out var newColor);
+                Xamarin.Forms.Application.Current.Resources.TryGetValue(key, out var newColor);
                 return (Color)newColor;
             }
             catch
@@ -162,12 +165,12 @@ namespace XForms
             if (string.IsNullOrWhiteSpace(tilte))
                 return;
 
-            await Application.Current.MainPage.DisplayAlert(tilte, message, cancelTitle);
+            await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(tilte, message, cancelTitle);
         }
 
         public static async Task<bool> AcceptAlert(string tilte, string message, string acceptTitle, string cancelTitle)
         {
-            var answer = await Application.Current.MainPage.DisplayAlert(tilte, message, acceptTitle, cancelTitle);
+            var answer = await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(tilte, message, acceptTitle, cancelTitle);
 
             return answer;
         }
@@ -185,23 +188,23 @@ namespace XForms
                     if (AppPreferences.UserRole.Equals(Roles.Collaborateur)
                         || AppPreferences.UserRole.Equals(Roles.Stagiaire)
                         || AppPreferences.UserRole.Equals(Roles.Chef_projet))
-                        Application.Current.MainPage = new NavigationPage(new HomePage());
+                        Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new HomePage());
 
                     else if (AppPreferences.UserRole.Equals(Roles.Manager)
                              || AppPreferences.UserRole.Equals(Roles.Responsable_RH))
-                        Application.Current.MainPage = new NavigationPage(new HomeAdminPage());
+                        Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new HomeAdminPage());
 
                 }
                 else
                 {
-                    Application.Current.MainPage = new NavigationPage(new SigninPage());
+                    Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new SigninPage());
                 }
             }
             catch (Exception ex)
             {
                 //Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
 
-                Application.Current.MainPage = new NavigationPage(new SigninPage());
+                Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new SigninPage());
             }
         }
 
@@ -333,7 +336,7 @@ namespace XForms
 
         public async static Task<MediaFile> TakeOrPickPhoto()
         {
-            string action = await Application.Current.MainPage.DisplayActionSheet("Sélectionner une photo", "Annulé", null, "Caméra", "Galerie");
+            string action = await Xamarin.Forms.Application.Current.MainPage.DisplayActionSheet("Sélectionner une photo", "Annulé", null, "Caméra", "Galerie");
 
             MediaFile file = null;
 
@@ -377,127 +380,11 @@ namespace XForms
             }
         }
 
-        //public static async Task DownloadFileAndOpenLocalFilePath(Models.File fileModel)
-        //{
-        //    if (fileModel == null) return;
+ 
 
-        //    //var progress = ProgressDonut("Chargement");
 
-        //    try
-        //    {
-        //        //if (!IsConnected())
-        //        //{
-        //        //    Alert("Vous n'êtes pas connéctés !");
-        //        //    return;
-        //        //}
 
-        //        var fileExtension = ".jpg";
-
-        //        var fileUrl = fileModel.URL.Split('?').FirstOrDefault();
-
-        //        if (!string.IsNullOrEmpty(fileUrl))
-        //        {
-        //            fileExtension = Path.GetExtension(fileUrl);
-        //        }
-
-        //        var fileName = Path.GetFileNameWithoutExtension(fileModel.Name).Replace(" ", "");
-
-        //        if (string.IsNullOrWhiteSpace(fileExtension))
-        //        {
-        //            Alert("N'ont pas d'extension de fichier");
-        //            return;
-        //        }
-
-        //        var loweredExtension = fileExtension.ToLower().Replace(".", string.Empty);
-
-        //        using (var client = new WebClient())
-        //        {
-        //            client.Headers.Clear();
-        //            client.Headers.Add(HttpRequestHeader.Authorization, "Bearer " + AppPreferences.Token);
-
-        //            //client.DownloadProgressChanged += async (s, e) =>
-        //            //{
-        //            //    progress.PercentComplete = e.ProgressPercentage;
-        //            //    if (Device.RuntimePlatform == Device.iOS)
-        //            //    {
-        //            //        progress.Title = $"{Environment.NewLine}{e.ProgressPercentage}%";
-        //            //    }
-        //            //    if (e.ProgressPercentage == 100)
-        //            //    {
-        //            //        progress.Hide();
-        //            //        progress.Dispose();
-        //            //    }
-        //            //};
-
-        //            //progress.Show();
-
-        //            var documentBytes = await client.DownloadDataTaskAsync(fileUrl);
-
-        //            var appdataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create), $"{fileName}.{loweredExtension}");
-
-        //            using (Stream stream = new MemoryStream(documentBytes))
-        //            {
-        //                using (var file = System.IO.File.Create(appdataPath))
-        //                {
-        //                    await stream.CopyToAsync(file);
-        //                }
-        //            }
-
-        //            var uri = new Uri(appdataPath);
-
-        //            //Device.BeginInvokeOnMainThread(() =>
-        //            //{
-        //            //    if (Device.RuntimePlatform == Device.iOS)
-        //            //    {
-        //            //        DependencyService.Get<IOpenLocalPath>().OpenPath(fileName, uri.AbsolutePath);
-        //            //    }
-        //            //    else if (Device.RuntimePlatform == Device.Android)
-        //            //    {
-        //            //        DependencyService.Get<IOpenLocalPath>().OpenPath(fileName, uri.AbsolutePath);
-        //            //    }
-        //            //});
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //progress.Hide();
-        //        //progress.Dispose();
-        //        //Alert(ex.Message);
-        //        return;
-        //    }
-        //    finally
-        //    {
-        //        //progress.Hide();
-        //        //progress.Dispose();
-        //    }
-        //}
-
-       //public async Task DownloadAttachement()
-       // {
-       //     try
-       //     {
-       //         AppHelpers.LoadingShow();
-
-       //         var model = new AttachementModel
-       //         {
-       //             FileId = 1,
-       //         };
-
-       //         var result = StaticData.GetAttachement(model);
-
-       //         await Xamarin.Essentials.Browser.OpenAsync(result.FileUrl);
-
-       //         await Close();
-       //     }
-       //     catch (Exception ex)
-       //     {
-
-       //     }
-       //     finally
-       //     {
-       //         AppHelpers.LoadingHide();
-       //     }
-       // }
+        public static bool IsImageVisible { get; set; }
 
         public static async Task DownloadPDF()
         {
@@ -508,6 +395,74 @@ namespace XForms
 
             //webClient.DownloadDataAsync(url);
 
+        }
+
+        public static string Text { get; set; }
+
+        public static ImageSource Image { get; set; }
+
+        public static async Task<FileResult> DoPickPdfAsync()
+        {
+            var options = new PickOptions
+            {
+                PickerTitle = "Please select a pdf",
+                FileTypes = FilePickerFileType.Pdf,
+            };
+
+            var result= await PickAndShow(options);
+            return result;
+        }
+        public static async Task<FileResult> PickAndShow(PickOptions options)
+        {
+            try
+            {
+                var result = await FilePicker.PickAsync(options);
+
+                if (result != null)
+                {
+                    var size = await GetStreamSizeAsync(result);
+
+                    Text = $"File Name: {result.FileName} ({size:0.00} KB)";
+
+                    var ext = Path.GetExtension(result.FileName).ToLowerInvariant();
+                    if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".gif")
+                    {
+                        var stream = await result.OpenReadAsync();
+
+                        Image = ImageSource.FromStream(() => stream);
+                        IsImageVisible = true;
+                    }
+                    else
+                    {
+                        IsImageVisible = false;
+                    }
+                }
+                else
+                {
+                    Text = $"Pick cancelled.";
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Text = ex.ToString();
+                IsImageVisible = false;
+                return null;
+            }
+        }
+
+       public static async Task<double> GetStreamSizeAsync(FileResult result)
+        {
+            try
+            {
+                using var stream = await result.OpenReadAsync();
+                return stream.Length / 1024.0;
+            }
+            catch
+            {
+                return 0.0;
+            }
         }
 
     }

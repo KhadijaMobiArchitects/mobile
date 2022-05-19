@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    x:Class="XForms.Controls.MaterialEntryGeolocalion"
+    x:Name="this"
+    >
+    <pcview:PancakeView
+        Padding="{OnPlatform iOS='0,0,0,0',Android='0,0,0,0'}"
+        BackgroundColor="{StaticResource InputBackground}"
+        CornerRadius="6"
+        >
+        <pcview:PancakeView.Border>
+            <pcview:Border Color="{StaticResource InputBorder}" Thickness="1"/>
+        </pcview:PancakeView.Border>
+        <Grid
+            ColumnSpacing="0"
+            ColumnDefinitions="*,auto"
+            RowDefinitions="auto"
+            >
+            <Grid
+                Grid.ColumnSpan="2"
+                >
+            <Entry
+                Text="{Binding DateString ,Source={x:Reference this}}"
+                Placeholder="{Binding Placeholder,Source={x:Reference this}}"                
+                VerticalTextAlignment="Center"
+                Style="{StaticResource TransparentEntryStyle}"
+                />
+            </Grid>
+
+            <cc:CustomButton
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                StyleCorner="Circle"
+                Opacity="0.6"
+                Style="{StaticResource InputActionStyle}"
+                >
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{x:Static res:FontAwesomeFonts.Calendar}"
+                        Size="20"
+                        Color="{StaticResource PlaceholderColor}"
+                        />
+                </cc:CustomButton.ImageSource>
+
+                </cc:CustomButton>
+            <BoxView
+                Grid.ColumnSpan="2"
+                Style="{StaticResource EntryOverStyle}"
+                />
+        </Grid>
+
+    </pcview:PancakeView>
+
+</StackLayout>

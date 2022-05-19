@@ -110,6 +110,9 @@ namespace XForms.HttpREST
         //        return new RESTServiceResponse<T>(false, ex.Message);
         //    }
         //}
+
+        
+
         public static async Task<RESTServiceResponse<object>> UploadAdministratifPjAsync(ProjectRequest fileData)
         {
             //#region IsConnected
@@ -174,6 +177,44 @@ namespace XForms.HttpREST
                 return new RESTServiceResponse<object>(result.succeeded, result.message);
             }
         }
+        public static async Task<RESTServiceResponse<object>> UploadAdministratifCertaficateAsync(CertaficateTreatementRequest fileData)
+        {
 
+            var stream = System.IO.File.OpenRead(fileData.Document.Path);
+
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(delegate { return true; });
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            using (var client = new HttpClient(clientHandler))
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + AppPreferences.Token);
+
+                MultipartFormDataContent formData = new MultipartFormDataContent();
+                HttpContent fileStreamContent = new StreamContent(stream);
+
+                fileStreamContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+                {
+                    Name = "Document",
+                    FileName = fileData.Document.Name
+                };
+                fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("multipart/form-data");
+
+                formData.Add(fileStreamContent);
+
+                formData.Add(new StringContent(fileData.Id.ToString()), "d");
+
+                var response = await client.PostAsync(AppUrls.PostTraitementDemandCertificate, formData);
+
+                var responseMessage = await response.Content.ReadAsStringAsync();
+
+                RESTServiceResponse<object> result = JsonConvert.DeserializeObject<RESTServiceResponse<object>>(responseMessage);
+
+                return new RESTServiceResponse<object>(result.succeeded, result.message);
+
+            }
+        }
     }
 }

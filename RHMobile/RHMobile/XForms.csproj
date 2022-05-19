@@ -251,5 +251,8 @@
     <Compile Update="Controls\MaterialUploadFile.xaml.cs">
       <DependentUpon>MaterialUploadFile.xaml</DependentUpon>
     </Compile>
+    <Compile Update="views\Displacement\DisplacementAdminPage.xaml.cs">
+      <DependentUpon>DisplacementAdminPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

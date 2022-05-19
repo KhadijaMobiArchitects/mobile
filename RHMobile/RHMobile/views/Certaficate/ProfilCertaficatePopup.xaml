@@ -52,57 +52,44 @@
             <Grid
             Padding="30,0"
                 Grid.Row="3"
-                RowDefinitions="*,*,*,*,Auto"
+                RowDefinitions="auto,auto,auto,Auto"
                 ColumnDefinitions="3*,2*"
                 Margin="0,30"
                 RowSpacing="20"
                 >
                 <cc:MaterialItemValue
-            Item="Date début"
-            Value="{Binding SelectedLeave.startDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Item="Type d’attestation"
+            Value="{Binding SelectedCertaficate.RefTypeCertificateLabel}"
             />
                 <cc:MaterialItemValue
             Grid.Column="1"
-            Item="Date Fin"
-            Value="{Binding SelectedLeave.endDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Item="Date demande"
+            Value="{Binding SelectedCertaficate.CreatedOn,StringFormat='{0:dd/MM/yyyy}'}"
 
             />
                 <cc:MaterialItemValue
             Grid.Row="1"
-            Item="Type de congé"
-            Value="{Binding SelectedLeave.labelType}"
-
-            />
-
-                <cc:MaterialItemValue
-            Grid.Row="1"
-                    Grid.Column="1"
-            Item="Projet"
-            Value="Ta7alil"
-            />
-                <cc:MaterialItemValue
-            Grid.Row="2"
                     Grid.ColumnSpan="2"
-                    VerticalOptions="Start"
-            Item="Situation sur le projet"
-            Value="Livré partiellement"
+            Item="Message"
+            Value="{Binding SelectedCertaficate.Objectif}"
             />
-                <cc:MaterialItemValue
-            Grid.Row="3"
-                    VerticalOptions="Start"
-            Item="Confirmation par squad"
-            Value="Confirmer"
-                 
-            />
-                <cc:MaterialItemValue
-            Grid.Row="2"
-                 Grid.Column="1"
-                    VerticalOptions="Start"
-            Item="Nombre de jours"
-            Value="{Binding SelectedLeave.DifferenceOfDays }"
-            />
+                <Grid
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    >
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding UploadFileCommand}"
+                            />
+                    </Grid.GestureRecognizers>
+                <cc:MaterialUploadFile
+
+                    Title="Télécharger le document"
+                    HorizontalOptions="Center"
+                    />
+                </Grid>
                 <StackLayout
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Grid.ColumnSpan="2"
                     >
                     <cc:CustomButton
@@ -114,7 +101,7 @@
                         Padding="20,5"
                         HorizontalOptions="FillAndExpand"
                         CornerRadius="20"
-                        Command="{Binding ValidateLeaveCommand}"
+                        Command="{Binding SendCertaficateCommand}"
 
                         />
                     <cc:CustomButton
@@ -146,7 +133,7 @@
                         Margin="-5"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Binding SelectedLeave.pictureUrl}"
+                        Source="{Binding SelectedCertaficate.ImageUrl}"
                         Aspect="AspectFill"
                         />
                 </cc:CornerView>

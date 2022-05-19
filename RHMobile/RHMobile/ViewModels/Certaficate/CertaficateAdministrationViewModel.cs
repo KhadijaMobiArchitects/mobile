@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Plugin.Media.Abstractions;
 using Rg.Plugins.Popup.Services;
 using Xamarin.CommunityToolkit.ObjectModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using XForms.Models;
 using XForms.views.Certaficate;
@@ -23,6 +25,9 @@ namespace XForms.ViewModels
 
         public ObservableRangeCollection<CertaficateResponse> ProfilsCertaficateItemsList { get; set; }
 
+        public CertaficateResponse SelectedCertaficate { get; set; }
+
+        public FileResult PickedFile { get; set; }
 
         public CertaficateAdministrationViewModel()
         {
@@ -50,6 +55,8 @@ namespace XForms.ViewModels
 
                 if (profilCertaficatePopup == null)
                     profilCertaficatePopup = new ProfilCertaficatePopup() { BindingContext = this };
+
+                SelectedCertaficate = model;
 
                 await PopupNavigation.Instance.PushSingleAsync(profilCertaficatePopup);
             }
@@ -97,9 +104,8 @@ namespace XForms.ViewModels
                 {
                     item.IsSelected = (item.Id == model.Id);
                     OnPropertyChanged(nameof(item.IsSelected));
-
-
                 }
+
                 IsCertaficateRequestInProgress = !HeadrActionList[0].IsSelected;
                 IsCertaficateRequestConfirmed = IsCertaficateRequestInProgress;
 
@@ -116,6 +122,66 @@ namespace XForms.ViewModels
         },
 
         (_) => CanSelectHeaderAction);
+
+        private Models.File certaficateFile;
+        private bool canUploadFile = true;
+        public ICommand UploadFileCommand => new Command(async () =>
+        {
+            try
+            {
+                canUploadFile = false;
+                var pickedFile = await AppHelpers.DoPickPdfAsync();
+                certaficateFile = new Models.File()
+                {
+                    //Name = System.IO.Path.GetFileName(pickedFile.FullPath),
+                    Name ="test.pdf",
+                    Path = pickedFile.FullPath
+                };
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canUploadFile = true;
+            }
+
+        }, () => canUploadFile);
+
+        private bool canSendCertaficate = true;
+        public ICommand SendCertaficateCommand => new Command(async () =>
+        {
+            try
+            {
+                canSendCertaficate = false;
+
+                var postParams = new Models.CertaficateTreatementRequest()
+                {
+                   Id = SelectedCertaficate.Id,
+                   Document = certaficateFile
+
+                };
+                var result = await App.AppServices.PostCertaficateTreatement(postParams);
+
+                AppHelpers.LoadingShow();
+                await GetAllCertificates();
+
+                await PopupNavigation.Instance.PopAllAsync();
+                AppHelpers.LoadingHide();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canSendCertaficate = true;
+            }
+
+        }, () => canSendCertaficate);
 
     }
 }

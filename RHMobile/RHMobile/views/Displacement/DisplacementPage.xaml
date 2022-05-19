@@ -6,7 +6,7 @@
     xmlns:Shared="clr-namespace:XForms.views.SharedViews"
     NavigationPage.HasBackButton="False"
     NavigationPage.HasNavigationBar="False"
-    xmlns:Local="clr-namespace:XForms"
+    xmlns:Local="clr-namespace:XForms" xmlns:cc="clr-namespace:XForms.Controls"
     x:Class="XForms.views.DisplacementPage">
     <Base:BasePage.Content>
         <Grid
@@ -30,6 +30,17 @@
                 BackButtonColor="{StaticResource EndGradient}"
                 Description="1 demandes en cours"
                 />
+            <Grid
+                Grid.Row="3"
+                BackgroundColor="Orange"
+                Padding="30,0"
+                >
+                <cc:MaterialEntryGeolocalion
+                    Placeholder="départ"
+                    />
+
+            </Grid>
+
 
             </Grid>
     </Base:BasePage.Content>
