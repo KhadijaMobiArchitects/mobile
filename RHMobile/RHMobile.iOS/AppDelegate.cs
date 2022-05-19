@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using XForms.Constants;
 
 namespace XForms.iOS
 {
@@ -32,6 +33,9 @@ namespace XForms.iOS
 
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
+            Xamarin.FormsGoogleMaps.Init(AppConstants.GoogleMapsApiKey);
+
+
 
 
             LoadApplication(new App());

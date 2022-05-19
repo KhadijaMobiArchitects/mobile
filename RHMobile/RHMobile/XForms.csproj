@@ -36,6 +36,8 @@
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.5.1" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.5.1" />
     <PackageReference Include="Acr.UserDialogs" Version="7.2.0.564" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.3.0" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2196" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -142,6 +144,11 @@
     <None Remove="Resources\Images\user.png" />
     <None Remove="Models\Certaficate\" />
     <None Remove="Acr.UserDialogs" />
+    <None Remove="Xamarin.Forms.GoogleMaps" />
+    <None Remove="Xamarin.Forms.Maps" />
+    <None Remove="views\Complaint\" />
+    <None Remove="ViewModels\Complaint\" />
+    <None Remove="Models\Complaint\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -192,6 +199,9 @@
     <Folder Include="views\Certaficate\" />
     <Folder Include="ViewModels\Certaficate\" />
     <Folder Include="Models\Certaficate\" />
+    <Folder Include="views\Complaint\" />
+    <Folder Include="ViewModels\Complaint\" />
+    <Folder Include="Models\Complaint\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

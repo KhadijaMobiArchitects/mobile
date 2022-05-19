@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Base:BasePage
- xmlns:Base="clr-namespace:XForms.views.Base"    xmlns="http://xamarin.com/schemas/2014/forms"
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:cc="clr-namespace:XForms.Controls" xmlns:Cell="clr-namespace:XForms.views"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:cc="clr-namespace:XForms.Controls" xmlns:Cell="clr-namespace:XForms.views"
     NavigationPage.HasNavigationBar="False"
     x:Class="XForms.views.CertaficateRequestPage"
     x:Name="this"
