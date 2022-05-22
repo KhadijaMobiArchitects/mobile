@@ -7,7 +7,7 @@
     NavigationPage.HasBackButton="False"
     NavigationPage.HasNavigationBar="False"
     xmlns:Local="clr-namespace:XForms"
-    xmlns:cc="clr-namespace:XForms.Controls" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:cc="clr-namespace:XForms.Controls" xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     x:Class="XForms.views.DisplacementPage">
     <Base:BasePage.Content>
         <Grid
