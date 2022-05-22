@@ -33,6 +33,11 @@
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.5.1" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.5.1" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.2.0.564" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.3.0" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2196" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -131,6 +136,19 @@
     <None Remove="Xam.Plugin.Media" />
     <None Remove="Resources\Images\image.png" />
     <None Remove="Resources\Images\image2.png" />
+    <None Remove="Models\Files\" />
+    <None Remove="Microsoft.AppCenter.Crashes" />
+    <None Remove="Microsoft.AppCenter.Analytics" />
+    <None Remove="views\Certaficate\" />
+    <None Remove="ViewModels\Certaficate\" />
+    <None Remove="Resources\Images\user.png" />
+    <None Remove="Models\Certaficate\" />
+    <None Remove="Acr.UserDialogs" />
+    <None Remove="Xamarin.Forms.GoogleMaps" />
+    <None Remove="Xamarin.Forms.Maps" />
+    <None Remove="views\Complaint\" />
+    <None Remove="ViewModels\Complaint\" />
+    <None Remove="Models\Complaint\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -170,13 +188,20 @@
     <Folder Include="views\LeaveAdministration\" />
     <Folder Include="ViewModels\Authentication\" />
     <Folder Include="Models\Authentication\" />
-    <Folder Include="Interface\" />
+    <Folder Include="Interfaces\" />
     <Folder Include="views\Walkthrough\" />
     <Folder Include="ViewModels\Walkthrough\" />
     <Folder Include="Models\Walkthrough\" />
     <Folder Include="views\Project\" />
     <Folder Include="ViewModels\Project\" />
     <Folder Include="Models\Profil\" />
+    <Folder Include="Models\Files\" />
+    <Folder Include="views\Certaficate\" />
+    <Folder Include="ViewModels\Certaficate\" />
+    <Folder Include="Models\Certaficate\" />
+    <Folder Include="views\Complaint\" />
+    <Folder Include="ViewModels\Complaint\" />
+    <Folder Include="Models\Complaint\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
@@ -215,6 +240,7 @@
     <EmbeddedResource Include="Resources\Images\check.png" />
     <EmbeddedResource Include="Resources\Images\image.png" />
     <EmbeddedResource Include="Resources\Images\image2.png" />
+    <EmbeddedResource Include="Resources\Images\user.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />
@@ -225,6 +251,18 @@
     </Compile>
     <Compile Update="Controls\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="views\Certaficate\CertaficateDetailsPopup.xaml.cs">
+      <DependentUpon>CertaficateDetailsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="views\Certaficate\ProfilCertaficatePopup.xaml.cs">
+      <DependentUpon>ProfilCertaficatePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MaterialUploadFile.xaml.cs">
+      <DependentUpon>MaterialUploadFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="views\Displacement\DisplacementAdminPage.xaml.cs">
+      <DependentUpon>DisplacementAdminPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

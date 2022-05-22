@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace XForms.Models
 {
-    public partial class Project 
+    public partial class ProjectModel : BindableObject
     { 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,14 +14,17 @@ namespace XForms.Models
         public string OwnerBy { get; set; }
         public string CreatedBy { get; set; }
         public string PictureUrl { get; set; }
+        public string FirstName_Owner { get; set; }
+        public string LastName_Owner { get; set; }
 
         //public ImageSource Image { get; set; }
 
     }
 
-    public partial class Project : BindableObject
+    public partial class ProjectModel : BindableObject
     {
         public bool IsSelected { get; set; }
+        public string OwnerFullName => FirstName_Owner + " " + LastName_Owner;
 
         public Color BackgroundColor => IsSelected ? Color.FromHex("#4ACFF9") : Color.White;
         public Color TextColor => IsSelected ? Color.White : Color.Black;
@@ -32,10 +35,11 @@ namespace XForms.Models
             get {
                 if (Percent < 30)
                     return AppHelpers.LookupColor("postponedColor");
-                else if (Percent >= 30 && Percent <= 70)
-                    return AppHelpers.LookupColor("InProgessColor");
-                else
+                else if (Percent > 29 && Percent < 90)
+                    return AppHelpers.LookupColor("InProgressColor");
+                else if(Percent > 89)
                     return AppHelpers.LookupColor("ConfirmedColor");
+                return Color.White;
             }
         }
 
@@ -45,12 +49,14 @@ namespace XForms.Models
             {
                 if (Percent < 30)
                     return AppHelpers.LookupColor("postponedTextColor");
-                else if (Percent >= 30 && Percent <= 70)
-                    return AppHelpers.LookupColor("InProgessTextColor");
-                else
+                else if (Percent > 29 && Percent < 89)
+                    return AppHelpers.LookupColor("InProgressTextColor");
+                else if (Percent > 89)
                     return AppHelpers.LookupColor("ConfirmedTextColor");
+                return Color.Black;
             }
         }
+
 
     }
 }

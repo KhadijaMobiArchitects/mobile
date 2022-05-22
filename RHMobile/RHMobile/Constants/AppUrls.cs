@@ -10,19 +10,45 @@ namespace XForms.Constants
 
         public const string Singin = BaseUrl + "Account/Authenticate";
 
-        public const string GesRequestsListLeave = BaseUrl + "leaves/getleaves/";
+        public const string GetRequestsListProfilsLeave = BaseUrl + "leaves/GetAllLeaves/";
+        public const string GetRequestInProgressProfilsLeave = BaseUrl + "leaves/GetInProgressLeaves/";
+        public const string GetRequestValidatedProfilsLeave = BaseUrl + "leaves/GetValidatedLeaves/";
+
+
+        public const string GetRequestsListProfilLeaves = BaseUrl + "leaves/getprofilleaves/";
+
+        //ProfilLeaves
+
         public const string GetRequestListTypeLeave = BaseUrl + "RefTypesLeave/";
         public const string GetRequestListProject = BaseUrl + "Projects/GetProjects";
+        public const string GetRequestListActualProject = BaseUrl + "Projects/getactualprojects";
+
+        public const string GetRequestListProfilProject = BaseUrl + "Projects/GetProfilProjects";
         public const string GetRequestSituationProject = BaseUrl + "RefSituationsProject/";
         public const string GetRequestProjectSquad = BaseUrl + "projects/getSquad/";
         public const string GetRequestProfils = BaseUrl + "Profils/GetProfils";
+        public const string GetRequestOwners = BaseUrl + "Profils/GetOwners";
+
+        public const string GetRequestAllCertaficates = BaseUrl + "Certificate/GetAllCertificates";
+        public const string GetRequestProfilCertificates = BaseUrl + "Certificate/GetProfilCertificates";
+        public const string GetRequestTypeCertificates = BaseUrl + "Certificate/GetTypeCertificates";
 
 
 
 
-        public const string PostLeaveRequest = BaseUrl + "leaves/postLeave/";
+        public const string PostLeaveRequest = BaseUrl + "leaves/CreateLeave/";
         public const string DeleteLeaveRequest = BaseUrl + "leaves/deleteLeave";
         public const string PostProjectRequest = BaseUrl + "projects/CreateProject";
+        public const string GetStaffMembersToAddRequest = BaseUrl + "Projects/GetStaffMembersToAdd";
+        public const string PostMembersRequest = BaseUrl + "Projects/AddStaffMembers";
+        public const string PostChangePercentRequest = BaseUrl + "Projects/ChangePercent";
+        public const string PostUpdateLeaveRequest = BaseUrl + "leaves/UpdateLeave";
+        public const string PostDemandCertaficate = BaseUrl + "Certificate/DemandCertificate";
+        public const string PostTraitementDemandCertificate = BaseUrl + "Certificate/DemandCertificate";
+
+
+
+
 
 
 

@@ -3,7 +3,6 @@
     xmlns:Base="clr-namespace:XForms.views.Base"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cc="clr-namespace:XForms.Controls"
-    x:Class="XForms.views.ProfilLeaveDetailsPopup"
     xmlns:res="clr-namespace:XForms.Resources"
     CloseWhenBackgroundIsClicked="True"
     HasKeyboardOffset="False"
@@ -11,6 +10,9 @@
     xmlns:Local="clr-namespace:XForms"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:animations="http://rotorgames.com"
+
+    x:Class="XForms.views.ProfilLeaveDetailsPopup"
+
     >
     <Base:BasePopupView.Animation>
         <animations:ScaleAnimation
@@ -44,7 +46,7 @@
 
                 <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
-                    Item="KAROUM Hassoun"
+                    Item="{Binding SelectedLeave.FullName}"
                     Value="Full stack dev"
                     HorizontalTextAlignment="Center"
             />
@@ -62,18 +64,18 @@
                 >
                 <cc:MaterialItemValue
             Item="Date début"
-            Value="{Binding SelectedLeave.StartDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedLeave.startDate,StringFormat='{0:dd/MM/yyyy}'}"
             />
                 <cc:MaterialItemValue
             Grid.Column="1"
             Item="Date Fin"
-            Value="{Binding SelectedLeave.EndDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedLeave.endDate,StringFormat='{0:dd/MM/yyyy}'}"
 
             />
                 <cc:MaterialItemValue
             Grid.Row="1"
             Item="Type de congé"
-            Value="{Binding SelectedLeave.LabelType}"
+            Value="{Binding SelectedLeave.labelType}"
 
             />
 
@@ -90,14 +92,14 @@
             Item="Situation sur le projet"
             Value="Livré partiellement"
             />
-             <cc:MaterialItemValue
+                <cc:MaterialItemValue
             Grid.Row="3"
                     VerticalOptions="Start"
             Item="Confirmation par squad"
             Value="Confirmer"
                  
             />
-             <cc:MaterialItemValue
+                <cc:MaterialItemValue
             Grid.Row="2"
                  Grid.Column="1"
                     VerticalOptions="Start"
@@ -109,23 +111,25 @@
                     Grid.ColumnSpan="2"
                     >
                     <cc:CustomButton
-                Text="Confirmer"
-                TextColor="{StaticResource White}"
-                BackgroundColor="{StaticResource Green }"
-                FontSize="12"
-                Padding="20,5"
-                HorizontalOptions="FillAndExpand"
+
+                        Text="Confirmer"
+                        TextColor="{StaticResource White}"
+                        BackgroundColor="{StaticResource Green }"
+                        FontSize="12"
+                        Padding="20,5"
+                        HorizontalOptions="FillAndExpand"
                         CornerRadius="20"
+                        Command="{Binding ValidateLeaveCommand}"
 
                         />
                     <cc:CustomButton
-                HorizontalOptions="FillAndExpand"
-                Text="Réfuser"
-                TextColor="{StaticResource White}"
-                BackgroundColor="{StaticResource Red}"
-                FontSize="12"
-                Padding="20,5"
-                Command="{Binding CancelRequest}"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Réfuser"
+                        TextColor="{StaticResource White}"
+                        BackgroundColor="{StaticResource Red}"
+                        FontSize="12"
+                        Padding="20,5"
+                        Command="{Binding RejectLeaveCommand}"
                         CornerRadius="20"
                         />
 
@@ -147,7 +151,7 @@
                         Margin="-5"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Local:ImageResource profil.png}"
+                        Source="{Binding SelectedLeave.pictureUrl}"
                         Aspect="AspectFill"
                         />
                 </cc:CornerView>

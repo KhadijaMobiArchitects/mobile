@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    x:Class="XForms.views.Project.ProfilDetailsPopup"
+    xmlns:res="clr-namespace:XForms.Resources"
+    CloseWhenBackgroundIsClicked="True"
+    HasSystemPadding="False"
+    HasKeyboardOffset="False"
+    BackgroundColor="#90000000"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:animations="http://rotorgames.com"
+    >
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+    </Base:BasePopupView.Animation>
+
+    <Grid
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"
+        >
+        <Grid  
+           
+            RowDefinitions="40,40,auto,auto"
+            >
+            <BoxView
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="30,30,0,0"
+            VerticalOptions="FillAndExpand" />
+
+           <cc:MaterialItemValue
+               Grid.Row="2"
+               Item="Mehdi Mellali"
+               Value="Développeur full stack"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               HorizontalTextAlignment="Center"
+               />
+            <Grid
+                RowSpacing="20"
+                Grid.Row="3"
+                RowDefinitions="*,*,*,auto,auto"
+                ColumnDefinitions="*,*"
+                Padding="30,30"
+                >
+                <cc:MaterialItemValue
+                    Item="Projet"
+                    Value="Ta7alil"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Row="1"
+                    Item="Date D'affectation"
+                    Value="Ta7alil"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Item="Estimation projet"
+                    Value="Ta7alil"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Row="2"
+                    Item="Autre projet"
+                    Value="Ta7alil"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Item="Owner"
+                    Value="Ta7alil"
+                    />
+                <Grid
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    RowSpacing="-20"
+                    >
+                <cc:CustomButton                 
+                    Text="Retirer"
+                    BackgroundColor="{StaticResource Red}"
+                    CornerRadius="27"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Margin="20"
+                    />
+                <cc:CustomButton
+                    Grid.Row="1"
+                    Text="Ajouter une note"
+                    BackgroundColor="{StaticResource Primary}"
+                    CornerRadius="27"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Margin="20"
+                    Command="{Binding OpenAddPointsPopupCommand}"
+                    />
+                </Grid>
+            </Grid>
+
+            <cc:CornerView
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                Padding="5"
+                BackgroundColor="{StaticResource BackgroundICon}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <cc:CornerView
+                    >
+                    <svg:SvgCachedImage                    
+                        Visual="Default"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Local:ImageResource profil.png}"
+                        Aspect="AspectFill"
+                        />
+                </cc:CornerView>
+            </cc:CornerView>
+        </Grid>
+    </Grid>
+
+</Base:BasePopupView>

@@ -65,7 +65,8 @@ BindableProperty.Create(nameof(ShowCheckBox), typeof(bool), typeof(View), false,
 
         void SelectItem_Clicked(System.Object sender, System.EventArgs e)
         {
-            if ((sender as View).BindingContext is Models.Leave item)
+
+            if ((sender as View).BindingContext is LeaveModel item)
             {
                 //(this.Parent.BindingContext as LeaveRequestViewModel).OpenProfilLeaveDetailsPopupView.Execute(item);
             }

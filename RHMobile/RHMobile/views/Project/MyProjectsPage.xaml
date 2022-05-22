@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+   xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:CellProject="clr-namespace:XForms.views" xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:pcview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:Local="clr-namespace:XForms"
+    x:Class="XForms.views.MyProjectsPage"
+    x:Name="this"
+    >
+    <Base:BasePage.Content>
+        <Grid
+           BackgroundColor="White"
+            RowDefinitions="auto,75,75,3*,auto"
+            >
+            <Shared:SmallReclangleBackground
+                Grid.RowSpan="2"
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                />
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                x:Name="MyHeader"
+                HasTitle="True"
+                HasDescription="True"
+                Title="Projets client"
+                HasNotification="True"
+                HasBackButton="True"
+                Description="{Binding NumberOfMyProjects,StringFormat='{0} projet en cours'}"
+                BackButtonBorderColor="{StaticResource StartGradient}"
+                BackButtonColor="{StaticResource EndGradient }"
+                />
+
+            <!--project List-->
+
+            <CollectionView                
+                HorizontalScrollBarVisibility="Never"
+                VerticalScrollBarVisibility="Never"
+                ItemsSource="{Binding ProfilProjectsList}"
+                ItemsLayout="HorizontalGrid,1"               
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                >                
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CellProject:ProjectCellView
+                            HorizontalOptions="Start"
+                            WidthRequest="120"
+                            />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Members List-->
+
+            <CollectionView
+                VerticalScrollBarVisibility="Never"
+                Grid.Row="3"
+                Grid.RowSpan="2"
+                ItemsSource="{Binding SquadList}"
+                Margin="30,10,30,80"
+                >
+                <CollectionView.Header                    
+                    >
+                    <Label
+                        Text="{Binding BindingContext.ProjectName,Source={x:Reference this},StringFormat='Squad {0}'}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        />
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <CellProject:ProfilProjectCellView
+                            ShowOwner="True"
+                            />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <!--<CollectionView.Footer                    
+                    >
+            <cc:CustomButton
+                Margin="5,10"
+                Text="Ajouter collaborateur"
+                CornerRadius="30"
+                />
+                </CollectionView.Footer>-->
+
+
+            </CollectionView>
+                <cc:CustomButton
+                    IsVisible="{Binding IsProjectOwner}"
+                    Grid.Row="4"
+                    Margin="30"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center"
+                    Padding="20,5"
+                    Text="Modifier le pourcentage"
+                    Command="{Binding OpenChangePercentPopup}"
+                    >
+
+                </cc:CustomButton>
+
+        </Grid>
+
+    </Base:BasePage.Content>
+</Base:BasePage>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:res="clr-namespace:XForms.Resources"
+    CloseWhenBackgroundIsClicked="True"
+    HasKeyboardOffset="False"
+    HasSystemPadding="False"
+    BackgroundColor="#90000000"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:animations="http://rotorgames.com"
+    x:Class="XForms.views.Certaficate.CertaficateDetailsPopup">
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+    </Base:BasePopupView.Animation>
+    <Grid
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"
+        >
+        <Grid  
+           
+            RowDefinitions="40,40,auto,auto"
+            >
+            <BoxView
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="30,30,0,0"
+            VerticalOptions="FillAndExpand" />
+
+            <StackLayout
+                Grid.Row="2"
+                >
+
+                <cc:MaterialItemValue                    
+                    HorizontalOptions="CenterAndExpand"
+                    Item="{Binding SelectedCertaficate.RefTypeCertificateLabel,StringFormat='Attestation de {0}',Mode=OneWay}"
+                    HorizontalTextAlignment="Center"
+            />
+
+            <cc:CornerView
+                BackgroundColor="{Binding SelectedCertaficate.BackgroundColor}"
+                Padding="5"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                StyleCorner="Default"
+                CornerRadius="4"
+
+                >
+                <Label
+                    HorizontalOptions="Center"
+                    Text="{Binding SelectedCertaficate.RefStatusCertificateLabel}"
+                    TextColor="{Binding SelectedCertaficate.TextColor}"
+                    BackgroundColor="{Binding SelectedCertaficate.BackgroundColor}"
+                    FontSize="12"
+                    Padding="5"                    
+                    />
+
+            </cc:CornerView>
+
+            </StackLayout>
+
+
+            <Grid
+            Padding="30,0"
+                Grid.Row="3"
+                RowDefinitions="auto,*,auto"
+                RowSpacing="20"
+                Margin="0,30"
+                >
+                <Label
+                    Text="Votre Demande"
+                    Style="{StaticResource TitleStyle}"
+
+                    />
+                <Label
+                    Grid.Row="1"
+                    FontSize="12"
+                    FontFamily="RubikRegular"
+                    Text="{Binding SelectedCertaficate.Objectif}"
+                    />
+                <StackLayout
+                    Grid.Row="3"
+                    Spacing="20"
+                    >
+                    <Label
+                        IsVisible="{Binding IsCertaficateRequestInProgress}"
+                        Text="Votre document est en cours de préparation"
+                        TextColor="{StaticResource Red}"
+                        FontFamily="RubikBold"
+                        FontSize="13"
+                        HorizontalOptions="Center"
+                        />
+                    <cc:CustomButton
+                        IsVisible="{Binding IsCertaficateRequestInProgress}"
+                        HorizontalOptions="Center"
+                        Text="Annuler la demande"
+                        TextColor="{StaticResource InProgressColor}"
+                        BackgroundColor="{StaticResource InProgressTextColor}"
+                        FontSize="13"
+                        Padding="20,5"
+                        Command="{Binding CancelRequest}"
+                        />
+                    <Grid
+                            IsVisible="{Binding IsCertaficateRequestConfirmed}"
+                        >
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding DownloadCertaficatCommand}"
+                                CommandParameter="{Binding .}"
+                                />
+                        </Grid.GestureRecognizers>
+                        <cc:MaterialUploadFile
+                            Title="Télécharger votre document" 
+                            />
+                    </Grid>
+                </StackLayout>
+            </Grid>
+
+            <cc:CornerView
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                Padding="5"
+                BackgroundColor="{StaticResource BackgroundICon}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <cc:CornerView
+                    >
+                    <svg:SvgCachedImage                    
+                        Visual="Default"
+                        Margin="10"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Local:ImageResource certaficate.svg}"
+                        />
+                </cc:CornerView>
+            </cc:CornerView>
+        </Grid>
+    </Grid>
+
+</Base:BasePopupView>

@@ -6,8 +6,8 @@ using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using XForms.Enum;
 using XForms.Models;
+using XForms.views;
 using XForms.views.Administration;
-using XForms.views.Displacement;
 using XForms.views.Leave;
 
 namespace XForms.ViewModels
@@ -15,6 +15,7 @@ namespace XForms.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         public List<REFItemAdministration> AdminstrationList { get; set; }
+
         public HomeViewModel()
         {
 
@@ -129,8 +130,11 @@ namespace XForms.ViewModels
                 {
                     AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveRequestPage()),
                     AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new DisplacementPage()),
+                    AdministrationService.Project =>  App.Current.MainPage.Navigation.PushAsync(new MyProjectsPage()),
+                    AdministrationService.Certaficate => App.Current.MainPage.Navigation.PushAsync(new CertaficateRequestPage()),
+                    AdministrationService.Complaint => App.Current.MainPage.Navigation.PushAsync(new ComplaintPage()),
 
-
+                    
                 };
             }
             catch (Exception ex)

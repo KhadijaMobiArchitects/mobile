@@ -49,13 +49,15 @@
                     <Label
                         Text="{Binding Name}"
                         HorizontalOptions="Center"
-                        FontSize="13"
+                        FontSize="14"
                         FontAttributes="Bold"
                         TextColor="{Binding TextColor}"
                         HorizontalTextAlignment="Center"
+                        MaxLines="1"
+                        LineBreakMode="TailTruncation"
                         />
                     <Label
-                        Text="{Binding Parent.BindingContext.ProjectOwnerName,Source={x:Reference this}}"
+                        Text="{Binding OwnerFullName}"
                         FontSize="12"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"

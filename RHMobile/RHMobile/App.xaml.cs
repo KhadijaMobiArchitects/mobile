@@ -27,12 +27,9 @@ namespace XForms
             }
             else
             {
-                //AppHelpers.SetInitialView();
-                MainPage = new NavigationPage(new HomePage());
+                AppHelpers.SetInitialView();
 
             }
-
-            //MainPage = new NavigationPage(new HomePage());
 
         }
 

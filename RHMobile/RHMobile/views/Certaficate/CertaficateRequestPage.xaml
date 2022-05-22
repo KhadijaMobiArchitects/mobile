@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:cc="clr-namespace:XForms.Controls" xmlns:Cell="clr-namespace:XForms.views"
+    NavigationPage.HasNavigationBar="False"
+    x:Class="XForms.views.CertaficateRequestPage"
+    x:Name="this"
+    >
+    <Base:BasePage.Content>
+        <Grid
+            BackgroundColor="{StaticResource White}"
+            RowDefinitions="auto,auto,auto,auto"
+            VerticalOptions="FillAndExpand"
+            >
+            
+            <Shared:SmallReclangleBackground
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                Grid.RowSpan="2"
+                />
+                        <!--Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"-->
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                HasTitle="True"
+                HasDescription="True"
+                Title="Demande Attestation"
+                HasNotification="True"
+                HasBackButton="True"
+                BackButtonBorderColor="{StaticResource StartGradient}"
+                BackButtonColor="{StaticResource EndGradient}"
+                Description="1 demandes en cours"
+                />
+                        <!--Switch-->
+            <StackLayout
+                Grid.Row="1"
+                Padding="30,0,30,20"
+                Spacing="15"
+                Orientation="Horizontal"
+                BindableLayout.ItemsSource="{Binding HeadrActionList}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+
+                            <!--Clicked="SelectItem_Clicked"-->
+
+                            <cc:CustomButton
+                                Text="{Binding Name,StringFormat='Demande {0}'}"
+                                StyleCorner="RoundCorner"
+                                BackgroundColor="{Binding CertaficateBackgroundColor}"
+                                TextColor="{Binding TextColor}"
+                                HorizontalOptions="Start"
+                                Padding="25,5"
+                                FontSize="12"
+                                Visual="Default"
+                                Command="{Binding BindingContext.SelectHeaderActionCommand, Source={x:Reference this}}"
+                                CommandParameter="{Binding .}"
+                                />
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+          <ScrollView
+            Padding="20,0"
+            Grid.Row="2"
+            HorizontalScrollBarVisibility="Never"
+            VerticalScrollBarVisibility="Never"
+            >
+                <CollectionView
+                    ItemsSource="{Binding ProfilCertaficatesItemsList}"
+                        >
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.Header>
+                        <Label
+                            Text="{Binding StatusName,StringFormat='Mes demandes {0}'}"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            TextColor="#33373D"
+                            />
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Cell:CertaficateRequestCellView
+                                BackgroundColorButton="{Binding BackgroundColor}"
+                                TextColor="{Binding TextColor}"                                        
+                                        />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </ScrollView>
+
+            <!--Footer-->
+
+            <Grid
+                Grid.Row="3"
+                Padding="30"
+                VerticalOptions="EndAndExpand"
+                >
+                <cc:CustomButton
+                    Text="Nouvelle Demande"
+                    FontSize="20"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center"
+                    Command="{Binding NavigationtonewRequest}"
+                    />
+            </Grid>
+        </Grid>
+    </Base:BasePage.Content>
+</Base:BasePage>

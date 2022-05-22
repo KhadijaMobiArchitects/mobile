@@ -9,12 +9,13 @@
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:Local="clr-namespace:XForms"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:adminCell="clr-namespace:XForms.views.Administration"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:adminCell="clr-namespace:XForms.views.Administration"
     NavigationPage.HasNavigationBar="False"   
     x:Class="XForms.views.Administration.HomePage">
     <Base:BasePage.Content>
         <Grid
-            RowDefinitions="auto,30,15,auto"
+            RowDefinitions="auto,30,30,auto"
             VerticalOptions="FillAndExpand"
             RowSpacing="0"
             >
@@ -28,13 +29,14 @@
             <Shared:SuggestionsNavBarView
                 HasTitle="True"
                 HasDescription="True"
-                Title="Hassoun KAROUM"
-                Description="Full stack dev"
+                Title="{Binding FullName}"
+                Description="{Binding RefFunctionLabel}"
                 HasNotification="True"
                 BackButtonColor="{StaticResource EndGradient}"
                 BackButtonBorderColor="{StaticResource StartGradient }"
                 HasImageProfil="True"
-                ImageProfil="{Local:ImageResource profil.png}"
+                ImageProfil="{Binding PictureUrl}"
+                HasSignOut="True"
                 />
 
             <!--pancakeView-->
@@ -142,7 +144,7 @@
                                 TextColor="White"
                                 />
                                         <Label
-                                Text="Vous avez gagner 5 Points sur la livraisonde la nouvelle projet Ta7alil version web."
+                                Text="Vous avez gagner 5 Points sur la livraisonde du nouveau projet Ta7alil version web."
                                 FontFamily="RubikLight"
                                 FontSize="12"
                                 TextColor="White"

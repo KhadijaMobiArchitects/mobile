@@ -116,12 +116,30 @@ namespace XForms
             set { Preferences.Set(nameof(ValidSession), value); }
         }
 
+        public static string PictureUrl
+        {
+            get { return Preferences.Get(nameof(PictureUrl), string.Empty); }
+            set { Preferences.Set(nameof(PictureUrl), value); }
+        }
+
+        public static string RefFunctionLabel
+        {
+            get { return Preferences.Get(nameof(RefFunctionLabel), string.Empty); }
+            set { Preferences.Set(nameof(RefFunctionLabel), value); }
+        }
+
         public static void ClearCache()
         {
-            Preferences.Remove(nameof(CurrentSiteId));
-            Preferences.Remove(nameof(IsSignIn));
-            Preferences.Remove(nameof(StoredSitesData));
-            Preferences.Remove(nameof(HashPass));
+            //Preferences.Remove(nameof(CurrentSiteId));
+            //Preferences.Remove(nameof(IsSignIn));
+            //Preferences.Remove(nameof(StoredSitesData));
+            //Preferences.Remove(nameof(HashPass));
+            //Preferences.Remove(nameof(Token));
+            //Preferences.Remove(nameof(PictureUrl));
+            Preferences.Clear();
+
+
+
             //Preferences.Remove(nameof(ProductsInCartList));
         }
     }

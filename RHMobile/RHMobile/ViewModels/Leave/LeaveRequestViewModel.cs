@@ -24,22 +24,20 @@ namespace XForms.ViewModels
     public class LeaveRequestViewModel : BaseViewModel
     {
         public List<REFItem> HeadrActionList { get; set; }
-        public List<REFItem> HeadrActionListAdmin { get; set; }
 
 
-        public List<Leave> LeaveDate { get; set; }
-        public ObservableRangeCollection<Leave> LeavesList { get; set; }
+        public List<LeaveModel> LeaveDate { get; set; }
+        public ObservableRangeCollection<LeaveModel> LeavesList { get; set; }
 
 
-        public ObservableRangeCollection<Leave> LeaveItemsList { get; set; }
-        public ObservableRangeCollection<Leave> LeaveItemsListAdmin { get; set; }
+        public ObservableRangeCollection<LeaveModel> LeaveItemsList { get; set; }
 
         public List<ChartEntry> entries { get; set; }
 
 
-        public List<Leave> InprogessLeavesList { get; set; }
-        public List<Leave> ConfirmedLeavesList { get; set; }
-        public List<Leave> PostponedLeavesList { get; set; }
+        public List<LeaveModel> InprogessLeavesList { get; set; }
+        public List<LeaveModel> ConfirmedLeavesList { get; set; }
+        public List<LeaveModel> PostponedLeavesList { get; set; }
 
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
@@ -55,7 +53,7 @@ namespace XForms.ViewModels
         public int PostponedDays { get; set; }
         public int TotalDays { get; set;}
         
-        public Leave SelectedLeave { get; set; }
+        public LeaveModel SelectedLeave { get; set; }
 
         public string StatusName { get; set; }
 
@@ -63,9 +61,9 @@ namespace XForms.ViewModels
 
         public LeaveRequestViewModel()
         {
-            ConfirmedLeavesList = new List<Leave>();
-            InprogessLeavesList = new List<Leave>();
-            PostponedLeavesList = new List<Leave>();
+            ConfirmedLeavesList = new List<LeaveModel>();
+            InprogessLeavesList = new List<LeaveModel>();
+            PostponedLeavesList = new List<LeaveModel>();
 
             //StatusName = "en cours";
 
@@ -89,20 +87,7 @@ namespace XForms.ViewModels
                 }
             };
 
-            HeadrActionListAdmin = new List<REFItem>()
-            {
-                new REFItem()
-                {
-                    Id = 1,
-                    Name = "en cours",
-                    IsSelected = true
-                },
-                new REFItem()
-                {
-                    Id = 2,
-                    Name = "validée",
-                }
-            };
+
 
             donutChart = new DonutChart()
             {
@@ -147,17 +132,15 @@ namespace XForms.ViewModels
                 var result = await App.AppServices.GetLeaves();
 
                 LeaveDate = result.data.ToList();
-                LeavesList = new ObservableRangeCollection<Leave>(LeaveDate);
+                LeavesList = new ObservableRangeCollection<LeaveModel>(LeaveDate);
 
 
 
                 FilterLeaves(LeavesList);
                 DifferenceOfDays(InprogessLeavesList, ConfirmedLeavesList, PostponedLeavesList);
-                LeaveItemsList = new ObservableRangeCollection<Leave>(InprogessLeavesList);
-                LeaveItemsListAdmin = new ObservableRangeCollection<Leave>(InprogessLeavesList);
+                LeaveItemsList = new ObservableRangeCollection<LeaveModel>(InprogessLeavesList);
 
                 numberOfRequests = LeaveItemsList.Count;
-                numberOfRequestsAdmin = LeaveItemsListAdmin.Count;
 
 
 
@@ -197,7 +180,7 @@ namespace XForms.ViewModels
 
         }
 
-        private void DifferenceOfDays(List<Leave> InprogessLeavesList, List<Leave> ConfirmedLeavesList, List<Leave> PostponedLeavesList)
+        private void DifferenceOfDays(List<LeaveModel> InprogessLeavesList, List<LeaveModel> ConfirmedLeavesList, List<LeaveModel> PostponedLeavesList)
         {
             ConfirmedDays = 0;
             InprogessDays = 0;
@@ -227,7 +210,7 @@ namespace XForms.ViewModels
             OnPropertyChanged(nameof(TotalDays));
         }
 
-        private void FilterLeaves(ObservableRangeCollection<Leave> LeavesList)
+        private void FilterLeaves(ObservableRangeCollection<LeaveModel> LeavesList)
         {
             ConfirmedLeavesList.Clear();
             InprogessLeavesList.Clear();
@@ -302,81 +285,37 @@ namespace XForms.ViewModels
         },
         (_) => CanSelectHeaderAction);
 
-        private bool CanSelectHeaderActionAdmin = true;
-        public ICommand SelectHeaderActionAdminCommand => new Command<REFItem>(async (model) =>
+
+
+        private bool canNavigateToNewRequest = true;
+        public ICommand NavigationtonewRequest => new Command(() =>
         {
             try
             {
+                canNavigateToNewRequest = false;
+                App.Current.MainPage.Navigation.PushAsync(new NewLeaveRequestPage());
 
-                AppHelpers.LoadingHide();
-
-                CanSelectHeaderActionAdmin = false;
-
-                if (model == null) return;
-
-                foreach (var item in HeadrActionListAdmin)
-                {
-                    item.IsSelected = (item.Id == model.Id);
-                    OnPropertyChanged(nameof(item.IsSelected));
-
-
-                }
-
-                if (HeadrActionListAdmin[0].IsSelected)
-                {
-                    LeaveItemsListAdmin.ReplaceRange(InprogessLeavesList);
-
-                }
-                else if (HeadrActionListAdmin[1].IsSelected)
-                {
-                    LeaveItemsListAdmin.ReplaceRange(ConfirmedLeavesList);
-
-                }
-                //else if (HeadrActionList[2].IsSelected)
-                //{
-                //    LeaveItemsList.ReplaceRange(PostponedLeavesList);
-
-                //}
-
-                numberOfRequestsAdmin = LeaveItemsListAdmin.Count;
-                OnPropertyChanged(nameof(LeaveItemsListAdmin));
-                OnPropertyChanged(nameof(numberOfRequestsAdmin));
-
-                StatusName = HeadrActionListAdmin[0].IsSelected ? HeadrActionListAdmin[0].Name : HeadrActionList[1].Name + "s";
-                OnPropertyChanged(nameof(StatusName));
-
+                HeadrActionList[0].IsSelected = true;
+                HeadrActionList[1].IsSelected = false;
+                HeadrActionList[2].IsSelected = false;
             }
             catch (Exception ex)
             {
-                AppHelpers.LoadingHide();
 
-                //Logger.LogError(ex);
             }
             finally
             {
-                AppHelpers.LoadingHide();
-
-                CanSelectHeaderActionAdmin = true;
+                canNavigateToNewRequest = true;
             }
-        },
-        (_) => CanSelectHeaderActionAdmin);
-
-        public ICommand NavigationtonewRequest => new Command(() =>
-        {
-            App.Current.MainPage.Navigation.PushAsync(new NewLeaveRequestPage());
-
-            HeadrActionList[0].IsSelected = true;
-            HeadrActionList[1].IsSelected = false;
-            HeadrActionList[2].IsSelected = false;
 
         },
-    () => true
+    () => canNavigateToNewRequest
     );
 
         private LeaveDetailsPopup leaveDetailsPopup;
 
         private bool canOpenLeaveDetailsPopup = true;
-        public ICommand OpenLeaveDetailsPopupView => new Command<Leave>(async (model) =>
+        public ICommand OpenLeaveDetailsPopupView => new Command<LeaveModel>(async (model) =>
         {
             try
             {
@@ -415,7 +354,7 @@ namespace XForms.ViewModels
 
 
         private bool canOpenProfilLeaveDetailsPopup = true;
-        public ICommand OpenProfilLeaveDetailsPopupView => new Command<Leave>(async (model) =>
+        public ICommand OpenProfilLeaveDetailsPopupView => new Command<LeaveModel>(async (model) =>
         {
             try
             {
@@ -466,8 +405,8 @@ namespace XForms.ViewModels
                     InprogessDays--;
                     TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
 
-                    LeaveItemsListAdmin.Remove(SelectedLeave);
-                    numberOfRequestsAdmin--;
+                    //LeaveItemsListAdmin.Remove(SelectedLeave);
+                    //numberOfRequestsAdmin--;
 
                 }
                 await PopupNavigation.Instance.PopAllAsync();

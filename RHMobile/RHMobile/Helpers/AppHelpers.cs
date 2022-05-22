@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using XForms.Interface;
 using XForms.Interfaces;
 using XForms.Popups;
 using XForms.views.Administration;
 using XForms.views.Authentication;
+using Microsoft.AppCenter.Crashes;
+using XForms.Enum;
+using System.Net;
+using Acr.UserDialogs;
+using Xamarin.Essentials;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace XForms
 {
@@ -75,7 +84,7 @@ namespace XForms
         {
             try
             {
-                Application.Current.Resources.TryGetValue(key, out var newColor);
+                Xamarin.Forms.Application.Current.Resources.TryGetValue(key, out var newColor);
                 return (Color)newColor;
             }
             catch
@@ -84,145 +93,118 @@ namespace XForms
             }
         }
 
-        //public static void Alert(string message = "", int durationInMs = 5000, Exception exception = default)
-        //{
-        //    if (exception != default)
-        //    {
-        //        //message = "Une erreur s'est produite";
-        //        message = exception.Message;
-        //    }
+        public static void Alert(string message = "", int durationInMs = 5000, Exception exception = default)
+        {
+            if (exception != default)
+            {
+                //message = "Une erreur s'est produite";
+                message = exception.Message;
+            }
 
-        //    if (!string.IsNullOrEmpty(message))
-        //    {
-        //        ToastLength toastLength = durationInMs >= 4000 ? ToastLength.LONG : ToastLength.SHORT;
+            if (!string.IsNullOrEmpty(message))
+            {
+                ToastLength toastLength = durationInMs >= 4000 ? ToastLength.LONG : ToastLength.SHORT;
 
-        //        Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
-        //        {
-        //            //    DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    //    DependencyService.Get<IToast>().Alert(message, toastLength, false);
 
 
-        //            if (Device.RuntimePlatform == Device.Android)
-        //            {
-        //                DependencyService.Get<IToast>().Alert(message, toastLength, false);
-        //            }
-        //            else
-        //            {
-        //                if (PopupNavigation.Instance.PopupStack.Any())
-        //                {
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                    }
+                    else
+                    {
+                        if (PopupNavigation.Instance.PopupStack.Any())
+                        {
 
-        //                    foreach (var item in PopupNavigation.Instance.PopupStack)
-        //                    {
-        //                        if (item.GetType() == typeof(LoadingPopup) && PopupNavigation.Instance.PopupStack.Count > 0)
-        //                        {
-        //                            Device.BeginInvokeOnMainThread(async () =>
-        //                            {
-        //                                await Task.Delay(1000);
+                            foreach (var item in PopupNavigation.Instance.PopupStack)
+                            {
+                                if (item.GetType() == typeof(LoadingPopup) && PopupNavigation.Instance.PopupStack.Count > 0)
+                                {
+                                    Device.BeginInvokeOnMainThread(async () =>
+                                    {
+                                        await Task.Delay(1000);
 
-        //                                //DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                                        //DependencyService.Get<IToast>().Alert(message, toastLength, false);
 
-        //                                //UserDialogs.Instance.Toast(new ToastConfig(message)
-        //                                //{
-        //                                //    Duration = TimeSpan.FromMilliseconds(durationInMs),
-        //                                //    //BackgroundColor = System.Drawing.Color.FromArgb(90, 0, 0, 0)
-        //                                //});
+                                        //UserDialogs.Instance.Toast(new ToastConfig(message)
+                                        //{
+                                        //    Duration = TimeSpan.FromMilliseconds(durationInMs),
+                                        //    //BackgroundColor = System.Drawing.Color.FromArgb(90, 0, 0, 0)
+                                        //});
 
-        //                                DependencyService.Get<IToast>().Alert(message, toastLength, false);
-        //                            });
+                                        DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                                    });
 
-        //                            return;
-        //                        }
-        //                        else
-        //                        {
-        //                            DependencyService.Get<IToast>().Alert(message, toastLength, false);
-        //                        }
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    DependencyService.Get<IToast>().Alert(message, toastLength, false);
-        //                }
-        //            }
-        //        });
-        //    }
+                                    return;
+                                }
+                                else
+                                {
+                                    DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            DependencyService.Get<IToast>().Alert(message, toastLength, false);
+                        }
+                    }
+                });
+            }
 
-        //    if (exception != default)
-        //    {
-        //        Crashes.TrackError(exception);
-        //    }
-        //}
+            if (exception != default)
+            {
+                Crashes.TrackError(exception);
+            }
+        }
 
-        //public static async Task OkAlert(string tilte, string message, string cancelTitle, string confirmTitle = null)
-        //{
-        //    if (string.IsNullOrWhiteSpace(tilte))
-        //        return;
+        public static async Task OkAlert(string tilte, string message, string cancelTitle, string confirmTitle = null)
+        {
+            if (string.IsNullOrWhiteSpace(tilte))
+                return;
 
-        //    await Application.Current.MainPage.DisplayAlert(tilte, message, cancelTitle);
-        //}
+            await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(tilte, message, cancelTitle);
+        }
 
-        //public static async Task<bool> AcceptAlert(string tilte, string message, string acceptTitle, string cancelTitle)
-        //{
-        //    var answer = await Application.Current.MainPage.DisplayAlert(tilte, message, acceptTitle, cancelTitle);
+        public static async Task<bool> AcceptAlert(string tilte, string message, string acceptTitle, string cancelTitle)
+        {
+            var answer = await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(tilte, message, acceptTitle, cancelTitle);
 
-        //    return answer;
-        //}
+            return answer;
+        }
+
 
         public static void SetInitialView()
         {
             try
             {
-                //    if (!App.Current.Resources.ContainsKey("MainPageStyle")
-                //|| !App.Current.Resources.ContainsKey("MainGridStyle"))
-                //    {
-
-                //        //Set Top Padding
-                //        var mainPageStyle = new Style(typeof(ScrollView))
-                //        {
-                //            Setters = {
-                //        new Setter {
-                //            Property = Grid.PaddingProperty,
-                //            Value =  new Thickness(0, 10, 0, 0)
-                //        }
-                //    }
-                //        };
-
-                //        var mainGridStyle = new Style(typeof(Grid))
-                //        {
-                //            Setters = {
-                //        new Setter {
-                //            Property = Grid.PaddingProperty,
-                //            Value =  new Thickness(0, 10, 0, 0)
-                //        }
-                //    }
-                //        };
-
-                //        App.Current.Resources.Add("MainPageStyle", mainPageStyle);
-                //        App.Current.Resources.Add("MainGridStyle", mainGridStyle);
-
-                //        App.IsSetDynamicResources = false;
-                //    }
-
-                if (!App.Current.Resources.ContainsKey("MainPageStyle")
-                || !App.Current.Resources.ContainsKey("MainGridStyle")
-                || !App.IsSetDynamicResources)
-                {
-                    SetDynamicResources();
-                }
-
                 if (
               (!string.IsNullOrEmpty(AppPreferences.Token)))
                 {
-                    Application.Current.MainPage = new NavigationPage(new HomePage());
+
+
+                    if (AppPreferences.UserRole.Equals(Roles.Collaborateur)
+                        || AppPreferences.UserRole.Equals(Roles.Stagiaire)
+                        || AppPreferences.UserRole.Equals(Roles.Chef_projet))
+                        Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new HomePage());
+
+                    else if (AppPreferences.UserRole.Equals(Roles.Manager)
+                             || AppPreferences.UserRole.Equals(Roles.Responsable_RH))
+                        Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new HomeAdminPage());
+
                 }
                 else
                 {
-                    Application.Current.MainPage = new NavigationPage(new HomePage());
+                    Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new SigninPage());
                 }
             }
             catch (Exception ex)
             {
                 //Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
 
-                Application.Current.MainPage = new NavigationPage(new SigninPage());
+                Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new SigninPage());
             }
         }
 
@@ -354,7 +336,7 @@ namespace XForms
 
         public async static Task<MediaFile> TakeOrPickPhoto()
         {
-            string action = await Application.Current.MainPage.DisplayActionSheet("Sélectionner une photo", "Annulé", null, "Caméra", "Galerie");
+            string action = await Xamarin.Forms.Application.Current.MainPage.DisplayActionSheet("Sélectionner une photo", "Annulé", null, "Caméra", "Galerie");
 
             MediaFile file = null;
 
@@ -372,6 +354,115 @@ namespace XForms
             }
 
             return file;
+        }
+        public static byte[] ConvertStreamToByteArray(Stream stream)
+        {
+            try
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    stream.CopyTo(memoryStream);
+                    stream.Dispose();
+                    stream.Close();
+                    return memoryStream.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                //Alert(message: ex.Message, exception: ex);
+                stream.Dispose();
+                stream.Close();
+                return null;
+            }
+            finally
+            {
+
+            }
+        }
+
+ 
+
+
+
+        public static bool IsImageVisible { get; set; }
+
+        public static async Task DownloadPDF()
+        {
+            var webClient = new WebClient();
+
+            var url = new Uri("https://st0rh0profils0dev.blob.core.windows.net/certificatedocs/1486ffa1-30e2-4cba-8706-8910b6c5817d637883047280952836-attestation-travail-intermediaire-146.pdf");
+            await Xamarin.Essentials.Browser.OpenAsync(url);
+
+            //webClient.DownloadDataAsync(url);
+
+        }
+
+        public static string Text { get; set; }
+
+        public static ImageSource Image { get; set; }
+
+        public static async Task<FileResult> DoPickPdfAsync()
+        {
+            var options = new PickOptions
+            {
+                PickerTitle = "Please select a pdf",
+                FileTypes = FilePickerFileType.Pdf,
+            };
+
+            var result= await PickAndShow(options);
+            return result;
+        }
+        public static async Task<FileResult> PickAndShow(PickOptions options)
+        {
+            try
+            {
+                var result = await FilePicker.PickAsync(options);
+
+                if (result != null)
+                {
+                    var size = await GetStreamSizeAsync(result);
+
+                    Text = $"File Name: {result.FileName} ({size:0.00} KB)";
+
+                    var ext = Path.GetExtension(result.FileName).ToLowerInvariant();
+                    if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".gif")
+                    {
+                        var stream = await result.OpenReadAsync();
+
+                        Image = ImageSource.FromStream(() => stream);
+                        IsImageVisible = true;
+                    }
+                    else
+                    {
+                        IsImageVisible = false;
+                    }
+                }
+                else
+                {
+                    Text = $"Pick cancelled.";
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Text = ex.ToString();
+                IsImageVisible = false;
+                return null;
+            }
+        }
+
+       public static async Task<double> GetStreamSizeAsync(FileResult result)
+        {
+            try
+            {
+                using var stream = await result.OpenReadAsync();
+                return stream.Length / 1024.0;
+            }
+            catch
+            {
+                return 0.0;
+            }
         }
 
     }

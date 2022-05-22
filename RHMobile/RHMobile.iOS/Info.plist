@@ -39,5 +39,12 @@
 	<string>Nous avons besoin d&amp;apos;accéder à la galerie pour récupérer et enregistrer des photos ou documents de vos produits</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Nous avons besoin d&amp;apos;accéder aux photos pour récupérer et enregistrer des photos ou documents de vos produits</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>SAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key></key>
+	<string></string>
 </dict>
 </plist>

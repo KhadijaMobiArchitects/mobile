@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="http://rotorgames.com"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:Local="clr-namespace:XForms"
+    HasSystemPadding="False"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:cc="clr-namespace:XForms.Controls" xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="XForms.views.Project.AddPointsPopup"
+    BackgroundColor="#90000000"
+    >
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+
+    </Base:BasePopupView.Animation>
+
+    <Grid
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"
+        >
+        <Grid            
+            RowDefinitions="40,40,auto,auto,auto">
+
+            <BoxView
+                Grid.Row="1"
+                Grid.RowSpan="4"
+                BackgroundColor="{StaticResource White}"
+                CornerRadius="30,30,0,0"
+                VerticalOptions="FillAndExpand" />
+
+           <cc:MaterialItemValue
+               Grid.Row="2"
+               Item="Mehdi Mellali"
+               Value="Développeur full stack"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               HorizontalTextAlignment="Center"
+               />
+            <pc:PancakeView
+                Grid.Row="3"
+                HeightRequest="30"
+                Padding="20,10"
+                Margin="30"
+                CornerRadius="6"
+                >
+                <pc:PancakeView.Border>
+                    <pc:Border Color="#DDE4F3" Thickness="1"/>
+                </pc:PancakeView.Border>
+                <Grid
+                    ColumnDefinitions="6*,*,*"
+                    >
+                    <Label
+                        Text="{Binding MyNotes, StringFormat='{0} points'}"
+                        VerticalOptions="Center"
+                        FontSize="14"
+                        TextColor="{StaticResource LabelColor}"
+                        FontFamily="RubikRegular"
+                        />
+                    <cc:CustomButton
+                        Grid.Column="1"
+                        StyleCorner="Circle"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Center"
+                        Padding="0"
+                        Clicked="Minus_Clicked"
+                        >
+                        <cc:CustomButton.ImageSource>
+                            <FontImageSource
+                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                                Glyph="{x:Static res:FontAwesomeFonts.MinusCircle}"
+                                Size="24"
+                                Color="#8E8E93"
+                                
+                                />
+                        </cc:CustomButton.ImageSource>
+                    </cc:CustomButton>
+                    <cc:CustomButton
+                        Grid.Column="2"
+                        StyleCorner="Circle"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Center"
+                        Padding="0"
+                        Clicked="Plus_Clicked"
+                        >
+                        <cc:CustomButton.ImageSource>
+                            <FontImageSource
+                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                                Glyph="{x:Static res:FontAwesomeFonts.PlusCircle}"
+                                Size="24"
+                                Color="#8E8E93"
+                                />
+                        </cc:CustomButton.ImageSource>
+                    </cc:CustomButton>
+                </Grid>
+            </pc:PancakeView>
+          <pc:PancakeView
+              Grid.Row="4"
+                HeightRequest="60"
+                Padding="20,10"
+                Margin="30,0,30,30"
+                CornerRadius="6"
+                >
+              <pc:PancakeView.Border>
+                  <pc:Border Color="#DDE4F3" Thickness="1"/>
+              </pc:PancakeView.Border>
+                    <Label
+                        Text="Ajouter un motif"
+                        VerticalOptions="Start"
+                        FontSize="14"
+                        TextColor="{StaticResource LabelColor}"
+                        FontFamily="RubikRegular"
+                        />
+              </pc:PancakeView>
+
+            <cc:CornerView
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                Padding="5"
+                BackgroundColor="{StaticResource BackgroundICon}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <cc:CornerView>
+                    <svg:SvgCachedImage                    
+                        Visual="Default"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Local:ImageResource profil.png}"
+                        Aspect="AspectFill"
+                        />
+                </cc:CornerView>
+            </cc:CornerView>
+        </Grid>
+        </Grid>
+</Base:BasePopupView>

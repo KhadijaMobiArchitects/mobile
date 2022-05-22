@@ -100,5 +100,21 @@
             Property="FontFamily"
             Value="{StaticResource MetropolisRegular}" />-->
     </Style>
+       <!--Editor-->
+    <Style
+        x:Key="BaseEditorStyle"
+        TargetType="Editor"
+        ApplyToDerivedTypes="True"
+        CanCascade="True">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource Black}" />
+        <Setter
+            Property="PlaceholderColor"
+            Value="{StaticResource PlaceholderColor}" />
+        <Setter
+            Property="FontSize"
+            Value="14" />
+    </Style>
 
 </ResourceDictionary>

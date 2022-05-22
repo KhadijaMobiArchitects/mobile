@@ -5,7 +5,7 @@ using XForms.Enum;
 
 namespace XForms.Models
 {
-    public class Leave
+    public class LeaveModel
     {
         public long Id { get; set; }
         public DateTime StartDate { get; set; }
@@ -51,8 +51,16 @@ namespace XForms.Models
         [JsonIgnore]
         public int DifferenceOfDays => (int)(EndDate - StartDate).TotalDays+1;
 
-        public Leave()
-        {
-        }
+    }
+
+    public class UpdateLeaveModel
+    {
+        public int id { get; set; }
+        public int refStatusLeaveId { get; set; }
+    }
+
+    public class DeleteLeaveModel
+    {
+        public int leaveId { get; set; }
     }
 }

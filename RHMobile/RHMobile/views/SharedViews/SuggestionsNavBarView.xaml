@@ -8,7 +8,7 @@
     xmlns:cc="clr-namespace:XForms.Controls"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-    xmlns:Local="clr-namespace:XForms"
+    xmlns:Local="clr-namespace:XForms" xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     x:Name="this"
     >
     <Base:BaseContent.Content>
@@ -17,7 +17,6 @@
             ColumnDefinitions="auto,*"
             >
                     <StackLayout
-                        Grid.Column="0"
                             >
                         <cc:CornerView
                             HeightRequest="45"
@@ -27,15 +26,16 @@
                             >
                             <cc:CornerView.GestureRecognizers>
                                 <TapGestureRecognizer
-                                        Command="{Binding NavigateToAdmin}"
-                                        />
+                                    Tapped="TapGestureRecognizer_Tapped"
+                                    />
                             </cc:CornerView.GestureRecognizers>
                             <cc:CornerView.Border>
                                 <pancake:Border Color="{StaticResource Secondenry}" Thickness="2"/>
                             </cc:CornerView.Border>
 
-                            <svg:SvgCachedImage
+                            <ff:CachedImage
                                 Source="{Binding ImageProfil,Source={x:Reference this}}"
+                                LoadingPlaceholder="{Local:ImageResource user.png}"
                                 Aspect="AspectFill"
                                 />
                         </cc:CornerView>
@@ -44,7 +44,7 @@
             <Grid
                 Grid.Column="1"
 
-                    ColumnDefinitions="auto,5*,*"
+                    ColumnDefinitions="auto,8*,auto,auto"
             >
                 <cc:CustomButton
                         BackgroundColor="{Binding BackButtonColor,Source={x:Reference this}}"
@@ -113,6 +113,29 @@
                     </cc:CustomButton.ImageSource>
 
                 </cc:CustomButton>
+
+                <cc:CustomButton
+                    Padding="0"
+                    StyleCorner="Circle"
+                    BackgroundColor="Transparent"
+                    IsVisible="{Binding HasSignOut,Source={x:Reference this}}"
+                    Grid.Column="3"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Command="{Binding Source={x:Reference this},Path=Parent.BindingContext.LogoutCommand}"
+                    Clicked="SignOutButton_Clicked"
+                    >
+
+                    <cc:CustomButton.ImageSource>
+                        <FontImageSource
+                    FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                    Glyph="{x:Static res:FontAwesomeFonts.SignOutAlt}"
+                    Color="White"
+                    Size="24" />
+                    </cc:CustomButton.ImageSource>
+
+                </cc:CustomButton>
+
 
 
             </Grid>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+ xmlns:Base="clr-namespace:XForms.views.Base"    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="http://rotorgames.com" xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:res="clr-namespace:XForms.Resources"
+    HasSystemPadding="False"
+    BackgroundColor="#90000000"
+    x:Class="XForms.views.Project.ChangePercentPopup">
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+
+    </Base:BasePopupView.Animation>
+
+    <Grid
+        BackgroundColor="Transparent"
+        VerticalOptions="EndAndExpand"
+        >
+        <BoxView
+            Grid.RowSpan="2"
+            BackgroundColor="White"
+            CornerRadius="30,30,0,0"
+            />
+
+        <Grid
+            RowDefinitions="auto,auto,auto"
+            ColumnDefinitions="5*,*"
+            Padding="30"
+            RowSpacing="20"
+            >
+ 
+            <Label
+                Grid.ColumnSpan="2"
+                Text="Saisissez une valeur"
+                Style="{StaticResource TitleStyle}"
+                />
+            <cc:MaterialEntry
+                Grid.ColumnSpan="2"
+                Grid.Row="1"
+                Placeholder="Saisissez une valeur entre 0 - 100"
+                Text="{Binding Percent}"
+                CornerRadiuss="6"
+                />
+            <Label
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Text="D’après votre estimation du projet, tant qu'owner saisit une valeur approximative."
+                FontSize="12"
+                TextColor="#A3AEC5"
+                FontFamily="RubikRegular"
+                />
+            <cc:CustomButton
+                Grid.Row="1"
+                Grid.Column="1"
+                StyleCorner="Circle"
+                Padding="0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                BackgroundColor="Transparent"
+                Command="{Binding ChangePercentCommand}"
+                >
+                <cc:CustomButton.ImageSource>
+                    <FontImageSource
+                        FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                        Glyph="{x:Static res:FontAwesomeFonts.CheckCircle}"
+                        Size="30"
+                        Color="{StaticResource Green}"
+                        />
+                </cc:CustomButton.ImageSource>
+            </cc:CustomButton>
+        </Grid>
+    </Grid>
+
+</Base:BasePopupView>

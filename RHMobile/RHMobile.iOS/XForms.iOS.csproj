@@ -76,6 +76,8 @@
     <Compile Include="Renderers.cs" />
     <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <Compile Include="DependencyServices\HasScreenNotch.cs" />
+    <Compile Include="DependencyServices\ToastiOS.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -166,6 +168,12 @@
     <PackageReference Include="Xam.Plugin.Media">
       <Version>5.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.2.0.564</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>5.0.0.2196</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RHMobile\XForms.csproj">
@@ -176,6 +184,7 @@
   <ItemGroup>
     <Folder Include="Renderers\" />
     <Folder Include="DependencyServices\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

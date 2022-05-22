@@ -21,21 +21,21 @@ namespace XForms.ViewModels
     public class NewLeaveRequestViewModel : BaseViewModel
     {
 
-        public List<Leave> ListLeave { get; set; }
+        public List<LeaveModel> ListLeave { get; set; }
         //public List<Projet> ListProjet { get; set; }
         //public List<SituationProjet> ListSituation { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
         //public Leave SelectedLeave { get; set; }
-        public Project SelectedProjet { get; set; }
+        public ProjectModel SelectedProjet { get; set; }
         public REFTypeLeave SelectedREFTypeLeave { get; set; }
         public SituationProject SelectedSituationProject { get; set; }
 
         public List<REFTypeLeave> TypeLeaveData;
         public List<REFTypeLeave> TypesLeaveList { get; set; }
-        public List<Project> ProjectData;
-        public List<Project> ProjectsList { get; set; }
+        public List<ProjectModel> ProjectData;
+        public List<ProjectModel> ProjectsList { get; set; }
 
         public List<SituationProject> SituationsProjectList { get; set; }
 
@@ -159,7 +159,7 @@ namespace XForms.ViewModels
 
                     CandSendRequest = false;
 
-                    Leave postParams = new Leave()
+                    LeaveModel postParams = new LeaveModel()
                     {
                         StartDate = StartDate,
                         EndDate = EndDate,
@@ -180,8 +180,15 @@ namespace XForms.ViewModels
 
                     var result = new RESTServiceResponse<object>();
                     result = await App.AppServices.PostLeave(postParams);
+                    if(result?.succeeded == true)
+                    {
+                        App.Current.MainPage.Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        AppHelpers.Alert(result?.message);
+                    }
 
-                    App.Current.MainPage.Navigation.PopAsync();
 
                 }
                 catch (Exception ex)

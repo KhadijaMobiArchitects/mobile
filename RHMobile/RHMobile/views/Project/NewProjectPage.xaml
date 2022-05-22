@@ -10,7 +10,7 @@
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:CellProject="clr-namespace:XForms.views.Project"
     x:Class="XForms.views.NewProjectPage"
-        xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+        xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:img="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     Title="Safe Area"
     ios:Page.UseSafeArea="False"
     x:Name="this"
@@ -42,7 +42,7 @@
 
           <ScrollView
                 Grid.Row="2"
-              Grid.RowSpan="2"
+                Grid.RowSpan="2"
                 Padding="0,20,0,0"
               >
               <Grid
@@ -53,7 +53,7 @@
                     Padding="30,0"
                     >
                     <cc:CustomButton
-                        Text="Ajouter une identité visuelle"
+                        Text="Ajouter une image"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         FontFamily="RubikBold"
@@ -74,17 +74,17 @@
 
                     <cc:MaterialEntry
                         Placeholder="Nom du projet"
-                        Text="{Binding projectRequest.ProjectName}"
+                        Text="{Binding ProjectName}"
                         CornerRadiuss="6"
                         />
                     <cc:MaterialDatePicker
                         Placeholder="Date début"
-                        Date="{Binding projectRequest.StartedAt}"
+                        Date="{Binding StartedAt}"
                         />
 
                     <cc:MaterialDatePicker
                         Placeholder="Date Fin"
-                        Date="{Binding projectRequest.EndedAt}"
+                        Date="{Binding EndedAt}"
                         />
                 </StackLayout>
 
@@ -97,7 +97,7 @@
                         FontAttributes="Bold"
                         FontSize="15"
                         Padding="30,0"
-                />
+                        />
 
                     <!--Chef du projet-->
                     <StackLayout>
@@ -201,18 +201,18 @@
                 VerticalOptions="Center"
                 BackgroundColor="#D2DCF1"
                 >
-                <svg:SvgCachedImage
+                <img:CachedImage
                     Source="{Binding UserPictureSource}"
                     Aspect="AspectFill"
                     HeightRequest="80"
                     >
-                    <svg:SvgCachedImage.GestureRecognizers>
+                    <img:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding PickPictureCommand}"
                             />
-                    </svg:SvgCachedImage.GestureRecognizers>
+                    </img:CachedImage.GestureRecognizers>
 
-                </svg:SvgCachedImage>
+                </img:CachedImage>
 
             </cc:CornerView>
 

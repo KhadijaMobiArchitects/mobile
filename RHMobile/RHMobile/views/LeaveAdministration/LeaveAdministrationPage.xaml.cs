@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using XForms.ViewModels;
 using XForms.views.Base;
 
-namespace XForms.views.LeaveAdministration
+namespace XForms.views
 {
     public partial class LeaveAdministrationPage : BasePage
     {
@@ -15,6 +15,8 @@ namespace XForms.views.LeaveAdministration
 
             //if (BindingContext == null)
             //    BindingContext = new LeaveRequestViewModel();
+            BindingContext = new LeaveAdministrationViewModel();
+
         }
 
         protected async override void OnAppearing()
@@ -23,7 +25,7 @@ namespace XForms.views.LeaveAdministration
             {
                 if (BindingContext == null)
                 {
-                    BindingContext = new LeaveRequestViewModel();
+                    BindingContext = new LeaveAdministrationViewModel();
                 }
 
                 base.OnAppearing();

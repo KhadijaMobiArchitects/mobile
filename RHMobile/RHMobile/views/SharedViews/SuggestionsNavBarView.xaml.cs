@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Input;
 using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
+using XForms.ViewModels;
+using XForms.views.Administration;
 using XForms.views.Base;
 
 namespace XForms.views.SharedViews
@@ -58,6 +61,19 @@ namespace XForms.views.SharedViews
             set
             {
                 SetValue(HasNotificationProperty, value);
+            }
+        }
+
+        public static readonly BindableProperty HasSignOutProperty = BindableProperty.Create(nameof(HasSignOut), typeof(bool), typeof(SuggestionsNavBarView), false);
+        public bool HasSignOut
+        {
+            get
+            {
+                return (bool)GetValue(HasSignOutProperty);
+            }
+            set
+            {
+                SetValue(HasSignOutProperty, value);
             }
         }
 
@@ -154,7 +170,6 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
                 canNavigationBack = true;
             }
 
-
         },
     () => canNavigationBack);
 
@@ -166,12 +181,25 @@ BindableProperty.Create(nameof(ImageProfil), typeof(ImageSource), typeof(View), 
             {
                 var isHasNotchScreen = AppHelpers.CheckHasNotchScreen();
 
-                this.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 0) : new Thickness(30, 30, 30, 0);
+                this.Padding = isHasNotchScreen ? new Thickness(30, 40, 30, 10) : new Thickness(30, 30, 30, 10);
             }
             else if (Device.RuntimePlatform == Device.Android)
                 this.Padding = new Thickness(30, 20, 30, 0);
         }
-        
 
+        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            //if (App.Current.MainPage.Navigation.NavigationStack.LastOrDefault().GetType() == typeof(HomeAdminPage))
+            //    App.Current.MainPage.Navigation.PopAsync();
+
+            //else 
+            //    App.Current.MainPage.Navigation.PushAsync(new HomeAdminPage());
+        }
+
+        void SignOutButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+
+
+        }
     }
 }

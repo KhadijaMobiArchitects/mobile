@@ -38,13 +38,14 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), Color.Ye
             InitializeComponent();
         }
 
-        void SelectItem_Clicked(System.Object sender, System.EventArgs e)
-        {
-            if ((sender as View).BindingContext is Models.Leave item)
-            {
-                (this.Parent.BindingContext as LeaveRequestViewModel).OpenProfilLeaveDetailsPopupView.Execute(item);
-            }
+        //void SelectItem_Clicked(System.Object sender, System.EventArgs e)
+        //{
+        //    if ((sender as View).BindingContext is LeaveResponse item)
+        //    {
+        //        (this.Parent.BindingContext as LeaveAdministrationViewModel).OpenProfilLeaveDetailsPopupView.Execute(item);
+        //    }
 
-        }
+        //}
+
     }
 }
