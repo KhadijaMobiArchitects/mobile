@@ -3,12 +3,16 @@ using System.Windows.Input;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using XForms.Models;
+using XForms.views;
 
 namespace XForms.ViewModels
 {
     public class ComplaintViewModel : BaseViewModel
     {
         public ObservableRangeCollection<ComplaintModel> ProfilComplaintsList { get; set; }
+
+        public ObservableRangeCollection<ComplaintModel> ProfilComplaintItemsList { get; set; }
+
 
         public ComplaintViewModel()
         {
@@ -63,5 +67,28 @@ namespace XForms.ViewModels
         },
 
         (_) => CanSelectHeaderAction);
+
+        private bool canNavigateToNewRequest = true;
+        public ICommand NavigationtonewRequest => new Command(() =>
+        {
+            try
+            {
+                canNavigateToNewRequest = false;
+                App.Current.MainPage.Navigation.PushAsync(new NewComplaintPage());
+
+                HeadrActionList[0].IsSelected = true;
+                HeadrActionList[1].IsSelected = false;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canNavigateToNewRequest = true;
+            }
+
+        },
+    () => canNavigateToNewRequest);
     }
 }

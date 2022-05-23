@@ -23,7 +23,6 @@
                 EndGradient="{StaticResource EndGradientAdmin}"
                 Grid.RowSpan="2"
                 />
-
                     <!--Header-->
                     <Shared:SuggestionsNavBarView
                     HasTitle="True"

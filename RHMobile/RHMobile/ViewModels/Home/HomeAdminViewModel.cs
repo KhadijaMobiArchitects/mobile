@@ -130,6 +130,9 @@ namespace XForms.ViewModels
                     AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveAdministrationPage()),
                     AdministrationService.Project => App.Current.MainPage.Navigation.PushAsync(new ProjectPage()),
                     AdministrationService.Certaficate => App.Current.MainPage.Navigation.PushAsync(new CertaficateAdministrationPage()),
+                    AdministrationService.Complaint => App.Current.MainPage.Navigation.PushAsync(new ComplaintAdministrationPage()),
+
+                    
                 };
             }
             catch (Exception ex)

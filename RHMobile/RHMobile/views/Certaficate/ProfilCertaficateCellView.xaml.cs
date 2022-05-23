@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace XForms.views
 {
-    public partial class ProfilCertaficateCellView : ContentView
+    public partial class ProfilComplaintCellView : ContentView
     {
         public static readonly BindableProperty BackgroundColorButtonProperty =
 BindableProperty.Create(nameof(BackgroundColorButton), typeof(Color), typeof(View), default, BindingMode.TwoWay);
@@ -30,7 +30,7 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), default,
                 SetValue(TextColorProperty, value);
             }
         }
-        public ProfilCertaficateCellView()
+        public ProfilComplaintCellView()
         {
             InitializeComponent();
         }

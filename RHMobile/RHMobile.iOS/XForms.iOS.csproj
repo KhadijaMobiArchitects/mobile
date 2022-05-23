@@ -171,8 +171,8 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.2.0.564</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>5.0.0.2196</Version>
+    <PackageReference Include="Xamarin.Forms.GoogleMaps">
+      <Version>4.0.0-BETA1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

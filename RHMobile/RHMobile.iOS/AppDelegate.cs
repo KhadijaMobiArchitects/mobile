@@ -33,7 +33,7 @@ namespace XForms.iOS
 
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
-            Xamarin.FormsGoogleMaps.Init(AppConstants.GoogleMapsApiKey);
+            //Xamarin.FormsGoogleMaps.Init(AppConstants.GoogleMapsApiKey);
 
 
 

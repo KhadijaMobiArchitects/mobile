@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:res="clr-namespace:XForms.Resources"
+    CloseWhenBackgroundIsClicked="True"
+    HasKeyboardOffset="False"
+    BackgroundColor="#90000000"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:animations="http://rotorgames.com"
+    x:Class="XForms.views.Complaint.ProfilComplaintPopup">
+
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+    </Base:BasePopupView.Animation>
+    <Grid
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"
+        >
+        <Grid  
+           
+            RowDefinitions="40,40,auto,auto"
+            >
+            <BoxView
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="30,30,0,0"
+            VerticalOptions="FillAndExpand" />
+            <StackLayout
+                Grid.Row="2"
+                >
+
+                <cc:MaterialItemValue                    
+                    HorizontalOptions="CenterAndExpand"
+                    Item="{Binding SelectedLeave.FullName}"
+                    Value="Full stack dev"
+                    HorizontalTextAlignment="Center"
+            />
+
+            </StackLayout>
+
+            <Grid
+            Padding="30,0"
+                Grid.Row="3"
+                RowDefinitions="auto,auto,auto,Auto"
+                ColumnDefinitions="3*,2*"
+                Margin="0,30"
+                RowSpacing="20"
+                >
+                <cc:MaterialItemValue
+            Item="Type d’attestation"
+            Value="{Binding SelectedCertaficate.RefTypeCertificateLabel}"
+            />
+                <cc:MaterialItemValue
+            Grid.Column="1"
+            Item="Date demande"
+            Value="{Binding SelectedCertaficate.CreatedOn,StringFormat='{0:dd/MM/yyyy}'}"
+
+            />
+                <cc:MaterialItemValue
+            Grid.Row="1"
+                    Grid.ColumnSpan="2"
+            Item="Message"
+            Value="{Binding SelectedCertaficate.Objectif}"
+            />
+                <Grid
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    >
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding UploadFileCommand}"
+                            />
+                    </Grid.GestureRecognizers>
+                <cc:MaterialUploadFile
+
+                    Title="Télécharger le document"
+                    HorizontalOptions="Center"
+                    />
+                </Grid>
+                <StackLayout
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    >
+                    <cc:CustomButton
+
+                        Text="Confirmer"
+                        TextColor="{StaticResource White}"
+                        BackgroundColor="{StaticResource Green }"
+                        FontSize="12"
+                        Padding="20,5"
+                        HorizontalOptions="FillAndExpand"
+                        CornerRadius="20"
+                        Command="{Binding SendCertaficateCommand}"
+
+                        />
+                    <cc:CustomButton
+                        HorizontalOptions="FillAndExpand"
+                        Text="Réfuser"
+                        TextColor="{StaticResource White}"
+                        BackgroundColor="{StaticResource Red}"
+                        FontSize="12"
+                        Padding="20,5"
+                        Command="{Binding RejectLeaveCommand}"
+                        CornerRadius="20"
+                        />
+
+                </StackLayout>
+            </Grid>
+
+            <cc:CornerView
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                Padding="5"
+                BackgroundColor="{StaticResource BackgroundICon}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <cc:CornerView
+                    Padding="5"
+                    >
+                    <svg:SvgCachedImage                    
+                        Visual="Default"
+                        Margin="-5"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Binding SelectedCertaficate.ImageUrl}"
+                        Aspect="AspectFill"
+                        />
+                </cc:CornerView>
+            </cc:CornerView>
+        </Grid>
+    </Grid>
+
+</Base:BasePopupView>
