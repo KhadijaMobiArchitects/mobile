@@ -16,7 +16,7 @@
 
         <TapGestureRecognizer           
             Grid.ColumnSpan="2"
-            Command="{Binding Parent.BindingContext.OpenCertaficateDetailsPopupCommand ,Source={x:Reference this}}"
+            Command="{Binding Parent.BindingContext.OpenComplaintDetailsPopupCommand ,Source={x:Reference this}}"
             CommandParameter="{Binding .}"
             />
 

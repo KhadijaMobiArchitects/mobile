@@ -23,7 +23,7 @@
                 />
 
             <Grid
-                RowDefinitions="*,3*,*"
+                RowDefinitions="*,5*"
                 VerticalOptions="FillAndExpand"
                 Grid.RowSpan="2"
                 RowSpacing="0">
@@ -40,11 +40,16 @@
                         ImageProfil="{Binding PictureUrl}"
                         HasSignOut="True"
                         />
-   
-                <!--Body-->
+                <ScrollView
+                    Grid.Row="1"
+                    >
+                    <Grid
+                        RowDefinitions="auto,auto"
+                        >
+              <!--Body-->
 
                 <Grid
-                    Grid.Row="1"
+                    Grid.Row="0"
                     RowDefinitions="auto,auto"
                     Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
                     >
@@ -79,15 +84,31 @@
                 <!--Footer-->
                 <Grid
                     Padding="30,5"
-                    Grid.Row="2"
+                    Grid.Row="1"
                     RowDefinitions="auto,auto"
                     >
+                    <StackLayout>
                     <Label
                         Text="Actualités du mois"
                         TextColor="{StaticResource LabelColor}"
                         FontSize="16"
                         FontAttributes="Bold"
+                        HorizontalOptions="StartAndExpand"
                         />
+                        <cc:CustomButton
+                            StyleCorner="Circle"
+                            HorizontalOptions="End"
+                            BackgroundColor="Transparent"
+                            >
+                            <cc:CustomButton.ImageSource>
+                                <FontImageSource
+                                    FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                                    Glyph="{x:Static res:FontAwesomeFonts.PlusCicrle}"
+                                    Size="24"
+                                    />
+                            </cc:CustomButton.ImageSource>
+                        </cc:CustomButton>
+                    </StackLayout>
                     <pancake:PancakeView
                         Grid.Row="1"
                         BackgroundColor="#47D1EA"
@@ -111,6 +132,8 @@
                     </pancake:PancakeView>
 
                 </Grid>
+                    </Grid>
+                </ScrollView>
 
             </Grid>
 

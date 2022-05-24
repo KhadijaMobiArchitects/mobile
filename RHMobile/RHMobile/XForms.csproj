@@ -148,6 +148,8 @@
     <None Remove="views\Complaint\" />
     <None Remove="ViewModels\Complaint\" />
     <None Remove="Models\Complaint\" />
+    <None Remove="views\News\" />
+    <None Remove="ViewModels\News\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -201,6 +203,8 @@
     <Folder Include="views\Complaint\" />
     <Folder Include="ViewModels\Complaint\" />
     <Folder Include="Models\Complaint\" />
+    <Folder Include="views\News\" />
+    <Folder Include="ViewModels\News\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

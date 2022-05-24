@@ -12,6 +12,12 @@ namespace XForms.ViewModels
     {
         public ObservableRangeCollection<ComplaintResponse> ProfilsComplaintsList { get; set; }
 
+        public ObservableRangeCollection<CertaficateResponse> ProfilsConfirmedCertaficateList { get; set; }
+        public ObservableRangeCollection<CertaficateResponse> ProfilsInProgressCertaficateList { get; set; }
+
+        public ObservableRangeCollection<CertaficateResponse> ProfilsCertaficateItemsList { get; set; }
+
+
         public ComplaintAdministrationViewModel()
         {
             ProfilsComplaintsList = new ObservableRangeCollection<ComplaintResponse>()
@@ -49,7 +55,7 @@ namespace XForms.ViewModels
         private ProfilComplaintPopup profilComplaintPopup;
         private bool canprofilComplaintPopup = true;
 
-        public ICommand OpenComplaintDetailsPopupCommand => new Command<ProfilComplaintPopup>(async (model) =>
+        public ICommand OpenComplaintDetailsPopupCommand => new Command<ComplaintResponse>(async (model) =>
         {
             try
             {

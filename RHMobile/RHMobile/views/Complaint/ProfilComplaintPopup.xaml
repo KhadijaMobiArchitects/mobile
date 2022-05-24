@@ -2,7 +2,8 @@
 <Base:BasePopupView
     xmlns:Base="clr-namespace:XForms.views.Base"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
     xmlns:res="clr-namespace:XForms.Resources"
     CloseWhenBackgroundIsClicked="True"
     HasKeyboardOffset="False"
@@ -82,11 +83,6 @@
                             Command="{Binding UploadFileCommand}"
                             />
                     </Grid.GestureRecognizers>
-                <cc:MaterialUploadFile
-
-                    Title="Télécharger le document"
-                    HorizontalOptions="Center"
-                    />
                 </Grid>
                 <StackLayout
                     Grid.Row="3"
