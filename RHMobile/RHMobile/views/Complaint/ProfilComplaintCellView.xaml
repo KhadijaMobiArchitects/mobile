@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cc="clr-namespace:XForms.Controls"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-    x:Class="XForms.views.Complaint.ProfilComplaintCellView"
+    x:Class="XForms.views.ProfilComplaintCellView"
     xmlns:Local="clr-namespace:XForms"
     x:Name="this"
     >
@@ -34,7 +34,7 @@
             StyleCorner="Circle"
             >
                 <svg:SvgCachedImage
-                Source="{Binding ImageUrl}"
+                Source="{Local:ImageResource profil.png}"
                 Aspect="AspectFill"
                 />
             </cc:CornerView>
@@ -44,7 +44,7 @@
                 VerticalOptions="Center"
                 >
                 <Label
-                    Text="{Binding CreatedByName}"
+                    Text="{Binding FirstName}"
                     FontAttributes="Bold"
                     FontSize="14"
                     TextColor="#33373D"
@@ -52,7 +52,7 @@
                     />
 
                 <Label
-                    Text="{Binding RefTypeCertificateLabel}"
+                    Text="{Binding Title}"
                     FontFamily="RubikRegular"
                     FontSize="12"
                     TextColor="#A3AEC5"

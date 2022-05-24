@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace XForms.views.Complaint
+namespace XForms.views
 {
     public partial class ProfilComplaintCellView : ContentView
     {

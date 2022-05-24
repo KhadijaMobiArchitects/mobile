@@ -10,7 +10,7 @@
     xmlns:Local="clr-namespace:XForms"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:animations="http://rotorgames.com"
-    x:Class="XForms.views.Complaint.ProfilComplaintPopup">
+    x:Class="XForms.views.ProfilComplaintPopup">
 
     <Base:BasePopupView.Animation>
         <animations:ScaleAnimation

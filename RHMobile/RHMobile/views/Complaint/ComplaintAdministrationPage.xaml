@@ -7,7 +7,7 @@
     NavigationPage.HasNavigationBar="False"
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:Cell="clr-namespace:XForms.views.Leave" xmlns:Cell2="clr-namespace:XForms.views"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:Cell="clr-namespace:XForms.views"
     x:Name="this"
     x:Class="XForms.views.ComplaintAdministrationPage">
     <Base:BasePage.Content>
@@ -70,7 +70,7 @@
                         VerticalScrollBarVisibility="Never"
                         >
                         <CollectionView
-                            ItemsSource="{Binding ProfilsCertaficateItemsList}"
+                            ItemsSource="{Binding ProfilsComplaintsList}"
                             >
                             <CollectionView.Header>
                                 <Label
@@ -86,7 +86,7 @@
                             </CollectionView.GroupHeaderTemplate>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Cell2:ProfilComplaintCellView
+                                    <Cell:ProfilComplaintCellView
                                         BackgroundColorButton="{Binding BackgroundColor}"
                                         TextColor="{Binding TextColor}"
                                         />
