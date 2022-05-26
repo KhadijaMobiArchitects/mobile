@@ -22,13 +22,13 @@
             RowDefinitions="auto"
             >
             <Grid
-                Grid.ColumnSpan="2"
                 >
             <Entry
-                Text="{Binding DateString ,Source={x:Reference this}}"
+                Text="{Binding Text ,Source={x:Reference this}}"
                 Placeholder="{Binding Placeholder,Source={x:Reference this}}"                
                 VerticalTextAlignment="Center"
                 Style="{StaticResource TransparentEntryStyle}"
+                
                 />
             </Grid>
 
@@ -43,7 +43,7 @@
                 <cc:CustomButton.ImageSource>
                     <FontImageSource
                         FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
-                        Glyph="{x:Static res:FontAwesomeFonts.Calendar}"
+                        Glyph="{x:Static res:FontAwesomeFonts.Position}"
                         Size="20"
                         Color="{StaticResource PlaceholderColor}"
                         />

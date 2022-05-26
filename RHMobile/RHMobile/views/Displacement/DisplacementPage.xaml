@@ -7,47 +7,70 @@
     NavigationPage.HasBackButton="False"
     NavigationPage.HasNavigationBar="False"
     xmlns:Local="clr-namespace:XForms"
-    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:cc="clr-namespace:XForms.Controls" xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     x:Class="XForms.views.DisplacementPage">
     <Base:BasePage.Content>
         <Grid
            BackgroundColor="White"
-            RowDefinitions="auto,30,30,4*"
+            RowDefinitions="auto,30,30,*"
             >
+
+            <Grid
+                RowDefinitions="*,auto,auto,auto"
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                RowSpacing="10"
+                Padding="0,0,0,30"
+                >
+                <Grid>                    
+                <ContentView
+                    Content="{Binding contentView}"
+                    >
+                </ContentView>
+                    <Image
+                        Source="{Local:ImageResource pins.png}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        />
+                </Grid>
+
+                <cc:MaterialEntryGeolocalion
+                    Margin="30,0"
+                    Grid.Row="1"
+                    Placeholder="départ"
+                    />
+                <cc:MaterialEntryGeolocalion
+                    Margin="30,0"
+                    Grid.Row="2"
+                    Placeholder="arrivé"
+                    Text="{Binding EndPosition}"
+                    
+                    />
+                <cc:MaterialEntry
+                    Margin="30,0"
+                    Grid.Row="3"
+                    Placeholder="Client"
+                    CornerRadiuss="6"                   
+                    />
+            </Grid>
             <Shared:SmallReclangleBackground
                 Grid.RowSpan="2"
                 StartGradient="{StaticResource StartGradient}"
                 EndGradient="{StaticResource EndGradient}"
                 />
-
             <!--Header-->
             <Shared:SuggestionsNavBarView
                 x:Name="MyHeader"
                 HasTitle="True"
                 HasDescription="True"
-                Title="Nouveau projet"
+                Title="Déplacemnt"
                 HasBackButton="True"
                 BackButtonBorderColor="{StaticResource StartGradient}"
                 BackButtonColor="{StaticResource EndGradient}"
                 Description="1 demandes en cours"
                 />
-            <Grid
-                RowDefinitions="auto,auto,auto"
-                Grid.Row="3"
-                BackgroundColor="Orange"
-                Padding="30,0"
-                >
-                <cc:MaterialEntryGeolocalion
-                    Placeholder="départ"
-                    />
-                <!--<maps:Map
-                    BackgroundColor="Black"
-                    Grid.Row="1"
-                    HeightRequest="200"
-                    />-->
-            </Grid>
-
-
             </Grid>
     </Base:BasePage.Content>
     

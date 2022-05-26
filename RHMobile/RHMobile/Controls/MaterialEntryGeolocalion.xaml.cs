@@ -31,7 +31,6 @@ BindableProperty.Create(nameof(Date), typeof(DateTime), typeof(View), null, Bind
         }
 
         private bool IsSelecetedDate;
-        public string DateString => IsSelecetedDate ? Date.Value.ToShortDateString() : string.Empty;
 
         public static readonly BindableProperty PlaceholderProperty =
 BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(View), string.Empty, BindingMode.TwoWay);
@@ -42,6 +41,18 @@ BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(View), strin
             set
             {
                 SetValue(PlaceholderProperty, value);
+            }
+        }
+
+        public static readonly BindableProperty TextProperty =
+BindableProperty.Create(nameof(Text), typeof(string), typeof(View), string.Empty, BindingMode.TwoWay);
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set
+            {
+                SetValue(TextProperty, value);
             }
         }
 

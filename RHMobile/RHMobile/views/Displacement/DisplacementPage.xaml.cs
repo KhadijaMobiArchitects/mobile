@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using XForms.ViewModels;
 using XForms.views.Base;
 
 namespace XForms.views
@@ -11,6 +12,7 @@ namespace XForms.views
         public DisplacementPage()
         {
             InitializeComponent();
+            BindingContext = new DisplacementViewModel();
         }
     }
 }

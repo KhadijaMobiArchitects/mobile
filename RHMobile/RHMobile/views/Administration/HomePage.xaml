@@ -85,7 +85,6 @@
                 Grid.Row="3"                
                 >
                 <Grid
-
                     RowDefinitions="auto,auto"
                     Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
                     >

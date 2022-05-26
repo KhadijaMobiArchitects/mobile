@@ -150,6 +150,9 @@
     <None Remove="Models\Complaint\" />
     <None Remove="views\News\" />
     <None Remove="ViewModels\News\" />
+    <None Remove="Models\Displacement\" />
+    <None Remove="Resources\Images\pin.png" />
+    <None Remove="Resources\Images\pins.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -205,6 +208,7 @@
     <Folder Include="Models\Complaint\" />
     <Folder Include="views\News\" />
     <Folder Include="ViewModels\News\" />
+    <Folder Include="Models\Displacement\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
@@ -244,6 +248,8 @@
     <EmbeddedResource Include="Resources\Images\image.png" />
     <EmbeddedResource Include="Resources\Images\image2.png" />
     <EmbeddedResource Include="Resources\Images\user.png" />
+    <EmbeddedResource Include="Resources\Images\pin.png" />
+    <EmbeddedResource Include="Resources\Images\pins.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />

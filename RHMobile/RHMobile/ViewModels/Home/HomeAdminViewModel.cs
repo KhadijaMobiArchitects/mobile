@@ -167,6 +167,22 @@ namespace XForms.ViewModels
         },
 (_) => canNavigateToUser);
 
+        private bool canNavigationToNewsPage = true;
+        public ICommand NavigationToNewsPageCommand => new Command(async () =>
+        {
+            try
+            {
+                canNavigationToNewsPage = false;
+                App.Current.MainPage.Navigation.PushAsync(new NewsPage());
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        , () => canNavigationToNewsPage);
+
     }
 }
 

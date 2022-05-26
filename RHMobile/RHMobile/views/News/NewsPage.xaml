@@ -7,9 +7,10 @@
     NavigationPage.HasNavigationBar="False"
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:Cell="clr-namespace:XForms.views"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:Cell="clr-namespace:XForms.views"
     x:Name="this"
-    x:Class="XForms.views.NewPage">
+    x:Class="XForms.views.NewsPage">
     <Base:BasePage.Content>
 <Grid
                 RowDefinitions="auto,auto,auto"
@@ -27,7 +28,7 @@
                     <Shared:SuggestionsNavBarView
                     HasTitle="True"
                     HasDescription="True"
-                    Title="Demande Attestation"
+                    Title="Ajouter Actualité"
                     HasNotification="True"
                     HasBackButton="True"
                     Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"

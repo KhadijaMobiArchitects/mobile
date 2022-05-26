@@ -7,12 +7,12 @@ using XForms.views.Base;
 
 namespace XForms.views
 {
-    public partial class NewPage : BasePage
+    public partial class NewsPage : BasePage
     {
-        public NewPage()
+        public NewsPage()
         {
             InitializeComponent();
-            BindingContext = new CertaficateAdministrationViewModel();
+            BindingContext = new NewsViewModel();
 
         }
         protected async override void OnAppearing()
@@ -21,7 +21,7 @@ namespace XForms.views
             {
                 if (BindingContext == null)
                 {
-                    BindingContext = new CertaficateAdministrationViewModel();
+                    BindingContext = new NewsViewModel();
                 }
 
                 base.OnAppearing();

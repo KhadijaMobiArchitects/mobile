@@ -27,11 +27,13 @@ namespace XForms.Resources
         public const string SignOut = "\uf08b";
         public const string SignOutAlt = "\uf2f5";
         public const string Download = "\uf019";
+        public const string Position = "\uf3c5";
+
+
+
 
 
         
-
-
 
 
 
