@@ -38,11 +38,9 @@ namespace XForms.ViewModels
 
             EndPosition = new PositionModel()
             {
-                Latitude = "33.54528444238300",
-                Longitude = "-7.630737568139180"
+                Latitude = "33.54428444208300",
+                Longitude = "-7.639737560139185"
             };
-
-            EndPosition = StartPosition;
 
             contentView = new ContentView()
             {
@@ -64,6 +62,21 @@ namespace XForms.ViewModels
                 };
                 EndPosition = endPosition;
 
+                map.Polylines.Clear();
+
+                var pathcontent = await LoadRoute(StartPosition, EndPosition);
+
+                var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
+                polyline.StrokeColor = AppHelpers.LookupColor("Primary");
+                polyline.StrokeWidth = 6;
+
+                foreach (var po in pathcontent)
+                {
+                    polyline.Positions.Add(po);
+
+                }
+                map.Polylines.Add(polyline);
+
             };
 
         }
@@ -73,19 +86,7 @@ namespace XForms.ViewModels
             base.OnAppearing();
 
             MoveMapToLocalPositionCommand.Execute(true);
-            var pathcontent = await LoadRoute(StartPosition,EndPosition);
-            map.Polylines.Clear();
-
-            var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
-            polyline.StrokeColor = AppHelpers.LookupColor("Primary");
-            polyline.StrokeWidth = 6;
-
-            foreach (var p in pathcontent)
-            {
-                polyline.Positions.Add(p);
-
-            }
-            map.Polylines.Add(polyline);
+ 
         }
 
         private bool CanMoveMapToLocalPosition = true;
