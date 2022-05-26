@@ -45,7 +45,7 @@
                     Margin="30,0"
                     Grid.Row="2"
                     Placeholder="arrivé"
-                    Text="{Binding EndPosition}"
+                    Text="{Binding EndPositionAddress}"
                     
                     />
                 <cc:MaterialEntry

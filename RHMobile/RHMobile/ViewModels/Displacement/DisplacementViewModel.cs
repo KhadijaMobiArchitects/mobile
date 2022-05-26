@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using XForms.Models;
+using XForms.Services;
 
 namespace XForms.ViewModels
 {
@@ -13,54 +16,33 @@ namespace XForms.ViewModels
         public Xamarin.Forms.GoogleMaps.Map map { get; set; }
         public ContentView contentView { get; set; }
         public List<PositionModel> ListPositions { get; set; }
-        public string EndPosition { get; set; }
+
+        public string StartPositionAddress { get; set; }
+        public string EndPositionAddress { get; set; }
+
+        public PositionModel StartPosition { get; set; }
+        public PositionModel EndPosition { get; set; }
+
 
         public DisplacementViewModel()
         {
             map = new Xamarin.Forms.GoogleMaps.Map();
-            //Pin pintokyo = new Pin()
-            //{
-            //    Type = PinType.Place,
-            //    Label = "Tokyo SKYTREE",
-            //    Address = "Sumida-ku, Tokyo, Japan",
-            //    Icon = AppHelpers.LoadBitmapDescriptors("profil.png"),
-            //    Position = new Position(33.54316339818309, -7.640259716132234),
-            //    Rotation = 33.3f,
-            //    Tag = "id_tokyo",
-            //    IsDraggable = true
 
-            //};
-
-            //map.Pins.Add(pintokyo);
-            //map.PinDragStart += Map_PinDragStart;
-            //map.PinDragEnd += Map_PinDragEnd;
-
-            ListPositions = new List<PositionModel>()
+            StartPosition = new PositionModel()
             {
-                new PositionModel(){Latitude = "33.547337102997076",Longitude = "-7.650029853066444"},
-                new PositionModel(){Latitude = "33.543741749157554",Longitude = "-7.6531364429836914"},
-                new PositionModel(){Latitude = "33.54315494483275",Longitude = "-7.640261390069967"},
+                Latitude = "33.54428444238301",
+                Longitude = "-7.639737568139186"
+
+
             };
 
-            //foreach (PositionModel item in ListPositions)
-            //{
-            //    Pin PositionPin = new Pin()
-            //    {
+            EndPosition = new PositionModel()
+            {
+                Latitude = "33.54528444238300",
+                Longitude = "-7.630737568139180"
+            };
 
-            //        Type = PinType.Place,
-            //        Position = new Position(Convert.ToDouble(item.Latitude), Convert.ToDouble(item.Longitude)),
-            //        Label = "Cars",
-            //        //Icon = AppHelpers.LoadBitmapDescriptors("profil.png")
-
-            //    };
-
-            //    map.Pins.Add(PositionPin);
-
-
-            //}
-            //map.MoveToRegion(MapSpan.FromCenterAndRadius(pintokyo.Position, Distance.FromMeters(5000)));
-
-            //map.MoveToRegion(MapSpan.FromCenterAndRadius(, Distance.FromMeters(5000)));
+            EndPosition = StartPosition;
 
             contentView = new ContentView()
             {
@@ -74,35 +56,38 @@ namespace XForms.ViewModels
                 ////labelStatus.Text = text;
                 //System.Diagnostics.Debug.WriteLine(text);
 
-                EndPosition = await AppHelpers.GatGeocoder(p.Target.Latitude, p.Target.Longitude);
+                EndPositionAddress = await AppHelpers.GatGeocoder(p.Target.Latitude, p.Target.Longitude);
+                var endPosition = new PositionModel()
+                {
+                    Latitude = Convert.ToString(p.Target.Latitude),
+                    Longitude = Convert.ToString(p.Target.Longitude)
+                };
+                EndPosition = endPosition;
 
             };
 
         }
 
-        public override void OnAppearing()
+        public async override void OnAppearing()
         {
             base.OnAppearing();
 
             MoveMapToLocalPositionCommand.Execute(true);
+            var pathcontent = await LoadRoute(StartPosition,EndPosition);
+            map.Polylines.Clear();
+
+            var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
+            polyline.StrokeColor = AppHelpers.LookupColor("Primary");
+            polyline.StrokeWidth = 6;
+
+            foreach (var p in pathcontent)
+            {
+                polyline.Positions.Add(p);
+
+            }
+            map.Polylines.Add(polyline);
         }
 
-        //private void Map_PinDragStart(object sender, PinDragEventArgs e)
-        //{
-
-        //}
-
-        //private async void Map_PinDragEnd(object sender, PinDragEventArgs e)
-        //{
-        //    var positons = new Position(e.Pin.Position.Latitude, e.Pin.Position.Longitude);
-        //    map.MoveToRegion(MapSpan.FromCenterAndRadius(positons, Distance.FromMeters(5000)));
-        //    await App.Current.MainPage.DisplayAlert("Alert", "Pick up location : Latitude :" + e.Pin.Position.Latitude + " Longitude : " + e.Pin.Position.Longitude, "OK");
-        //    string adresse = await AppHelpers.GatGeocoder(e.Pin.Position.Latitude, e.Pin.Position.Longitude);
-        //    await App.Current.MainPage.DisplayAlert("Adresse :", adresse, "OK");
-
-
-        //}
-        //
         private bool CanMoveMapToLocalPosition = true;
         public ICommand MoveMapToLocalPositionCommand => new Command<bool>(async (flag) =>
         {
@@ -160,5 +145,22 @@ namespace XForms.ViewModels
                 CanMoveMapToLocalPosition = true;
             }
         }, (_) => CanMoveMapToLocalPosition);
+
+        internal async Task<System.Collections.Generic.List<Xamarin.Forms.GoogleMaps.Position>> LoadRoute(PositionModel StartPosition, PositionModel EndPosition)
+        {
+            var googleDirection = await ApiServices.ServiceClientInstance.GetDirections(StartPosition.Latitude, StartPosition.Longitude, EndPosition.Latitude, EndPosition.Longitude);
+            if (googleDirection.Routes != null && googleDirection.Routes.Count > 0)
+            {
+                var positions = (Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points)));
+                return positions;
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "Add your payment method inside the Google Maps console.", "Ok");
+                return null;
+
+            }
+
+        }
     }
 }

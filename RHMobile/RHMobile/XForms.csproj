@@ -153,6 +153,8 @@
     <None Remove="Models\Displacement\" />
     <None Remove="Resources\Images\pin.png" />
     <None Remove="Resources\Images\pins.png" />
+    <None Remove="Services\Map\" />
+    <None Remove="Models\Map\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -209,6 +211,8 @@
     <Folder Include="views\News\" />
     <Folder Include="ViewModels\News\" />
     <Folder Include="Models\Displacement\" />
+    <Folder Include="Services\Map\" />
+    <Folder Include="Models\Map\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />
