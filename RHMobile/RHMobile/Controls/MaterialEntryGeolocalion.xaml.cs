@@ -86,7 +86,13 @@ BindableProperty.Create(nameof(IsIconClicked), typeof(bool), typeof(View), false
         {
             InitializeComponent();
             IconColor = AppHelpers.LookupColor("PlaceholderColor");
-
+            //entry.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e)=>
+            //{
+            //    if(e.PropertyName == nameof(IsFocused))
+            //    {
+            //        IsIconClicked = !IsIconClicked;
+            //    }
+            //};
         }
 
         void CustomButton_Clicked(System.Object sender, System.EventArgs e)

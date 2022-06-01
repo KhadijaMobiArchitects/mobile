@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using XForms.Constants;
+using XForms.Enum;
+using XForms.HttpREST;
 using XForms.Interfaces;
 using XForms.Models;
 
@@ -33,25 +35,35 @@ namespace XForms.Services
             client.BaseAddress = new Uri("https://maps.googleapis.com/maps/");
         }
 
-        public async Task<GoogleDirection> GetDirections(string originLatitude, string originLongitude, string destinationLatitude, string destinationLongitude)
+        public async Task<GoogleDirection> GetDirections(double originLatitude, double originLongitude, double destinationLatitude, double destinationLongitude)
         {
-            GoogleDirection googleDirection = new GoogleDirection();
+            //GoogleDirection googleDirection = new GoogleDirection();
 
-            var response = await client.GetAsync($"api/directions/json?mode=driving&transit_routing_preference=less_driving&origin={originLatitude},{originLongitude}&destination={destinationLatitude},{destinationLongitude}&key={AppConstants.GoogleMapsApiKey}").ConfigureAwait(false);
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (!string.IsNullOrWhiteSpace(json))
-                {
-                    googleDirection = await Task.Run(() =>
-                       JsonConvert.DeserializeObject<GoogleDirection>(json)
-                    ).ConfigureAwait(false);
+            //var response = await client.GetAsync($"api/directions/json?mode=driving&transit_routing_preference=less_driving&origin={originLatitude},{originLongitude}&destination={destinationLatitude},{destinationLongitude}&key={AppConstants.GoogleMapsApiKey}").ConfigureAwait(false);
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            //    if (!string.IsNullOrWhiteSpace(json))
+            //    {
+            //        googleDirection = await Task.Run(() =>
+            //           JsonConvert.DeserializeObject<GoogleDirection>(json)
+            //        ).ConfigureAwait(false);
 
-                }
+            //    }
 
-            }
+            //}
 
-            return googleDirection;
+            string a_originLatitude = originLatitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string a_originLongitude = originLongitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string a_destinationLatitude = destinationLatitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string a_destinationLongitude = destinationLongitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+
+
+            var url = $"{AppUrls.GoogleMapBaseUrl}api/directions/json?mode=driving&transit_routing_preference=less_driving&origin={a_originLatitude},{a_originLongitude}&destination={a_destinationLatitude},{a_destinationLongitude}&key={AppConstants.GoogleMapsApiKey}";
+
+            return await RESTHelper.GetRequestJson<GoogleDirection>(url: url, method: HttpVerbs.GET);
+            
         }
     }
 

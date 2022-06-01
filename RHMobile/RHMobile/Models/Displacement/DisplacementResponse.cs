@@ -7,7 +7,7 @@ using XForms.Enum;
 namespace XForms.Models
 {
 
-    public partial class DisplacementResponse
+    public partial class DisplacementResponse : BindableObject
     {
         public int Id { get; set; }
         public int StartPositionId { get; set; }
@@ -20,6 +20,7 @@ namespace XForms.Models
         public int RefStatusDeplacementId { get; set; }
         public string RefStatusName { get; set; }
         public string Motif { get; set; }
+        public string PictureUrl { get; set; }
     }
 
     public partial class DisplacementResponse

@@ -6,7 +6,7 @@ namespace XForms.Constants
         //public const string BaseUrl = "https://rh-api-dev.azurewebsites.net/api/";
         public const string BaseUrl = "http://rh-api-dev-mobiarchitects.azurewebsites.net/api/";
 
-
+        public const string GoogleMapBaseUrl = "https://maps.googleapis.com/maps/";
 
         public const string Singin = BaseUrl + "Account/Authenticate";
 

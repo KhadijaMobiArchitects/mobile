@@ -15,5 +15,13 @@ namespace XForms.views
             BindingContext = new DisplacementAdministrationViewModel();
 
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            //if(BindingContext == null)
+            //    BindingContext = new DisplacementAdministrationViewModel();
+
+        }
     }
 }

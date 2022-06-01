@@ -215,5 +215,58 @@ namespace XForms.HttpREST
 
             }
         }
+
+
+        #region GetRequest Json
+        public static async Task<T> GetRequestJson<T>(string url, HttpVerbs method = HttpVerbs.GET, System.Collections.Specialized.NameValueCollection getParams = null, object postObject = null, string contentType = "application/json")
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    //setup client
+                    Uri uri = new Uri(url);
+                    #region Setting Attachements
+
+                    //if (method == HttpVerbs.GET && getParams != null)
+                    //{
+                    //    uri = uri.AttachParameters(getParams);
+                    //}
+
+                    #endregion
+                    client.BaseAddress = uri;
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
+                    //client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Settings.AccessToken);
+                    //client.DefaultRequestHeaders.TryAddWithoutValidation("From", AppUrls.AppHash);
+
+                    //make request
+                    HttpResponseMessage response = new HttpResponseMessage();
+                    switch (method)
+                    {
+                        case HttpVerbs.GET:
+                            response = await client.GetAsync(uri);
+                            break;
+                        case HttpVerbs.POST:
+                            var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, contentType);
+                            response = await client.PostAsync(uri, content);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    var stringResponseJson = await response.Content.ReadAsStringAsync();
+
+                    var result = JsonConvert.DeserializeObject<T>(stringResponseJson);
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                return default;
+            }
+        }
+        #endregion
     }
 }

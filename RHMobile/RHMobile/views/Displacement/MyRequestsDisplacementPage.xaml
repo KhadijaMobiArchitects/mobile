@@ -100,15 +100,16 @@
 
             <Grid
                 Grid.Row="3"
-                Padding="30"
+                Padding="30,30"
                 VerticalOptions="EndAndExpand"
                 >
                 <cc:CustomButton
                     Text="Nouvelle Demande"
                     FontSize="20"
                     TextColor="{StaticResource White}"
-                    VerticalOptions="Center"
                     Command="{Binding NavigationtonewRequest}"
+                    BackgroundColor="{StaticResource Primary}"
+                    HeightRequest="80"
                     />
             </Grid>
         </Grid>

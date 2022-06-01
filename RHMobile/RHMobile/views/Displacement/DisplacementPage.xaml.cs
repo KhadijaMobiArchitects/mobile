@@ -17,9 +17,14 @@ namespace XForms.views
 
             MessagingCenter.Subscribe<DisplacementViewModel, int>(this, AppConstants.SendPipUp, async (sender, arg) =>
             {
-                _= pin.TranslateTo(0, arg, 500, Easing.Linear);
+                _ = pin.TranslateTo(0, arg, 500, Easing.Linear);
 
             });
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
         }
 
     }

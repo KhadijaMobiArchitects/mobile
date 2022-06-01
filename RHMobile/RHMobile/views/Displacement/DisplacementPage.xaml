@@ -11,37 +11,64 @@
     xmlns:cc="clr-namespace:XForms.Controls"
     xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     xmlns:cell="clr-namespace:XForms.views"
+    xmlns:bottom="clr-namespace:Xam.Plugin.SimpleBottomDrawer;assembly=Xam.Plugin.SimpleBottomDrawer"
     x:Class="XForms.views.DisplacementPage"
     x:Name="this"
     >
     <Base:BasePage.Content>
+        <RelativeLayout>
+
         <Grid
            BackgroundColor="White"
             RowDefinitions="auto,10,10,*"
+            RowSpacing="0"
+                         RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=1,
+                                                                       Constant=-160}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1,
+                                                                      Constant=0}"
             >
+                 <Shared:SmallReclangleBackground
+                Grid.RowSpan="2"
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                />
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                x:Name="MyHeader"
+                HasTitle="True"
+                Title="Déplacemnt"
+                HasBackButton="True"
+                BackButtonBorderColor="{StaticResource StartGradient}"
+                BackButtonColor="{StaticResource EndGradient}"
+                />
 
             <Grid
-                RowDefinitions="*,auto,auto,auto,auto,auto,auto,auto"
                 Grid.Row="1"
-                Grid.RowSpan="3"
+                Grid.RowSpan="4"
                 RowSpacing="10"
                 Padding="0,0,0,30"
                 >
-                <Grid>                    
-                <ContentView
+                <Grid>
+                    <ContentView
                     Content="{Binding contentView}"
                     >
-                </ContentView>
+                    </ContentView>
                     <Label
                         IsVisible="{Binding IsPickIconVisible}"
                         HorizontalOptions="Fill"
                         HorizontalTextAlignment="Center"
-                        VerticalOptions="End"
-                        Text="Veuillez choisir la position sur la map"
+                        VerticalOptions="Start"
+                        Text="vous pouvez choisir la position sur la map"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White"
                         FontFamily="RubikRegular"
                         Padding="5"
+                        Margin="0,5,0,0"
+                        FontSize="13"
                         />
                     <Grid
                         IsVisible="{Binding IsPickIconVisible}"
@@ -49,7 +76,7 @@
                         VerticalOptions="Center"
 
                         >
-                   <Image
+                        <Image
                         x:Name="pin"
                         Source="{Local:ImageResource pins.png}"
                         HeightRequest="40"
@@ -67,9 +94,13 @@
                             Opacity="0.4"
                             />
                     </Grid>
+
                 </Grid>
-            <cc:CustomButton
+            <ScrollView
                 Grid.Row="1"
+                >
+                <StackLayout>
+             <cc:CustomButton
                 BackgroundColor="Transparent"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
@@ -77,18 +108,17 @@
                 HeightRequest="20"
                 Command="{Binding DownUpCommand}"
                 Padding="0">
-                <cc:CustomButton.ImageSource>
-                    <FontImageSource
+                    <cc:CustomButton.ImageSource>
+                        <FontImageSource
                         FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
                         Glyph="{Binding DownUpGlyph}"
                         Size="24"
                         />
-                </cc:CustomButton.ImageSource>
-            </cc:CustomButton>
+                    </cc:CustomButton.ImageSource>
+                </cc:CustomButton>
                 <StackLayout
-                    Grid.Row="2"
-                    >        
-                <cc:MaterialEntryGeolocalion
+                    >
+                    <cc:MaterialEntryGeolocalion
                     Margin="30,0"
                     Placeholder="départ"
                     Text="{Binding StartPlaceText}"
@@ -110,7 +140,7 @@
                                             CommandParameter="{Binding .}"
                                             />
                                     </Grid.GestureRecognizers>
-                                <cell:AddressCellView
+                                    <cell:AddressCellView
                                     Address="{Binding Description}"
                                     />
                                 </Grid>
@@ -119,9 +149,8 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout
-                    Grid.Row="3"
                     >
-                <cc:MaterialEntryGeolocalion
+                    <cc:MaterialEntryGeolocalion
                     Margin="30,0"
                     Placeholder="arrivé"
                     Text="{Binding EndPlaceText}"
@@ -143,7 +172,7 @@
                                             CommandParameter="{Binding .}"
                                             />
                                     </Grid.GestureRecognizers>
-                                <cell:AddressCellView
+                                    <cell:AddressCellView
                                     Address="{Binding Description}"
                                     />
                                 </Grid>
@@ -152,7 +181,6 @@
                     </StackLayout>
                 </StackLayout>
                 <cc:MaterialDatePicker
-                    Grid.Row="4"
                     Padding="30,0"
                     Placeholder="Date de déplacement"
                     Date="{Binding DisplacementDate}"
@@ -161,7 +189,6 @@
                     />
                 <cc:MaterialEntry
                     Margin="30,0"
-                    Grid.Row="5"
                     Placeholder="Client"
                     CornerRadiuss="6"
                     Text="{Binding Client}"
@@ -169,14 +196,12 @@
 
                     />
                 <cc:MaterialEntry
-                    Grid.Row="6"
                     Placeholder="Objectif"
                     Padding="30,0"
                     Text="{Binding Motif}"
                     IsVisible="{Binding DownUp}"
                     />
                 <cc:CustomButton
-                    Grid.Row="7"
                     Text="Envoyer la demande"
                     FontSize="14"
                     TextColor="White"
@@ -184,23 +209,142 @@
                     Command="{Binding SendRequestCommand}"
                     IsVisible="{Binding DownUp}"
                     />
-            </Grid>
-            <Shared:SmallReclangleBackground
-                Grid.RowSpan="2"
-                StartGradient="{StaticResource StartGradient}"
-                EndGradient="{StaticResource EndGradient}"
-                />
-            <!--Header-->
-            <Shared:SuggestionsNavBarView
-                x:Name="MyHeader"
-                HasTitle="True"
-                Title="Déplacemnt"
-                HasBackButton="True"
-                BackButtonBorderColor="{StaticResource StartGradient}"
-                BackButtonColor="{StaticResource EndGradient}"
+                </StackLayout>
+            </ScrollView>
 
-                />
+              
             </Grid>
+
+        </Grid>
+
+  <bottom:BottomDrawer
+
+                        Padding="0"
+                        BackgroundColor="White"
+      HasShadow="False"
+                        CornerRadius="20"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=1,
+                                                                       Constant=-100}"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1,
+                                                                      Constant=0}"
+                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=1,
+                                                                  Constant=-200}">
+                    <StackLayout
+                            Spacing="0">
+                                  <BoxView
+                                      Margin="0,15,0,10"
+                                      BackgroundColor="{StaticResource PlaceholderColor}"
+                                    CornerRadius="2"
+                                    HeightRequest="4"   
+                                    HorizontalOptions="Center"
+                                    WidthRequest="60" />
+                        <ScrollView
+                            VerticalScrollBarVisibility="Never"
+                            VerticalOptions="FillAndExpand"
+                            >
+                        <StackLayout
+                                Spacing="15"
+                                Margin="20,16,20,-5">
+
+                <StackLayout
+                    >
+                    <cc:MaterialEntryGeolocalion
+                    Placeholder="départ"
+                    Text="{Binding StartPlaceText}"
+                    IsIconClicked="{Binding IsStartPointClicked}"
+                    IsVisible="{Binding DownUp}"
+
+                    />
+                    <StackLayout
+                        BindableLayout.ItemsSource="{Binding Places}"
+                        IsVisible="{Binding IsStartCollectionVisible}"
+                        >
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.SelectStartAddressCommand,Source={x:Reference this}}"
+                                            CommandParameter="{Binding .}"
+                                            />
+                                    </Grid.GestureRecognizers>
+                                    <cell:AddressCellView
+                                    Address="{Binding Description}"
+                                    />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout
+                    >
+                    <cc:MaterialEntryGeolocalion
+                    Placeholder="arrivé"
+                    Text="{Binding EndPlaceText}"
+                    IsIconClicked="{Binding IsEndPointClicked}"
+                    IsVisible="{Binding DownUp}"
+                    
+                    />
+                    <StackLayout
+                        BindableLayout.ItemsSource="{Binding Places}"
+                        IsVisible="{Binding IsEndCollectionVisible}"
+                        >
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.SelectEndAddressCommand,Source={x:Reference this}}"
+                                            CommandParameter="{Binding .}"
+                                            />
+                                    </Grid.GestureRecognizers>
+                                    <cell:AddressCellView
+                                    Address="{Binding Description}"
+                                    />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+                <cc:MaterialDatePicker
+                    Placeholder="Date de déplacement"
+                    Date="{Binding DisplacementDate}"
+                    IsVisible="{Binding DownUp}"
+
+                    />
+                <cc:MaterialEntry
+                    Placeholder="Client"
+                    CornerRadiuss="6"
+                    Text="{Binding Client}"
+                    IsVisible="{Binding DownUp}"
+
+                    />
+                <cc:MaterialEntry
+                    Placeholder="Objectif"
+                    Text="{Binding Motif}"
+                    CornerRadiuss="6"
+                    IsVisible="{Binding DownUp}"
+                    />
+                <cc:CustomButton
+                    Text="Envoyer la demande"
+                    FontSize="14"
+                    TextColor="White"
+                    Command="{Binding SendRequestCommand}"
+                    IsVisible="{Binding DownUp}"
+                    VerticalOptions="End"
+                    />
+                        </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </bottom:BottomDrawer>
+
+        </RelativeLayout>
     </Base:BasePage.Content>
-    
+
 </Base:BasePage>

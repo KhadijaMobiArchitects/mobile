@@ -3,8 +3,98 @@
  xmlns:Base="clr-namespace:XForms.views.Base"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:Cell="clr-namespace:XForms.views"
+    x:Name="this"
     x:Class="XForms.views.DisplacementAdministrationPage">
-    <Base:BasePage.Content>
+<Base:BasePage.Content>
+        <Grid
+                RowDefinitions="auto,auto,auto"
+                VerticalOptions="FillAndExpand"
+                RowSpacing="10"
+                BackgroundColor="White"               
+                >
+
+            <Shared:SmallReclangleBackground
+                StartGradient="{StaticResource StartGradientAdmin}"
+                EndGradient="{StaticResource EndGradientAdmin}"
+                Grid.RowSpan="2"
+                />
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                    HasTitle="True"
+                    HasDescription="True"
+                    Title="Déplacement"
+                    HasNotification="True"
+                    HasBackButton="True"
+                    Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
+                    BackButtonBorderColor="{StaticResource StartGradientAdmin}"
+                    BackButtonColor="{StaticResource EndGradientAdmin }"
+                    />
+            <!--Switch-->
+            <StackLayout
+                        Grid.Row="1"
+                        Padding="30,0,30,20"
+                        Spacing="15"
+                        Orientation="Horizontal"
+                        BindableLayout.ItemsSource="{Binding HeadrActionList}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+
+                            <!--Clicked="SelectItem_Clicked"-->
+
+                            <cc:CustomButton
+                                        Text="{Binding Name,StringFormat='Demande {0}'}"
+                                        StyleCorner="RoundCorner"
+                                        BackgroundColor="{Binding BackgroundColorAdmin}"
+                                        TextColor="{Binding TextColorAdmin}"
+                                        HorizontalOptions="Start"
+                                        Padding="25,5"
+                                        FontSize="12"
+                                        Visual="Default"
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionCommand}"
+                                        CommandParameter="{Binding .}"
+                                        />
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            <ScrollView
+                        Padding="30,0"
+                        Grid.Row="2"
+                        HorizontalScrollBarVisibility="Never"
+                        VerticalScrollBarVisibility="Never"
+                        >
+                <CollectionView
+                            ItemsSource="{Binding ProfilsDispalacementItemsList}"
+                            >
+                    <CollectionView.Header>
+                        <Label
+                                    Text="{Binding  StatusName,StringFormat='Les demandes {0}'}"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    TextColor="#6C0DB3"
+                                    />
+                    </CollectionView.Header>
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Cell:ProfilDisplacementCellView
+                                        BackgroundColorButton="{Binding BackgroundColor}"
+                                        TextColor="{Binding TextColor}"
+                                        />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
 
     </Base:BasePage.Content>
 

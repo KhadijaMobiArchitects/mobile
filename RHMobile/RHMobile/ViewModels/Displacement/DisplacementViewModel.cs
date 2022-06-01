@@ -64,16 +64,14 @@ namespace XForms.ViewModels
 
             StartPosition = new PositionModel()
             {
-                Latitude = "33.54428444238301",
-                Longitude = "-7.639737568139186"
-
-
+                Latitude = 33.54428444238301,
+                Longitude = -7.639737568139186
             };
 
             EndPosition = new PositionModel()
             {
-                Latitude = "33.54428444208300",
-                Longitude = "-7.639737560139185"
+                Latitude = 33.54428444208300,
+                Longitude = -7.639737560139185
             };
 
             contentView = new ContentView()
@@ -85,7 +83,6 @@ namespace XForms.ViewModels
             map.CameraIdled += Map_CameraIdled;
 
             DownUpGlyph = Resources.FontAwesomeFonts.Angledown;
-
         }
 
 
@@ -100,8 +97,8 @@ namespace XForms.ViewModels
             var address = await AppHelpers.GatGeocoder(p.Target.Latitude, p.Target.Longitude);
             var position = new PositionModel()
             {
-                Latitude = Convert.ToString(p.Target.Latitude),
-                Longitude = Convert.ToString(p.Target.Longitude)
+                Latitude = p.Target.Latitude,
+                Longitude = p.Target.Longitude
             };
 
             if (IsStartPointClicked)
@@ -123,39 +120,45 @@ namespace XForms.ViewModels
                 if (IsStartPointClicked)
                     IsStartPointClicked = false;
 
-                //map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(), Distance.FromKilometers(5)), false);
+                //map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(EndPosition.Latitude, EndPosition.Longitude), Distance.FromKilometers(5)), false);
 
                 map.Polylines.Clear();
                 map.Pins.Clear();
 
-                var pathcontent = await LoadRoute(StartPosition, EndPosition);
-
-                var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
-                polyline.StrokeColor = AppHelpers.LookupColor("Primary");
-                polyline.StrokeWidth = 4;
-
-                foreach (var po in pathcontent)
+                try
                 {
-                    polyline.Positions.Add(po);
+                    var pathcontent = await LoadRoute(StartPosition, EndPosition);
+                    var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
+                    polyline.StrokeColor = AppHelpers.LookupColor("Primary");
+                    polyline.StrokeWidth = 4;
+
+                    foreach (var po in pathcontent)
+                    {
+                        polyline.Positions.Add(po);
+
+                    }
+                    map.Polylines.Add(polyline);
 
                 }
-                map.Polylines.Add(polyline);
-
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
 
                 Pin StartPin = new Pin()
                 {
-                    //Icon =BitmapDescriptorFactory.FromStream(stream),
-                    
+                    //Icon = BitmapDescriptorFactory.FromBundle(),
+
                     Label = "Départ",
                     Type = PinType.Place,
-                    Position = new Position(Convert.ToDouble(StartPosition.Latitude),Convert.ToDouble(StartPosition.Longitude))
+                    Position = new Position(StartPosition.Latitude,StartPosition.Longitude)
 
                 };
                 Pin EndPin = new Pin()
                 {
                     Label = "Arrivé",
                     Type = PinType.Place,
-                    Position = new Position(Convert.ToDouble(EndPosition.Latitude), Convert.ToDouble(EndPosition.Longitude))
+                    Position = new Position(EndPosition.Latitude, EndPosition.Longitude)
 
                 };
                 map.Pins.Add(StartPin);
@@ -308,8 +311,8 @@ namespace XForms.ViewModels
                 StartPlaceText = model.Description;
                 IsStartCollectionVisible = false;
                 GooglePlace  googlePlace = await googleMapsApiService.GetPlacePositon(model.PlaceId);
-                StartPosition.Latitude = Convert.ToString(googlePlace.Latitude);
-                StartPosition.Longitude = Convert.ToString(googlePlace.Longitude);
+                StartPosition.Latitude = googlePlace.Latitude;
+                StartPosition.Longitude = googlePlace.Longitude;
 
                 map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(googlePlace.Latitude, googlePlace.Longitude),Distance.FromKilometers(5)), false);
             }
@@ -332,10 +335,12 @@ namespace XForms.ViewModels
                 EndPlaceText = model.Description;
                 IsEndCollectionVisible = false;
                 GooglePlace googlePlace = await googleMapsApiService.GetPlacePositon(model.PlaceId);
-                EndPosition.Latitude = Convert.ToString(googlePlace.Latitude);
-                EndPosition.Longitude = Convert.ToString(googlePlace.Longitude);
+                EndPosition.Latitude = googlePlace.Latitude;
+                EndPosition.Longitude = googlePlace.Longitude;
 
                 map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(googlePlace.Latitude, googlePlace.Longitude), Distance.FromKilometers(5)), false);
+                //map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(EndPosition.Latitude, EndPosition.Longitude), Distance.FromKilometers(5)), false);
+
 
                 map.Polylines.Clear();
                 map.Pins.Clear();
@@ -357,14 +362,14 @@ namespace XForms.ViewModels
                 {
                     Label = "Départ",
                     Type = PinType.Place,
-                    Position = new Position(Convert.ToDouble(StartPosition.Latitude), Convert.ToDouble(StartPosition.Longitude))
+                    Position = new Position(StartPosition.Latitude,StartPosition.Longitude)
 
                 };
                 Pin EndPin = new Pin()
                 {
                     Label = "Arrivé",
                     Type = PinType.Place,
-                    Position = new Position(Convert.ToDouble(EndPosition.Latitude), Convert.ToDouble(EndPosition.Longitude))
+                    Position = new Position(EndPosition.Latitude,EndPosition.Longitude)
 
                 };
                 map.Pins.Add(StartPin);
@@ -382,6 +387,11 @@ namespace XForms.ViewModels
         }, (_) => canSelectEndAddress);
 
 
+
+        public ImageSource CollectPointScreenshot { get; set; }
+        public System.IO.Stream CollectPointScreenshotStream { get; set; }
+        public bool CollectPointScreenshotVisibility { get; set; }
+
         private bool canSenddisplacementRequest = true;
         public ICommand SendRequestCommand => new Command(async () =>
         {
@@ -389,27 +399,42 @@ namespace XForms.ViewModels
             {
                 canSenddisplacementRequest = false;
 
-                var postParams = new DisplacementModel()
+                var mapSnapshotStream = await map.TakeSnapshot();
+                if (mapSnapshotStream != null)
                 {
-                    LatitudeDepart = Convert.ToDouble(StartPosition.Latitude),
-                    LongitudeDepart = Convert.ToDouble(StartPosition.Longitude),
-                    LatitudeArrivée = Convert.ToDouble(EndPosition.Latitude),
-                    LongitudeArrivée = Convert.ToDouble(EndPosition.Longitude),
-                    Date = DisplacementDate,
-                    Client = Client,
-                    Motif = Motif 
-                };
 
-                var result =await App.AppServices.PostDisplacement(postParams);
-                if (result.succeeded)
-                {
-                    await App.Current.MainPage.Navigation.PopAsync();
+                    CollectPointScreenshotStream = mapSnapshotStream;
+                    CollectPointScreenshot = ImageSource.FromStream(() => CollectPointScreenshotStream);
+                    OnPropertyChanged(nameof(CollectPointScreenshot));
+                    CollectPointScreenshotVisibility = true;
+
+                    var fileBytes = AppHelpers.ConvertStreamToByteArray(mapSnapshotStream);
 
                 }
-                else
-                {
-                    AppHelpers.Alert(result.message);
-                }
+
+
+
+                //var postParams = new DisplacementModel()
+                //{
+                //    LatitudeDepart = Convert.ToDouble(StartPosition.Latitude),
+                //    LongitudeDepart = Convert.ToDouble(StartPosition.Longitude),
+                //    LatitudeArrivée = Convert.ToDouble(EndPosition.Latitude),
+                //    LongitudeArrivée = Convert.ToDouble(EndPosition.Longitude),
+                //    Date = DisplacementDate,
+                //    Client = Client,
+                //    Motif = Motif 
+                //};
+
+                //var result =await App.AppServices.PostDisplacement(postParams);
+                //if (result.succeeded)
+                //{
+                //    await App.Current.MainPage.Navigation.PopAsync();
+
+                //}
+                //else
+                //{
+                //    AppHelpers.Alert(result.message);
+                //}
 
             }
             catch (Exception ex)
