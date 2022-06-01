@@ -25,14 +25,15 @@
                 Orientation="Horizontal"
                 >
                 <Entry
-            x:Name="NativeEntry"
-            Text="{Binding Text,Source={x:Reference this}}"
-            Placeholder="{Binding Placeholder,Source={x:Reference this}}"
-            Style="{StaticResource TransparentEntryStyle}"
-            BackgroundColor="{StaticResource InputBackground}"
-            Visual="Material"
-            IsPassword="{Binding IsPassword, Source={x:Reference this}}"
-            HorizontalOptions="FillAndExpand"
+                x:Name="NativeEntry"
+                Text="{Binding Text,Source={x:Reference this}}"
+                Placeholder="{Binding Placeholder,Source={x:Reference this}}"
+                Style="{StaticResource TransparentEntryStyle}"
+                BackgroundColor="{StaticResource InputBackground}"
+                Visual="Material"
+                IsPassword="{Binding IsPassword, Source={x:Reference this}}"
+                HorizontalOptions="FillAndExpand"
+                    
             />
                 <Grid>
                     <cc:CustomButton

@@ -14,9 +14,6 @@ namespace XForms.ViewModels
         public string SigninEmail { get; set; }
         public string SigninPassword { get; set; }
 
-
-
-
         public SigninViewModel()
         {
             //Collaborateur

@@ -36,13 +36,12 @@
                     >
             <DatePicker
                 x:Name="myDatePicker"
-
                 TextColor="Black"
                 Style="{StaticResource TransparentPickerStyle}"
                 Visual="Material"
                 DateSelected="DatePicker_DateSelected"
                 Date="{Binding Date, Source={x:Reference this}}"
-
+                Format="dd-MM-yyyy"
                 />
                 </Grid>
             </Grid>

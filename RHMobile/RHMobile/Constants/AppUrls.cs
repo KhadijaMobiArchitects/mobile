@@ -6,7 +6,7 @@ namespace XForms.Constants
         //public const string BaseUrl = "https://rh-api-dev.azurewebsites.net/api/";
         public const string BaseUrl = "http://rh-api-dev-mobiarchitects.azurewebsites.net/api/";
 
-        
+
 
         public const string Singin = BaseUrl + "Account/Authenticate";
 
@@ -46,11 +46,11 @@ namespace XForms.Constants
         public const string PostDemandCertaficate = BaseUrl + "Certificate/DemandCertificate";
         public const string PostTraitementDemandCertificate = BaseUrl + "Certificate/DemandCertificate";
 
+        public const string PostDisplacementRequest = BaseUrl + "Deplacement/DemandDeplacement";
 
-
-
-
-
+        public const string GetProfilDeplacement = BaseUrl + "Deplacement/GetProfilDeplacements";
+        public const string GetAllDeplacement = BaseUrl + "Deplacement/GetAllDeplacements";
+        public const string PostUpdateDeplacement = BaseUrl + "Deplacement/UpdateDeplacement";
 
 
 

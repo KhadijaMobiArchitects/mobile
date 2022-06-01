@@ -14,7 +14,6 @@ namespace XForms.views
             InitializeComponent();
             BindingContext = new CertaficateViewModel();
 
-
         }
 
         protected override void OnAppearing()

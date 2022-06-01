@@ -58,6 +58,8 @@ BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(View), strin
             myDatePicker.MinimumDate = DateTime.Now;
             myDatePicker.MaximumDate = DateTime.Now.AddYears(1);
 
+            //myDatePicker. = new System.Globalization.CultureInfo("fr-FR");
+
             //Date = null;
         }
 
