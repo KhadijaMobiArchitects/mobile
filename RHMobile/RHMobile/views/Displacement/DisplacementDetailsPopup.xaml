@@ -75,16 +75,7 @@
                 RowSpacing="20"
                 Margin="0,30"
                 >
-                <!--<Label
-                    Text="Votre Demande"
-                    Style="{StaticResource TitleStyle}"
-                    />
-                <Label
-                    Grid.Row="1"
-                    FontSize="12"
-                    FontFamily="RubikRegular"
-                    Text="{Binding SelectedDisplacement.Motif}"
-                    />-->
+
                 <cc:MaterialItemValue
                     Item="Date déplacement"
                     Value="{Binding SelectedDisplacement.Date,StringFormat='{0:dd/MM/yyyy}'}"

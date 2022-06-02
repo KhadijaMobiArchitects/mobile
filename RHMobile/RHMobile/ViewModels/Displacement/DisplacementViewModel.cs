@@ -407,34 +407,33 @@ namespace XForms.ViewModels
                     CollectPointScreenshot = ImageSource.FromStream(() => CollectPointScreenshotStream);
                     OnPropertyChanged(nameof(CollectPointScreenshot));
                     CollectPointScreenshotVisibility = true;
-
-                    var fileBytes = AppHelpers.ConvertStreamToByteArray(mapSnapshotStream);
-
                 }
 
+                var fileBytes = AppHelpers.ConvertStreamToByteArray(mapSnapshotStream);
 
+                var postParams = new DisplacementModel()
+                {
+                    LatitudeDepart = Convert.ToDouble(StartPosition.Latitude),
+                    LongitudeDepart = Convert.ToDouble(StartPosition.Longitude),
+                    LatitudeArrivée = Convert.ToDouble(EndPosition.Latitude),
+                    LongitudeArrivée = Convert.ToDouble(EndPosition.Longitude),
+                    Date = DisplacementDate,
+                    Client = Client,
+                    Motif = Motif,
+                    Picture = fileBytes
 
-                //var postParams = new DisplacementModel()
-                //{
-                //    LatitudeDepart = Convert.ToDouble(StartPosition.Latitude),
-                //    LongitudeDepart = Convert.ToDouble(StartPosition.Longitude),
-                //    LatitudeArrivée = Convert.ToDouble(EndPosition.Latitude),
-                //    LongitudeArrivée = Convert.ToDouble(EndPosition.Longitude),
-                //    Date = DisplacementDate,
-                //    Client = Client,
-                //    Motif = Motif 
-                //};
+                };
 
-                //var result =await App.AppServices.PostDisplacement(postParams);
-                //if (result.succeeded)
-                //{
-                //    await App.Current.MainPage.Navigation.PopAsync();
+                var result = await App.AppServices.PostDisplacement(postParams);
+                if (result.succeeded)
+                {
+                    await App.Current.MainPage.Navigation.PopAsync();
 
-                //}
-                //else
-                //{
-                //    AppHelpers.Alert(result.message);
-                //}
+                }
+                else
+                {
+                    AppHelpers.Alert(result.message);
+                }
 
             }
             catch (Exception ex)

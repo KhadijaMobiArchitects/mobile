@@ -13,6 +13,7 @@ namespace XForms.Models
         public DateTime Date { get; set; }
         public string Client { get; set; }
         public string Motif { get; set; }
+        public Byte[] Picture { get; set; }
     }
     public class UpdateDeplacementModel
     {

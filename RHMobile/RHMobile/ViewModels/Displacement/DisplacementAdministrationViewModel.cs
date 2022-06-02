@@ -89,23 +89,23 @@ namespace XForms.ViewModels
 
         (_) => CanSelectHeaderAction);
 
-        private DisplacementDetailsPopup DisplacementDetailsPopup;
-        private bool canCertaficateDetailsPopup = true;
-        public ICommand OpenDisplacementDetailsPopupCommand => new Command<DisplacementResponse>(async (model) =>
+        private ProfilDisplacementPopup profilDisplacementPopup;
+        private bool canOpenProfilDisplacementPopup = true;
+        public ICommand OpenProfilDisplacementPopupCommand => new Command<DisplacementResponse>(async (model) =>
         {
             try
             {
-                canCertaficateDetailsPopup = false;
+                canOpenProfilDisplacementPopup = false;
                 SelectedDisplacement = model;
 
                 SelectedDisplacement.StartAddress = await AppHelpers.GatGeocoder(SelectedDisplacement.StartPostion.Latitude, SelectedDisplacement.StartPostion.Longitude);
                 SelectedDisplacement.EndAddress = await AppHelpers.GatGeocoder(SelectedDisplacement.EndPostion.Latitude, SelectedDisplacement.EndPostion.Longitude);
 
 
-                if (DisplacementDetailsPopup == null)
-                    DisplacementDetailsPopup = new DisplacementDetailsPopup() { BindingContext = this };
+                if (profilDisplacementPopup == null)
+                    profilDisplacementPopup = new ProfilDisplacementPopup() { BindingContext = this };
 
-                await PopupNavigation.Instance.PushSingleAsync(DisplacementDetailsPopup);
+                await PopupNavigation.Instance.PushSingleAsync(profilDisplacementPopup);
             }
             catch (Exception ex)
             {
@@ -113,10 +113,10 @@ namespace XForms.ViewModels
             }
             finally
             {
-                canCertaficateDetailsPopup = true;
+                canOpenProfilDisplacementPopup = true;
             }
 
 
-        }, (_) => canCertaficateDetailsPopup);
+        }, (_) => canOpenProfilDisplacementPopup);
     }
 }

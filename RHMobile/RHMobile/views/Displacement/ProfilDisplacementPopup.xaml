@@ -10,7 +10,8 @@
     xmlns:Local="clr-namespace:XForms"
     xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:animations="http://rotorgames.com"
-    x:Class="XForms.views.Certaficate.ProfilCertaficatePopup">
+    HasSystemPadding="False"
+    x:Class="XForms.views.ProfilDisplacementPopup">
 
     <Base:BasePopupView.Animation>
         <animations:ScaleAnimation
@@ -25,6 +26,7 @@
     <Grid
         VerticalOptions="EndAndExpand"
         BackgroundColor="Transparent"
+        Margin="0,100,0,0"
         >
         <Grid  
            
@@ -48,48 +50,53 @@
             />
 
             </StackLayout>
-
-            <Grid
-            Padding="30,0"
+            <ScrollView
                 Grid.Row="3"
-                RowDefinitions="auto,auto,auto,Auto"
-                ColumnDefinitions="3*,2*"
-                Margin="0,30"
-                RowSpacing="20"
+                VerticalScrollBarVisibility="Never"
                 >
-                <cc:MaterialItemValue
-            Item="Type d’attestation"
-            Value="{Binding SelectedCertaficate.RefTypeCertificateLabel}"
-            />
-                <cc:MaterialItemValue
-            Grid.Column="1"
-            Item="Date demande"
-            Value="{Binding SelectedCertaficate.CreatedOn,StringFormat='{0:dd/MM/yyyy}'}"
+          <Grid
+            Padding="30,0"
 
-            />
+              RowDefinitions="auto,auto,auto,auto,auto"
+                RowSpacing="20"
+                Margin="0,30"
+                >
+
                 <cc:MaterialItemValue
-            Grid.Row="1"
-                    Grid.ColumnSpan="2"
-            Item="Message"
-            Value="{Binding SelectedCertaficate.Objectif}"
-            />
-                <Grid
+                    Item="Date déplacement"
+                    Value="{Binding SelectedDisplacement.Date,StringFormat='{0:dd/MM/yyyy}'}"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Column="1"
+                    Item="Client"
+                    Value="{Binding SelectedDisplacement.Client}"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Row="1"
+                    Item="Départ"
+                    Value="{Binding SelectedDisplacement.StartAddress}"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Item="Arrivé"
+                    Value="{Binding SelectedDisplacement.EndAddress}"
+                    />
+           <cc:MaterialItemValue
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
-                    >
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding UploadFileCommand}"
-                            />
-                    </Grid.GestureRecognizers>
-                <cc:MaterialUploadFile
-
-                    Title="Charger le document"
-                    HorizontalOptions="Center"
+                    Item="Objectif"
+                    Value="{Binding SelectedDisplacement.Motif}"
                     />
-                </Grid>
+              <Image
+                  Grid.Row="3"
+                  Grid.ColumnSpan="2"
+                  Source="{Binding SelectedDisplacement.PathScreenUrl}"
+                  HorizontalOptions="CenterAndExpand"
+                  />
+            
                 <StackLayout
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.ColumnSpan="2"
                     >
                     <cc:CustomButton
@@ -106,7 +113,7 @@
                         />
                     <cc:CustomButton
                         HorizontalOptions="FillAndExpand"
-                        Text="Réfuser"
+                        Text="Refuser"
                         TextColor="{StaticResource White}"
                         BackgroundColor="{StaticResource Red}"
                         FontSize="12"
@@ -117,7 +124,7 @@
 
                 </StackLayout>
             </Grid>
-
+            </ScrollView>
             <cc:CornerView
                 Grid.RowSpan="2"
                 StyleCorner="Circle"
@@ -133,7 +140,7 @@
                         Margin="-5"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Binding SelectedCertaficate.ImageUrl}"
+                        Source="{Binding SelectedDisplacement.PictureUrl}"
                         Aspect="AspectFill"
                         />
                 </cc:CornerView>

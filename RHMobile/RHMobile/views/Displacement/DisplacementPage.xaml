@@ -96,7 +96,7 @@
                     </Grid>
 
                 </Grid>
-            <ScrollView
+            <!--<ScrollView
                 Grid.Row="1"
                 >
                 <StackLayout>
@@ -210,7 +210,7 @@
                     IsVisible="{Binding DownUp}"
                     />
                 </StackLayout>
-            </ScrollView>
+            </ScrollView>-->
 
               
             </Grid>
