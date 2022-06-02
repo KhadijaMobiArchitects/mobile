@@ -157,7 +157,7 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostDisplacementRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
-        public async Task<RESTServiceResponse<object>> PostDisplacement(UpdateDeplacementModel postParams)
+        public async Task<RESTServiceResponse<object>> PosteUpdateDisplacement(UpdateDeplacementModel postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateDeplacement}", postObject: postParams, method: HttpVerbs.POST);
         }

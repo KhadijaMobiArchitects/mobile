@@ -30,15 +30,15 @@ namespace XForms.ViewModels
         public async override void OnAppearing()
         {
             base.OnAppearing();
-            await getProfilDisplacements();
+            IsDispalacementRequestInProgress = true;
+
+            await getallProfilsDisplacement();
 
             //ProfilsDispalacementItemsList = new ObservableRangeCollection<DisplacementResponse>();
-            ProfilsDispalacementItemsList = ProfilInProgressDispalacementsList;
-            IsDispalacementRequestInProgress = true;
 
         }
 
-        public async Task getProfilDisplacements()
+        public async Task getallProfilsDisplacement()
         {
             AppHelpers.LoadingShow();
             var result = await App.AppServices.GetAllDeplacement();
@@ -49,6 +49,8 @@ namespace XForms.ViewModels
 
                 ProfilConfirmedDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 2)).ToList());
                 ProfilInProgressDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 1)).ToList());
+                ProfilsDispalacementItemsList = IsDispalacementRequestInProgress ? ProfilInProgressDispalacementsList : ProfilConfirmedDispalacementsList;
+
 
             }
             else
@@ -118,5 +120,73 @@ namespace XForms.ViewModels
 
 
         }, (_) => canOpenProfilDisplacementPopup);
+
+
+
+        private bool canConfirmDispalacement = true;
+        public ICommand ConfirmeDisplacementCommand => new Command(async () =>
+        {
+            try
+            {
+                canConfirmDispalacement = false;
+                AppHelpers.LoadingShow();
+
+                var postParams = new Models.UpdateDeplacementModel()
+                {
+                    Id = SelectedDisplacement.Id,
+                    RefStatusDeplacementId = 2
+                };
+                var result = await App.AppServices.PosteUpdateDisplacement(postParams);
+
+                await getallProfilsDisplacement();
+
+                await PopupNavigation.Instance.PopAllAsync();
+                AppHelpers.LoadingHide();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canConfirmDispalacement = true;
+            }
+
+        }, () => canConfirmDispalacement);
+
+        private bool canRejectDispalacement = true;
+        public  ICommand RejectDisplacementCommand => new Command(async () =>
+        {
+            try
+            {
+                canRejectDispalacement = false;
+                AppHelpers.LoadingShow();
+
+                var postParams = new Models.UpdateDeplacementModel()
+                {
+                    Id = SelectedDisplacement.Id,
+                    RefStatusDeplacementId = 3
+                };
+                var result = await App.AppServices.PosteUpdateDisplacement(postParams);
+
+                //ProfilsDispalacementItemsList.Remove()
+
+                await getallProfilsDisplacement();
+
+                await PopupNavigation.Instance.PopAllAsync();
+                AppHelpers.LoadingHide();
+
+                OnPropertyChanged(nameof(ProfilsDispalacementItemsList));
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canRejectDispalacement = true;
+            }
+
+        }, () => canRejectDispalacement);
     }
 }

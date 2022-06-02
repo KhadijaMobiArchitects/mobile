@@ -44,8 +44,8 @@
 
                 <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
-                    Item="{Binding SelectedLeave.FullName}"
-                    Value="Full stack dev"
+                    Item="{Binding SelectedDisplacement.CreatedBy}"
+                    Value="{Binding SelectedDisplacement.CreatedByFunction}"
                     HorizontalTextAlignment="Center"
             />
 
@@ -98,6 +98,7 @@
                 <StackLayout
                     Grid.Row="4"
                     Grid.ColumnSpan="2"
+                    IsVisible="{Binding IsDispalacementRequestInProgress}"
                     >
                     <cc:CustomButton
 
@@ -108,7 +109,7 @@
                         Padding="20,5"
                         HorizontalOptions="FillAndExpand"
                         CornerRadius="20"
-                        Command="{Binding SendCertaficateCommand}"
+                        Command="{Binding ConfirmeDisplacementCommand}"
 
                         />
                     <cc:CustomButton
@@ -118,7 +119,7 @@
                         BackgroundColor="{StaticResource Red}"
                         FontSize="12"
                         Padding="20,5"
-                        Command="{Binding RejectLeaveCommand}"
+                        Command="{Binding RejectDisplacementCommand}"
                         CornerRadius="20"
                         />
 

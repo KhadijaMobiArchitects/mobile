@@ -21,7 +21,8 @@ namespace XForms.Models
         public string RefStatusName { get; set; }
         public string Motif { get; set; }
         public string PathScreenUrl { get; set; }
-        public string PictureUrl { get; set; }        
+        public string PictureUrl { get; set; }
+        public string CreatedByFunction { get; set; }
     }
 
     public partial class DisplacementResponse

@@ -40,8 +40,9 @@ namespace XForms.ViewModels
 
             await GetAllCertificates();
 
-            ProfilsCertaficateItemsList = new ObservableRangeCollection<CertaficateResponse>();
+            //ProfilsCertaficateItemsList = new ObservableRangeCollection<CertaficateResponse>();
             ProfilsCertaficateItemsList = ProfilsInProgressCertaficateList;
+            IsCertaficateRequestInProgress = true;
         }
 
         private ProfilCertaficatePopup profilCertaficatePopup;
@@ -106,8 +107,8 @@ namespace XForms.ViewModels
                     OnPropertyChanged(nameof(item.IsSelected));
                 }
 
-                IsCertaficateRequestInProgress = !HeadrActionList[0].IsSelected;
-                IsCertaficateRequestConfirmed = IsCertaficateRequestInProgress;
+                IsCertaficateRequestInProgress = HeadrActionList[0].IsSelected;
+                IsCertaficateRequestConfirmed = !IsCertaficateRequestInProgress;
 
                 ProfilsCertaficateItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressCertaficateList : ProfilsConfirmedCertaficateList;
             }
