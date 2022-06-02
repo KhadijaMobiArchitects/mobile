@@ -32,35 +32,33 @@
                 />
 
             <!--Body-->
-            <Grid
+            <StackLayout
                 Padding="30,10"
                 Grid.Row="2"
-                RowDefinitions="auto,auto,auto,auto"
-                RowSpacing="20"
+                Spacing="20"
+ 
                 >
                 <Label
                     Text="Réclamations"
                     Style="{StaticResource TitleStyle}"
                     />
-                <cc:MaterialPicker
-                    Grid.Row="1"
+                <!--<cc:MaterialPicker
                     Title="Type de réclamation"
                     LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
                     ItemsSource="{Binding TypesCertaficateList}"
                     SelectedItem="{Binding SelectedType}"
-                    />
+                    />-->
                 <cc:MaterialEntry
-                    Grid.Row="2"
                     Placeholder="Titre de réclamation"
                     CornerRadiuss="6"
+                    Text="{Binding ComplaintTitle}"
                     />
 
                 <Grid
-                    Grid.Row="3"
-                    RowDefinitions="80,Auto">
+                    RowDefinitions="200,Auto">
                     <cc:CustomEditor
                         x:Name="ProductDescriptionEditor"
-                        Text="{Binding CertaficateObjectif}"
+                        Text="{Binding ComplaintObjectif}"
                         Placeholder="Sujet"
                         IsCustom="True"
                         Grid.RowSpan="2"
@@ -71,7 +69,7 @@
                         />
 
                 </Grid>
-            </Grid>
+            </StackLayout>
 
             <!--Footer-->
 

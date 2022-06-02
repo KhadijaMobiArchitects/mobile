@@ -20,36 +20,7 @@ namespace XForms.ViewModels
 
         public ComplaintAdministrationViewModel()
         {
-            ProfilsComplaintsList = new ObservableRangeCollection<ComplaintResponse>()
-            {
-                new ComplaintResponse()
-                {
-                    id = 1,
-                    FirstName = "Hassoun",
-                    LastName = "Karoum",
-                    Title = "Les bruits",
-                    Objet = "HHh hhh hhhhhhhh"
 
-               },
-                new ComplaintResponse()
-                {
-                    id = 1,
-                    FirstName = "Hamza",
-                    LastName = "Karoum",
-                    Title = "Les bruits",
-                    Objet = "HHh hhh hhhhhhhh"
-
-               },
-                new ComplaintResponse()
-                {
-                    id = 1,
-                    FirstName = "Omar",
-                    LastName = "Karoum",
-                    Title = "Les bruits",
-                    Objet = "HHh hhh hhhhhhhh"
-
-               },
-            };
         }
 
         private ProfilComplaintPopup profilComplaintPopup;

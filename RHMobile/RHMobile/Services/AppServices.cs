@@ -111,6 +111,16 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<IEnumerable<DisplacementResponse>>(url: $"{AppUrls.GetAllDeplacement}", method: HttpVerbs.GET);
         }
 
+        public async Task<RESTServiceResponse<IEnumerable<ComplaintResponse>>> GetProfilComplaint()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<ComplaintResponse>>(url: $"{AppUrls.GetProfilClaims}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<ComplaintResponse>>> GetAllComplaint()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<ComplaintResponse>>(url: $"{AppUrls.GetAllClaims}", method: HttpVerbs.GET);
+        }
+
         //public async Task<RESTServiceResponse<object>> PostProject(ProjectRequest postParams)
         //{
         //    return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostProjectRequest}", postObject: postParams, method: HttpVerbs.POST);
@@ -160,6 +170,15 @@ namespace XForms.Services
         public async Task<RESTServiceResponse<object>> PosteUpdateDisplacement(UpdateDeplacementModel postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateDeplacement}", postObject: postParams, method: HttpVerbs.POST);
+        }
+
+        public async Task<RESTServiceResponse<object>> PostComplaint(ComplaintModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostClaimRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
+        public async Task<RESTServiceResponse<object>> PosteUpdateComplaint(ComplaintTraitement postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostTraitementClaimRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
 
 
