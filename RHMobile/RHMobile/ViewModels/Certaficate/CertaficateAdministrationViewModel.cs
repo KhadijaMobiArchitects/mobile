@@ -37,11 +37,12 @@ namespace XForms.ViewModels
         public async override void OnAppearing()
         {
             base.OnAppearing();
+            IsCertaficateRequestInProgress = true;
 
             await GetAllCertificates();
 
-            ProfilsCertaficateItemsList = new ObservableRangeCollection<CertaficateResponse>();
-            ProfilsCertaficateItemsList = ProfilsInProgressCertaficateList;
+            //ProfilsCertaficateItemsList = new ObservableRangeCollection<CertaficateResponse>();
+            //ProfilsCertaficateItemsList = ProfilsInProgressCertaficateList;
         }
 
         private ProfilCertaficatePopup profilCertaficatePopup;
@@ -83,6 +84,8 @@ namespace XForms.ViewModels
                 ProfilsConfirmedCertaficateList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 2)).ToList());
                 ProfilsInProgressCertaficateList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 1)).ToList());
 
+                ProfilsCertaficateItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressCertaficateList : ProfilsConfirmedCertaficateList;
+
             }
             else
             {
@@ -106,8 +109,8 @@ namespace XForms.ViewModels
                     OnPropertyChanged(nameof(item.IsSelected));
                 }
 
-                IsCertaficateRequestInProgress = !HeadrActionList[0].IsSelected;
-                IsCertaficateRequestConfirmed = IsCertaficateRequestInProgress;
+                IsCertaficateRequestInProgress = HeadrActionList[0].IsSelected;
+                IsCertaficateRequestConfirmed = !IsCertaficateRequestInProgress;
 
                 ProfilsCertaficateItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressCertaficateList : ProfilsConfirmedCertaficateList;
             }
@@ -183,5 +186,41 @@ namespace XForms.ViewModels
 
         }, () => canSendCertaficate);
 
+        //private bool canRejectComplaint = true;
+        //public ICommand RejectComplaintCommand => new Command(async () =>
+        //{
+        //    try
+        //    {
+        //        canRejectComplaint = false;
+        //        AppHelpers.LoadingShow();
+
+        //      var postParams = new Models.CertaficateTreatementRequest()
+        //        {
+        //           Id = SelectedCertaficate.Id,
+        //           Document = certaficateFile
+
+        //        };
+        //        var result = await App.AppServices.PosteUpdateComplaint(postParams);
+
+        //        //ProfilsDispalacementItemsList.Remove()
+
+        //        await GetAllComplaints();
+
+        //        await PopupNavigation.Instance.PopAllAsync();
+        //        AppHelpers.LoadingHide();
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    finally
+        //    {
+        //        canRejectComplaint = true;
+        //    }
+
+        //}, () => canRejectComplaint);
     }
+
 }
+

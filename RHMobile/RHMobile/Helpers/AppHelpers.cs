@@ -19,6 +19,8 @@ using System.Net;
 using Acr.UserDialogs;
 using Xamarin.Essentials;
 using static System.Net.Mime.MediaTypeNames;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace XForms
 {
@@ -464,6 +466,125 @@ namespace XForms
                 return 0.0;
             }
         }
+        public static Xamarin.Forms.GoogleMaps.BitmapDescriptor LoadBitmapDescriptors(string fileName, double width =0, double height=0, bool isAnimationPlaying = false)
+        {
+            try
+            {
+
+                var assembly = typeof(App).GetTypeInfo().Assembly;
+
+                Xamarin.Forms.GoogleMaps.BitmapDescriptor descriptor;
+
+                descriptor = Xamarin.Forms.GoogleMaps.BitmapDescriptorFactory.FromStream(GetResourceStream("XForms.Resources.Images." + fileName, assembly), id: fileName);
+
+                return descriptor;
+            }
+            catch (Exception ex)
+            {
+                AppHelpers.Alert(exception: ex);
+
+                return default;
+            }
+        }
+
+        public static System.IO.Stream GetResourceStream(string fileName, Assembly assembly)
+        {
+            return assembly.GetManifestResourceStream($"{fileName}");
+        }
+
+        public async static Task<string> GatGeocoder(double latitude, double longitude)
+        {
+            try
+            {
+                var geoCoder = new Xamarin.Forms.GoogleMaps.Geocoder();
+
+                var pinPosition = new Xamarin.Forms.GoogleMaps.Position(latitude, longitude);
+
+                IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(pinPosition);
+
+                var address = possibleAddresses.FirstOrDefault();
+
+                return address;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        private static CancellationTokenSource cts;
+        public static async Task<Xamarin.Essentials.Location> GetCurrentLocation()
+        {
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                cts = new CancellationTokenSource();
+                var location = await Geolocation.GetLocationAsync(request, cts.Token);
+
+                if (location != null)
+                {
+
+
+                    //Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    return location;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+                return null;
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+                var answer = await AppHelpers.AcceptAlert("", "ENABLE_GPS", "YES", "NO");
+
+                if (answer)
+                {
+                    DependencyService.Get<ILocationSettings>().OpenLocationSettings();
+                }
+
+                return null;
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+                return null;
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+                return null;
+            }
+        }
+        public static async Task<PermissionStatus> CheckAndRequestLocationPermission()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+            if (status == PermissionStatus.Granted)
+                return status;
+
+            if (status == PermissionStatus.Denied && DeviceInfo.Platform == DevicePlatform.iOS)
+            {
+                // Prompt the user to turn on in settings
+                // On iOS once a permission has been denied it may not be requested again from the application
+                return status;
+            }
+
+            if (Permissions.ShouldShowRationale<Permissions.LocationWhenInUse>())
+            {
+                // Prompt the user with additional information as to why the permission is needed
+            }
+
+            status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+
+            return status;
+        }
 
     }
+
 }

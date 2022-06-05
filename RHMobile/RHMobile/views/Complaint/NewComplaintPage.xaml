@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePage
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    NavigationPage.HasNavigationBar="False"
+    xmlns:res="clr-namespace:XForms.Resources"
+    x:Class="XForms.views.NewComplaintPage">
+    <Base:BasePage.Content>
+
+        <Grid
+            RowDefinitions="auto,20,*,auto"
+            >
+            <Shared:SmallReclangleBackground
+                Grid.RowSpan="2"
+                StartGradient="{StaticResource StartGradient}"
+                EndGradient="{StaticResource EndGradient}"
+                />
+
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
+                HasTitle="True"
+                HasDescription="False"
+                Title="Nouvelle Réclamation"
+                Description="hello"
+                HasNotification="True"
+                HasBackButton="True"
+                BackButtonColor="{StaticResource EndGradient}"
+                BackButtonBorderColor="{StaticResource StartGradient }"
+                />
+
+            <!--Body-->
+            <StackLayout
+                Padding="30,10"
+                Grid.Row="2"
+                Spacing="20"
+ 
+                >
+                <Label
+                    Text="Réclamations"
+                    Style="{StaticResource TitleStyle}"
+                    />
+                <!--<cc:MaterialPicker
+                    Title="Type de réclamation"
+                    LeftGlyph="{x:Static res:FontAwesomeFonts.Angledown}"
+                    ItemsSource="{Binding TypesCertaficateList}"
+                    SelectedItem="{Binding SelectedType}"
+                    />-->
+                <cc:MaterialEntry
+                    Placeholder="Titre de réclamation"
+                    CornerRadiuss="6"
+                    Text="{Binding ComplaintTitle}"
+                    />
+
+                <Grid
+                    RowDefinitions="200,Auto">
+                    <cc:CustomEditor
+                        x:Name="ProductDescriptionEditor"
+                        Text="{Binding ComplaintObjectif}"
+                        Placeholder="Sujet"
+                        IsCustom="True"
+                        Grid.RowSpan="2"
+                        Style="{StaticResource TransparentEditorStyle}"
+                        BorderColor="#DDE4F3"
+                        IsHasBorder="True"
+                        BorderWidth="2"
+                        />
+
+                </Grid>
+            </StackLayout>
+
+            <!--Footer-->
+
+            <Grid
+                Grid.Row="3"
+                Padding="30"
+                VerticalOptions="EndAndExpand"
+                >
+                <cc:CustomButton
+
+                    Text="Envoyer ma demande"
+                    FontSize="20"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center"
+                    Command="{Binding SendRequestCommand}"
+                    IsEnabled="{Binding EnableButtonSendRequest}"
+                    />
+            </Grid>                       
+        </Grid>
+    </Base:BasePage.Content>
+</Base:BasePage>

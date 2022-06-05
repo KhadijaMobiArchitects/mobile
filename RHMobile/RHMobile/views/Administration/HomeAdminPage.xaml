@@ -10,26 +10,26 @@
     xmlns:Shared="clr-namespace:XForms.views.SharedViews"
     xmlns:adminCell="clr-namespace:XForms.views.Administration"
     NavigationPage.HasNavigationBar="False"
-
+    x:Name="this"
     x:Class="XForms.views.Administration.HomeAdminPage">
     <Base:BasePage.Content>
         <Grid
             BackgroundColor="White"
             RowDefinitions="*,5*">
 
-    <Shared:SmallReclangleBackground
+            <Shared:SmallReclangleBackground
                 StartGradient="{StaticResource StartGradientAdmin}"
                 EndGradient="{StaticResource EndGradientAdmin}"
                 />
 
             <Grid
-                RowDefinitions="*,3*,*"
+                RowDefinitions="*,5*"
                 VerticalOptions="FillAndExpand"
                 Grid.RowSpan="2"
                 RowSpacing="0">
                 <!--Header-->
 
-                    <Shared:SuggestionsNavBarView
+                <Shared:SuggestionsNavBarView
                         HasTitle="True"
                         HasDescription="True"
                         Title="{Binding FullName}"
@@ -40,79 +40,102 @@
                         ImageProfil="{Binding PictureUrl}"
                         HasSignOut="True"
                         />
-   
-                <!--Body-->
-
-                <Grid
+                <ScrollView
                     Grid.Row="1"
+                    >
+                    <!--Body-->
+
+                    <Grid
                     RowDefinitions="auto,auto"
                     Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
                     >
-                    <Label
-                        Text="Services"
-                        FontSize="16"
-                        FontAttributes="Bold"
-                        TextColor="{StaticResource LabelColor}"
-                        Padding="6,0"
-                        />
-                    <CollectionView
+
+                        <CollectionView
                         Grid.Row="1"
                         ItemsLayout="VerticalGrid,3"
                         ItemsSource="{Binding AdminstrationList}"
                         >
-                        <CollectionView.ItemTemplate                            
+                            <CollectionView.Header>
+                                <Label
+                            Text="Services"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource LabelColor}"
+                            Padding="6,0"
+                            />
+                            </CollectionView.Header>
+                            <CollectionView.ItemTemplate                            
                             >
-                            <DataTemplate>
-                                <adminCell:AdministrationCellView
+                                <DataTemplate>
+                                    <adminCell:AdministrationCellView
                                     Title="{Binding Title}"
                                     ICone="{Binding ICone}"
                                     />
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            <CollectionView.Footer>
 
-                    </CollectionView>                 
-
-                </Grid>
-
-
-
-                <!--Footer-->
-                <Grid
-                    Padding="30,5"
-                    Grid.Row="2"
+                                <!--Footer-->
+                                <Grid
                     RowDefinitions="auto,auto"
                     >
-                    <Label
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        >
+                                        <Label
                         Text="Actualités du mois"
                         TextColor="{StaticResource LabelColor}"
                         FontSize="16"
                         FontAttributes="Bold"
+                        HorizontalOptions="StartAndExpand"
+                                            VerticalOptions="Center"
                         />
-                    <pancake:PancakeView
+                                        <cc:CustomButton
+                                            VerticalOptions="Center"
+                            StyleCorner="Circle"
+                            HorizontalOptions="End"
+                            BackgroundColor="Transparent"
+                                            Command="{Binding BindingContext.NavigationToNewsPageCommand,Source={x:Reference this}}"
+                            >
+                                            <cc:CustomButton.ImageSource>
+                                                <FontImageSource
+                                    FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                                    Glyph="{x:Static res:FontAwesomeFonts.PlusCicrle}"
+                                    Size="24"
+                                    />
+                                            </cc:CustomButton.ImageSource>
+                                        </cc:CustomButton>
+                                    </StackLayout>
+                                    <pancake:PancakeView
                         Grid.Row="1"
                         BackgroundColor="#47D1EA"
                         Padding="10,16"
                         CornerRadius="6"
                         >
-                        <StackLayout>
-                            <Label
+                                        <StackLayout>
+                                            <Label
                                 Text="Squad Ta7alil"
                                 FontSize="15"
                                 FontAttributes="Bold"
                                 TextColor="White"
                                 />
-                            <Label
+                                            <Label
                                 Text="Vous avez gagner 5 Points sur la livraisonde du nouveau projet Ta7alil version web."
                                 FontFamily="RubikLight"
                                 FontSize="12"
                                 TextColor="White"
                                 />
-                        </StackLayout>
-                    </pancake:PancakeView>
+                                        </StackLayout>
+                                    </pancake:PancakeView>
 
-                </Grid>
+                                </Grid>
+                            </CollectionView.Footer>
+                        </CollectionView>
 
-            </Grid>
+                    </Grid>
+            </ScrollView>
+
+        </Grid>
 
         </Grid>
     </Base:BasePage.Content>

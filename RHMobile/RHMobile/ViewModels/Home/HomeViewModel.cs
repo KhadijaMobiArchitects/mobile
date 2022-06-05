@@ -129,7 +129,7 @@ namespace XForms.ViewModels
                 _ = model.Id switch
                 {
                     AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveRequestPage()),
-                    AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new DisplacementPage()),
+                    AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new MyRequestsDisplacementPage()),
                     AdministrationService.Project =>  App.Current.MainPage.Navigation.PushAsync(new MyProjectsPage()),
                     AdministrationService.Certaficate => App.Current.MainPage.Navigation.PushAsync(new CertaficateRequestPage()),
                     AdministrationService.Complaint => App.Current.MainPage.Navigation.PushAsync(new ComplaintPage()),

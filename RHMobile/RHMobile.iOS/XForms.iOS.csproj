@@ -28,6 +28,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <LangVersion>9.0</LangVersion>
+    <MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -171,8 +172,11 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.2.0.564</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>5.0.0.2196</Version>
+    <PackageReference Include="Xamarin.Forms.GoogleMaps">
+      <Version>4.0.0-BETA1</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.SimpleBottomDrawer">
+      <Version>1.0.11</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

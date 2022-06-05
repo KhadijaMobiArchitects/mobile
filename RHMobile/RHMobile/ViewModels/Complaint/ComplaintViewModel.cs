@@ -1,34 +1,60 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using XForms.Models;
+using XForms.views;
 
 namespace XForms.ViewModels
 {
     public class ComplaintViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<ComplaintModel> ProfilComplaintsList { get; set; }
+        public ObservableRangeCollection<ComplaintResponse> ProfilComplaintsList { get; set; }
+
+        public ObservableRangeCollection<ComplaintResponse> ProfilConfirmedComplaintsList { get; set; }
+        public ObservableRangeCollection<ComplaintResponse> ProfilInProgressComplaintsList { get; set; }
+        public ObservableRangeCollection<ComplaintResponse> ProfilComplaintsItemsList { get; set; }
+
+
+        public bool IsComplaintRequestInProgress { get; set; }
+        public bool IsComplaintRequestConfirmed { get; set; }
+        public ComplaintResponse SelectedComplaint { get; set; }
+
 
         public ComplaintViewModel()
         {
-            ProfilComplaintsList = new ObservableRangeCollection<ComplaintModel>()
+
+        }
+
+        public async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await getProfilComplaints();
+
+            ProfilComplaintsItemsList = new ObservableRangeCollection<ComplaintResponse>();
+            ProfilComplaintsItemsList = ProfilInProgressComplaintsList;
+            IsComplaintRequestInProgress = true;
+
+        }
+        public async Task getProfilComplaints()
+        {
+            AppHelpers.LoadingShow();
+            var result = await App.AppServices.GetProfilComplaint();
+            AppHelpers.LoadingHide();
+            if (result?.succeeded == true)
             {
-                new ComplaintModel()
-                {
-                    Id =1,
-                    Subject ="Music exagirée sur le bureau",
-                    Status = "En cours",
-                    Date = DateTime.Now
-                },
-                new ComplaintModel()
-                {
-                    Id =1,
-                    Subject ="Mauvais connexion",
-                    Status = "En cours",
-                    Date = DateTime.Now
-                }
-            };
+                ProfilComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.ToList());
+
+                ProfilConfirmedComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 2)).ToList());
+                ProfilInProgressComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 1)).ToList());
+
+            }
+            else
+            {
+                AppHelpers.Alert(result?.message);
+            }
         }
 
         private bool CanSelectHeaderAction = true;
@@ -47,10 +73,10 @@ namespace XForms.ViewModels
 
 
                 }
-                //IsCertaficateRequestInProgress = HeadrActionList[0].IsSelected;
-                //IsCertaficateRequestConfirmed = !IsCertaficateRequestInProgress;
+                IsComplaintRequestInProgress = HeadrActionList[0].IsSelected;
+                IsComplaintRequestConfirmed = !IsComplaintRequestInProgress;
 
-                //ProfilCertaficatesItemsList = IsCertaficateRequestInProgress ? ProfilInProgressCertaficatesList : ProfilConfirmedCertaficatesList;
+                ProfilComplaintsItemsList = IsComplaintRequestInProgress ? ProfilInProgressComplaintsList : ProfilConfirmedComplaintsList;
             }
             catch (Exception ex)
             {
@@ -63,5 +89,28 @@ namespace XForms.ViewModels
         },
 
         (_) => CanSelectHeaderAction);
+
+        private bool canNavigateToNewRequest = true;
+        public ICommand NavigationtonewRequest => new Command(() =>
+        {
+            try
+            {
+                canNavigateToNewRequest = false;
+                App.Current.MainPage.Navigation.PushAsync(new NewComplaintPage());
+
+                HeadrActionList[0].IsSelected = true;
+                HeadrActionList[1].IsSelected = false;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canNavigateToNewRequest = true;
+            }
+
+        },
+    () => canNavigateToNewRequest);
     }
 }

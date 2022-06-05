@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+    xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:res="clr-namespace:XForms.Resources"
+    CloseWhenBackgroundIsClicked="True"
+    HasKeyboardOffset="False"
+    BackgroundColor="#90000000"
+    xmlns:Local="clr-namespace:XForms"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:animations="http://rotorgames.com"
+    HasSystemPadding="False"
+    x:Class="XForms.views.ProfilDisplacementPopup">
+
+    <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+    </Base:BasePopupView.Animation>
+    <Grid
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"
+        Margin="0,100,0,0"
+        >
+        <Grid  
+           
+            RowDefinitions="40,40,auto,auto"
+            >
+            <BoxView
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="30,30,0,0"
+            VerticalOptions="FillAndExpand" />
+            <StackLayout
+                Grid.Row="2"
+                >
+
+                <cc:MaterialItemValue                    
+                    HorizontalOptions="CenterAndExpand"
+                    Item="{Binding SelectedDisplacement.CreatedBy}"
+                    Value="{Binding SelectedDisplacement.CreatedByFunction}"
+                    HorizontalTextAlignment="Center"
+            />
+
+            </StackLayout>
+            <ScrollView
+                Grid.Row="3"
+                VerticalScrollBarVisibility="Never"
+                >
+          <Grid
+            Padding="30,0"
+
+              RowDefinitions="auto,auto,auto,auto,auto"
+                RowSpacing="20"
+                Margin="0,30"
+                >
+
+                <cc:MaterialItemValue
+                    Item="Date déplacement"
+                    Value="{Binding SelectedDisplacement.Date,StringFormat='{0:dd/MM/yyyy}'}"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Column="1"
+                    Item="Client"
+                    Value="{Binding SelectedDisplacement.Client}"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Row="1"
+                    Item="Départ"
+                    Value="{Binding SelectedDisplacement.StartAddress}"
+                    />
+                <cc:MaterialItemValue
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Item="Arrivé"
+                    Value="{Binding SelectedDisplacement.EndAddress}"
+                    />
+           <cc:MaterialItemValue
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Item="Objectif"
+                    Value="{Binding SelectedDisplacement.Motif}"
+                    />
+              <Image
+                  Grid.Row="3"
+                  Grid.ColumnSpan="2"
+                  Source="{Binding SelectedDisplacement.PathScreenUrl}"
+                  HorizontalOptions="CenterAndExpand"
+                  />
+            
+                <StackLayout
+                    Grid.Row="4"
+                    Grid.ColumnSpan="2"
+                    IsVisible="{Binding IsDispalacementRequestInProgress}"
+                    >
+                    <cc:CustomButton
+
+                        Text="Confirmer"
+                        TextColor="{StaticResource White}"
+                        BackgroundColor="{StaticResource Green }"
+                        FontSize="12"
+                        Padding="20,5"
+                        HorizontalOptions="FillAndExpand"
+                        CornerRadius="20"
+                        Command="{Binding ConfirmeDisplacementCommand}"
+
+                        />
+                    <cc:CustomButton
+                        HorizontalOptions="FillAndExpand"
+                        Text="Refuser"
+                        TextColor="{StaticResource White}"
+                        BackgroundColor="{StaticResource Red}"
+                        FontSize="12"
+                        Padding="20,5"
+                        Command="{Binding RejectDisplacementCommand}"
+                        CornerRadius="20"
+                        />
+
+                </StackLayout>
+            </Grid>
+            </ScrollView>
+            <cc:CornerView
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                Padding="5"
+                BackgroundColor="{StaticResource BackgroundICon}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <cc:CornerView
+                    Padding="5"
+                    >
+                    <svg:SvgCachedImage                    
+                        Visual="Default"
+                        Margin="-5"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Binding SelectedDisplacement.PictureUrl}"
+                        Aspect="AspectFill"
+                        />
+                </cc:CornerView>
+            </cc:CornerView>
+        </Grid>
+    </Grid>
+
+</Base:BasePopupView>

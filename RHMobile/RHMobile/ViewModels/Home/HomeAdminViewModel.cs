@@ -130,6 +130,11 @@ namespace XForms.ViewModels
                     AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveAdministrationPage()),
                     AdministrationService.Project => App.Current.MainPage.Navigation.PushAsync(new ProjectPage()),
                     AdministrationService.Certaficate => App.Current.MainPage.Navigation.PushAsync(new CertaficateAdministrationPage()),
+                    AdministrationService.Complaint => App.Current.MainPage.Navigation.PushAsync(new ComplaintAdministrationPage()),
+                    AdministrationService.Move => App.Current.MainPage.Navigation.PushAsync(new DisplacementAdministrationPage()),
+
+
+
                 };
             }
             catch (Exception ex)
@@ -163,6 +168,22 @@ namespace XForms.ViewModels
             }
         },
 (_) => canNavigateToUser);
+
+        private bool canNavigationToNewsPage = true;
+        public ICommand NavigationToNewsPageCommand => new Command(async () =>
+        {
+            try
+            {
+                canNavigationToNewsPage = false;
+                App.Current.MainPage.Navigation.PushAsync(new NewsPage());
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        , () => canNavigationToNewsPage);
 
     }
 }

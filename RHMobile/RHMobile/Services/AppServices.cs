@@ -101,6 +101,26 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostLeaveRequest}",postObject: postParams, method: HttpVerbs.POST);
         }
 
+        public async Task<RESTServiceResponse<IEnumerable<DisplacementResponse>>> GetProfilDeplacement()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<DisplacementResponse>>(url: $"{AppUrls.GetProfilDeplacement}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<DisplacementResponse>>> GetAllDeplacement()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<DisplacementResponse>>(url: $"{AppUrls.GetAllDeplacement}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<ComplaintResponse>>> GetProfilComplaint()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<ComplaintResponse>>(url: $"{AppUrls.GetProfilClaims}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<IEnumerable<ComplaintResponse>>> GetAllComplaint()
+        {
+            return await RESTHelper.GetRequest<IEnumerable<ComplaintResponse>>(url: $"{AppUrls.GetAllClaims}", method: HttpVerbs.GET);
+        }
+
         //public async Task<RESTServiceResponse<object>> PostProject(ProjectRequest postParams)
         //{
         //    return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostProjectRequest}", postObject: postParams, method: HttpVerbs.POST);
@@ -114,9 +134,7 @@ namespace XForms.Services
         {
             return await RESTHelper.UploadAdministratifCertaficateAsync(postParams);
         }
-
-
-        
+ 
         public async Task<RESTServiceResponse<object>> PostMembers(AddMembersRequest postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostMembersRequest}", postObject: postParams, method: HttpVerbs.POST);
@@ -134,6 +152,7 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
+
         public async Task<RESTServiceResponse<object>> PostCertificate(CertaficateModel postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostDemandCertaficate}", postObject: postParams, method: HttpVerbs.POST);
@@ -142,6 +161,27 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostTraitementDemandCertificate}", postObject: postParams, method: HttpVerbs.POST);
         }
+
+
+        public async Task<RESTServiceResponse<object>> PostDisplacement(DisplacementModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostDisplacementRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
+        public async Task<RESTServiceResponse<object>> PosteUpdateDisplacement(UpdateDeplacementModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostUpdateDeplacement}", postObject: postParams, method: HttpVerbs.POST);
+        }
+
+        public async Task<RESTServiceResponse<object>> PostComplaint(ComplaintModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostClaimRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
+        public async Task<RESTServiceResponse<object>> PosteUpdateComplaint(ComplaintTraitement postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostTraitementClaimRequest}", postObject: postParams, method: HttpVerbs.POST);
+        }
+
+
     }
 
 

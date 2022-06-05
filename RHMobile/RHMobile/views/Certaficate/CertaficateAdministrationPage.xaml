@@ -7,11 +7,11 @@
     NavigationPage.HasNavigationBar="False"
     xmlns:res="clr-namespace:XForms.Resources"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:Cell="clr-namespace:XForms.views.Leave" xmlns:Cell2="clr-namespace:XForms.views"
+    xmlns:Shared="clr-namespace:XForms.views.SharedViews" xmlns:Cell="clr-namespace:XForms.views"
     x:Name="this"
     x:Class="XForms.views.CertaficateAdministrationPage">
     <Base:BasePage.Content>
-<Grid
+        <Grid
                 RowDefinitions="auto,auto,auto"
                 VerticalOptions="FillAndExpand"
                 RowSpacing="10"
@@ -23,9 +23,8 @@
                 EndGradient="{StaticResource EndGradientAdmin}"
                 Grid.RowSpan="2"
                 />
-
-                    <!--Header-->
-                    <Shared:SuggestionsNavBarView
+            <!--Header-->
+            <Shared:SuggestionsNavBarView
                     HasTitle="True"
                     HasDescription="True"
                     Title="Demande Attestation"
@@ -35,20 +34,20 @@
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />
-                   <!--Switch-->
-                    <StackLayout
+            <!--Switch-->
+            <StackLayout
                         Grid.Row="1"
                         Padding="30,0,30,20"
                         Spacing="15"
                         Orientation="Horizontal"
                         BindableLayout.ItemsSource="{Binding HeadrActionList}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
 
-                                    <!--Clicked="SelectItem_Clicked"-->
+                            <!--Clicked="SelectItem_Clicked"-->
 
-                                    <cc:CustomButton
+                            <cc:CustomButton
                                         Text="{Binding Name,StringFormat='Demande {0}'}"
                                         StyleCorner="RoundCorner"
                                         BackgroundColor="{Binding BackgroundColorAdmin}"
@@ -60,42 +59,42 @@
                                         Command="{Binding Source={x:Reference this}, Path=BindingContext.SelectHeaderActionCommand}"
                                         CommandParameter="{Binding .}"
                                         />
-                                </StackLayout>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </StackLayout>
-                    <ScrollView
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            <ScrollView
                         Padding="30,0"
                         Grid.Row="2"
                         HorizontalScrollBarVisibility="Never"
                         VerticalScrollBarVisibility="Never"
                         >
-                        <CollectionView
+                <CollectionView
                             ItemsSource="{Binding ProfilsCertaficateItemsList}"
                             >
-                            <CollectionView.Header>
-                                <Label
+                    <CollectionView.Header>
+                        <Label
                                     Text="{Binding  StatusName,StringFormat='Les demandes {0}'}"
                                     FontAttributes="Bold"
                                     FontSize="18"
                                     TextColor="#6C0DB3"
                                     />
-                            </CollectionView.Header>
-                            <CollectionView.GroupHeaderTemplate>
-                                <DataTemplate>
-                                </DataTemplate>
-                            </CollectionView.GroupHeaderTemplate>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Cell2:ProfilCertaficateCellView
+                    </CollectionView.Header>
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Cell:ProfilCertaficateCellView
                                         BackgroundColorButton="{Binding BackgroundColor}"
                                         TextColor="{Binding TextColor}"
                                         />
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                </ScrollView>
-    </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
 
     </Base:BasePage.Content>
 </Base:BasePage>

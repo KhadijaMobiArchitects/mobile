@@ -117,4 +117,16 @@
             Value="14" />
     </Style>
 
+    <Style
+        x:Key="BasePicker"
+        TargetType="DatePicker"
+        CanCascade="True"
+        ApplyToDerivedTypes="True"
+        >
+        <Setter
+            Property="Format"
+            Value="dd/MM/yyyy"
+            />
+
+    </Style>
 </ResourceDictionary>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="XForms.views.ProfilComplaintCellView"
+    xmlns:Local="clr-namespace:XForms"
+    x:Name="this"
+    >
+    <ContentView.Content
+        >
+        <Grid
+            RowDefinitions="*,auto"            
+            >
+            <Grid.GestureRecognizers>
+
+        <TapGestureRecognizer           
+            Grid.ColumnSpan="2"
+            Command="{Binding Parent.BindingContext.OpenComplaintDetailsPopupCommand,Source={x:Reference this}}"
+            CommandParameter="{Binding .}"
+            />
+
+            </Grid.GestureRecognizers>
+            <Grid
+            ColumnDefinitions="auto,*,auto"
+
+                Padding="0,10"
+                ColumnSpacing="15"
+                >
+
+            <cc:CornerView
+            HeightRequest="50"
+            StyleCorner="Circle"
+            >
+                <svg:SvgCachedImage
+                Source="{Binding PictureUrl}"
+                Aspect="AspectFill"
+                />
+            </cc:CornerView>
+
+            <StackLayout
+                Grid.Column="1"
+                VerticalOptions="Center"
+                >
+                <Label
+                    Text="{Binding CreatedBy}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    TextColor="#33373D"
+                    VerticalTextAlignment="Center"
+                    />
+
+                <Label
+                    Text="{Binding Title}"
+                    FontFamily="RubikRegular"
+                    FontSize="12"
+                    TextColor="#A3AEC5"
+                    VerticalTextAlignment="Center"
+                    >
+                </Label>
+
+                <!--<Label
+
+                    />-->
+
+            </StackLayout>
+
+            <cc:CornerView
+                VerticalOptions="CenterAndExpand"
+                Grid.Column="2"
+                StyleCorner="Default"
+                CornerRadius="4"
+                >
+                <Label
+                Text="{Binding RefStatusClaimName}"
+                BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
+                TextColor="{Binding TextColor,Source = {x:Reference this}}"
+                FontSize="12"
+                FontFamily="RubikRegular"
+                Padding="10"
+                    />
+            </cc:CornerView>
+                
+        </Grid>
+
+            <BoxView
+                Grid.Row="1"
+                HeightRequest="1"
+                BackgroundColor="#EBF1FE"
+                HorizontalOptions="FillAndExpand"
+                />
+
+        </Grid>
+
+      
+
+    </ContentView.Content>
+</ContentView>

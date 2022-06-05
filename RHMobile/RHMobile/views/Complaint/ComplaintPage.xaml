@@ -71,7 +71,7 @@
             VerticalScrollBarVisibility="Never"
             >
                 <CollectionView
-                    ItemsSource="{Binding ProfilComplaintsList}"
+                    ItemsSource="{Binding ProfilComplaintsItemsList}"
                         >
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate>

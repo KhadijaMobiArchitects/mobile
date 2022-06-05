@@ -128,6 +128,18 @@ namespace XForms
             set { Preferences.Set(nameof(RefFunctionLabel), value); }
         }
 
+        public static double LastKnownLatitude
+        {
+            get { return Preferences.Get(nameof(LastKnownLatitude), 0); }
+            set { Preferences.Set(nameof(LastKnownLatitude), value); }
+        }
+
+        public static double LastKnownLongitude
+        {
+            get { return Preferences.Get(nameof(LastKnownLongitude), 0); }
+            set { Preferences.Set(nameof(LastKnownLongitude), value); }
+        }
+
         public static void ClearCache()
         {
             //Preferences.Remove(nameof(CurrentSiteId));

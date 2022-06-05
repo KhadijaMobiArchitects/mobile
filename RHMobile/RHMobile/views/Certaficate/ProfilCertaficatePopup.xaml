@@ -42,8 +42,8 @@
 
                 <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
-                    Item="{Binding SelectedLeave.FullName}"
-                    Value="Full stack dev"
+                    Item="{Binding SelectedCertaficate.CreatedByName}"
+                    Value="{Binding SelectedCertaficate.CreatedByFunction}"
                     HorizontalTextAlignment="Center"
             />
 
@@ -83,14 +83,15 @@
                             />
                     </Grid.GestureRecognizers>
                 <cc:MaterialUploadFile
-
-                    Title="Télécharger le document"
+                    IsVisible="{Binding IsCertaficateRequestInProgress}"
+                    Title="Charger le document"
                     HorizontalOptions="Center"
                     />
                 </Grid>
                 <StackLayout
                     Grid.Row="3"
                     Grid.ColumnSpan="2"
+                    IsVisible="{Binding IsCertaficateRequestInProgress}"
                     >
                     <cc:CustomButton
 
