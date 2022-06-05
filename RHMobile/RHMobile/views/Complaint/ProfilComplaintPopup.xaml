@@ -43,7 +43,7 @@
 
                 <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
-                    Item="{Binding SelectedLeave.FullName}"
+                    Item="{Binding SelectedComplaint.CreatedBy}"
                     Value="Full stack dev"
                     HorizontalTextAlignment="Center"
             />
@@ -59,20 +59,20 @@
                 RowSpacing="20"
                 >
                 <cc:MaterialItemValue
-            Item="Type d’attestation"
-            Value="{Binding SelectedCertaficate.RefTypeCertificateLabel}"
+            Item="Titre "
+            Value="{Binding SelectedComplaint.Title}"
             />
                 <cc:MaterialItemValue
             Grid.Column="1"
             Item="Date demande"
-            Value="{Binding SelectedCertaficate.CreatedOn,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedComplaint.CreatedOn,StringFormat='{0:dd/MM/yyyy}'}"
 
             />
                 <cc:MaterialItemValue
             Grid.Row="1"
                     Grid.ColumnSpan="2"
-            Item="Message"
-            Value="{Binding SelectedCertaficate.Objectif}"
+            Item="objectif"
+            Value="{Binding SelectedComplaint.Object}"
             />
                 <Grid
                     Grid.Row="2"
@@ -97,7 +97,7 @@
                         Padding="20,5"
                         HorizontalOptions="FillAndExpand"
                         CornerRadius="20"
-                        Command="{Binding SendCertaficateCommand}"
+                        Command="{Binding ConfirmeComplaintCommand}"
 
                         />
                     <cc:CustomButton
@@ -107,7 +107,7 @@
                         BackgroundColor="{StaticResource Red}"
                         FontSize="12"
                         Padding="20,5"
-                        Command="{Binding RejectLeaveCommand}"
+                        Command="{Binding RejectComplaintCommand}"
                         CornerRadius="20"
                         />
 
@@ -129,7 +129,7 @@
                         Margin="-5"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Binding SelectedCertaficate.ImageUrl}"
+                        Source="{Binding SelectedComplaint.ImageUrl}"
                         Aspect="AspectFill"
                         />
                 </cc:CornerView>

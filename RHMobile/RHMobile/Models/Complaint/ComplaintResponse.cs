@@ -14,6 +14,7 @@ namespace XForms.Models
         public int RefStatusClaimId { get; set; }
         public string RefStatusClaimName { get; set; }
         public string CreatedByFunction { get; set; }
+        public string PictureUrl { get; set; }
     }
     public partial class ComplaintResponse
     {

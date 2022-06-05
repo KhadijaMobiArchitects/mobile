@@ -34,7 +34,7 @@
             StyleCorner="Circle"
             >
                 <svg:SvgCachedImage
-                Source="{Local:ImageResource profil.png}"
+                Source="{Binding PictureUrl}"
                 Aspect="AspectFill"
                 />
             </cc:CornerView>
@@ -44,7 +44,7 @@
                 VerticalOptions="Center"
                 >
                 <Label
-                    Text="{Binding FirstName}"
+                    Text="{Binding CreatedBy}"
                     FontAttributes="Bold"
                     FontSize="14"
                     TextColor="#33373D"
@@ -73,7 +73,7 @@
                 CornerRadius="4"
                 >
                 <Label
-                Text="{Binding RefStatusCertificateLabel}"
+                Text="{Binding RefStatusClaimName}"
                 BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
                 TextColor="{Binding TextColor,Source = {x:Reference this}}"
                 FontSize="12"
