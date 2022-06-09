@@ -102,7 +102,7 @@
                         />
                     <cc:CustomButton
                         HorizontalOptions="FillAndExpand"
-                        Text="Réfuser"
+                        Text="Refuser"
                         TextColor="{StaticResource White}"
                         BackgroundColor="{StaticResource Red}"
                         FontSize="12"

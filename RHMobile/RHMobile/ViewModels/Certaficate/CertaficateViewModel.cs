@@ -27,6 +27,7 @@ namespace XForms.ViewModels
         public bool IsCertaficateRequestConfirmed { get; set; }
 
         public CertaficateResponse SelectedCertaficate { get; set; }
+        public int numberOfRequests { get; set; }
 
         public CertaficateViewModel()
         {
@@ -34,10 +35,8 @@ namespace XForms.ViewModels
         public async override void OnAppearing()
         {
             base.OnAppearing();
+            IsCertaficateRequestInProgress = true;
             await getProfilCertaficates();
-  
-            ProfilCertaficatesItemsList = new ObservableRangeCollection<CertaficateResponse>();
-            ProfilCertaficatesItemsList = ProfilInProgressCertaficatesList;
 
         }
 
@@ -52,8 +51,8 @@ namespace XForms.ViewModels
 
                 ProfilConfirmedCertaficatesList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x =>(x.RefStatusCertificateId == 2)).ToList());
                 ProfilInProgressCertaficatesList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 1)).ToList());
-
-
+                ProfilCertaficatesItemsList = ProfilInProgressCertaficatesList;
+                numberOfRequests = ProfilCertaficatesItemsList.Count;
             }
             else
             {
@@ -81,6 +80,7 @@ namespace XForms.ViewModels
                 IsCertaficateRequestConfirmed = !IsCertaficateRequestInProgress;
 
                 ProfilCertaficatesItemsList = IsCertaficateRequestInProgress ? ProfilInProgressCertaficatesList : ProfilConfirmedCertaficatesList;
+                numberOfRequests = ProfilCertaficatesItemsList.Count;
             }
             catch (Exception ex)
             {

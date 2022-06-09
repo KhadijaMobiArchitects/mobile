@@ -23,6 +23,8 @@ namespace XForms.ViewModels
         public ObservableRangeCollection<ComplaintResponse> ProfilsComplaintItemsList { get; set; }
 
         public ComplaintResponse SelectedComplaint { get; set; }
+
+        public int numberOfRequestsAdmin { get; set; }
         public ComplaintAdministrationViewModel()
         {
 
@@ -51,7 +53,7 @@ namespace XForms.ViewModels
                 ProfilsInProgressComplaintList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 1)).ToList());
 
                 ProfilsComplaintItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressComplaintList : ProfilsConfirmedComplaintList;
-
+                numberOfRequestsAdmin = ProfilsComplaintItemsList.Count;
             }
             else
             {
@@ -80,6 +82,8 @@ namespace XForms.ViewModels
                 IsComplaintRequestConfirmed = !IsComplaintRequestInProgress;
 
                 ProfilsComplaintItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressComplaintList : ProfilsConfirmedComplaintList;
+                numberOfRequestsAdmin = ProfilsComplaintItemsList.Count;
+
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using XForms.Models;
 using XForms.views.Authentication;
@@ -16,6 +17,7 @@ namespace XForms.ViewModels
         public string FullName { get; set; }
         public string PictureUrl { get; set; }
         public string RefFunctionLabel { get; set; }
+        public bool EnableFaceID { get; set; }
 
         public BaseViewModel()
         {
@@ -64,6 +66,7 @@ namespace XForms.ViewModels
                 CanLogout = false;
 
                 AppPreferences.ClearCache();
+                PopupNavigation.Instance.PopAllAsync();
 
                 Application.Current.MainPage = new NavigationPage(new SigninPage());
             }
@@ -76,6 +79,30 @@ namespace XForms.ViewModels
                 CanLogout = true;
             }
         }, () => CanLogout);
+
+        private bool CanOpenFlyout = true;
+        private views.FlyoutPage flyoutPagePopup;
+        public ICommand OpenFlyoutCommand => new Command(async () =>
+        {
+            try
+            {
+                CanOpenFlyout = false;
+                if (flyoutPagePopup == null)
+                    flyoutPagePopup = new views.FlyoutPage() { BindingContext = this};
+
+                await PopupNavigation.Instance.PushSingleAsync(flyoutPagePopup);
+            }
+            catch (Exception ex)
+            {
+                //Logger?.LogError(ex, showError: true);
+            }
+            finally
+            {
+                CanOpenFlyout = true;
+            }
+        }, () => CanOpenFlyout);
+
+        
 
         private bool CanSelectHeaderAction = true;
         public ICommand SelectHeaderActionCommand => new Command<REFItem>(async (model) =>

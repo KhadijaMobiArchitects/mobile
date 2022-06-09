@@ -154,10 +154,18 @@ namespace XForms
                         }
                     }
                 });
+
+
             }
 
-            if (exception != default)
+            if (exception != null)
             {
+                Debug.WriteLine($"-----------------------------");
+                Debug.WriteLine($"Exception Message : {exception.Message}");
+                Debug.WriteLine($"-----------------------------");
+                Debug.WriteLine($"Exception Strack error : {exception.StackTrace}");
+                Debug.WriteLine($"-----------------------------");
+
                 Crashes.TrackError(exception);
             }
         }

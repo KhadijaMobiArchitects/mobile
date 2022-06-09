@@ -44,7 +44,7 @@
             <Grid
                 Grid.Column="1"
 
-                    ColumnDefinitions="auto,8*,auto,auto"
+                    ColumnDefinitions="auto,8*,auto,auto,auto"
             >
                 <cc:CustomButton
                         BackgroundColor="{Binding BackButtonColor,Source={x:Reference this}}"
@@ -118,7 +118,7 @@
                     Padding="0"
                     StyleCorner="Circle"
                     BackgroundColor="Transparent"
-                    IsVisible="{Binding HasSignOut,Source={x:Reference this}}"
+                    IsVisible="false"
                     Grid.Column="3"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
@@ -130,6 +130,27 @@
                         <FontImageSource
                     FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
                     Glyph="{x:Static res:FontAwesomeFonts.SignOutAlt}"
+                    Color="White"
+                    Size="24" />
+                    </cc:CustomButton.ImageSource>
+
+                </cc:CustomButton>
+                <cc:CustomButton
+                    Padding="0"
+                    StyleCorner="Circle"
+                    BackgroundColor="Transparent"
+                    IsVisible="{Binding HasSignOut,Source={x:Reference this}}"
+                    Grid.Column="4"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Command="{Binding Source={x:Reference this},Path=Parent.BindingContext.OpenFlyoutCommand}"
+                    Clicked="SignOutButton_Clicked"
+                    >
+
+                    <cc:CustomButton.ImageSource>
+                        <FontImageSource
+                    FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                    Glyph="{x:Static res:FontAwesomeFonts.Bars}"
                     Color="White"
                     Size="24" />
                     </cc:CustomButton.ImageSource>

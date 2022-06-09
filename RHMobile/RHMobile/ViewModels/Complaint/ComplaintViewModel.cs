@@ -21,7 +21,7 @@ namespace XForms.ViewModels
         public bool IsComplaintRequestInProgress { get; set; }
         public bool IsComplaintRequestConfirmed { get; set; }
         public ComplaintResponse SelectedComplaint { get; set; }
-
+        public int numberOfRequests { get; set; }
 
         public ComplaintViewModel()
         {
@@ -31,12 +31,8 @@ namespace XForms.ViewModels
         public async override void OnAppearing()
         {
             base.OnAppearing();
-            await getProfilComplaints();
-
-            ProfilComplaintsItemsList = new ObservableRangeCollection<ComplaintResponse>();
-            ProfilComplaintsItemsList = ProfilInProgressComplaintsList;
             IsComplaintRequestInProgress = true;
-
+            await getProfilComplaints();
         }
         public async Task getProfilComplaints()
         {
@@ -49,7 +45,8 @@ namespace XForms.ViewModels
 
                 ProfilConfirmedComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 2)).ToList());
                 ProfilInProgressComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 1)).ToList());
-
+                ProfilComplaintsItemsList = ProfilInProgressComplaintsList;
+                numberOfRequests = ProfilComplaintsItemsList.Count;
             }
             else
             {
@@ -77,6 +74,8 @@ namespace XForms.ViewModels
                 IsComplaintRequestConfirmed = !IsComplaintRequestInProgress;
 
                 ProfilComplaintsItemsList = IsComplaintRequestInProgress ? ProfilInProgressComplaintsList : ProfilConfirmedComplaintsList;
+                numberOfRequests = ProfilComplaintsItemsList.Count;
+
             }
             catch (Exception ex)
             {

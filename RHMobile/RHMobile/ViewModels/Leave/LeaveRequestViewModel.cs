@@ -83,7 +83,7 @@ namespace XForms.ViewModels
                 new REFItem()
                 {
                     Id = 3,
-                    Name = "Annulée",
+                    Name = "Refusée",
                 }
             };
 

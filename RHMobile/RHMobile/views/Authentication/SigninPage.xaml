@@ -24,7 +24,7 @@
                 Grid.RowSpan="2"
                 >
                 <Grid
-                RowDefinitions="Auto,*,Auto"
+                RowDefinitions="Auto,2*,*"
                 Padding="{OnPlatform iOS='30,90,30,40',Android='30,50,30,40'}"
                 VerticalOptions="FillAndExpand"
                 RowSpacing="50"
@@ -55,13 +55,13 @@
                             VerticalOptions="CenterAndExpand"
                         >
                             <Label
-                        Text="HR Management"
+                        Text="Gestion RH"
                         TextColor="#0B3461"
                         FontSize="20"
                         FontFamily="RubikBold"
                         />
                             <Label
-                        Text="By mobiarchitects"
+                        Text="mobiarchitects"
                         FontSize="14"
                         TextColor="#126BCD"
                         FontFamily="RubikLight"
@@ -74,7 +74,7 @@
                     <!--content-->
                     <Grid
                     Grid.Row="1"
-                    RowDefinitions="Auto,Auto,Auto"
+                    RowDefinitions="Auto,Auto,*"
                     RowSpacing="30"
                     >
                         <StackLayout
@@ -110,26 +110,37 @@
                         </StackLayout>
                         <StackLayout
                             Grid.Row="2"
+                            VerticalOptions="CenterAndExpand"
+                            Spacing="80"
                             >
                             <cc:CustomButton
                                 Text="Se connecter"
                                 FontSize="20"
                         Command="{Binding SubmitCommand}"
                                 />
+                 <cc:CustomButton
+                        Text="Se connecter avec face ID"
+                        BackgroundColor="#24B3D6"
+                        FontSize="20"
+                        Clicked="Button_Clicked"
+                        Command="{Binding OpenFingerPrintViewCommand}"
+                        />
                         </StackLayout>
+       
                     </Grid>
 
                     <!--Footer-->
 
-                    <Grid
+                    <!--<Grid
                     Grid.Row="2"
                     >
                         <cc:CustomButton
                         Text="Se connecter avec face ID"
                         BackgroundColor="#24B3D6"
                         FontSize="20"
+                        Clicked="Button_Clicked"
                         />
-                    </Grid>
+                    </Grid>-->
 
                 </Grid>
             </ScrollView>

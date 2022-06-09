@@ -23,6 +23,8 @@ namespace XForms.ViewModels
         public bool IsDispalacementRequestInProgress { get; set; }
         public bool IsDispalacementRequestConfirmed { get; set; }
         public DisplacementResponse SelectedDisplacement { get; set; }
+        public int numberOfRequests { get; set; }
+
 
         public MyRequetsDisplacemntViewModel()
         {
@@ -31,11 +33,8 @@ namespace XForms.ViewModels
         public async override void OnAppearing()
         {
             base.OnAppearing();
-            await getProfilDisplacements();
-
-            ProfilDispalacementsItemsList = new ObservableRangeCollection<DisplacementResponse>();
-            ProfilDispalacementsItemsList = ProfilInProgressDispalacementsList;
             IsDispalacementRequestInProgress = true;
+            await getProfilDisplacements();
 
         }
 
@@ -50,6 +49,8 @@ namespace XForms.ViewModels
 
                 ProfilConfirmedDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 2)).ToList());
                 ProfilInProgressDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 1)).ToList());
+                ProfilDispalacementsItemsList = ProfilInProgressDispalacementsList;
+                numberOfRequests = ProfilDispalacementsItemsList.Count;
 
             }
             else
@@ -77,7 +78,9 @@ namespace XForms.ViewModels
                 IsDispalacementRequestInProgress = HeadrActionList[0].IsSelected;
                 IsDispalacementRequestConfirmed = !IsDispalacementRequestInProgress;
 
+
                 ProfilDispalacementsItemsList = IsDispalacementRequestInProgress ? ProfilInProgressDispalacementsList : ProfilConfirmedDispalacementsList;
+                numberOfRequests = ProfilDispalacementsItemsList.Count;
             }
             catch (Exception ex)
             {

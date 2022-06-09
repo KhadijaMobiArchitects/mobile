@@ -132,9 +132,9 @@ namespace XForms.Services
         }
         public async Task<RESTServiceResponse<object>> PostCertaficateTreatement(CertaficateTreatementRequest postParams)
         {
-            return await RESTHelper.UploadAdministratifCertaficateAsync(postParams);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostCertaficateTreatement}", postObject: postParams, method: HttpVerbs.POST);
         }
- 
+
         public async Task<RESTServiceResponse<object>> PostMembers(AddMembersRequest postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostMembersRequest}", postObject: postParams, method: HttpVerbs.POST);

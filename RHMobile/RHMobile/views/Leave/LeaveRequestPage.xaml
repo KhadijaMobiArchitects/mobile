@@ -103,7 +103,7 @@
                         <cc:MaterialDay
                                     NumberOfDays="{Binding PostponedDays}"
                                     StatusColor="{StaticResource postponedColor}"
-                                    StatusDays="Annulé"
+                                    StatusDays="Refusé"
                                     VerticalOptions="EndAndExpand"
                                     />
                     </StackLayout>

@@ -22,7 +22,7 @@ namespace XForms.Models
     public class CertaficateTreatementRequest
     {
         public int Id { get; set; }
-        public File Document { get; set; }
+        public byte[] Document { get; set; }
 
     }
 

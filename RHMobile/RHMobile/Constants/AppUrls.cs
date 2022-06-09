@@ -58,6 +58,7 @@ namespace XForms.Constants
 
         public const string PostClaimRequest = BaseUrl + "Claims/Claiming";
         public const string PostTraitementClaimRequest = BaseUrl + "Claims/TraitementClaim";
+        public const string PostCertaficateTreatement = BaseUrl + "Certificate/TraitementDemandCertificate";
 
 
 

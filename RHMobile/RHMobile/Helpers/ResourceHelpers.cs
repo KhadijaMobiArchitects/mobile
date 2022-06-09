@@ -42,11 +42,11 @@ namespace XForms
 
             Title = service switch
             {
-                AdministrationService.Leave => BackToLine("Demande Congé"),
-                AdministrationService.Certaficate => BackToLine("Demande Attestation"),
-                AdministrationService.Move => BackToLine("Déplacement Client"),
-                AdministrationService.Complaint => BackToLine("Réclamation Interne"),
-                AdministrationService.Project => BackToLine("Projets Client"),
+                AdministrationService.Leave => BackToLine("Congé"),
+                AdministrationService.Certaficate => BackToLine("Attestation"),
+                AdministrationService.Move => BackToLine("Déplacement"),
+                AdministrationService.Complaint => BackToLine("Réclamation"),
+                AdministrationService.Project => BackToLine("Projet"),
                 AdministrationService.Intership => BackToLine("Espace Stagaires"),
                 AdministrationService.PersonalData => BackToLine("Données Personnelles"),
                 AdministrationService.Delegation => BackToLine("Délegations"),

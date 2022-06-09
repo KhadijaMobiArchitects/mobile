@@ -28,6 +28,7 @@ namespace XForms.ViewModels
         public CertaficateResponse SelectedCertaficate { get; set; }
 
         public FileResult PickedFile { get; set; }
+        public int numberOfRequestsAdmin { get; set; }
 
         public CertaficateAdministrationViewModel()
         {
@@ -83,9 +84,8 @@ namespace XForms.ViewModels
 
                 ProfilsConfirmedCertaficateList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 2)).ToList());
                 ProfilsInProgressCertaficateList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 1)).ToList());
-
                 ProfilsCertaficateItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressCertaficateList : ProfilsConfirmedCertaficateList;
-
+                numberOfRequestsAdmin = ProfilsCertaficateItemsList.Count;
             }
             else
             {
@@ -113,6 +113,8 @@ namespace XForms.ViewModels
                 IsCertaficateRequestConfirmed = !IsCertaficateRequestInProgress;
 
                 ProfilsCertaficateItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressCertaficateList : ProfilsConfirmedCertaficateList;
+                numberOfRequestsAdmin = ProfilsCertaficateItemsList.Count;
+
             }
             catch (Exception ex)
             {
@@ -141,7 +143,6 @@ namespace XForms.ViewModels
                     Path = pickedFile.FullPath
                 };
 
-
             }
             catch (Exception ex)
             {
@@ -161,10 +162,13 @@ namespace XForms.ViewModels
             {
                 canSendCertaficate = false;
 
+                var bytes = System.IO.File.ReadAllBytes(certaficateFile.Path);
+
+
                 var postParams = new Models.CertaficateTreatementRequest()
                 {
                    Id = SelectedCertaficate.Id,
-                   Document = certaficateFile
+                   Document = bytes
 
                 };
                 var result = await App.AppServices.PostCertaficateTreatement(postParams);

@@ -30,7 +30,7 @@
                 x:Name="MyHeader"
                 HasTitle="True"
                 HasDescription="True"
-                Title="Projets client"
+                Title="Projets"
                 HasNotification="True"
                 HasBackButton="True"
                 Description="{Binding NumberOfProjects,StringFormat='{0} projet en cours'}"

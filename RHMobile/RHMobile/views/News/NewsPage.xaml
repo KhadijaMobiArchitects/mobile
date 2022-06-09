@@ -13,7 +13,7 @@
     x:Class="XForms.views.NewsPage">
     <Base:BasePage.Content>
 <Grid
-                RowDefinitions="auto,auto,auto"
+                RowDefinitions="auto,auto,*"
                 VerticalOptions="FillAndExpand"
                 RowSpacing="10"
                 BackgroundColor="White"               
@@ -35,6 +35,48 @@
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />
+
+                <!--Body-->
+            <StackLayout
+                Padding="40,10"
+                Grid.Row="2"
+                Spacing="20" 
+                >
+                <Label
+                    Text="Actualité"
+                    Style="{StaticResource TitleStyle}"
+                    />
+  
+                <cc:MaterialEntry
+                    Placeholder="Titre"
+                    CornerRadiuss="6"
+                    Text="{Binding ComplaintTitle}"
+                    />
+
+                <Grid
+                    RowDefinitions="200,Auto">
+                    <cc:CustomEditor
+                        x:Name="ProductDescriptionEditor"
+                        Text="{Binding ComplaintObjectif}"
+                        Placeholder="Description"
+                        IsCustom="True"
+                        Grid.RowSpan="2"
+                        Style="{StaticResource TransparentEditorStyle}"
+                        BorderColor="#DDE4F3"
+                        IsHasBorder="True"
+                        BorderWidth="2"
+                        />
+                </Grid>
+
+              <cc:CustomButton
+                  VerticalOptions="EndAndExpand"
+                    Text="Envoyer ma demande"
+                    FontSize="20"
+                    TextColor="{StaticResource White}"
+                    Command="{Binding SendRequestCommand}"
+                    IsEnabled="{Binding EnableButtonSendRequest}"
+                    />
+            </StackLayout>
       </Grid>
 
     </Base:BasePage.Content>

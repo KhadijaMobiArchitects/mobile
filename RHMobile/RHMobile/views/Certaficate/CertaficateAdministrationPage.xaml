@@ -27,7 +27,7 @@
             <Shared:SuggestionsNavBarView
                     HasTitle="True"
                     HasDescription="True"
-                    Title="Demande Attestation"
+                    Title="Attestation"
                     HasNotification="True"
                     HasBackButton="True"
                     Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"

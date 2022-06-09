@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Base1:BasePopupView
+ xmlns:Base1="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cc="clr-namespace:XForms.Controls"
+    xmlns:res="clr-namespace:XForms.Resources"
+    xmlns:FF="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:local="clr-namespace:XForms"
+    CloseWhenBackgroundIsClicked="False"
+    BackgroundInputTransparent="False"
+    x:Class="XForms.Popups.FeedBackPopup">
+
+    <Grid
+        BackgroundColor="Transparent"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+        <Grid
+            Grid.RowSpan="3"
+            RowDefinitions="40,40,Auto"
+            VerticalOptions="CenterAndExpand">
+
+            <Frame
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                VerticalOptions="CenterAndExpand"
+                BackgroundColor="{StaticResource White}"
+                Style="{StaticResource PopupCardStyle}">
+
+                <StackLayout
+                    Spacing="10">
+
+                    <!--<FF:CachedImage
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Start"
+                        HeightRequest="60"
+                        Source="{local:ImageResource DefaultImage.png}" />-->
+
+                    <Label
+                        x:Name="TitleLabel"
+                        Text="{Binding TitleText}"
+                        FontSize="16"
+                        Margin="20,0"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource DarkText}" />
+
+                    <Label
+                        Text="{Binding DescriptionText}"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        FontSize="14"
+                        Margin="20,0"
+                        TextColor="{StaticResource DarkText}" />
+
+                    <!--Footer Actions-->
+                    <FlexLayout
+                        Margin="0,20,0,10"
+                        Direction="Row">
+
+                        <cc:CustomButton
+                            x:Name="ConfirmButton"
+                            FlexLayout.Grow="1"
+                            Margin="5,0"
+                            FontSize="20"
+                            Text="{Binding ConfirmActionText}"
+                            BackgroundColor="{Binding PrimaryColor}"
+                            Clicked="ConfirmClicked" />
+
+                        <cc:CustomButton
+                            x:Name="CancelButton"
+                            Margin="5,0"
+                            FontSize="20"
+                            FlexLayout.Grow="1"
+                            IsVisible="{Binding HasCancelAction}"
+                            Text="{Binding CancelActionText}"
+                            BackgroundColor="{Binding SecondaryColor}"
+                            Clicked="Cancel_Clicked" />
+                    </FlexLayout>
+                </StackLayout>
+            </Frame>
+
+            <cc:CornerView
+                Grid.RowSpan="2"
+                StyleCorner="Circle"
+                Padding="5"
+                BackgroundColor="{StaticResource White}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <cc:CornerView
+                    Padding="5"
+                    BackgroundColor="{Binding HeaderGlyphBackground}">
+
+                    <Image
+                        BackgroundColor="Transparent"
+                        Visual="Default"
+                        Margin="15"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                                Glyph="{Binding HeaderGlyph}"
+                                Color="{StaticResource White}">
+                            </FontImageSource>
+                        </Image.Source>
+                    </Image>
+                </cc:CornerView>
+            </cc:CornerView>
+        </Grid>
+    </Grid>
+</Base1:BasePopupView>

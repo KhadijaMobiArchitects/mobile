@@ -23,6 +23,7 @@ namespace XForms.ViewModels
         public bool IsDispalacementRequestInProgress { get; set; }
         public bool IsDispalacementRequestConfirmed { get; set; }
         public DisplacementResponse SelectedDisplacement { get; set; }
+        public int numberOfRequestsAdmin { get; set; }
 
         public DisplacementAdministrationViewModel()
         {
@@ -33,8 +34,6 @@ namespace XForms.ViewModels
             IsDispalacementRequestInProgress = true;
 
             await getallProfilsDisplacement();
-
-            //ProfilsDispalacementItemsList = new ObservableRangeCollection<DisplacementResponse>();
 
         }
 
@@ -49,7 +48,9 @@ namespace XForms.ViewModels
 
                 ProfilConfirmedDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 2)).ToList());
                 ProfilInProgressDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 1)).ToList());
+
                 ProfilsDispalacementItemsList = IsDispalacementRequestInProgress ? ProfilInProgressDispalacementsList : ProfilConfirmedDispalacementsList;
+                numberOfRequestsAdmin = ProfilsDispalacementItemsList.Count;
 
 
             }
@@ -78,6 +79,8 @@ namespace XForms.ViewModels
                 IsDispalacementRequestConfirmed = !IsDispalacementRequestInProgress;
 
                 ProfilsDispalacementItemsList = IsDispalacementRequestInProgress ? ProfilInProgressDispalacementsList : ProfilConfirmedDispalacementsList;
+                numberOfRequestsAdmin = ProfilsDispalacementItemsList.Count;
+
             }
             catch (Exception ex)
             {

@@ -139,6 +139,34 @@ namespace XForms
             get { return Preferences.Get(nameof(LastKnownLongitude), 0); }
             set { Preferences.Set(nameof(LastKnownLongitude), value); }
         }
+        public static bool EnableFaceID
+        {
+            get { return Preferences.Get(nameof(EnableFaceID), false); }
+            set { Preferences.Set(nameof(EnableFaceID), value); }
+        }
+
+        public static bool IsAleardyLoggedIn
+        {
+            get { return Preferences.Get(nameof(IsAleardyLoggedIn), false); }
+            set { Preferences.Set(nameof(IsAleardyLoggedIn), value); }
+        }
+
+
+        public static bool IsDigitalPrintActived
+        {
+            get { return Preferences.Get(nameof(IsDigitalPrintActived), false); }
+            set { Preferences.Set(nameof(IsDigitalPrintActived), value); }
+        }
+
+        public static bool IsLoggedIn
+        {
+            get { return Preferences.Get(nameof(IsLoggedIn), false); }
+            set { Preferences.Set(nameof(IsLoggedIn), value); }
+        }
+
+        
+
+
 
         public static void ClearCache()
         {
