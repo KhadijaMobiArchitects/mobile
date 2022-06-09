@@ -12,13 +12,13 @@ namespace XForms
             //switch (service)
             //{
             //    case AdministrationService.Leave:
-            //        iconService = AppHelpers.GetSvgResource("calendar2.svg");
+            //        iconService = AppHelpers.GetSvgResource("calendar.svg");
             //        break;
             //}
 
             iconService = service switch
             {
-                AdministrationService.Leave => AppHelpers.GetSvgResource("calendar2.svg"),
+                AdministrationService.Leave => AppHelpers.GetSvgResource("calendar.svg"),
                 AdministrationService.Certaficate => AppHelpers.GetSvgResource("certaficate.svg"),
                 AdministrationService.Move => AppHelpers.GetSvgResource("move.svg"),
                 AdministrationService.Complaint => AppHelpers.GetSvgResource("complaint.svg"),
@@ -30,7 +30,7 @@ namespace XForms
                 AdministrationService.RCAR => AppHelpers.GetSvgResource("rcar.svg"),
                 AdministrationService.Recore => AppHelpers.GetSvgResource("recore.svg"),
                 AdministrationService.RecorePrime => AppHelpers.GetSvgResource("recoreprime.svg"),
-                _ => AppHelpers.GetSvgResource("calendar2.svg")
+                _ => AppHelpers.GetSvgResource("calendar.svg")
             };
 
             return iconService;

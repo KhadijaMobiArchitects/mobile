@@ -35,7 +35,7 @@
 
                 <svg:SvgCachedImage
                     HeightRequest="45"
-                Source="{Local:ImageResource calendar2.svg}"
+                Source="{Local:ImageResource calendar.svg}"
                 Aspect="AspectFit"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"

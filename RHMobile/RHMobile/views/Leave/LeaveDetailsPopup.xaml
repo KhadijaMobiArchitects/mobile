@@ -144,7 +144,7 @@
                         Margin="10"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Local:ImageResource calendar2.svg}"
+                        Source="{Local:ImageResource calendar.svg}"
                         />
                 </cc:CornerView>
             </cc:CornerView>

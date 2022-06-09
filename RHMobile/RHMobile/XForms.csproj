@@ -84,8 +84,6 @@
     <None Remove="ViewModels\Base\" />
     <None Remove="views\SharedView\" />
     <None Remove="views\SharedViews\ReclangleBackground\" />
-    <None Remove="Resources\Images\calendar.svg" />
-    <None Remove="Resources\Images\calendar2.svg" />
     <None Remove="Services\" />
     <None Remove="Services\Base\" />
     <None Remove="Xamarin.CommunityToolkit" />
@@ -96,17 +94,6 @@
     <None Remove="ViewModels\Home\" />
     <None Remove="Models\Administration\" />
     <None Remove="Resources\Images\certificate.svg" />
-    <None Remove="Resources\Images\complaint.svg" />
-    <None Remove="Resources\Images\delegation.svg" />
-    <None Remove="Resources\Images\intership.svg" />
-    <None Remove="Resources\Images\move.svg" />
-    <None Remove="Resources\Images\payslips.svg" />
-    <None Remove="Resources\Images\personalData.svg" />
-    <None Remove="Resources\Images\project.svg" />
-    <None Remove="Resources\Images\rcar.svg" />
-    <None Remove="Resources\Images\recore.svg" />
-    <None Remove="Resources\Images\recoreprime.svg" />
-    <None Remove="Resources\Images\certaficate.svg" />
     <None Remove="ViewModels\Displacement\" />
     <None Remove="views\Displacement\" />
     <None Remove="Validators\" />
@@ -161,6 +148,18 @@
     <None Remove="Xam.Plugin.SimpleBottomDrawer" />
     <None Remove="Plugin.Fingerprint" />
     <None Remove="CardsView" />
+    <None Remove="Resources\Images\certaficate.svg" />
+    <None Remove="Resources\Images\complaint.svg" />
+    <None Remove="Resources\Images\delegation.svg" />
+    <None Remove="Resources\Images\intership.svg" />
+    <None Remove="Resources\Images\move.svg" />
+    <None Remove="Resources\Images\payslips.svg" />
+    <None Remove="Resources\Images\personalData.svg" />
+    <None Remove="Resources\Images\project.svg" />
+    <None Remove="Resources\Images\rcar.svg" />
+    <None Remove="Resources\Images\recore.svg" />
+    <None Remove="Resources\Images\recoreprime.svg" />
+    <None Remove="Resources\Images\calendar.svg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -232,19 +231,6 @@
     <EmbeddedResource Include="Resources\Assets\FontAwesome5Solid.ttf" />
     <EmbeddedResource Include="Resources\Images\ImageProfil.svg" />
     <EmbeddedResource Include="Resources\Images\profil.png" />
-    <EmbeddedResource Include="Resources\Images\calendar.svg" />
-    <EmbeddedResource Include="Resources\Images\calendar2.svg" />
-    <EmbeddedResource Include="Resources\Images\complaint.svg" />
-    <EmbeddedResource Include="Resources\Images\delegation.svg" />
-    <EmbeddedResource Include="Resources\Images\intership.svg" />
-    <EmbeddedResource Include="Resources\Images\move.svg" />
-    <EmbeddedResource Include="Resources\Images\payslips.svg" />
-    <EmbeddedResource Include="Resources\Images\personalData.svg" />
-    <EmbeddedResource Include="Resources\Images\project.svg" />
-    <EmbeddedResource Include="Resources\Images\rcar.svg" />
-    <EmbeddedResource Include="Resources\Images\recore.svg" />
-    <EmbeddedResource Include="Resources\Images\recoreprime.svg" />
-    <EmbeddedResource Include="Resources\Images\certaficate.svg" />
     <EmbeddedResource Include="Resources\Assets\AnimLoadingLight.json" />
     <EmbeddedResource Include="Resources\Images\balance.svg" />
     <EmbeddedResource Include="Resources\Images\ProfilWomen.png" />
@@ -260,6 +246,18 @@
     <EmbeddedResource Include="Resources\Images\user.png" />
     <EmbeddedResource Include="Resources\Images\pin.png" />
     <EmbeddedResource Include="Resources\Images\pins.png" />
+    <EmbeddedResource Include="Resources\Images\certaficate.svg" />
+    <EmbeddedResource Include="Resources\Images\complaint.svg" />
+    <EmbeddedResource Include="Resources\Images\delegation.svg" />
+    <EmbeddedResource Include="Resources\Images\intership.svg" />
+    <EmbeddedResource Include="Resources\Images\move.svg" />
+    <EmbeddedResource Include="Resources\Images\payslips.svg" />
+    <EmbeddedResource Include="Resources\Images\personalData.svg" />
+    <EmbeddedResource Include="Resources\Images\project.svg" />
+    <EmbeddedResource Include="Resources\Images\rcar.svg" />
+    <EmbeddedResource Include="Resources\Images\recore.svg" />
+    <EmbeddedResource Include="Resources\Images\recoreprime.svg" />
+    <EmbeddedResource Include="Resources\Images\calendar.svg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />
