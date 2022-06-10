@@ -65,7 +65,7 @@ namespace XForms.ViewModels
             {
                 CanLogout = false;
 
-                AppPreferences.ClearCache();
+                //AppPreferences.ClearCache();
                 PopupNavigation.Instance.PopAllAsync();
 
                 Application.Current.MainPage = new NavigationPage(new SigninPage());

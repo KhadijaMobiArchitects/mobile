@@ -24,30 +24,30 @@ namespace XForms.views.Authentication
                               var vm   = new SigninViewModel();
                 BindingContext = vm;
 
-                await Task.Delay(500);
+                //await Task.Delay(500);
                 //vm.OpenFingerPrintViewCommand.Execute(null);
 
             }
 
         }
 
-        async void Button_Clicked(System.Object sender, System.EventArgs e)
-        {
-            var availability = await CrossFingerprint.Current.IsAvailableAsync();
+        //async void Button_Clicked(System.Object sender, System.EventArgs e)
+        //{
+        //    var availability = await CrossFingerprint.Current.IsAvailableAsync();
 
-            if (!availability)
-            {
-                await DisplayAlert("Warning!", "No biometrics available", "OK");
+        //    if (!availability)
+        //    {
+        //        await DisplayAlert("Warning!", "No biometrics available", "OK");
 
-                return;
-            }
+        //        return;
+        //    }
 
-            var authResult = await CrossFingerprint.Current.AuthenticateAsync(new AuthenticationRequestConfiguration("Heads up!", "I would like to use your biometrics, please!"));
+        //    var authResult = await CrossFingerprint.Current.AuthenticateAsync(new AuthenticationRequestConfiguration("Heads up!", "I would like to use your biometrics, please!"));
 
-            if (authResult.Authenticated)
-            {
-                await DisplayAlert("Yaay!", "Here is the secrets", "Thanks!");
-            }
-        }
+        //    if (authResult.Authenticated)
+        //    {
+        //        await DisplayAlert("Yaay!", "Here is the secrets", "Thanks!");
+        //    }
+        //}
     }
 }

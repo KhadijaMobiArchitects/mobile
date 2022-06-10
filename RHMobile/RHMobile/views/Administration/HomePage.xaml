@@ -57,7 +57,7 @@
                                 HeightRequest="30"
                                 WidthRequest="30"
                                 Aspect="AspectFit"
-                                Source="{Local:ImageResource balance.svg}"
+                                Source="{Local:ImageResource personalData.svg}"
                                 />
                     <Label
                                 Text="Votre solde est"

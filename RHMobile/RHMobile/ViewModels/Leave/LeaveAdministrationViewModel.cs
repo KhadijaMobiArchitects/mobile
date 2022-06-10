@@ -181,6 +181,7 @@ namespace XForms.ViewModels
 
                 AppHelpers.LoadingShow();
                 var result = await App.AppServices.PostUpdateLeave(postParam);
+                AppHelpers.Alert(result?.message);
                 await PopupNavigation.Instance.PopAllAsync();
                 await getLeavesList();
 
@@ -216,6 +217,7 @@ namespace XForms.ViewModels
                 AppHelpers.LoadingShow();
                 AppHelpers.LoadingShow();
                 var result = await App.AppServices.PostUpdateLeave(postParam);
+                AppHelpers.Alert(result?.message);
                 await PopupNavigation.Instance.PopAllAsync();
                 await getLeavesList();
 

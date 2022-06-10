@@ -37,13 +37,13 @@ namespace XForms.ViewModels
 
             //Manager
 
-            SigninEmail = "samirghaouissi@gmail.com";
-            SigninPassword = "Password2022!!";
+            //SigninEmail = "samirghaouissi@gmail.com";
+            //SigninPassword = "Password2022!!";
 
             //Responsable RH
 
-            //SigninEmail = "rimrh@gmail.com";
-            //SigninPassword = "Password2022!!";
+            SigninEmail = "rimrh@gmail.com";
+            SigninPassword = "Password2022!!";
 
 
 
@@ -96,21 +96,25 @@ namespace XForms.ViewModels
 
                     AppPreferences.IsSignIn = true;
 
-                    bool isFingerprintAvailable = await CrossFingerprint.Current.IsAvailableAsync(false);
+                    //bool isFingerprintAvailable = await CrossFingerprint.Current.IsAvailableAsync(false);
+                    bool isFingerprintAvailable = true;
 
                     //!AppPreferences.IsAleardyLoggedIn
                     if (!AppPreferences.IsAleardyLoggedIn && isFingerprintAvailable)
+                    //if (isFingerprintAvailable)
+
                     {
                         var digitalPrintPopup = new Popups.FeedBackPopup(
-                            //headerGlyph: DigitalPrintGlyph,
-                            headerGlyphBackground: AppHelpers.LookupColor("Primary"),
-                            title: "Empreinte digitale",
-                            description: "L'empreinte digitale vous permet de vous connecter en toute sécurité et rapidité",
-                            confirmActionText: "Activer",
-                            cancelActionText: "Plus tard",
-                            hasCancelAction: true,
-                            primaryColor: AppHelpers.LookupColor("Primary")
-                            );
+                        headerGlyph: Resources.FontAwesomeFonts.finger,
+                        headerGlyphBackground: AppHelpers.LookupColor("Primary"),
+                        title: "Empreinte digitale",
+                        description: "L'empreinte digitale vous permet de vous connecter en toute sécurité et rapidité",
+                        confirmActionText: "Activer",
+                        cancelActionText: "Plus tard",
+                        hasCancelAction: true,
+                        primaryColor: AppHelpers.LookupColor("ConfirmedColor"),
+                        secondaryColor: AppHelpers.LookupColor("InProgressColor")
+                        ) ;
 
                         digitalPrintPopup.OnEventAcquired += async (sender1, args1) =>
                         {
@@ -125,7 +129,7 @@ namespace XForms.ViewModels
                                 {
                                     var digitalPrintAuthenticatedPopup = new Popups.FeedBackPopup(
                                                headerGlyph: Resources.FontAwesomeFonts.Check,
-                                               headerGlyphBackground: AppHelpers.LookupColor("GreenStatut"),
+                                               headerGlyphBackground: AppHelpers.LookupColor("Primay"),
                                                title: "Empreinte digitale",
                                                description: "Votre empreinte digitale a été bien enregistrée",
                                                confirmActionText: "D’accord",
@@ -244,7 +248,7 @@ namespace XForms.ViewModels
             catch (Exception ex)
             {
                 //Logger?.LogError(ex);
-                AppHelpers.Alert(ex.Message, exception : ex) ;
+                AppHelpers.Alert(ex.Message, exception: ex);
             }
             finally
             {
@@ -310,34 +314,46 @@ namespace XForms.ViewModels
 
                     //    App.IsAppAleardyOpen = true;
 
-                    //    Settings.IsDigitalPrintActived = true;
+                    AppPreferences.IsDigitalPrintActived = true;
 
                     //    Settings.IsLoggedIn = true;
 
+                    if (AppPreferences.UserRole.Equals(Roles.Collaborateur))
                         Application.Current.MainPage = new NavigationPage(new HomePage());
 
+                    if (AppPreferences.UserRole.Equals(Roles.Chef_projet))
+                        Application.Current.MainPage = new NavigationPage(new HomePage());
+
+                    if (AppPreferences.UserRole.Equals(Roles.Stagiaire))
+                        Application.Current.MainPage = new NavigationPage(new HomePage());
+
+                    else if (AppPreferences.UserRole.Equals(Roles.Manager))
+                        Application.Current.MainPage = new NavigationPage(new HomeAdminPage());
+
+                    else if (AppPreferences.UserRole.Equals(Roles.Responsable_RH))
+                        Application.Current.MainPage = new NavigationPage(new HomeAdminPage());
                     //Application.Current.MainPage = new NavigationPage(new Views.MyTabbedPage());
                 }
                 else
                 {
-                        var digitalPrintFailedPopup = new FeedBackPopup(
-                            headerGlyph: Resources.FontAwesomeFonts.close,
-                            headerGlyphBackground: AppHelpers.LookupColor("Danger"),
-                            title: "Erreur",
-                            description: "Votre empreinte digitale n'est pas conforme, veuillez réessayer",
-                            confirmActionText: "D’accord",
-                            primaryColor: AppHelpers.LookupColor("Danger"));
-                        digitalPrintFailedPopup.OnEventAcquired += async (sender, args) =>
+                    var digitalPrintFailedPopup = new FeedBackPopup(
+                        headerGlyph: Resources.FontAwesomeFonts.close,
+                        headerGlyphBackground: AppHelpers.LookupColor("Red"),
+                        title: "Erreur",
+                        description: "Votre empreinte digitale n'est pas conforme, veuillez réessayer",
+                        confirmActionText: "D’accord",
+                        primaryColor: AppHelpers.LookupColor("Red"));
+                    digitalPrintFailedPopup.OnEventAcquired += async (sender, args) =>
+                    {
+                        if (args)
                         {
-                            if (args)
-                            {
-                                await PopupNavigation.Instance.PopSafeAsync();
-                            }
-                        };
+                            await PopupNavigation.Instance.PopSafeAsync();
+                        }
+                    };
 
-                        await PopupNavigation.Instance.PushSingleAsync(digitalPrintFailedPopup);
-                    }
-                
+                    await PopupNavigation.Instance.PushSingleAsync(digitalPrintFailedPopup);
+                }
+
             }
             catch (Exception ex)
             {
