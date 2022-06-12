@@ -51,20 +51,20 @@
                 VerticalOptions="Center"
                 >
                     <Label
-                    Text="{Binding FirstName}"
+                    Text="{Binding FullName}"
                     FontAttributes="Bold"
                     FontSize="14"
                     TextColor="#33373D"
                     VerticalTextAlignment="Center"
                     >
-                        <Label.FormattedText>
+                        <!--<Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{Binding FirstName}" />
                                 <Span Text=" "/>
                                 <Span Text="{Binding LastName}"/>
                             </FormattedString>
 
-                        </Label.FormattedText>
+                        </Label.FormattedText>-->
                     </Label>
 
                     <Label

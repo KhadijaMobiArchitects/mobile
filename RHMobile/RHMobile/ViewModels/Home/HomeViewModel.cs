@@ -16,6 +16,8 @@ namespace XForms.ViewModels
     {
         public List<REFItemAdministration> AdminstrationList { get; set; }
 
+        public int MyPoints { get; set; }
+
         public HomeViewModel()
         {
 
@@ -115,6 +117,14 @@ namespace XForms.ViewModels
     };
             
         }
+        public async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var result = await App.AppServices.GetSumPoints();
+            MyPoints = result.data;
+        }
+
         public INavigation navigation { get; set; }
         public bool canAdminisatrionNavigation = true;
         public ICommand AdministraionNavigation => new Command<REFItemAdministration>(async (model) =>

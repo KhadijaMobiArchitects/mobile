@@ -62,7 +62,8 @@ namespace XForms.HttpREST
             }
             catch(Exception Ex)
             {
-                return new RESTServiceResponse<T>(false, Ex.Message);
+                //return new RESTServiceResponse<T>(false, Ex.Message);
+                return null;
             }
         }
         //public static async Task<RESTServiceResponse<T>> UploadFileAsync<T>(string url, Models.File fileData, Dictionary<string, string> stringContent = null)

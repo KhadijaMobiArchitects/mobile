@@ -89,7 +89,7 @@
                 CornerRadius="4"
                 >
                 <Label
-                Text="{Binding labelStatus}"
+                Text="{Binding LabelStatus}"
                 BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
                 TextColor="{Binding TextColor,Source = {x:Reference this}}"
                 FontSize="12"

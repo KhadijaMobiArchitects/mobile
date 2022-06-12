@@ -18,7 +18,7 @@
             />
         <Label
             Grid.Column="1"
-            Text="{Binding NumberOfDays,StringFormat='{0} congé',Source={x:Reference this}}"
+            Text="{Binding NumberOfDays,StringFormat='{0} jour',Source={x:Reference this}}"
             FontSize="13"
             FontAttributes="Bold"
             TextColor="#33373D"

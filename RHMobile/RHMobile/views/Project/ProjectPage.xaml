@@ -30,10 +30,10 @@
                 x:Name="MyHeader"
                 HasTitle="True"
                 HasDescription="True"
-                Title="Projets"
+                Title="Projet"
                 HasNotification="True"
                 HasBackButton="True"
-                Description="{Binding NumberOfProjects,StringFormat='{0} projet en cours'}"
+                Description="{Binding NumberOfProjects,StringFormat='{0} projets en cours'}"
                 BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                 BackButtonColor="{StaticResource EndGradientAdmin }"
                 />
@@ -127,13 +127,15 @@
                 Grid.RowSpan="2"
                 ItemsSource="{Binding SquadList}"
                 Margin="30,10"
+                VerticalScrollBarVisibility="Never"
                 >
                 <CollectionView.Header                    
                     >
                     <Label
-                        Text="{Binding BindingContext.ProjectName,Source={x:Reference this},StringFormat='Squad {0}'}"
+                        Text="{Binding BindingContext.ProjectNameSquad,Source={x:Reference this},StringFormat='{0}'}"
                         FontSize="16"
                         FontAttributes="Bold"
+                        Padding="0,0,0,15"
                         />
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>

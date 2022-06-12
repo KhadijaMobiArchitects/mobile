@@ -47,7 +47,7 @@
                 <cc:MaterialItemValue                    
                     HorizontalOptions="CenterAndExpand"
                     Item="{Binding SelectedLeave.FullName}"
-                    Value="Full stack dev"
+                    Value="{Binding SelectedLeave.RefFunctionLabel}"
                     HorizontalTextAlignment="Center"
             />
 
@@ -64,18 +64,18 @@
                 >
                 <cc:MaterialItemValue
             Item="Date début"
-            Value="{Binding SelectedLeave.startDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedLeave.StartDate,StringFormat='{0:dd/MM/yyyy}'}"
             />
                 <cc:MaterialItemValue
             Grid.Column="1"
             Item="Date Fin"
-            Value="{Binding SelectedLeave.endDate,StringFormat='{0:dd/MM/yyyy}'}"
+            Value="{Binding SelectedLeave.EndDate,StringFormat='{0:dd/MM/yyyy}'}"
 
             />
                 <cc:MaterialItemValue
             Grid.Row="1"
             Item="Type de congé"
-            Value="{Binding SelectedLeave.labelType}"
+            Value="{Binding SelectedLeave.LabelType}"
 
             />
 
@@ -83,19 +83,19 @@
             Grid.Row="1"
                     Grid.Column="1"
             Item="Projet"
-            Value="Ta7alil"
+            Value="{Binding SelectedLeave.ProjectName}"
             />
                 <cc:MaterialItemValue
             Grid.Row="2"
                     Grid.ColumnSpan="2"
                     VerticalOptions="Start"
             Item="Situation sur le projet"
-            Value="Livré partiellement"
+            Value="{Binding SelectedLeave.SituationProjet}"
             />
                 <cc:MaterialItemValue
             Grid.Row="3"
                     VerticalOptions="Start"
-            Item="Confirmation par squad"
+            Item="Confirmation de l'équipe"
             Value="Confirmer"
                  
             />
@@ -104,7 +104,7 @@
                  Grid.Column="1"
                     VerticalOptions="Start"
             Item="Nombre de jours"
-            Value="{Binding SelectedLeave.DifferenceOfDays }"
+            Value="{Binding SelectedLeave.NombreJours}"
             />
                 <StackLayout
                     Grid.Row="4"
@@ -151,7 +151,7 @@
                         Margin="-5"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Binding SelectedLeave.pictureUrl}"
+                        Source="{Binding SelectedLeave.PictureUrl}"
                         Aspect="AspectFill"
                         />
                 </cc:CornerView>

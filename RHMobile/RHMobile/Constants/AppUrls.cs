@@ -13,8 +13,7 @@ namespace XForms.Constants
         public const string GetRequestsListProfilsLeave = BaseUrl + "leaves/GetAllLeaves/";
         public const string GetRequestInProgressProfilsLeave = BaseUrl + "leaves/GetInProgressLeaves/";
         public const string GetRequestValidatedProfilsLeave = BaseUrl + "leaves/GetValidatedLeaves/";
-
-
+        public const string GetStatistics_ProfilLeaves = BaseUrl + "leaves/GetStatistics_ProfilLeaves";
         public const string GetRequestsListProfilLeaves = BaseUrl + "leaves/getprofilleaves/";
 
         //ProfilLeaves
@@ -28,6 +27,8 @@ namespace XForms.Constants
         public const string GetRequestProjectSquad = BaseUrl + "projects/getSquad/";
         public const string GetRequestProfils = BaseUrl + "Profils/GetProfils";
         public const string GetRequestOwners = BaseUrl + "Profils/GetOwners";
+        public const string DeleteMemberProject = BaseUrl + "Projects/DeleteFromSquad";
+
 
         public const string GetRequestAllCertaficates = BaseUrl + "Certificate/GetAllCertificates";
         public const string GetRequestProfilCertificates = BaseUrl + "Certificate/GetProfilCertificates";
@@ -59,7 +60,10 @@ namespace XForms.Constants
         public const string PostClaimRequest = BaseUrl + "Claims/Claiming";
         public const string PostTraitementClaimRequest = BaseUrl + "Claims/TraitementClaim";
         public const string PostCertaficateTreatement = BaseUrl + "Certificate/TraitementDemandCertificate";
+        public const string GranttPoints = BaseUrl + "Points/GranttPoints";
+        public const string GetSumPoints = BaseUrl + "Points/GetSumPoints";
 
+        
 
 
         //public const string PostRequestLeave = "http://localhost:3000/Leaves";

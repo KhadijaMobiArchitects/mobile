@@ -69,7 +69,7 @@
 
                                 />
                     <Label
-                                Text="40 pts"
+                                Text="{Binding MyPoints,StringFormat='{0} pts'}"
                                 HorizontalOptions="EndAndExpand"
                                 VerticalTextAlignment="Center"
                                 FontSize="20"

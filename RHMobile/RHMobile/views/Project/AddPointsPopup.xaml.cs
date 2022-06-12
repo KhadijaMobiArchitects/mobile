@@ -16,13 +16,13 @@ namespace XForms.views.Project
 
         void Minus_Clicked(System.Object sender, System.EventArgs e)
         {
-            if ((this.BindingContext as ProjectViewModel).MyNotes > 0)
-                (this.BindingContext as ProjectViewModel).MyNotes--;
+            if ((this.BindingContext as ProjectViewModel).MyPoints > 0)
+                (this.BindingContext as ProjectViewModel).MyPoints--;
 
         }
         void Plus_Clicked(System.Object sender, System.EventArgs e)
         {
-            (this.BindingContext as ProjectViewModel).MyNotes++;
+            (this.BindingContext as ProjectViewModel).MyPoints++;
         }
     }
 }

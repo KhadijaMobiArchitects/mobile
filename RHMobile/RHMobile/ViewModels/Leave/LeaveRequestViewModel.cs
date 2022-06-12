@@ -26,18 +26,18 @@ namespace XForms.ViewModels
         public List<REFItem> HeadrActionList { get; set; }
 
 
-        public List<LeaveModel> LeaveDate { get; set; }
-        public ObservableRangeCollection<LeaveModel> LeavesList { get; set; }
+        public List<LeaveResponse> LeaveDate { get; set; }
+        public ObservableRangeCollection<LeaveResponse> LeavesList { get; set; }
 
 
-        public ObservableRangeCollection<LeaveModel> LeaveItemsList { get; set; }
+        public ObservableRangeCollection<LeaveResponse> LeaveItemsList { get; set; }
 
         public List<ChartEntry> entries { get; set; }
 
 
-        public List<LeaveModel> InprogessLeavesList { get; set; }
-        public List<LeaveModel> ConfirmedLeavesList { get; set; }
-        public List<LeaveModel> PostponedLeavesList { get; set; }
+        public List<LeaveResponse> InprogessLeavesList { get; set; }
+        public List<LeaveResponse> ConfirmedLeavesList { get; set; }
+        public List<LeaveResponse> PostponedLeavesList { get; set; }
 
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
@@ -52,8 +52,9 @@ namespace XForms.ViewModels
         public int InprogessDays { get; set; }
         public int PostponedDays { get; set; }
         public int TotalDays { get; set;}
-        
-        public LeaveModel SelectedLeave { get; set; }
+
+        public StatistiqueLeaveModel statistiqueLeaveModel { get; set; }
+        public LeaveResponse SelectedLeave { get; set; }
 
         public string StatusName { get; set; }
 
@@ -61,9 +62,9 @@ namespace XForms.ViewModels
 
         public LeaveRequestViewModel()
         {
-            ConfirmedLeavesList = new List<LeaveModel>();
-            InprogessLeavesList = new List<LeaveModel>();
-            PostponedLeavesList = new List<LeaveModel>();
+            ConfirmedLeavesList = new List<LeaveResponse>();
+            InprogessLeavesList = new List<LeaveResponse>();
+            PostponedLeavesList = new List<LeaveResponse>();
 
             //StatusName = "en cours";
 
@@ -92,7 +93,7 @@ namespace XForms.ViewModels
             donutChart = new DonutChart()
             {
                 MinValue = 0,
-                MaxValue = 26,
+                MaxValue = 18,
                 HoleRadius = 0.7f,
 
             };
@@ -103,12 +104,9 @@ namespace XForms.ViewModels
         {
             base.OnAppearing();
 
-            //if (InterventionsList?.Any() != true || App.CanRefreshHome)
-            //{
-            //    await GetIntervenetionsData();
+                var result = await App.AppServices.GetStatistics_ProfilLeaves();
+            statistiqueLeaveModel = result.data;
 
-            //    App.CanRefreshHome = false;
-            //}
             StatusName = "en cours";
             OnPropertyChanged(nameof(StatusName));
             await getLeavesList();
@@ -132,37 +130,34 @@ namespace XForms.ViewModels
                 var result = await App.AppServices.GetLeaves();
 
                 LeaveDate = result.data.ToList();
-                LeavesList = new ObservableRangeCollection<LeaveModel>(LeaveDate);
+                LeavesList = new ObservableRangeCollection<LeaveResponse>(LeaveDate);
 
 
 
                 FilterLeaves(LeavesList);
                 DifferenceOfDays(InprogessLeavesList, ConfirmedLeavesList, PostponedLeavesList);
-                LeaveItemsList = new ObservableRangeCollection<LeaveModel>(InprogessLeavesList);
+                LeaveItemsList = new ObservableRangeCollection<LeaveResponse>(InprogessLeavesList);
 
                 numberOfRequests = LeaveItemsList.Count;
-
-
-
-
+                TotalDays = statistiqueLeaveModel.ValidatedDays + statistiqueLeaveModel.InProgresDays + statistiqueLeaveModel.RejectedDays;
                 entries = new List<ChartEntry>
             {
-                new ChartEntry(ConfirmedDays)
+                new ChartEntry(statistiqueLeaveModel.ValidatedDays)
                 {
                     Color = SKColor.Parse("#95D5A4")
                 },
-                new ChartEntry(InprogessDays)
+                new ChartEntry(statistiqueLeaveModel.InProgresDays)
                 {
                     Color = SKColor.Parse("#FEE07D")
                 },
-                new ChartEntry(PostponedDays)
+                new ChartEntry(statistiqueLeaveModel.RejectedDays)
                 {
                     Color = SKColor.Parse("#D59595")
                 },
-                new ChartEntry(TotalDays)
-                {
-                    Color = SKColor.Parse("#E4FAE8")
-                },
+                //new ChartEntry(TotalDays)
+                //{
+                //    Color = SKColor.Parse("#F6FFF8")
+                //},
             };
 
                 donutChart.Entries = entries;
@@ -180,7 +175,7 @@ namespace XForms.ViewModels
 
         }
 
-        private void DifferenceOfDays(List<LeaveModel> InprogessLeavesList, List<LeaveModel> ConfirmedLeavesList, List<LeaveModel> PostponedLeavesList)
+        private void DifferenceOfDays(List<LeaveResponse> InprogessLeavesList, List<LeaveResponse> ConfirmedLeavesList, List<LeaveResponse> PostponedLeavesList)
         {
             ConfirmedDays = 0;
             InprogessDays = 0;
@@ -202,7 +197,7 @@ namespace XForms.ViewModels
             ConfirmedDays = ConfirmedLeavesList.Count;
             InprogessDays = InprogessLeavesList.Count;
             PostponedDays = PostponedLeavesList.Count;
-            TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
+            //TotalDays = 18;
 
             OnPropertyChanged(nameof(ConfirmedDays));
             OnPropertyChanged(nameof(InprogessDays));
@@ -210,7 +205,7 @@ namespace XForms.ViewModels
             OnPropertyChanged(nameof(TotalDays));
         }
 
-        private void FilterLeaves(ObservableRangeCollection<LeaveModel> LeavesList)
+        private void FilterLeaves(ObservableRangeCollection<LeaveResponse> LeavesList)
         {
             ConfirmedLeavesList.Clear();
             InprogessLeavesList.Clear();
@@ -315,7 +310,7 @@ namespace XForms.ViewModels
         private LeaveDetailsPopup leaveDetailsPopup;
 
         private bool canOpenLeaveDetailsPopup = true;
-        public ICommand OpenLeaveDetailsPopupView => new Command<LeaveModel>(async (model) =>
+        public ICommand OpenLeaveDetailsPopupView => new Command<LeaveResponse>(async (model) =>
         {
             try
             {
@@ -354,7 +349,7 @@ namespace XForms.ViewModels
 
 
         private bool canOpenProfilLeaveDetailsPopup = true;
-        public ICommand OpenProfilLeaveDetailsPopupView => new Command<LeaveModel>(async (model) =>
+        public ICommand OpenProfilLeaveDetailsPopupView => new Command<LeaveResponse>(async (model) =>
         {
             try
             {

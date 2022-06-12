@@ -38,10 +38,10 @@
                 CornerRadius="30,30,0,0"
                 VerticalOptions="FillAndExpand" />
 
-           <cc:MaterialItemValue
+            <cc:MaterialItemValue
                Grid.Row="2"
-               Item="Mehdi Mellali"
-               Value="Développeur full stack"
+               Item="{Binding SelectedProfil.FullName}"
+               Value="{Binding SelectedProfil.RefFunctionLabel}"
                HorizontalOptions="Center"
                VerticalOptions="Center"
                HorizontalTextAlignment="Center"
@@ -50,17 +50,18 @@
                 Grid.Row="3"
                 HeightRequest="30"
                 Padding="20,10"
-                Margin="30"
+                Margin="30,0"
                 CornerRadius="6"
+                BackgroundColor="{StaticResource InputBackground}"
                 >
                 <pc:PancakeView.Border>
-                    <pc:Border Color="#DDE4F3" Thickness="1"/>
+                    <pc:Border Color="{StaticResource InputBorder}" Thickness="1"/>
                 </pc:PancakeView.Border>
                 <Grid
                     ColumnDefinitions="6*,*,*"
                     >
                     <Label
-                        Text="{Binding MyNotes, StringFormat='{0} points'}"
+                        Text="{Binding MyPoints, StringFormat='{0} points'}"
                         VerticalOptions="Center"
                         FontSize="14"
                         TextColor="{StaticResource LabelColor}"
@@ -103,25 +104,23 @@
                     </cc:CustomButton>
                 </Grid>
             </pc:PancakeView>
-          <pc:PancakeView
-              Grid.Row="4"
-                HeightRequest="60"
-                Padding="20,10"
-                Margin="30,0,30,30"
-                CornerRadius="6"
-                >
-              <pc:PancakeView.Border>
-                  <pc:Border Color="#DDE4F3" Thickness="1"/>
-              </pc:PancakeView.Border>
-                    <Label
-                        Text="Ajouter un motif"
-                        VerticalOptions="Start"
-                        FontSize="14"
-                        TextColor="{StaticResource LabelColor}"
-                        FontFamily="RubikRegular"
-                        />
-              </pc:PancakeView>
 
+            <StackLayout
+              Grid.Row="4"
+                Margin="30,20"
+                Spacing="20"
+                             >
+                <cc:MaterialEntry
+                        Placeholder="Ajouter un motif"
+                        BackgroundColor="Transparent"
+                        CornerRadiuss="6"
+                    Text="{Binding Motif}"
+                        />
+                <cc:CustomButton
+                      Text="Confirmer"
+                    Command="{Binding AddPointsToMemberCommand}"
+                      />
+            </StackLayout>
             <cc:CornerView
                 Grid.RowSpan="2"
                 StyleCorner="Circle"
@@ -134,11 +133,11 @@
                         Visual="Default"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Local:ImageResource profil.png}"
+                        Source="{Binding SelectedProfil.PictureUrl}"
                         Aspect="AspectFill"
                         />
                 </cc:CornerView>
             </cc:CornerView>
         </Grid>
-        </Grid>
+    </Grid>
 </Base:BasePopupView>

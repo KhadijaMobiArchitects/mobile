@@ -42,8 +42,8 @@
 
            <cc:MaterialItemValue
                Grid.Row="2"
-               Item="Mehdi Mellali"
-               Value="Développeur full stack"
+               Item="{Binding SelectedProfil.FullName}"
+               Value="{Binding SelectedProfil.RefFunctionLabel}"
                HorizontalOptions="Center"
                VerticalOptions="Center"
                HorizontalTextAlignment="Center"
@@ -57,46 +57,37 @@
                 >
                 <cc:MaterialItemValue
                     Item="Projet"
-                    Value="Ta7alil"
+                    Value="{Binding SelectedProfil.ProjetName}"
                     />
                 <cc:MaterialItemValue
                     Grid.Row="1"
                     Item="Date D'affectation"
-                    Value="Ta7alil"
+                    Value="{Binding SelectedProfil.DateAffectation,StringFormat='{0:dd/MM/yyyy}'}"
                     />
                 <cc:MaterialItemValue
                     Grid.Row="1"
                     Grid.Column="1"
                     Item="Estimation projet"
-                    Value="Ta7alil"
+                    Value="{Binding SelectedProfil.EstimationProject, StringFormat='{0} Mois'}"
                     />
                 <cc:MaterialItemValue
                     Grid.Row="2"
                     Item="Autre projet"
-                    Value="Ta7alil"
+                    Value="{Binding SelectedProfil.OtherProjectsString}"
                     />
                 <cc:MaterialItemValue
                     Grid.Row="2"
                     Grid.Column="1"
                     Item="Owner"
-                    Value="Ta7alil"
+                    Value="{Binding SelectedProfil.ProjetName}"
                     />
                 <Grid
                     Grid.Row="3"
                     Grid.ColumnSpan="2"
                     RowSpacing="-20"
                     >
-                <cc:CustomButton                 
-                    Text="Retirer"
-                    BackgroundColor="{StaticResource Red}"
-                    CornerRadius="27"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    Margin="20"
-                    />
-                <cc:CustomButton
-                    Grid.Row="1"
-                    Text="Ajouter une note"
+          <cc:CustomButton
+                    Text="Ajouter des points"
                     BackgroundColor="{StaticResource Primary}"
                     CornerRadius="27"
                     FontSize="14"
@@ -104,6 +95,17 @@
                     Margin="20"
                     Command="{Binding OpenAddPointsPopupCommand}"
                     />
+                <cc:CustomButton
+                    Grid.Row="1"                    
+                    Text="Retirer"
+                    BackgroundColor="{StaticResource Red}"
+                    CornerRadius="27"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Margin="20"
+                    Command="{Binding RejectProfilFromProjectCommand}"
+                    />
+      
                 </Grid>
             </Grid>
 
@@ -120,7 +122,7 @@
                         Visual="Default"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Source="{Local:ImageResource profil.png}"
+                        Source="{Binding SelectedProfil.PictureUrl}"
                         Aspect="AspectFill"
                         />
                 </cc:CornerView>

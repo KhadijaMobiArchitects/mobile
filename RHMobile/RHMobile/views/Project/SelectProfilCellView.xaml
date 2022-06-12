@@ -62,7 +62,7 @@
         </Grid>
             <Label
                 Text="{Binding LastName}"
-                FontSize="13"
+                FontSize="12"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
                 FontAttributes="Bold"

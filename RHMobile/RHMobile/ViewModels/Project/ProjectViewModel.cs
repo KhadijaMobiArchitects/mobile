@@ -41,15 +41,20 @@ namespace XForms.ViewModels
         public string SelectedProjectName { get; set; } = "";
 
         public ProjectModel SelectedProjet { get; set; }
+        public ProfilResponse SelectedProfil { get; set; }
 
         public bool IsProjectOwner { get; set; }
 
         public string ProjectName { get; set; } = "";
+        public string ProjectNameSquad =>"Équipe de projet " + ProjectName;
+
 
 
         private ProjectModel AddProjectCell;
 
-        public int MyNotes { get; set; } = 0;
+        public int MyPoints { get; set; } = 0;
+        public string Motif { get; set; }
+
         public int Percent { get; set; } = 0;
 
         public ProjectViewModel()
@@ -334,6 +339,10 @@ namespace XForms.ViewModels
             {
                 canProfilDetailsPopup = false;
 
+                if (model == null)
+                    return;
+                SelectedProfil = model;
+
                 if (profilDetailsPopup == null)
                     profilDetailsPopup = new ProfilDetailsPopup() { BindingContext = this };
 
@@ -341,7 +350,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
             finally
             {
@@ -423,7 +432,7 @@ namespace XForms.ViewModels
                 var result =await App.AppServices.PostMembers(addMemebersRequest);
                 AppHelpers.LoadingHide();
                 GetProjectSquad(SelectedProjectId);
-                PopupNavigation.Instance.PopAllAsync();
+                await PopupNavigation.Instance.PopAllAsync();
 
             }
             catch (Exception ex)
@@ -538,6 +547,80 @@ namespace XForms.ViewModels
 
         },
         () => canChangePercent);
+
+
+        private bool canRejectProfilfromProjet = true;
+        public ICommand RejectProfilFromProjectCommand => new Command(async () =>
+        {
+            try
+            {
+                canRejectProfilfromProjet = false;
+                var deleteMemeberProject = new DeleteMemeberProjectModel()
+                {
+                    ProjectId = SelectedProjectId,
+                    ProfilId = SelectedProfil.RecId
+                };
+
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.DeleteMemberFromProjet(deleteMemeberProject);
+                AppHelpers.LoadingHide();
+                AppHelpers.Alert(result?.message);
+                GetProjectSquad(SelectedProjectId);
+                await PopupNavigation.Instance.PopAllAsync();
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canRejectProfilfromProjet = true;
+
+            }
+
+        },
+        () => canRejectProfilfromProjet);
+
+
+        private bool canAddPointsToMember = true;
+        public ICommand AddPointsToMemberCommand => new Command(async () =>
+        {
+            try
+            {
+                canAddPointsToMember = false;
+                var points = new PointModel()
+                {
+                    SumPoints = MyPoints,
+                    Motif = Motif,
+                    GrantedTo = SelectedProfil.RecId,
+                    Title = ""
+
+                };
+
+                //AppHelpers.LoadingShow();
+                var result = await App.AppServices.GranttPoints(points);
+                //AppHelpers.LoadingHide();
+                AppHelpers.Alert(result?.message);
+                await PopupNavigation.Instance.PopAllAsync();
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                canRejectProfilfromProjet = true;
+
+            }
+
+        },
+        () => canRejectProfilfromProjet);
+
+
     }
 }
 

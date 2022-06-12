@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using XForms.Resources;
 
 namespace XForms.Models
 {
-    public partial class ProfilResponse
+    public partial class ProfilResponse : BindableObject
     {
         public string RecId { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set; } 
+        public string LastName { get; set; }
+
+        public string FullName { get; set; }
 
         //public IFormFile? Picture { get; set; }
 
@@ -20,7 +23,13 @@ namespace XForms.Models
 
         public String RefFunctionLabel { get; set; }
 
+        public object DateAffectation { get; set; }
+        public List<string> OtherProjects { get; set; }
+        public string ProjetName { get; set; }
+        public double EstimationProject { get; set; }
 
+        //public string FullName => FirstName +" "+ LastName ;
+        public string OtherProjectsString => String.Join(" , ", OtherProjects);
 
     }
 

@@ -25,6 +25,9 @@ namespace XForms.ViewModels
             //SigninEmail = "abdelahasserhihe@gmail.com";
             //SigninPassword = "Password2022!!";
 
+            SigninEmail = "hassoun.k@mobiarchitects.com";
+            SigninPassword = "Password2022!!";
+
             //Chef_projet
 
             //SigninEmail = "oussamabouhami@gmail.com";
@@ -37,13 +40,13 @@ namespace XForms.ViewModels
 
             //Manager
 
-            //SigninEmail = "samirghaouissi@gmail.com";
+            //SigninEmail = "sr@mobiarchitects.com";
             //SigninPassword = "Password2022!!";
 
             //Responsable RH
 
-            SigninEmail = "rimrh@gmail.com";
-            SigninPassword = "Password2022!!";
+            //SigninEmail = "rimrh@gmail.com";
+            //SigninPassword = "Password2022!!";
 
 
 
@@ -104,6 +107,7 @@ namespace XForms.ViewModels
                     //if (isFingerprintAvailable)
 
                     {
+                        AppPreferences.IsAleardyLoggedIn = true;
                         var digitalPrintPopup = new Popups.FeedBackPopup(
                         headerGlyph: Resources.FontAwesomeFonts.finger,
                         headerGlyphBackground: AppHelpers.LookupColor("Primary"),

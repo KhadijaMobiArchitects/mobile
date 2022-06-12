@@ -61,7 +61,7 @@
                             FontSize="16"
                             FontAttributes="Bold"
                             TextColor="{StaticResource LabelColor}"
-                            Padding="6,0"
+                            Padding="6,0,0,10"
                             />
                             </CollectionView.Header>
                             <CollectionView.ItemTemplate                            

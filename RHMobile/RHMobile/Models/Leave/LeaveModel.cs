@@ -17,7 +17,7 @@ namespace XForms.Models
         public int RefStatusLeaveId { get; set; }
         public int RefTypeLeaveId { get; set; }
         public string LabelType { get; set; }
-        public string labelStatus { get; set; }
+        public string LabelStatus { get; set; }
         public int ProjectId { get; set; }
         public int RefSituationProjectId { get; set; }
 
@@ -62,5 +62,13 @@ namespace XForms.Models
     public class DeleteLeaveModel
     {
         public int leaveId { get; set; }
+    }
+
+    public class StatistiqueLeaveModel
+    {
+        public int InProgresDays { get; set; }
+        public int ValidatedDays { get; set; }
+        public int RejectedDays { get; set; }
+        public int TotalDays { get; set; }
     }
 }

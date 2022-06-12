@@ -160,6 +160,7 @@
     <None Remove="Resources\Images\recore.svg" />
     <None Remove="Resources\Images\recoreprime.svg" />
     <None Remove="Resources\Images\calendar.svg" />
+    <None Remove="Models\Points\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />
@@ -218,6 +219,7 @@
     <Folder Include="Models\Displacement\" />
     <Folder Include="Services\Map\" />
     <Folder Include="Models\Map\" />
+    <Folder Include="Models\Point\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Rectangle.png" />

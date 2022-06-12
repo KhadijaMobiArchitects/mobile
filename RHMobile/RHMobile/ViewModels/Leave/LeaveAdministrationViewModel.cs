@@ -57,8 +57,8 @@ namespace XForms.ViewModels
                     LeaveListAdmin = new ObservableRangeCollection<LeaveResponse>(result.data.ToList());
 
                     LeaveItemsListAdmin = new ObservableRangeCollection<LeaveResponse>();
-                    InprogessLeavesList = LeaveListAdmin.Where(x => (x.refStatusLeaveId == 1)).ToList();
-                    ConfirmedLeavesList = LeaveListAdmin.Where(x => (x.refStatusLeaveId == 2)).ToList();
+                    InprogessLeavesList = LeaveListAdmin.Where(x => (x.RefStatusLeaveId == 1)).ToList();
+                    ConfirmedLeavesList = LeaveListAdmin.Where(x => (x.RefStatusLeaveId == 2)).ToList();
                     LeaveItemsListAdmin.ReplaceRange(InprogessLeavesList);
                     canOpenProfilLeaveDetailsPopup = true;
                     numberOfRequests = LeaveItemsListAdmin.Count;
@@ -73,7 +73,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                AppHelpers.Alert(ex.Message, exception: ex);
             }
         }
         private bool CanSelectHeaderAction = true;
@@ -116,7 +116,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                AppHelpers.LoadingHide();
+                AppHelpers.Alert(ex.Message, exception: ex);
 
                 //Logger.LogError(ex);
             }
@@ -175,7 +175,7 @@ namespace XForms.ViewModels
 
                 var postParam = new UpdateLeaveModel()
                 {
-                    id = SelectedLeave.id,
+                    id = SelectedLeave.Id,
                     refStatusLeaveId = 2
                 };
 
@@ -210,11 +210,9 @@ namespace XForms.ViewModels
 
                 var postParam = new UpdateLeaveModel()
                 {
-                    id = SelectedLeave.id,
+                    id = SelectedLeave.Id,
                     refStatusLeaveId = 3
                 };
-
-                AppHelpers.LoadingShow();
                 AppHelpers.LoadingShow();
                 var result = await App.AppServices.PostUpdateLeave(postParam);
                 AppHelpers.Alert(result?.message);

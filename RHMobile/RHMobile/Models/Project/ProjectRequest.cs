@@ -28,4 +28,10 @@ namespace XForms.Models
 
 
     }
+
+    public class DeleteMemeberProjectModel
+    {
+        public int ProjectId { get; set; }
+        public string ProfilId { get; set; }
+    } 
 }

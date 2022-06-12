@@ -47,7 +47,7 @@ namespace XForms.ViewModels
         public bool EnableButtonSendRequest { get; set; }
         public Color ButtonSendRequestBackground => EnableButtonSendRequest ? Color.FromHex("#126BCD") : Color.FromHex("#B0B6BE");
 
-        public int NumberOfDays => (int) (EndDate - StartDate).TotalDays + 1;
+        public int NumberOfDays { get; set; }
 
         private NewLeaveRequestValidator validator;
 
@@ -78,11 +78,24 @@ namespace XForms.ViewModels
                 e.PropertyName == nameof(SelectedSituationProject)
                 )
                 {
-
                     validationResult = validator.Validate(this);
-                     EnableButtonSendRequest = validationResult.IsValid;
+                    EnableButtonSendRequest = validationResult.IsValid;
                     OnPropertyChanged(nameof(ButtonSendRequestBackground));
 
+                }
+                if (e.PropertyName == nameof(StartDate) ||
+                e.PropertyName == nameof(EndDate)
+                )
+                {
+                    try
+                    {
+                        NumberOfDays = AppHelpers.BusinessDaysUntil(StartDate, EndDate);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             };
 
