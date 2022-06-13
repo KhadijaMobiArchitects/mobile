@@ -33,7 +33,7 @@
                 HasBackButton="True"
                 BackButtonBorderColor="{StaticResource StartGradient}"
                 BackButtonColor="{StaticResource EndGradient}"
-                Description="{Binding numberOfRequests,StringFormat='{0} demande'}"
+                Description="{Binding numberOfRequests,StringFormat='{0} demandes'}"
 
                 />
                         <!--Switch-->

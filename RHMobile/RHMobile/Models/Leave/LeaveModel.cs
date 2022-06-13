@@ -71,4 +71,9 @@ namespace XForms.Models
         public int RejectedDays { get; set; }
         public int TotalDays { get; set; }
     }
+
+    public class DeleteLeave
+    {
+        public int LeaveId { get; set; }
+    }
 }

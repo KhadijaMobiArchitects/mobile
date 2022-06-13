@@ -32,6 +32,7 @@ namespace XForms.Models
         {
             LeaveStatus.Inprogress => Color.FromHex("#FEE07D"),
             LeaveStatus.Confirmed => Color.FromHex("#95D5A4"),
+            LeaveStatus.Postponed => Color.FromHex("#D59595"),
             _ => Color.Gray
 
         };
@@ -39,8 +40,10 @@ namespace XForms.Models
         {
             LeaveStatus.Inprogress => Color.FromHex("#E6992A"),
             LeaveStatus.Confirmed => Color.FromHex("#589266"),
+            LeaveStatus.Postponed => Color.FromHex("#925858"),
             _ => Color.Gray
         };
+
 
         public string FullName => FirstName + " " + LastName;
         //public string confirmerParSquad => ConfirmedBySquad switch

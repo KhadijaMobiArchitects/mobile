@@ -617,8 +617,8 @@ namespace XForms
 
             firstDay = firstDay.Date;
             lastDay = lastDay.Date;
-            if (firstDay > lastDay)
-                throw new ArgumentException("Incorrect last day " + lastDay);
+            //if (firstDay > lastDay)
+            //    throw new ArgumentException("Incorrect last day " + lastDay);
 
             TimeSpan span = lastDay - firstDay;
             int businessDays = span.Days + 1;

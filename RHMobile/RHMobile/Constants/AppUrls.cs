@@ -41,7 +41,7 @@ namespace XForms.Constants
 
 
         public const string PostLeaveRequest = BaseUrl + "leaves/CreateLeave/";
-        public const string DeleteLeaveRequest = BaseUrl + "leaves/deleteLeave";
+        public const string DeleteLeaveRequest = BaseUrl + "leaves/DeleteLeave";
         public const string PostProjectRequest = BaseUrl + "projects/CreateProject";
         public const string GetStaffMembersToAddRequest = BaseUrl + "Projects/GetStaffMembersToAdd";
         public const string PostMembersRequest = BaseUrl + "Projects/AddStaffMembers";

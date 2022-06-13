@@ -391,14 +391,23 @@ namespace XForms.ViewModels
             {
                 AppHelpers.LoadingShow();
                 CanCancelRequest = false;
-                var result = await App.AppServices.DeleteLeave(SelectedLeave.Id);
+                var postparamts = new DeleteLeave()
+                {
+                    LeaveId = SelectedLeave.Id
+                };
+
+                var result = await App.AppServices.DeleteLeave(postparamts);
                 if (result.succeeded)
                 {
                     InprogessLeavesList.Remove(SelectedLeave);
                     LeaveItemsList.Remove(SelectedLeave);
                     numberOfRequests--;
-                    InprogessDays--;
-                    TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
+
+                    var re = await App.AppServices.GetStatistics_ProfilLeaves();
+                    statistiqueLeaveModel = re.data;
+
+                    //InprogessDays--;
+                    //TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
 
                     //LeaveItemsListAdmin.Remove(SelectedLeave);
                     //numberOfRequestsAdmin--;

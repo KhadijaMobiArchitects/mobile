@@ -102,12 +102,13 @@ namespace XForms.ViewModels
                     //bool isFingerprintAvailable = await CrossFingerprint.Current.IsAvailableAsync(false);
                     bool isFingerprintAvailable = true;
 
-                    //!AppPreferences.IsAleardyLoggedIn
+                    //AppPreferences.IsAleardyLoggedIn = false;
                     if (!AppPreferences.IsAleardyLoggedIn && isFingerprintAvailable)
                     //if (isFingerprintAvailable)
 
                     {
                         AppPreferences.IsAleardyLoggedIn = true;
+
                         var digitalPrintPopup = new Popups.FeedBackPopup(
                         headerGlyph: Resources.FontAwesomeFonts.finger,
                         headerGlyphBackground: AppHelpers.LookupColor("Primary"),
@@ -132,8 +133,8 @@ namespace XForms.ViewModels
                                 if (result.Authenticated)
                                 {
                                     var digitalPrintAuthenticatedPopup = new Popups.FeedBackPopup(
-                                               headerGlyph: Resources.FontAwesomeFonts.Check,
-                                               headerGlyphBackground: AppHelpers.LookupColor("Primay"),
+                                               headerGlyph: Resources.FontAwesomeFonts.CheckCircle,
+                                               headerGlyphBackground: AppHelpers.LookupColor("Primary"),
                                                title: "Empreinte digitale",
                                                description: "Votre empreinte digitale a été bien enregistrée",
                                                confirmActionText: "D’accord",
@@ -177,7 +178,7 @@ namespace XForms.ViewModels
                             {
                                 //Close Digital Print Popup
                                 var digitalPrintCancelPopup = new Popups.FeedBackPopup(
-                     //headerGlyph: DigitalPrintGlyph,
+                     headerGlyph: Resources.FontAwesomeFonts.finger,
                      headerGlyphBackground: AppHelpers.LookupColor("Primary"),
                      title: "Empreinte digitale",
                      description: @"Vous pouvez, à tout moment, activer la connexion par touch ID depuis le menu ""Paramètres""",

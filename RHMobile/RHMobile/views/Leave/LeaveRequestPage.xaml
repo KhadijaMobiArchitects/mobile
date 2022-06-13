@@ -29,7 +29,7 @@
                 HasTitle="True"
                 HasDescription="True"
                 Title="Demande Congé"
-                Description="{Binding numberOfRequests,StringFormat='{0} demande'}"
+                Description="{Binding numberOfRequests,StringFormat='{0} demandes'}"
                 HasNotification="True"
                 HasBackButton="True"
                 BackButtonBorderColor="{StaticResource StartGradient}"
@@ -90,7 +90,7 @@
                         <cc:MaterialDay
                                     NumberOfDays="{Binding statistiqueLeaveModel.ValidatedDays}"
                                     StatusColor="{StaticResource ConfirmedColor}"
-                                    StatusDays="consomé"
+                                    StatusDays="consomés"
                                     VerticalOptions="StartAndExpand"
                                     
                                     />
@@ -103,7 +103,7 @@
                         <cc:MaterialDay
                                     NumberOfDays="{Binding statistiqueLeaveModel.RejectedDays}"
                                     StatusColor="{StaticResource postponedColor}"
-                                    StatusDays="Refusé"
+                                    StatusDays="Refusés"
                                     VerticalOptions="EndAndExpand"
                                     />
                     </StackLayout>

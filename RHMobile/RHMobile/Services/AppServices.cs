@@ -162,9 +162,10 @@ namespace XForms.Services
 
 
 
-        public async Task<RESTServiceResponse<object>> DeleteLeave(long Id)
+        public async Task<RESTServiceResponse<object>> DeleteLeave(DeleteLeave postParams)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteLeaveRequest}/{Id}", method: HttpVerbs.DELETE);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
+
         }
 
         public async Task<RESTServiceResponse<object>> PostUpdateLeave(UpdateLeaveModel postParams)
