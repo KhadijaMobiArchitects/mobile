@@ -15,7 +15,7 @@
     x:Class="XForms.views.Administration.HomePage">
     <Base:BasePage.Content>
         <Grid
-            RowDefinitions="auto,30,30,auto"
+            RowDefinitions="auto,30,30,*"
             VerticalOptions="FillAndExpand"
             RowSpacing="0"
             >
@@ -57,10 +57,10 @@
                                 HeightRequest="30"
                                 WidthRequest="30"
                                 Aspect="AspectFit"
-                                Source="{Local:ImageResource balance.svg}"
+                                Source="{Local:ImageResource personalData.svg}"
                                 />
                     <Label
-                                Text="Votre soldes est"
+                                Text="Votre solde est"
                                 VerticalTextAlignment="Center"
                                 Padding="10,0"
                                 TextColor="#33373D"
@@ -69,7 +69,7 @@
 
                                 />
                     <Label
-                                Text="40 pts"
+                                Text="{Binding MyPoints,StringFormat='{0} pts'}"
                                 HorizontalOptions="EndAndExpand"
                                 VerticalTextAlignment="Center"
                                 FontSize="20"
@@ -81,15 +81,14 @@
             </pancake:PancakeView>
 
             <!--Body-->
-            <ScrollView
-                Grid.Row="3"                
-                >
+
                 <Grid
-                    RowDefinitions="auto,auto"
+                    Grid.Row="3"
+
+                    RowDefinitions="*"
                     Padding="{OnPlatform iOS='24,0,24,0',Android='24,0,24,0'}"
                     >
                     <CollectionView
-                        Grid.Row="1"
                         ItemsLayout="VerticalGrid,3"
                         VerticalScrollBarVisibility="Never"
                             HorizontalScrollBarVisibility="Never"
@@ -120,7 +119,6 @@
                         <CollectionView.Footer>
                             <Grid
                     Padding="0,30"
-                    Grid.Row="1"
                     RowDefinitions="auto,auto"
                     >
                                 <Label
@@ -158,8 +156,6 @@
                 </Grid>
 
                 <!--Footer-->
-
-            </ScrollView>
         </Grid>
     </Base:BasePage.Content>
 

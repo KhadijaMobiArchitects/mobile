@@ -189,7 +189,9 @@
                     Text="Ajouter Projet"
                     CornerRadius="25"
                     Command="{Binding AddProjectCommand}"
-                />
+                    FontSize="15"
+                    HeightRequest="50"
+                    />
             </Grid>
           </ScrollView>
 

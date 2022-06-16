@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using XForms.Interfaces;
 using XForms.Models;
+using XForms.Services;
 using XForms.views.Authentication;
 
 namespace XForms.ViewModels
@@ -12,16 +15,20 @@ namespace XForms.ViewModels
     public class BaseViewModel : BindableObject
     {
         public List<REFItem> HeadrActionList { get; set; }
+        protected ILogger Logger;
 
         public string FullName { get; set; }
         public string PictureUrl { get; set; }
         public string RefFunctionLabel { get; set; }
+        public bool EnableFaceID { get; set; }
 
         public BaseViewModel()
         {
             FullName = AppPreferences.FullName;
             PictureUrl = AppPreferences.PictureUrl;
             RefFunctionLabel = AppPreferences.RefFunctionLabel;
+
+            Logger = new AppCenterLogger();
 
             HeadrActionList = new List<REFItem>()
             {
@@ -47,7 +54,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger?.LogError(ex);
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -63,19 +70,44 @@ namespace XForms.ViewModels
             {
                 CanLogout = false;
 
-                AppPreferences.ClearCache();
+                //AppPreferences.ClearCache();
+                PopupNavigation.Instance.PopAllAsync();
 
                 Application.Current.MainPage = new NavigationPage(new SigninPage());
             }
             catch (Exception ex)
             {
-                //Logger?.LogError(ex, showError: true);
+                Logger?.LogError(ex, showError: true);
             }
             finally
             {
                 CanLogout = true;
             }
         }, () => CanLogout);
+
+        private bool CanOpenFlyout = true;
+        private views.FlyoutPage flyoutPagePopup;
+        public ICommand OpenFlyoutCommand => new Command(async () =>
+        {
+            try
+            {
+                CanOpenFlyout = false;
+                if (flyoutPagePopup == null)
+                    flyoutPagePopup = new views.FlyoutPage() { BindingContext = this};
+
+                await PopupNavigation.Instance.PushSingleAsync(flyoutPagePopup);
+            }
+            catch (Exception ex)
+            {
+                Logger?.LogError(ex, showError: true);
+            }
+            finally
+            {
+                CanOpenFlyout = true;
+            }
+        }, () => CanOpenFlyout);
+
+        
 
         private bool CanSelectHeaderAction = true;
         public ICommand SelectHeaderActionCommand => new Command<REFItem>(async (model) =>
@@ -96,6 +128,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex, showError: true);
 
             }
             finally

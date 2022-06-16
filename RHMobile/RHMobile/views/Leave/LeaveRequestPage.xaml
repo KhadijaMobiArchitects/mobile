@@ -65,14 +65,14 @@
                                     >
                             <Label
 
-                                Text="{Binding TotalDays}"
+                                Text="{Binding statistiqueLeaveModel.TotalDays}"
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
                                 FontSize="24"
                                 FontAttributes="Bold"
                                 />
                             <Label
-                                        Text="Total des congés"
+                                        Text="Total des jours"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                         FontSize="13"
@@ -88,22 +88,22 @@
                                 Padding="0,20"
                                 >
                         <cc:MaterialDay
-                                    NumberOfDays="{Binding ConfirmedDays}"
+                                    NumberOfDays="{Binding statistiqueLeaveModel.ValidatedDays}"
                                     StatusColor="{StaticResource ConfirmedColor}"
-                                    StatusDays="consomé"
+                                    StatusDays="consomés"
                                     VerticalOptions="StartAndExpand"
                                     
                                     />
                         <cc:MaterialDay
-                                    NumberOfDays="{Binding InprogessDays}"
+                                    NumberOfDays="{Binding statistiqueLeaveModel.InProgresDays}"
                                     StatusColor="{StaticResource InProgressColor}"
                                     StatusDays="en vérification"
                                     VerticalOptions="CenterAndExpand"
                                     />
                         <cc:MaterialDay
-                                    NumberOfDays="{Binding PostponedDays}"
+                                    NumberOfDays="{Binding statistiqueLeaveModel.RejectedDays}"
                                     StatusColor="{StaticResource postponedColor}"
-                                    StatusDays="Annulé"
+                                    StatusDays="Refusés"
                                     VerticalOptions="EndAndExpand"
                                     />
                     </StackLayout>

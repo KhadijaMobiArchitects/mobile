@@ -23,6 +23,8 @@ namespace XForms.ViewModels
         public ObservableRangeCollection<ComplaintResponse> ProfilsComplaintItemsList { get; set; }
 
         public ComplaintResponse SelectedComplaint { get; set; }
+
+        public int numberOfRequestsAdmin { get; set; }
         public ComplaintAdministrationViewModel()
         {
 
@@ -41,23 +43,30 @@ namespace XForms.ViewModels
 
         public async Task GetAllComplaints()
         {
-            AppHelpers.LoadingShow();
-            var result = await App.AppServices.GetAllComplaint();
-            if (result?.succeeded == true)
+            try
             {
-                ComplaintProfils = new ObservableRangeCollection<ComplaintResponse>(result.data.ToList());
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.GetAllComplaint();
+                AppHelpers.LoadingHide();
+                if (result?.succeeded == true)
+                {
+                    ComplaintProfils = new ObservableRangeCollection<ComplaintResponse>(result.data.ToList());
 
-                ProfilsConfirmedComplaintList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 2)).ToList());
-                ProfilsInProgressComplaintList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 1)).ToList());
+                    ProfilsConfirmedComplaintList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 2)).ToList());
+                    ProfilsInProgressComplaintList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 1)).ToList());
 
-                ProfilsComplaintItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressComplaintList : ProfilsConfirmedComplaintList;
-
+                    ProfilsComplaintItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressComplaintList : ProfilsConfirmedComplaintList;
+                    numberOfRequestsAdmin = ProfilsComplaintItemsList.Count;
+                }
+                else
+                {
+                    AppHelpers.Alert(result?.message);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AppHelpers.Alert(result?.message);
+                Logger.LogError(ex);
             }
-            AppHelpers.LoadingHide();
         }
 
 
@@ -80,10 +89,12 @@ namespace XForms.ViewModels
                 IsComplaintRequestConfirmed = !IsComplaintRequestInProgress;
 
                 ProfilsComplaintItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressComplaintList : ProfilsConfirmedComplaintList;
+                numberOfRequestsAdmin = ProfilsComplaintItemsList.Count;
+
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -111,7 +122,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -143,7 +154,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -158,26 +169,29 @@ namespace XForms.ViewModels
             try
             {
                 canRejectComplaint = false;
-                AppHelpers.LoadingShow();
 
                 var postParams = new Models.ComplaintTraitement()
                 {
                     Id = SelectedComplaint.Id,
                     RefStatusClaimId = 3
                 };
+
+                AppHelpers.LoadingShow();
                 var result = await App.AppServices.PosteUpdateComplaint(postParams);
+                AppHelpers.LoadingHide();
+
 
                 //ProfilsDispalacementItemsList.Remove()
 
                 await GetAllComplaints();
 
                 await PopupNavigation.Instance.PopAllAsync();
-                AppHelpers.LoadingHide();
+
 
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {

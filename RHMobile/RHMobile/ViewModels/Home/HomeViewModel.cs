@@ -16,6 +16,8 @@ namespace XForms.ViewModels
     {
         public List<REFItemAdministration> AdminstrationList { get; set; }
 
+        public int MyPoints { get; set; }
+
         public HomeViewModel()
         {
 
@@ -115,6 +117,21 @@ namespace XForms.ViewModels
     };
             
         }
+        public async override void OnAppearing()
+        {
+            base.OnAppearing();
+            try
+            {
+
+                var result = await App.AppServices.GetSumPoints();
+                MyPoints = result.data;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
+        }
+
         public INavigation navigation { get; set; }
         public bool canAdminisatrionNavigation = true;
         public ICommand AdministraionNavigation => new Command<REFItemAdministration>(async (model) =>
@@ -125,7 +142,7 @@ namespace XForms.ViewModels
 
                 if (model == null)
                     return;
-
+                Logger.LogEvent(model.Id.ToString());
                 _ = model.Id switch
                 {
                     AdministrationService.Leave => App.Current.MainPage.Navigation.PushAsync(new LeaveRequestPage()),
@@ -139,7 +156,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
 
             }
             finally
@@ -156,13 +173,10 @@ namespace XForms.ViewModels
             {
                 canNavigateToAdmin = false;
                 App.Current.MainPage.Navigation.PushAsync(new HomeAdminPage());
-
-
             }
             catch (Exception ex)
             {
-
-
+                Logger.LogError(ex);
             }
             finally
             {

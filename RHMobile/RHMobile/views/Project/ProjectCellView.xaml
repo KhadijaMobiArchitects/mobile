@@ -63,6 +63,8 @@
                         HorizontalTextAlignment="Center"
                         TextColor="{Binding TextColor}"
                         FontFamily="RubikRegular"
+                        MaxLines="1"
+                        LineBreakMode="TailTruncation"
                         />
                 </StackLayout>
 

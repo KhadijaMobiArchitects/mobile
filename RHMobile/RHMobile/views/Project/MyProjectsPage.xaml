@@ -29,10 +29,10 @@
                 x:Name="MyHeader"
                 HasTitle="True"
                 HasDescription="True"
-                Title="Projets client"
+                Title="Projet"
                 HasNotification="True"
                 HasBackButton="True"
-                Description="{Binding NumberOfMyProjects,StringFormat='{0} projet en cours'}"
+                Description="{Binding NumberOfMyProjects,StringFormat='{0} projets en cours'}"
                 BackButtonBorderColor="{StaticResource StartGradient}"
                 BackButtonColor="{StaticResource EndGradient }"
                 />
@@ -73,7 +73,7 @@
                 <CollectionView.Header                    
                     >
                     <Label
-                        Text="{Binding BindingContext.ProjectName,Source={x:Reference this},StringFormat='Squad {0}'}"
+                        Text="{Binding BindingContext.ProjectNameSquad,Source={x:Reference this},StringFormat='{0}'}"
                         FontSize="16"
                         FontAttributes="Bold"
                         />

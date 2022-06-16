@@ -7,6 +7,10 @@ using XForms.views.Administration;
 using XForms.Services;
 using XForms.views.Walkthrough;
 using XForms.views;
+using Microsoft.AppCenter;
+using XForms.Constants;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Analytics;
 
 namespace XForms
 {
@@ -27,14 +31,33 @@ namespace XForms
             }
             else
             {
-                AppHelpers.SetInitialView();
+                //AppHelpers.SetInitialView();
+                MainPage = new NavigationPage(new SigninPage());
+
+
 
             }
 
         }
 
 
-        //Design patterns : Singleton
+        protected override void OnStart()
+        {
+            try
+            {
+                #region AppCenter
+                AppCenter.Start($"android={AppConstants.AndroidAppCenterKey};" +
+                                 $"ios={AppConstants.iOSAppCenterKey}",
+                                 typeof(Analytics), typeof(Crashes));
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+                //Design patterns : Singleton
 
         private static AppServices _appServices;
         public static AppServices AppServices
@@ -58,12 +81,6 @@ namespace XForms
                     _appServices = value;
                 
             }
-        }
-
-
-
-        protected override void OnStart()
-        {
         }
 
         protected override void OnSleep()

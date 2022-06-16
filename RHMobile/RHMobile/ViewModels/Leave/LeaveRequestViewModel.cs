@@ -26,18 +26,18 @@ namespace XForms.ViewModels
         public List<REFItem> HeadrActionList { get; set; }
 
 
-        public List<LeaveModel> LeaveDate { get; set; }
-        public ObservableRangeCollection<LeaveModel> LeavesList { get; set; }
+        public List<LeaveResponse> LeaveDate { get; set; }
+        public ObservableRangeCollection<LeaveResponse> LeavesList { get; set; }
 
 
-        public ObservableRangeCollection<LeaveModel> LeaveItemsList { get; set; }
+        public ObservableRangeCollection<LeaveResponse> LeaveItemsList { get; set; }
 
         public List<ChartEntry> entries { get; set; }
 
 
-        public List<LeaveModel> InprogessLeavesList { get; set; }
-        public List<LeaveModel> ConfirmedLeavesList { get; set; }
-        public List<LeaveModel> PostponedLeavesList { get; set; }
+        public List<LeaveResponse> InprogessLeavesList { get; set; }
+        public List<LeaveResponse> ConfirmedLeavesList { get; set; }
+        public List<LeaveResponse> PostponedLeavesList { get; set; }
 
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
@@ -52,8 +52,9 @@ namespace XForms.ViewModels
         public int InprogessDays { get; set; }
         public int PostponedDays { get; set; }
         public int TotalDays { get; set;}
-        
-        public LeaveModel SelectedLeave { get; set; }
+
+        public StatistiqueLeaveModel statistiqueLeaveModel { get; set; }
+        public LeaveResponse SelectedLeave { get; set; }
 
         public string StatusName { get; set; }
 
@@ -61,9 +62,9 @@ namespace XForms.ViewModels
 
         public LeaveRequestViewModel()
         {
-            ConfirmedLeavesList = new List<LeaveModel>();
-            InprogessLeavesList = new List<LeaveModel>();
-            PostponedLeavesList = new List<LeaveModel>();
+            ConfirmedLeavesList = new List<LeaveResponse>();
+            InprogessLeavesList = new List<LeaveResponse>();
+            PostponedLeavesList = new List<LeaveResponse>();
 
             //StatusName = "en cours";
 
@@ -83,7 +84,7 @@ namespace XForms.ViewModels
                 new REFItem()
                 {
                     Id = 3,
-                    Name = "Annulée",
+                    Name = "Refusée",
                 }
             };
 
@@ -92,7 +93,7 @@ namespace XForms.ViewModels
             donutChart = new DonutChart()
             {
                 MinValue = 0,
-                MaxValue = 26,
+                MaxValue = 18,
                 HoleRadius = 0.7f,
 
             };
@@ -102,22 +103,26 @@ namespace XForms.ViewModels
         public async override void OnAppearing()
         {
             base.OnAppearing();
+            try
+            {
+                var result = await App.AppServices.GetStatistics_ProfilLeaves();
+                statistiqueLeaveModel = result.data;
 
-            //if (InterventionsList?.Any() != true || App.CanRefreshHome)
-            //{
-            //    await GetIntervenetionsData();
+                StatusName = "en cours";
+                OnPropertyChanged(nameof(StatusName));
+                await getLeavesList();
 
-            //    App.CanRefreshHome = false;
-            //}
-            StatusName = "en cours";
-            OnPropertyChanged(nameof(StatusName));
-            await getLeavesList();
+                //LeaveItemsList = InprogessLeavesList;
 
-            //LeaveItemsList = InprogessLeavesList;
+                //OnPropertyChanged(nameof(LeavesList));
+                OnPropertyChanged(nameof(LeaveItemsList));
 
-            //OnPropertyChanged(nameof(LeavesList));
-            OnPropertyChanged(nameof(LeaveItemsList));
+            }
+            catch (Exception ex)
+            {
+                Logger?.LogError(ex);
 
+            }
 
             //StatusName = HeadrActionList[0].IsSelected ? HeadrActionList[0].Name : (HeadrActionList[1].IsSelected ? HeadrActionList[1].Name : HeadrActionList[2].Name);
 
@@ -132,44 +137,41 @@ namespace XForms.ViewModels
                 var result = await App.AppServices.GetLeaves();
 
                 LeaveDate = result.data.ToList();
-                LeavesList = new ObservableRangeCollection<LeaveModel>(LeaveDate);
+                LeavesList = new ObservableRangeCollection<LeaveResponse>(LeaveDate);
 
 
 
                 FilterLeaves(LeavesList);
                 DifferenceOfDays(InprogessLeavesList, ConfirmedLeavesList, PostponedLeavesList);
-                LeaveItemsList = new ObservableRangeCollection<LeaveModel>(InprogessLeavesList);
+                LeaveItemsList = new ObservableRangeCollection<LeaveResponse>(InprogessLeavesList);
 
                 numberOfRequests = LeaveItemsList.Count;
-
-
-
-
+                TotalDays = statistiqueLeaveModel.ValidatedDays + statistiqueLeaveModel.InProgresDays + statistiqueLeaveModel.RejectedDays;
                 entries = new List<ChartEntry>
             {
-                new ChartEntry(ConfirmedDays)
+                new ChartEntry(statistiqueLeaveModel.ValidatedDays)
                 {
                     Color = SKColor.Parse("#95D5A4")
                 },
-                new ChartEntry(InprogessDays)
+                new ChartEntry(statistiqueLeaveModel.InProgresDays)
                 {
                     Color = SKColor.Parse("#FEE07D")
                 },
-                new ChartEntry(PostponedDays)
+                new ChartEntry(statistiqueLeaveModel.RejectedDays)
                 {
                     Color = SKColor.Parse("#D59595")
                 },
-                new ChartEntry(TotalDays)
-                {
-                    Color = SKColor.Parse("#E4FAE8")
-                },
+                //new ChartEntry(TotalDays)
+                //{
+                //    Color = SKColor.Parse("#F6FFF8")
+                //},
             };
 
                 donutChart.Entries = entries;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Logger?.LogError(ex);
 
             }
             finally
@@ -180,56 +182,76 @@ namespace XForms.ViewModels
 
         }
 
-        private void DifferenceOfDays(List<LeaveModel> InprogessLeavesList, List<LeaveModel> ConfirmedLeavesList, List<LeaveModel> PostponedLeavesList)
+        private void DifferenceOfDays(List<LeaveResponse> InprogessLeavesList, List<LeaveResponse> ConfirmedLeavesList, List<LeaveResponse> PostponedLeavesList)
         {
-            ConfirmedDays = 0;
-            InprogessDays = 0;
-            PostponedDays = 0;
 
-            //foreach (var item in ConfirmedLeavesList)
-            //{
-            //    ConfirmedDays += item.DifferenceOfDays;
-            //}
-            //foreach (var item in InprogessLeavesList)
-            //{
-            //    InprogessDays += item.DifferenceOfDays;
-            //}
-            //foreach (var item in PostponedLeavesList)
-            //{
-            //    PostponedDays += item.DifferenceOfDays;
-            //}
+            try
+            {
+                ConfirmedDays = 0;
+                InprogessDays = 0;
+                PostponedDays = 0;
 
-            ConfirmedDays = ConfirmedLeavesList.Count;
-            InprogessDays = InprogessLeavesList.Count;
-            PostponedDays = PostponedLeavesList.Count;
-            TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
+                //foreach (var item in ConfirmedLeavesList)
+                //{
+                //    ConfirmedDays += item.DifferenceOfDays;
+                //}
+                //foreach (var item in InprogessLeavesList)
+                //{
+                //    InprogessDays += item.DifferenceOfDays;
+                //}
+                //foreach (var item in PostponedLeavesList)
+                //{
+                //    PostponedDays += item.DifferenceOfDays;
+                //}
 
-            OnPropertyChanged(nameof(ConfirmedDays));
-            OnPropertyChanged(nameof(InprogessDays));
-            OnPropertyChanged(nameof(PostponedDays));
-            OnPropertyChanged(nameof(TotalDays));
+                ConfirmedDays = ConfirmedLeavesList.Count;
+                InprogessDays = InprogessLeavesList.Count;
+                PostponedDays = PostponedLeavesList.Count;
+                //TotalDays = 18;
+
+                OnPropertyChanged(nameof(ConfirmedDays));
+                OnPropertyChanged(nameof(InprogessDays));
+                OnPropertyChanged(nameof(PostponedDays));
+                OnPropertyChanged(nameof(TotalDays));
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+
+            }
+
         }
 
-        private void FilterLeaves(ObservableRangeCollection<LeaveModel> LeavesList)
+        private void FilterLeaves(ObservableRangeCollection<LeaveResponse> LeavesList)
         {
-            ConfirmedLeavesList.Clear();
-            InprogessLeavesList.Clear();
-            PostponedLeavesList.Clear();
-
-            foreach (var item in LeavesList)
+            try
             {
-                if (item.RefStatusLeaveId == (int)LeaveStatus.Inprogress)
+
+                ConfirmedLeavesList.Clear();
+                InprogessLeavesList.Clear();
+                PostponedLeavesList.Clear();
+
+                foreach (var item in LeavesList)
                 {
-                    InprogessLeavesList.Add(item);
+                    if (item.RefStatusLeaveId == (int)LeaveStatus.Inprogress)
+                    {
+                        InprogessLeavesList.Add(item);
+                    }
+                    else if (item.RefStatusLeaveId == (int)LeaveStatus.Confirmed)
+                    {
+                        ConfirmedLeavesList.Add(item);
+                    }
+                    else if (item.RefStatusLeaveId == (int)LeaveStatus.Postponed)
+                    {
+                        PostponedLeavesList.Add(item);
+                    }
                 }
-                else if (item.RefStatusLeaveId == (int)LeaveStatus.Confirmed)
-                {
-                    ConfirmedLeavesList.Add(item);
-                }
-                else if (item.RefStatusLeaveId == (int)LeaveStatus.Postponed)
-                {
-                    PostponedLeavesList.Add(item);
-                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+
             }
         }
 
@@ -276,7 +298,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger.LogError(ex);
+                Logger.LogError(ex);
             }
             finally
             {
@@ -301,7 +323,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -315,7 +337,7 @@ namespace XForms.ViewModels
         private LeaveDetailsPopup leaveDetailsPopup;
 
         private bool canOpenLeaveDetailsPopup = true;
-        public ICommand OpenLeaveDetailsPopupView => new Command<LeaveModel>(async (model) =>
+        public ICommand OpenLeaveDetailsPopupView => new Command<LeaveResponse>(async (model) =>
         {
             try
             {
@@ -338,7 +360,8 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                await PopupNavigation.Instance.PushSingleAsync(leaveDetailsPopup);
+                //await PopupNavigation.Instance.PushSingleAsync(leaveDetailsPopup);
+                Logger?.LogError(ex);
 
             }
             finally
@@ -354,7 +377,7 @@ namespace XForms.ViewModels
 
 
         private bool canOpenProfilLeaveDetailsPopup = true;
-        public ICommand OpenProfilLeaveDetailsPopupView => new Command<LeaveModel>(async (model) =>
+        public ICommand OpenProfilLeaveDetailsPopupView => new Command<LeaveResponse>(async (model) =>
         {
             try
             {
@@ -378,6 +401,8 @@ namespace XForms.ViewModels
             catch (Exception ex)
             {
                 await PopupNavigation.Instance.PushSingleAsync(profilLeaveDetailsPopup);
+                Logger?.LogError(ex);
+
 
             }
             finally
@@ -394,16 +419,27 @@ namespace XForms.ViewModels
         {
             try
             {
-                AppHelpers.LoadingShow();
                 CanCancelRequest = false;
-                var result = await App.AppServices.DeleteLeave(SelectedLeave.Id);
+                var postparamts = new DeleteLeave()
+                {
+                    LeaveId = SelectedLeave.Id
+                };
+
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.DeleteLeave(postparamts);
+                AppHelpers.LoadingHide();
+
                 if (result.succeeded)
                 {
                     InprogessLeavesList.Remove(SelectedLeave);
                     LeaveItemsList.Remove(SelectedLeave);
                     numberOfRequests--;
-                    InprogessDays--;
-                    TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
+
+                    var re = await App.AppServices.GetStatistics_ProfilLeaves();
+                    statistiqueLeaveModel = re.data;
+
+                    //InprogessDays--;
+                    //TotalDays = ConfirmedDays + InprogessDays + PostponedDays;
 
                     //LeaveItemsListAdmin.Remove(SelectedLeave);
                     //numberOfRequestsAdmin--;
@@ -413,14 +449,13 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                AppHelpers.LoadingHide();
+                Logger?.LogError(ex);
+
 
             }
             finally
             {
                 CanCancelRequest = true;
-                AppHelpers.LoadingHide();
-
 
             }
 
@@ -439,6 +474,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
             finally

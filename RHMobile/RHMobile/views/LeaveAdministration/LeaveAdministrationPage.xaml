@@ -33,7 +33,7 @@
                     Title="Demande Congé"
                     HasNotification="True"
                     HasBackButton="True"
-                    Description="{Binding numberOfRequests,StringFormat='{0} demande'}"
+                    Description="{Binding numberOfRequests,StringFormat='{0} demandes'}"
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />

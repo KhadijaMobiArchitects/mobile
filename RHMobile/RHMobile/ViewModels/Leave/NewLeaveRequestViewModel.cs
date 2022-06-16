@@ -47,7 +47,7 @@ namespace XForms.ViewModels
         public bool EnableButtonSendRequest { get; set; }
         public Color ButtonSendRequestBackground => EnableButtonSendRequest ? Color.FromHex("#126BCD") : Color.FromHex("#B0B6BE");
 
-        public int NumberOfDays => (int) (EndDate - StartDate).TotalDays + 1;
+        public int NumberOfDays { get; set; }
 
         private NewLeaveRequestValidator validator;
 
@@ -57,34 +57,53 @@ namespace XForms.ViewModels
 
         public NewLeaveRequestViewModel()
         {
-
-
-            StartDate = DateTime.Now;
-            EndDate = DateTime.Now;
-
-
-
-            getTypesLeave();
-            getProjects();
-            getSituationsProject();
-
-            this.PropertyChanged += (s, e) =>
+            try
             {
-                if (
-                e.PropertyName == nameof(StartDate) ||
-                e.PropertyName == nameof(EndDate) ||
-                e.PropertyName == nameof(SelectedREFTypeLeave) ||
-                e.PropertyName == nameof(SelectedProjet) ||
-                e.PropertyName == nameof(SelectedSituationProject)
-                )
+
+                StartDate = DateTime.Now;
+                EndDate = DateTime.Now;
+
+
+
+                getTypesLeave();
+                getProjects();
+                getSituationsProject();
+
+                this.PropertyChanged += (s, e) =>
                 {
+                    if (
+                    e.PropertyName == nameof(StartDate) ||
+                    e.PropertyName == nameof(EndDate) ||
+                    e.PropertyName == nameof(SelectedREFTypeLeave) ||
+                    e.PropertyName == nameof(SelectedProjet) ||
+                    e.PropertyName == nameof(SelectedSituationProject)
+                    )
+                    {
+                        validationResult = validator.Validate(this);
+                        EnableButtonSendRequest = validationResult.IsValid;
+                        OnPropertyChanged(nameof(ButtonSendRequestBackground));
 
-                    validationResult = validator.Validate(this);
-                     EnableButtonSendRequest = validationResult.IsValid;
-                    OnPropertyChanged(nameof(ButtonSendRequestBackground));
+                    }
+                    if (e.PropertyName == nameof(StartDate) ||
+                    e.PropertyName == nameof(EndDate)
+                    )
+                    {
+                        try
+                        {
+                            NumberOfDays = AppHelpers.BusinessDaysUntil(StartDate, EndDate);
 
-                }
-            };
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogError(ex);
+                        }
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
 
         }
 
@@ -110,6 +129,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
 
@@ -129,6 +149,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
         }
@@ -144,6 +165,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
         }
@@ -155,7 +177,6 @@ namespace XForms.ViewModels
             {
                 try
                 {
-                    AppHelpers.LoadingShow();
 
                     CandSendRequest = false;
 
@@ -179,10 +200,13 @@ namespace XForms.ViewModels
 
 
                     var result = new RESTServiceResponse<object>();
+                    AppHelpers.LoadingShow();
                     result = await App.AppServices.PostLeave(postParams);
-                    if(result?.succeeded == true)
+                    AppHelpers.LoadingHide();
+
+                    if (result?.succeeded == true)
                     {
-                        App.Current.MainPage.Navigation.PopAsync();
+                        await App.Current.MainPage.Navigation.PopAsync();
                     }
                     else
                     {
@@ -193,14 +217,11 @@ namespace XForms.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    //Console.WriteLine(ex);
-                    AppHelpers.LoadingHide();
-
+                    Logger?.LogError(ex);
                 }
                 finally
                 {
                     CandSendRequest = true;
-                    AppHelpers.LoadingHide();
                 }
             },
             () => CandSendRequest
@@ -217,7 +238,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -230,9 +251,15 @@ namespace XForms.ViewModels
 
         public ICommand NotifySquad => new Command(async () =>
         {
-            ConfirmedBySquad = !ConfirmedBySquad;
-            OnPropertyChanged(nameof(ButtonConfirmedBySquadBackground));
-
+            try
+            {
+                ConfirmedBySquad = !ConfirmedBySquad;
+                OnPropertyChanged(nameof(ButtonConfirmedBySquadBackground));
+            }
+            catch (Exception ex)
+            {
+                Logger?.LogError(ex);
+            }
 
         },
     () => true

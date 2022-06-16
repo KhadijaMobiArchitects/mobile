@@ -40,7 +40,7 @@ BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(View), Color.Ye
 
         void SelectItem_Clicked(System.Object sender, System.EventArgs e)
         {
-            if ((sender as View).BindingContext is Models.LeaveModel item)
+            if ((sender as View).BindingContext is Models.LeaveResponse item)
             {
                 (this.Parent.BindingContext as LeaveRequestViewModel).OpenLeaveDetailsPopupView.Execute(item);
             }

@@ -23,6 +23,8 @@ namespace XForms.ViewModels
         public bool IsDispalacementRequestInProgress { get; set; }
         public bool IsDispalacementRequestConfirmed { get; set; }
         public DisplacementResponse SelectedDisplacement { get; set; }
+        public int numberOfRequests { get; set; }
+
 
         public MyRequetsDisplacemntViewModel()
         {
@@ -31,30 +33,36 @@ namespace XForms.ViewModels
         public async override void OnAppearing()
         {
             base.OnAppearing();
-            await getProfilDisplacements();
-
-            ProfilDispalacementsItemsList = new ObservableRangeCollection<DisplacementResponse>();
-            ProfilDispalacementsItemsList = ProfilInProgressDispalacementsList;
             IsDispalacementRequestInProgress = true;
+            await getProfilDisplacements();
 
         }
 
         public async Task getProfilDisplacements()
         {
-            AppHelpers.LoadingShow();
-            var result = await App.AppServices.GetProfilDeplacement();
-            AppHelpers.LoadingHide();
-            if (result?.succeeded == true)
+            try
             {
-                ProfilDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.ToList());
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.GetProfilDeplacement();
+                AppHelpers.LoadingHide();
+                if (result?.succeeded == true)
+                {
+                    ProfilDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.ToList());
 
-                ProfilConfirmedDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 2)).ToList());
-                ProfilInProgressDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 1)).ToList());
+                    ProfilConfirmedDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 2)).ToList());
+                    ProfilInProgressDispalacementsList = new ObservableRangeCollection<DisplacementResponse>(result.data.Where(x => (x.RefStatusDeplacementId == 1)).ToList());
+                    ProfilDispalacementsItemsList = ProfilInProgressDispalacementsList;
+                    numberOfRequests = ProfilDispalacementsItemsList.Count;
 
+                }
+                else
+                {
+                    AppHelpers.Alert(result?.message);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AppHelpers.Alert(result?.message);
+                Logger.LogError(ex);
             }
         }
 
@@ -77,11 +85,13 @@ namespace XForms.ViewModels
                 IsDispalacementRequestInProgress = HeadrActionList[0].IsSelected;
                 IsDispalacementRequestConfirmed = !IsDispalacementRequestInProgress;
 
+
                 ProfilDispalacementsItemsList = IsDispalacementRequestInProgress ? ProfilInProgressDispalacementsList : ProfilConfirmedDispalacementsList;
+                numberOfRequests = ProfilDispalacementsItemsList.Count;
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -104,7 +114,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -134,7 +144,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {

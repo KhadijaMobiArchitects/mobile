@@ -7,38 +7,50 @@ namespace XForms.Models
 
     public partial class LeaveResponse
     {
-        public int id { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
-        public bool confirmedBySquad { get; set; }
-        public DateTime createdOn { get; set; }
-        public string createdBy { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public int refStatusLeaveId { get; set; }
-        public string labelStatus { get; set; }
-        public int refTypeLeaveId { get; set; }
-        public string labelType { get; set; }
-        public string pictureUrl { get; set; }
-
+        public int Id { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public bool ConfirmedBySquad { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int RefStatusLeaveId { get; set; }
+        public string LabelStatus { get; set; }
+        public int RefTypeLeaveId { get; set; }
+        public string LabelType { get; set; }
+        public string PictureUrl { get; set; }
+        public string ProjectName { get; set; }
+        public string SituationProjet { get; set; }
+        public int NombreJours { get; set; }
+        public string Owner { get; set; }
+        public string RefFunctionLabel { get; set; }
     }
     public partial class LeaveResponse
     {
-        public Color BackgroundColor => (LeaveStatus)refStatusLeaveId switch
+        public Color BackgroundColor => (LeaveStatus)RefStatusLeaveId switch
         {
             LeaveStatus.Inprogress => Color.FromHex("#FEE07D"),
             LeaveStatus.Confirmed => Color.FromHex("#95D5A4"),
+            LeaveStatus.Postponed => Color.FromHex("#D59595"),
             _ => Color.Gray
 
         };
-        public Color TextColor => (LeaveStatus)refStatusLeaveId switch
+        public Color TextColor => (LeaveStatus)RefStatusLeaveId switch
         {
             LeaveStatus.Inprogress => Color.FromHex("#E6992A"),
             LeaveStatus.Confirmed => Color.FromHex("#589266"),
+            LeaveStatus.Postponed => Color.FromHex("#925858"),
             _ => Color.Gray
         };
 
-        public string FullName => firstName + " " + lastName;
+
+        public string FullName => FirstName + " " + LastName;
+        //public string confirmerParSquad => ConfirmedBySquad switch
+        //{
+        //     true => "Confirmé",
+        //    false => "-----"
+        //};
 
     }
 }

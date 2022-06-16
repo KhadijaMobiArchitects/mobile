@@ -139,7 +139,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
 
             }
             finally
@@ -160,7 +160,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -175,12 +175,12 @@ namespace XForms.ViewModels
             try
             {
                 canNavigationToNewsPage = false;
-                App.Current.MainPage.Navigation.PushAsync(new NewsPage());
+                await App.Current.MainPage.Navigation.PushAsync(new NewsPage());
 
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
         }
         , () => canNavigationToNewsPage);

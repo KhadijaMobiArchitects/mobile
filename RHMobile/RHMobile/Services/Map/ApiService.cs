@@ -16,9 +16,7 @@ namespace XForms.Services
     public class ApiServices
     {
         private JsonSerializer _serializer = new JsonSerializer();
-
         private static ApiServices _ServiceClientInstance;
-
         public static ApiServices ServiceClientInstance
         {
             get
@@ -57,9 +55,6 @@ namespace XForms.Services
             string a_originLongitude = originLongitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
             string a_destinationLatitude = destinationLatitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
             string a_destinationLongitude = destinationLongitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
-
-
-
             var url = $"{AppUrls.GoogleMapBaseUrl}api/directions/json?mode=driving&transit_routing_preference=less_driving&origin={a_originLatitude},{a_originLongitude}&destination={a_destinationLatitude},{a_destinationLongitude}&key={AppConstants.GoogleMapsApiKey}";
 
             return await RESTHelper.GetRequestJson<GoogleDirection>(url: url, method: HttpVerbs.GET);
@@ -71,7 +66,6 @@ namespace XForms.Services
     public class GoogleMapsApiService 
     {
         //static string _googleMapsKey;
-
         private const string ApiBaseAddress = "https://maps.googleapis.com/maps/";
         private HttpClient CreateClient()
         {
@@ -82,7 +76,6 @@ namespace XForms.Services
 
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             return httpClient;
         }
         public static void Initialize(string googleMapsKey)

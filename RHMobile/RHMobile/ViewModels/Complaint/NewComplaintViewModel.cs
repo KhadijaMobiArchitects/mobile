@@ -51,6 +51,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
 

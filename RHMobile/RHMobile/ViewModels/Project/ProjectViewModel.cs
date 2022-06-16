@@ -41,15 +41,20 @@ namespace XForms.ViewModels
         public string SelectedProjectName { get; set; } = "";
 
         public ProjectModel SelectedProjet { get; set; }
+        public ProfilResponse SelectedProfil { get; set; }
 
         public bool IsProjectOwner { get; set; }
 
         public string ProjectName { get; set; } = "";
+        public string ProjectNameSquad =>"Équipe de projet " + ProjectName;
+
 
 
         private ProjectModel AddProjectCell;
 
-        public int MyNotes { get; set; } = 0;
+        public int MyPoints { get; set; } = 0;
+        public string Motif { get; set; }
+
         public int Percent { get; set; } = 0;
 
         public ProjectViewModel()
@@ -59,22 +64,30 @@ namespace XForms.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
-            if(AppPreferences.UserRole == Roles.Manager)
-                GetActualProjects();
-            if(AppPreferences.UserRole == Roles.Collaborateur || AppPreferences.UserRole == Roles.Chef_projet)
-                GetProfilProjects();
 
-
-            this.PropertyChanged += (s, e) =>
+            try
             {
-                if (
-                e.PropertyName == nameof(SearchPartKeyword)
-                )
+                if (AppPreferences.UserRole == Roles.Manager)
+                    GetActualProjects();
+                if (AppPreferences.UserRole == Roles.Collaborateur || AppPreferences.UserRole == Roles.Chef_projet)
+                    GetProfilProjects();
+
+
+                this.PropertyChanged += (s, e) =>
                 {
-                    //Search(SearchWord);
-                    SearchCommand.Execute(null);
-                }
-            };
+                    if (
+                    e.PropertyName == nameof(SearchPartKeyword)
+                    )
+                    {
+                        //Search(SearchWord);
+                        SearchCommand.Execute(null);
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
 
         }
 
@@ -82,7 +95,9 @@ namespace XForms.ViewModels
         {
             try
             {
+                AppHelpers.LoadingShow();
                 var result = await App.AppServices.GetAcualProjects();
+                AppHelpers.LoadingHide();
                 if (result?.succeeded == true)
                 {
                     ProjectsList = new ObservableRangeCollection<ProjectModel>(result.data.ToList());
@@ -95,7 +110,6 @@ namespace XForms.ViewModels
                         ProjectName = ProjectsList[0].Name;
                     }
                     NumberOfProjects = ProjectsList.Count;
-                    //SelectedProjetId = SelectedProjetId;                    
                 }
 
                 else
@@ -103,10 +117,10 @@ namespace XForms.ViewModels
                     AppHelpers.Alert(result?.message);
                 }
 
-
             }
             catch (Exception ex)
             {
+                Logger.LogError(ex);
 
             }
         }
@@ -141,7 +155,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
         }
 
@@ -151,20 +165,16 @@ namespace XForms.ViewModels
             {
                 AppHelpers.LoadingShow();
                 var result = await App.AppServices.GetProjectSquad(ProjectId);
+                AppHelpers.LoadingHide();
                 if (result?.succeeded == true)
                 {
-                    AppHelpers.LoadingHide();
                     SquadList = new ObservableRangeCollection<ProfilResponse>(result.data.ToList());
-
-
                 }
                 else
                 {
                     AppHelpers.Alert(result?.message);
                 }
 
-
-                AppHelpers.LoadingShow();
                 var result2 = await App.AppServices.GetProjectStaffMembersToAdd(ProjectId);
                 if (result2?.succeeded == true)
                 {
@@ -184,13 +194,12 @@ namespace XForms.ViewModels
                         ProjectOwnerName = profil.FirstName + " " + profil.LastName;
                         break;
                     }
-
                 }
-                    ProjectsList.FirstOrDefault(x => x.Id == ProjectId).OwnerName = ProjectOwnerName;
+                    //ProjectsList.FirstOrDefault(x => x.Id == ProjectId).OwnerName = ProjectOwnerName;
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
         }
         
@@ -200,15 +209,12 @@ namespace XForms.ViewModels
             try
             {
                 canAddProjectCommand = false;
-
-                App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
-
+                await App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
                 //var result = await App.AppServices.PostProject(projectRequest);
-
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -224,6 +230,9 @@ namespace XForms.ViewModels
          {
              try
              {
+                 if (model.IsSelected)
+                     return;
+
                  canSelectProject = false;
                  SelectedProjectId = model.Id;
                  SelectedProjectName = model?.Name;
@@ -248,7 +257,7 @@ namespace XForms.ViewModels
              }
              catch (Exception ex)
              {
-
+                 Logger.LogError(ex);
              }
              finally
              {
@@ -264,11 +273,12 @@ namespace XForms.ViewModels
             try
             {
                 canAddProject = false;
-                App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
+               await App.Current.MainPage.Navigation.PushAsync(new NewProjectPage());
 
             }
             catch (Exception ex)
             {
+                Logger.LogError(ex);
 
             }
             finally
@@ -288,7 +298,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -315,7 +325,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -334,6 +344,10 @@ namespace XForms.ViewModels
             {
                 canProfilDetailsPopup = false;
 
+                if (model == null)
+                    return;
+                SelectedProfil = model;
+
                 if (profilDetailsPopup == null)
                     profilDetailsPopup = new ProfilDetailsPopup() { BindingContext = this };
 
@@ -341,7 +355,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -374,7 +388,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Logger.LogError(ex);
 
             }
 
@@ -398,7 +412,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger?.LogError(ex, showError: true);
+                Logger.LogError(ex);
             }
             finally
             {
@@ -423,12 +437,12 @@ namespace XForms.ViewModels
                 var result =await App.AppServices.PostMembers(addMemebersRequest);
                 AppHelpers.LoadingHide();
                 GetProjectSquad(SelectedProjectId);
-                PopupNavigation.Instance.PopAllAsync();
+                await PopupNavigation.Instance.PopAllAsync();
 
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -444,12 +458,10 @@ namespace XForms.ViewModels
             try
             {
                 canRemoveMember = false;
-
-
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
 
         },
@@ -471,7 +483,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -492,12 +504,10 @@ namespace XForms.ViewModels
                 await PopupNavigation.Instance.PopAsync();
                 await PopupNavigation.Instance.PushSingleAsync(addPointsPopup);
 
-
-
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -528,7 +538,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -538,6 +548,78 @@ namespace XForms.ViewModels
 
         },
         () => canChangePercent);
+
+
+        private bool canRejectProfilfromProjet = true;
+        public ICommand RejectProfilFromProjectCommand => new Command(async () =>
+        {
+            try
+            {
+                canRejectProfilfromProjet = false;
+                var deleteMemeberProject = new DeleteMemeberProjectModel()
+                {
+                    ProjectId = SelectedProjectId,
+                    ProfilId = SelectedProfil.RecId
+                };
+
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.DeleteMemberFromProjet(deleteMemeberProject);
+                AppHelpers.LoadingHide();
+                AppHelpers.Alert(result?.message);
+                GetProjectSquad(SelectedProjectId);
+                await PopupNavigation.Instance.PopAllAsync();
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
+            finally
+            {
+                canRejectProfilfromProjet = true;
+
+            }
+
+        },
+        () => canRejectProfilfromProjet);
+
+
+        private bool canAddPointsToMember = true;
+        public ICommand AddPointsToMemberCommand => new Command(async () =>
+        {
+            try
+            {
+                canAddPointsToMember = false;
+                var points = new PointModel()
+                {
+                    SumPoints = MyPoints,
+                    Motif = Motif,
+                    GrantedTo = SelectedProfil.RecId,
+                    Title = ""
+
+                };
+
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.GranttPoints(points);
+                AppHelpers.LoadingHide();
+                AppHelpers.Alert(result?.message);
+                await PopupNavigation.Instance.PopAllAsync();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
+            finally
+            {
+                canRejectProfilfromProjet = true;
+
+            }
+
+        },
+        () => canRejectProfilfromProjet);
+
+
     }
 }
 

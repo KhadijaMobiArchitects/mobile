@@ -104,9 +104,9 @@
                     <cc:CustomButton
                         IsVisible="{Binding IsCertaficateRequestInProgress}"
                         HorizontalOptions="Center"
-                        Text="Annuler la demande"
-                        TextColor="{StaticResource InProgressColor}"
-                        BackgroundColor="{StaticResource InProgressTextColor}"
+                        Text="Annuler"
+                        TextColor="{StaticResource InProgressTextColor}"
+                        BackgroundColor="{StaticResource InProgressColor}"
                         FontSize="13"
                         Padding="20,5"
                         Command="{Binding CancelRequest}"

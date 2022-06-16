@@ -39,7 +39,7 @@
             >
 
                 <svg:SvgCachedImage
-                Source="{Binding pictureUrl}"
+                Source="{Binding PictureUrl}"
                 Aspect="AspectFill"
                 />
             </cc:CornerView>
@@ -58,13 +58,13 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
-                                Text="{Binding firstName}"
+                                Text="{Binding FirstName}"
                                 />
                             <Span
                                 Text=" "
                                 />
                             <Span
-                                Text="{Binding lastName}"
+                                Text="{Binding LastName}"
                                 />
                         </FormattedString>
                     </Label.FormattedText>
@@ -80,13 +80,13 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
-                                Text="{Binding startDate,StringFormat='{0:dd/MM/yyyy}'}"
+                                Text="{Binding StartDate,StringFormat='{0:dd/MM/yyyy}'}"
                                 />
                             <Span
                                 Text=" - "
                                 />
                             <Span
-                                Text="{Binding endDate,StringFormat='{0:dd/MM/yyyy}'}"
+                                Text="{Binding EndDate,StringFormat='{0:dd/MM/yyyy}'}"
                                 />
                         </FormattedString>
                     </Label.FormattedText>
@@ -105,7 +105,7 @@
                 CornerRadius="4"
                 >
                 <Label
-                Text="{Binding labelStatus}"
+                Text="{Binding LabelStatus}"
                 BackgroundColor="{Binding BackgroundColorButton,Source={x:Reference this}}"
                 TextColor="{Binding TextColor,Source = {x:Reference this}}"
                 FontSize="12"

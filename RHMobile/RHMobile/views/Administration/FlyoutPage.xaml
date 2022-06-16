@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Base:BasePopupView
+ xmlns:Base="clr-namespace:XForms.views.Base"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="http://rotorgames.com" xmlns:cc="clr-namespace:XForms.Controls"
+    HasSystemPadding="True"
+    HasKeyboardOffset="False"
+    BackgroundColor="#90000000"
+        xmlns:res="clr-namespace:XForms.Resources"
+    CloseWhenBackgroundIsClicked="True"
+    
+    x:Class="XForms.views.FlyoutPage"
+    x:Name="this"
+    >
+        <Base:BasePopupView.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Right"
+            PositionOut="Right"
+            ScaleIn="1"
+            ScaleOut="1"
+            DurationIn="200"
+            DurationOut="200"
+            HasBackgroundAnimation="True" />
+    </Base:BasePopupView.Animation>
+        <Grid
+            BackgroundColor="Transparent"
+            HorizontalOptions="EndAndExpand"
+            >
+            <StackLayout
+                BackgroundColor="White"
+                WidthRequest="200"
+                Padding="10,20"
+                Spacing="30"
+
+                >
+                <StackLayout
+                    Orientation="Horizontal"
+                    >
+                <Label
+                    Text="Security face Id"
+                    VerticalOptions="Center"
+                    HorizontalOptions="StartAndExpand"
+                    />
+                    <Switch
+                        OnColor="{StaticResource Primary}"
+                        IsToggled="{Binding EnableFaceID}"
+                        Toggled="Switch_Toggled"
+                        />
+                </StackLayout>
+                <StackLayout
+                    Orientation="Horizontal"
+                    >
+                <Label
+                    Text="Logout"
+                    VerticalOptions="Center"
+                    HorizontalOptions="StartAndExpand"
+
+                    />
+                     <cc:CustomButton
+                    Padding="0"
+                    StyleCorner="Circle"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Command="{Binding LogoutCommand}"
+                    >
+                    <cc:CustomButton.ImageSource>
+                        <FontImageSource
+                    FontFamily="{x:Static res:FontAwesomeFonts.FontFamilySolid}"
+                    Glyph="{x:Static res:FontAwesomeFonts.SignOutAlt}"
+                    Color="{StaticResource Primary}"
+                    Size="30" />
+                    </cc:CustomButton.ImageSource>
+
+                </cc:CustomButton> 
+                </StackLayout>
+
+            </StackLayout>
+        </Grid>
+</Base:BasePopupView>

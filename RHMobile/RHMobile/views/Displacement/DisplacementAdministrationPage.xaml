@@ -30,7 +30,7 @@
                     Title="Déplacement"
                     HasNotification="True"
                     HasBackButton="True"
-                    Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demande'}"
+                    Description="{Binding numberOfRequestsAdmin,StringFormat='{0} demandes'}"
                     BackButtonBorderColor="{StaticResource StartGradientAdmin}"
                     BackButtonColor="{StaticResource EndGradientAdmin }"
                     />

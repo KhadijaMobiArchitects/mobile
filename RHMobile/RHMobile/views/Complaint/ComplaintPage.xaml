@@ -33,7 +33,8 @@
                 HasBackButton="True"
                 BackButtonBorderColor="{StaticResource StartGradient}"
                 BackButtonColor="{StaticResource EndGradient}"
-                Description="1 demandes en cours"
+                Description="{Binding numberOfRequests,StringFormat='{0} demandes'}"
+
                 />
                         <!--Switch-->
             <StackLayout

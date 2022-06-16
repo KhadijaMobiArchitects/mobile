@@ -39,6 +39,7 @@ namespace XForms.ViewModels
         {
 
         }
+
         public async override void OnAppearing()
         {
             base.OnAppearing();
@@ -57,8 +58,8 @@ namespace XForms.ViewModels
                     LeaveListAdmin = new ObservableRangeCollection<LeaveResponse>(result.data.ToList());
 
                     LeaveItemsListAdmin = new ObservableRangeCollection<LeaveResponse>();
-                    InprogessLeavesList = LeaveListAdmin.Where(x => (x.refStatusLeaveId == 1)).ToList();
-                    ConfirmedLeavesList = LeaveListAdmin.Where(x => (x.refStatusLeaveId == 2)).ToList();
+                    InprogessLeavesList = LeaveListAdmin.Where(x => (x.RefStatusLeaveId == 1)).ToList();
+                    ConfirmedLeavesList = LeaveListAdmin.Where(x => (x.RefStatusLeaveId == 2)).ToList();
                     LeaveItemsListAdmin.ReplaceRange(InprogessLeavesList);
                     canOpenProfilLeaveDetailsPopup = true;
                     numberOfRequests = LeaveItemsListAdmin.Count;
@@ -73,7 +74,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
         }
         private bool CanSelectHeaderAction = true;
@@ -116,9 +117,9 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                AppHelpers.LoadingHide();
+                //AppHelpers.Alert(ex.Message, exception: ex);
 
-                //Logger.LogError(ex);
+                Logger.LogError(ex);
             }
             finally
             {
@@ -154,7 +155,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                await PopupNavigation.Instance.PushSingleAsync(profilLeaveDetailsPopup);
+                Logger?.LogError(ex);
 
             }
             finally
@@ -175,12 +176,13 @@ namespace XForms.ViewModels
 
                 var postParam = new UpdateLeaveModel()
                 {
-                    id = SelectedLeave.id,
+                    id = SelectedLeave.Id,
                     refStatusLeaveId = 2
                 };
 
                 AppHelpers.LoadingShow();
                 var result = await App.AppServices.PostUpdateLeave(postParam);
+                AppHelpers.Alert(result?.message);
                 await PopupNavigation.Instance.PopAllAsync();
                 await getLeavesList();
 
@@ -195,7 +197,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
         }, (_) => canValidateLeave);
 
@@ -209,29 +211,19 @@ namespace XForms.ViewModels
 
                 var postParam = new UpdateLeaveModel()
                 {
-                    id = SelectedLeave.id,
+                    id = SelectedLeave.Id,
                     refStatusLeaveId = 3
                 };
-
-                AppHelpers.LoadingShow();
                 AppHelpers.LoadingShow();
                 var result = await App.AppServices.PostUpdateLeave(postParam);
+                AppHelpers.Alert(result?.message);
                 await PopupNavigation.Instance.PopAllAsync();
                 await getLeavesList();
 
-
-                //if (result?.succeeded == true)
-                //{
-                //    AppHelpers.Alert(result?.message);
-                //}
-                //else
-                //{
-                //    AppHelpers.Alert(result?.message);
-                //}
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
         }, (_) => canRejectLeave);
     }

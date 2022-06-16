@@ -26,14 +26,19 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<IEnumerable<LeaveResponse>>(url: $"{AppUrls.GetRequestValidatedProfilsLeave}", method: HttpVerbs.GET);
         }
 
-        public async Task<RESTServiceResponse<IEnumerable<LeaveModel>>> GetProfilLeaves()
+        public async Task<RESTServiceResponse<IEnumerable<LeaveResponse>>> GetProfilLeaves()
         {
-            return await RESTHelper.GetRequest<IEnumerable<LeaveModel>>(url: $"{AppUrls.GetRequestsListProfilLeaves}", method: HttpVerbs.GET);
+            return await RESTHelper.GetRequest<IEnumerable<LeaveResponse>>(url: $"{AppUrls.GetRequestsListProfilLeaves}", method: HttpVerbs.GET);
         }
 
-        public async Task<RESTServiceResponse<IEnumerable<LeaveModel>>> GetLeaves()
+        public async Task<RESTServiceResponse<IEnumerable<LeaveResponse>>> GetLeaves()
         {
-            return await RESTHelper.GetRequest<IEnumerable<LeaveModel>>(url: $"{AppUrls.GetRequestsListProfilLeaves}", method: HttpVerbs.GET);
+            return await RESTHelper.GetRequest<IEnumerable<LeaveResponse>>(url: $"{AppUrls.GetRequestsListProfilLeaves}", method: HttpVerbs.GET);
+        }
+
+        public async Task<RESTServiceResponse<StatistiqueLeaveModel>> GetStatistics_ProfilLeaves()
+        {
+            return await RESTHelper.GetRequest<StatistiqueLeaveModel>(url: $"{AppUrls.GetStatistics_ProfilLeaves}", method: HttpVerbs.GET);
         }
 
 
@@ -121,6 +126,11 @@ namespace XForms.Services
             return await RESTHelper.GetRequest<IEnumerable<ComplaintResponse>>(url: $"{AppUrls.GetAllClaims}", method: HttpVerbs.GET);
         }
 
+        public async Task<RESTServiceResponse<int>> GetSumPoints()
+        {
+            return await RESTHelper.GetRequest<int>(url: $"{AppUrls.GetSumPoints}", method: HttpVerbs.GET);
+        }
+
         //public async Task<RESTServiceResponse<object>> PostProject(ProjectRequest postParams)
         //{
         //    return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostProjectRequest}", postObject: postParams, method: HttpVerbs.POST);
@@ -132,9 +142,9 @@ namespace XForms.Services
         }
         public async Task<RESTServiceResponse<object>> PostCertaficateTreatement(CertaficateTreatementRequest postParams)
         {
-            return await RESTHelper.UploadAdministratifCertaficateAsync(postParams);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostCertaficateTreatement}", postObject: postParams, method: HttpVerbs.POST);
         }
- 
+
         public async Task<RESTServiceResponse<object>> PostMembers(AddMembersRequest postParams)
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostMembersRequest}", postObject: postParams, method: HttpVerbs.POST);
@@ -143,9 +153,19 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostChangePercentRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
-        public async Task<RESTServiceResponse<object>> DeleteLeave(long Id)
+
+        public async Task<RESTServiceResponse<object>> DeleteMemberFromProjet(DeleteMemeberProjectModel postParams)
         {
-            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteLeaveRequest}/{Id}", method: HttpVerbs.DELETE);
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteMemberProject}", postObject: postParams, method: HttpVerbs.POST);
+        }
+
+
+
+
+        public async Task<RESTServiceResponse<object>> DeleteLeave(DeleteLeave postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.DeleteLeaveRequest}", postObject: postParams, method: HttpVerbs.POST);
+
         }
 
         public async Task<RESTServiceResponse<object>> PostUpdateLeave(UpdateLeaveModel postParams)
@@ -180,6 +200,11 @@ namespace XForms.Services
         {
             return await RESTHelper.GetRequest<object>(url: $"{AppUrls.PostTraitementClaimRequest}", postObject: postParams, method: HttpVerbs.POST);
         }
+        public async Task<RESTServiceResponse<object>> GranttPoints(PointModel postParams)
+        {
+            return await RESTHelper.GetRequest<object>(url: $"{AppUrls.GranttPoints}", postObject: postParams, method: HttpVerbs.POST);
+        }
+  
 
 
     }
