@@ -434,6 +434,7 @@ namespace XForms.ViewModels
             try
             {
                 canSenddisplacementRequest = false;
+                AppHelpers.LoadingShow();
 
                 var mapSnapshotStream = await map.TakeSnapshot();
                 if (mapSnapshotStream != null)
@@ -461,6 +462,8 @@ namespace XForms.ViewModels
                 };
 
                 var result = await App.AppServices.PostDisplacement(postParams);
+
+                AppHelpers.LoadingHide();
                 if (result.succeeded)
                 {
                     await App.Current.MainPage.Navigation.PopAsync();
