@@ -36,22 +36,32 @@ namespace XForms.ViewModels
         }
         public async Task getProfilComplaints()
         {
-            AppHelpers.LoadingShow();
-            var result = await App.AppServices.GetProfilComplaint();
-            AppHelpers.LoadingHide();
-            if (result?.succeeded == true)
+            try
             {
-                ProfilComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.ToList());
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.GetProfilComplaint();
+                AppHelpers.LoadingHide();
+                if (result?.succeeded == true)
+                {
+                    ProfilComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.ToList());
 
-                ProfilConfirmedComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 2)).ToList());
-                ProfilInProgressComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 1)).ToList());
-                ProfilComplaintsItemsList = ProfilInProgressComplaintsList;
-                numberOfRequests = ProfilComplaintsItemsList.Count;
+                    ProfilConfirmedComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 2)).ToList());
+                    ProfilInProgressComplaintsList = new ObservableRangeCollection<ComplaintResponse>(result.data.Where(x => (x.RefStatusClaimId == 1)).ToList());
+                    ProfilComplaintsItemsList = ProfilInProgressComplaintsList;
+                    numberOfRequests = ProfilComplaintsItemsList.Count;
+                }
+                else
+                {
+                    AppHelpers.Alert(result?.message);
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                AppHelpers.Alert(result?.message);
+                Logger.LogError(ex);
+
             }
+
         }
 
         private bool CanSelectHeaderAction = true;
@@ -79,6 +89,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger.LogError(ex);
 
             }
             finally
@@ -102,7 +113,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {

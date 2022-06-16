@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using XForms.Interfaces;
 using XForms.Models;
+using XForms.Services;
 using XForms.views.Authentication;
 
 namespace XForms.ViewModels
@@ -13,6 +15,7 @@ namespace XForms.ViewModels
     public class BaseViewModel : BindableObject
     {
         public List<REFItem> HeadrActionList { get; set; }
+        protected ILogger Logger;
 
         public string FullName { get; set; }
         public string PictureUrl { get; set; }
@@ -24,6 +27,8 @@ namespace XForms.ViewModels
             FullName = AppPreferences.FullName;
             PictureUrl = AppPreferences.PictureUrl;
             RefFunctionLabel = AppPreferences.RefFunctionLabel;
+
+            Logger = new AppCenterLogger();
 
             HeadrActionList = new List<REFItem>()
             {
@@ -49,7 +54,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger?.LogError(ex);
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -72,7 +77,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger?.LogError(ex, showError: true);
+                Logger?.LogError(ex, showError: true);
             }
             finally
             {
@@ -94,7 +99,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger?.LogError(ex, showError: true);
+                Logger?.LogError(ex, showError: true);
             }
             finally
             {
@@ -123,6 +128,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex, showError: true);
 
             }
             finally

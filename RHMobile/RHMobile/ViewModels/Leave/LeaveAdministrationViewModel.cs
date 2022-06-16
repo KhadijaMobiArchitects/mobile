@@ -39,6 +39,7 @@ namespace XForms.ViewModels
         {
 
         }
+
         public async override void OnAppearing()
         {
             base.OnAppearing();
@@ -73,7 +74,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                AppHelpers.Alert(ex.Message, exception: ex);
+                Logger?.LogError(ex);
             }
         }
         private bool CanSelectHeaderAction = true;
@@ -116,9 +117,9 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                AppHelpers.Alert(ex.Message, exception: ex);
+                //AppHelpers.Alert(ex.Message, exception: ex);
 
-                //Logger.LogError(ex);
+                Logger.LogError(ex);
             }
             finally
             {
@@ -154,7 +155,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                await PopupNavigation.Instance.PushSingleAsync(profilLeaveDetailsPopup);
+                Logger?.LogError(ex);
 
             }
             finally
@@ -196,7 +197,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
         }, (_) => canValidateLeave);
 
@@ -219,19 +220,10 @@ namespace XForms.ViewModels
                 await PopupNavigation.Instance.PopAllAsync();
                 await getLeavesList();
 
-
-                //if (result?.succeeded == true)
-                //{
-                //    AppHelpers.Alert(result?.message);
-                //}
-                //else
-                //{
-                //    AppHelpers.Alert(result?.message);
-                //}
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
         }, (_) => canRejectLeave);
     }

@@ -42,21 +42,28 @@ namespace XForms.ViewModels
 
         public async  Task getProfilCertaficates()
         {
-            AppHelpers.LoadingShow();
-            var result = await App.AppServices.GetProfilCertificates();
-            AppHelpers.LoadingHide();
-            if (result?.succeeded == true)
+            try
             {
-                ProfilCertaficatesList = new ObservableRangeCollection<CertaficateResponse>(result.data.ToList());
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.GetProfilCertificates();
+                AppHelpers.LoadingHide();
+                if (result?.succeeded == true)
+                {
+                    ProfilCertaficatesList = new ObservableRangeCollection<CertaficateResponse>(result.data.ToList());
 
-                ProfilConfirmedCertaficatesList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x =>(x.RefStatusCertificateId == 2)).ToList());
-                ProfilInProgressCertaficatesList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 1)).ToList());
-                ProfilCertaficatesItemsList = ProfilInProgressCertaficatesList;
-                numberOfRequests = ProfilCertaficatesItemsList.Count;
+                    ProfilConfirmedCertaficatesList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 2)).ToList());
+                    ProfilInProgressCertaficatesList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 1)).ToList());
+                    ProfilCertaficatesItemsList = ProfilInProgressCertaficatesList;
+                    numberOfRequests = ProfilCertaficatesItemsList.Count;
+                }
+                else
+                {
+                    AppHelpers.Alert(result?.message);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AppHelpers.Alert(result?.message);
+                Logger?.LogError(ex);
             }
         }
 
@@ -84,7 +91,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -108,7 +115,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -134,7 +141,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -154,7 +161,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
             finally
             {

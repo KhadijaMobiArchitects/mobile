@@ -42,8 +42,6 @@ namespace XForms.ViewModels
 
             await GetAllCertificates();
 
-            //ProfilsCertaficateItemsList = new ObservableRangeCollection<CertaficateResponse>();
-            //ProfilsCertaficateItemsList = ProfilsInProgressCertaficateList;
         }
 
         private ProfilCertaficatePopup profilCertaficatePopup;
@@ -64,6 +62,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
             finally
@@ -76,22 +75,30 @@ namespace XForms.ViewModels
 
         public async Task GetAllCertificates()
         {
-            AppHelpers.LoadingShow();
-            var result = await App.AppServices.GetAllCertificates();
-            if(result?.succeeded == true)
+            try
             {
-                CertaficateProfils = new ObservableRangeCollection<CertaficateResponse>(result.data.ToList());
+                AppHelpers.LoadingShow();
+                var result = await App.AppServices.GetAllCertificates();
+                AppHelpers.LoadingHide();
+                if (result?.succeeded == true)
+                {
+                    CertaficateProfils = new ObservableRangeCollection<CertaficateResponse>(result.data.ToList());
 
-                ProfilsConfirmedCertaficateList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 2)).ToList());
-                ProfilsInProgressCertaficateList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 1)).ToList());
-                ProfilsCertaficateItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressCertaficateList : ProfilsConfirmedCertaficateList;
-                numberOfRequestsAdmin = ProfilsCertaficateItemsList.Count;
+                    ProfilsConfirmedCertaficateList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 2)).ToList());
+                    ProfilsInProgressCertaficateList = new ObservableRangeCollection<CertaficateResponse>(result.data.Where(x => (x.RefStatusCertificateId == 1)).ToList());
+                    ProfilsCertaficateItemsList = HeadrActionList[0].IsSelected ? ProfilsInProgressCertaficateList : ProfilsConfirmedCertaficateList;
+                    numberOfRequestsAdmin = ProfilsCertaficateItemsList.Count;
+                }
+                else
+                {
+                    AppHelpers.Alert(result?.message);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AppHelpers.Alert(result?.message);
+                Logger?.LogError(ex);
             }
-            AppHelpers.LoadingHide();
+
         }
 
         private bool CanSelectHeaderAction = true;
@@ -118,6 +125,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
             finally
@@ -146,6 +154,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
             finally
@@ -181,6 +190,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
+                Logger?.LogError(ex);
 
             }
             finally

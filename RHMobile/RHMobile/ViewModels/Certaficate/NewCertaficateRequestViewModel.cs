@@ -28,15 +28,22 @@ namespace XForms.ViewModels
 
         public async Task GetTypeCertificates()
         {
-            var result = await App.AppServices.GetTypeCertificates();
-            if (result?.succeeded == true)
+            try
             {
-                TypesCertaficateList = new ObservableRangeCollection<TypeCertaficate>(result.data.ToList());
+                var result = await App.AppServices.GetTypeCertificates();
+                if (result?.succeeded == true)
+                {
+                    TypesCertaficateList = new ObservableRangeCollection<TypeCertaficate>(result.data.ToList());
 
+                }
+                else
+                {
+                    AppHelpers.Alert(result?.message);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AppHelpers.Alert(result?.message);
+                Logger?.LogError(ex);
             }
         }
 
@@ -65,7 +72,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger?.LogError(ex);
             }
 
         },()=>canSendRequest);

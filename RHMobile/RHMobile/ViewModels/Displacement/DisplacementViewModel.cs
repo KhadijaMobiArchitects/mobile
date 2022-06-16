@@ -60,29 +60,36 @@ namespace XForms.ViewModels
 
         public DisplacementViewModel()
         {
-            map = new Xamarin.Forms.GoogleMaps.Map();
-
-            StartPosition = new PositionModel()
+            try
             {
-                Latitude = 33.54428444238301,
-                Longitude = -7.639737568139186
-            };
+                map = new Xamarin.Forms.GoogleMaps.Map();
 
-            EndPosition = new PositionModel()
+                StartPosition = new PositionModel()
+                {
+                    Latitude = 33.54428444238301,
+                    Longitude = -7.639737568139186
+                };
+
+                EndPosition = new PositionModel()
+                {
+                    Latitude = 33.54428444208300,
+                    Longitude = -7.639737560139185
+                };
+
+                contentView = new ContentView()
+                {
+                    Content = map,
+                };
+
+                map.CameraMoveStarted += Map_CameraMoveStarted;
+                map.CameraIdled += Map_CameraIdled;
+
+                DownUpGlyph = Resources.FontAwesomeFonts.Angledown;
+            }
+            catch (Exception ex)
             {
-                Latitude = 33.54428444208300,
-                Longitude = -7.639737560139185
-            };
-
-            contentView = new ContentView()
-            {
-                Content = map,
-            };
-
-            map.CameraMoveStarted += Map_CameraMoveStarted;
-            map.CameraIdled += Map_CameraIdled;
-
-            DownUpGlyph = Resources.FontAwesomeFonts.Angledown;
+                Logger?.LogError(ex);
+            }
         }
 
 
@@ -142,7 +149,7 @@ namespace XForms.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    Logger?.LogError(ex);
                 }
 
                 Pin StartPin = new Pin()
@@ -187,37 +194,51 @@ namespace XForms.ViewModels
 
             using (HttpClient client = new HttpClient())
             {
-                stream = await client.GetStreamAsync(AppPreferences.PictureUrl);
+                try
+                {
+                    stream = await client.GetStreamAsync(AppPreferences.PictureUrl);
+
+                }
+                catch (Exception ex)
+                {
+                    Logger?.LogError(ex);
+                }
             }
 
         }
 
         private async void DisplacementViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(StartPlaceText))
+            try
             {
-                IsStartCollectionVisible = !(StartPlaceText == "");
-                await GetPlacesByName(StartPlaceText + ", Morocco");
+                if (e.PropertyName == nameof(StartPlaceText))
+                {
+                    IsStartCollectionVisible = !(StartPlaceText == "");
+                    await GetPlacesByName(StartPlaceText + ", Morocco");
+                }
+
+                if (e.PropertyName == nameof(EndPlaceText))
+                {
+                    IsEndCollectionVisible = !(EndPlaceText == "");
+                    await GetPlacesByName(EndPlaceText + ", Morocco");
+                }
+
+                if (e.PropertyName == nameof(IsStartPointClicked))
+                {
+
+                    IsPickIconVisible = (IsStartPointClicked || IsEndPointClicked);
+
+                }
+                if (e.PropertyName == nameof(IsEndPointClicked))
+                {
+
+                    IsPickIconVisible = (IsStartPointClicked || IsEndPointClicked);
+
+                }
             }
-
-            if (e.PropertyName == nameof(EndPlaceText))
+            catch (Exception ex)
             {
-                IsEndCollectionVisible = !(EndPlaceText == "");
-                await GetPlacesByName(EndPlaceText + ", Morocco");
-            }
-
-            if (e.PropertyName == nameof(IsStartPointClicked))
-            {
-
-                IsPickIconVisible = (IsStartPointClicked || IsEndPointClicked);
-
-            }
-            if (e.PropertyName == nameof(IsEndPointClicked))
-            {
-
-                IsPickIconVisible = (IsStartPointClicked || IsEndPointClicked);
-
-
+                Logger?.LogError(ex);
             }
         }
 
@@ -266,7 +287,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger.LogError(ex);
+                Logger.LogError(ex);
             }
             finally
             {
@@ -276,30 +297,45 @@ namespace XForms.ViewModels
 
         internal async Task<System.Collections.Generic.List<Xamarin.Forms.GoogleMaps.Position>> LoadRoute(PositionModel StartPosition, PositionModel EndPosition)
         {
-            var googleDirection = await ApiServices.ServiceClientInstance.GetDirections(StartPosition.Latitude, StartPosition.Longitude, EndPosition.Latitude, EndPosition.Longitude);
-            if (googleDirection.Routes != null && googleDirection.Routes.Count > 0)
+            try
             {
-                var positions = (Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points)));
-                return positions;
-            }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Alert", "Add your payment method inside the Google Maps console.", "Ok");
-                return null;
+                var googleDirection = await ApiServices.ServiceClientInstance.GetDirections(StartPosition.Latitude, StartPosition.Longitude, EndPosition.Latitude, EndPosition.Longitude);
+                if (googleDirection.Routes != null && googleDirection.Routes.Count > 0)
+                {
+                    var positions = (Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points)));
+                    return positions;
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Alert", "Add your payment method inside the Google Maps console.", "Ok");
+                    return null;
 
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                return null;
             }
         }
 
         public async Task GetPlacesByName(string placeText)
         {
-            var places = await googleMapsApiService.GetPlaces(placeText);
-            var placeResult = places.AutoCompletePlaces;
-            if (placeResult != null && placeResult.Count > 0)
+            try
             {
-                Places = new ObservableCollection<GooglePlaceAutoCompletePrediction>(placeResult);
-            }
+                var places = await googleMapsApiService.GetPlaces(placeText);
+                var placeResult = places.AutoCompletePlaces;
+                if (placeResult != null && placeResult.Count > 0)
+                {
+                    Places = new ObservableCollection<GooglePlaceAutoCompletePrediction>(placeResult);
+                }
 
-            ShowRecentPlaces = (placeResult == null || placeResult.Count == 0);
+                ShowRecentPlaces = (placeResult == null || placeResult.Count == 0);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
         }
 
         private bool canSelectStartAddress = true;
@@ -318,7 +354,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -378,7 +414,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -438,7 +474,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -464,7 +500,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {

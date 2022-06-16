@@ -252,8 +252,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger?.LogError(ex);
-                AppHelpers.Alert(ex.Message, exception: ex);
+                Logger?.LogError(ex);
             }
             finally
             {
@@ -362,7 +361,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-                //Logger.LogError(ex);
+                Logger.LogError(ex);
             }
             finally
             {

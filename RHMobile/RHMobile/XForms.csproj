@@ -40,6 +40,7 @@
     <PackageReference Include="Xam.Plugin.SimpleBottomDrawer" Version="1.0.11" />
     <PackageReference Include="Plugin.Fingerprint" Version="3.0.0-beta.1" />
     <PackageReference Include="CardsView" Version="2.8.1" />
+    <PackageReference Include="Microsoft.AppCenter" Version="4.5.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Forms" />
@@ -161,6 +162,7 @@
     <None Remove="Resources\Images\recoreprime.svg" />
     <None Remove="Resources\Images\calendar.svg" />
     <None Remove="Models\Points\" />
+    <None Remove="Microsoft.AppCenter" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="views\" />

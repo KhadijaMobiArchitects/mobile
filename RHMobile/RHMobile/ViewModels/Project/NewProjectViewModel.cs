@@ -48,7 +48,6 @@ namespace XForms.ViewModels
                 if (result?.succeeded == true)
                 {
                     ProjectMembersList = new ObservableCollection<ProfilResponse>(result.data.ToList());
-
                 }
                 else
                     AppHelpers.Alert(result?.message);
@@ -56,7 +55,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
         }
         public async void GetOwners()
@@ -74,7 +73,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
         }
 
@@ -104,7 +103,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -135,7 +134,7 @@ namespace XForms.ViewModels
            }
            catch (Exception ex)
            {
-
+               Logger.LogError(ex);
            }
            finally
            {
@@ -190,7 +189,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
@@ -238,7 +237,7 @@ namespace XForms.ViewModels
             }
             catch (Exception ex)
             {
-
+                Logger.LogError(ex);
             }
             finally
             {
